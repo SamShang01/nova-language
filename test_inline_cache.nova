@@ -1,0 +1,47 @@
+# 内联缓存测试文件
+
+class TestClass {
+    func method1() -> string {
+        return "method1";
+    }
+    
+    func method2() -> string {
+        return "method2";
+    }
+    
+    func method3() -> string {
+        return "method3";
+    }
+}
+
+func main() {
+    println("内联缓存测试");
+    
+    // 测试1: 单态调用（monomorphic）
+    println("测试1: 单态调用");
+    let obj = TestClass();
+    let result1 = obj.method1();
+    let result2 = obj.method1();
+    let result3 = obj.method1();
+    println("单态调用完成: " + result1);
+    
+    // 测试2: 多态调用（polymorphic）
+    println("测试2: 多态调用");
+    let obj1 = TestClass();
+    let obj2 = TestClass();
+    let result4 = obj1.method1();
+    let result5 = obj2.method2();
+    let result6 = obj1.method1();
+    let result7 = obj2.method2();
+    println("多态调用完成: " + result4 + ", " + result5);
+    
+    // 测试3: 混合调用
+    println("测试3: 混合调用");
+    let obj3 = TestClass();
+    let result8 = obj3.method1();
+    let result9 = obj3.method2();
+    let result10 = obj3.method3();
+    println("混合调用完成: " + result8 + ", " + result9 + ", " + result10);
+    
+    println("内联缓存测试完成");
+}

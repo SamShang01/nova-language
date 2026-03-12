@@ -1,0 +1,214 @@
+
+template class Stack<T> {
+    var data: Vector<T>;
+
+    init() {
+        this.data = Vector<T>();
+    }
+
+    init(initialCapacity: int) {
+        this.data = Vector<T>(initialCapacity);
+    }
+
+    init(values: [T]) {
+        this.data = Vector<T>(values);
+    }
+
+    func push(value: T) {
+        this.data.push(value);
+    }
+
+    func pop(): T {
+        return this.data.pop();
+    }
+
+    func top(): T {
+        return this.data.back();
+    }
+
+    func isEmpty(): bool {
+        return this.data.isEmpty();
+    }
+
+    func size(): int {
+        return this.data.count();
+    }
+
+    func clear() {
+        this.data.clear();
+    }
+
+    func contains(value: T): bool {
+        return this.data.contains(value);
+    }
+
+    func toArray(): [T] {
+        return this.data.toArray();
+    }
+
+    func swap(other: Stack<T>) {
+        this.data.swap(other.data);
+    }
+}
+
+template class Queue<T> {
+    var data: List<T>;
+
+    init() {
+        this.data = List<T>();
+    }
+
+    init(values: [T]) {
+        this.data = List<T>();
+        var i = 0;
+        while i < values.len() {
+            this.data.pushBack(values[i]);
+            i = i + 1;
+        }
+    }
+
+    func enqueue(value: T) {
+        this.data.pushBack(value);
+    }
+
+    func dequeue(): T {
+        return this.data.popFront();
+    }
+
+    func front(): T {
+        return this.data.front();
+    }
+
+    func back(): T {
+        return this.data.back();
+    }
+
+    func isEmpty(): bool {
+        return this.data.isEmpty();
+    }
+
+    func size(): int {
+        return this.data.count();
+    }
+
+    func clear() {
+        this.data.clear();
+    }
+
+    func contains(value: T): bool {
+        return this.data.contains(value);
+    }
+
+    func toArray(): [T] {
+        return this.data.toArray();
+    }
+
+    func swap(other: Queue<T>) {
+        this.data.swap(other.data);
+    }
+}
+
+template class PriorityQueue<T> {
+    var data: Vector<T>;
+
+    init() {
+        this.data = Vector<T>();
+    }
+
+    init(values: [T]) {
+        this.data = Vector<T>(values);
+        this.heapify();
+    }
+
+    func push(value: T) {
+        this.data.push(value);
+        this.siftUp(this.data.count() - 1);
+    }
+
+    func pop(): T {
+        if this.data.isEmpty() {
+            return null;
+        }
+        var root = this.data.front();
+        var last = this.data.back();
+        this.data.set(0, last);
+        this.data.pop();
+        this.siftDown(0);
+        return root;
+    }
+
+    func top(): T {
+        return this.data.front();
+    }
+
+    func isEmpty(): bool {
+        return this.data.isEmpty();
+    }
+
+    func size(): int {
+        return this.data.count();
+    }
+
+    func clear() {
+        this.data.clear();
+    }
+
+    func contains(value: T): bool {
+        return this.data.contains(value);
+    }
+
+    func toArray(): [T] {
+        return this.data.toArray();
+    }
+
+    func heapify() {
+        var n = this.data.count();
+        var i = n / 2 - 1;
+        while i >= 0 {
+            this.siftDown(i);
+            i = i - 1;
+        }
+    }
+
+    func siftUp(index: int) {
+        while index > 0 {
+            var parent = (index - 1) / 2;
+            if this.data.get(parent) >= this.data.get(index) {
+                break;
+            }
+            var temp = this.data.get(parent);
+            this.data.set(parent, this.data.get(index));
+            this.data.set(index, temp);
+            index = parent;
+        }
+    }
+
+    func siftDown(index: int) {
+        var n = this.data.count();
+        while true {
+            var left = 2 * index + 1;
+            var right = 2 * index + 2;
+            var largest = index;
+
+            if left < n && this.data.get(left) > this.data.get(largest) {
+                largest = left;
+            }
+            if right < n && this.data.get(right) > this.data.get(largest) {
+                largest = right;
+            }
+
+            if largest == index {
+                break;
+            }
+
+            var temp = this.data.get(index);
+            this.data.set(index, this.data.get(largest));
+            this.data.set(largest, temp);
+            index = largest;
+        }
+    }
+
+    func swap(other: PriorityQueue<T>) {
+        this.data.swap(other.data);
+    }
+}

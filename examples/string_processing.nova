@@ -1,0 +1,234 @@
+// 字符串处理示例
+
+use std::string;
+
+// 反转字符串
+func reverse_string(s: string) -> string {
+    let chars = split(s, "");
+    let result = "";
+    for i in [chars.len() - 1, 0, -1] {
+        result = result + chars[i];
+    }
+    return result;
+}
+
+// 检查回文字符串
+func is_palindrome(s: string) -> bool {
+    let trimmed = trim(to_lower(s));
+    let reversed = reverse_string(trimmed);
+    return trimmed == reversed;
+}
+
+// 统计字符出现次数
+func count_char(s: string, c: string) -> int {
+    let count = 0;
+    for ch in split(s, "") {
+        if ch == c {
+            count = count + 1;
+        }
+    }
+    return count;
+}
+
+// 检查字符串是否包含子串（不区分大小写）
+func contains_case_insensitive(s: string, sub: string) -> bool {
+    let lower_s = to_lower(s);
+    let lower_sub = to_lower(sub);
+    return contains(lower_s, lower_sub);
+}
+
+// 首字母大写
+func capitalize(s: string) -> string {
+    if len(s) == 0 {
+        return s;
+    }
+    let first = to_upper(substring(s, 0, 1));
+    let rest = substring(s, 1, len(s));
+    return first + rest;
+}
+
+// 驼峰命名转换
+func to_camel_case(s: string) -> string {
+    let words = split(s, " ");
+    let result = "";
+    for word in words {
+        result = result + capitalize(trim(word));
+    }
+    return result;
+}
+
+// 蛇形命名转换
+func to_snake_case(s: string) -> string {
+    let words = split(s, " ");
+    let result = "";
+    for i in [0, len(words)] {
+        if i > 0 {
+            result = result + "_";
+        }
+        result = result + to_lower(trim(words[i]));
+    }
+    return result;
+}
+
+// 移除所有空格
+func remove_all_spaces(s: string) -> string {
+    let result = "";
+    for ch in split(s, "") {
+        if ch != " " {
+            result = result + ch;
+        }
+    }
+    return result;
+}
+
+// 替换所有出现的子串
+func replace_all(s: string, old: string, new: string) -> string {
+    let result = s;
+    while contains(result, old) {
+        result = replace(result, old, new);
+    }
+    return result;
+}
+
+// 检查字符串是否为空或仅包含空白字符
+func is_blank(s: string) -> bool {
+    let trimmed = trim(s);
+    return len(trimmed) == 0;
+}
+
+// 获取字符串的n个字符
+func truncate(s: string, n: int) -> string {
+    if len(s) <= n {
+        return s;
+    }
+    return substring(s, 0, n) + "...";
+}
+
+// 检查字符串是否以指定前缀开头
+func starts_with_ignore_case(s: string, prefix: string) -> bool {
+    let lower_s = to_lower(s);
+    let lower_prefix = to_lower(prefix);
+    return starts_with(lower_s, lower_prefix);
+}
+
+// 检查字符串是否以指定后缀结尾
+func ends_with_ignore_case(s: string, suffix: string) -> bool {
+    let lower_s = to_lower(s);
+    let lower_suffix = to_lower(suffix);
+    return ends_with(lower_s, lower_suffix);
+}
+
+// 主函数
+func main() {
+    print("=== 大小写转换 ===");
+    let s = "Hello, World!";
+    print(f"原始字符串: {s}");
+    print(f"大写: {to_upper(s)}");
+    print(f"小写: {to_lower(s)}");
+    
+    print("\n=== 字符串修剪 ===");
+    let s2 = "  Hello, World!  ";
+    print(f"原始字符串: '{s2}'");
+    print(f"修剪后: '{trim(s2)}'");
+    
+    print("\n=== 字符串分割 ===");
+    let s3 = "apple,banana,orange";
+    let fruits = split(s3, ",");
+    print(f"原始字符串: {s3}");
+    print(f"分割结果:");
+    for fruit in fruits {
+        print(f"  - {fruit}");
+    }
+    
+    print("\n=== 字符串连接 ===");
+    let words = ["Hello", "World", "Nova"];
+    let joined = join(words, " ");
+    print(f"单词列表: {words}");
+    print(f"连接结果: {joined}");
+    
+    print("\n=== 字符串替换 ===");
+    let s4 = "Hello, World!";
+    let replaced = replace(s4, "World", "Nova");
+    print(f"原始字符串: {s4}");
+    print(f"替换后: {replaced}");
+    
+    let s5 = "a,b,c,a,b,a";
+    let replaced_all = replace_all(s5, "a", "x");
+    print(f"原始字符串: {s5}");
+    print(f"全部替换后: {replaced_all}");
+    
+    print("\n=== 字符串子串 ===");
+    let s6 = "Hello, World!";
+    let sub1 = substring(s6, 0, 5);
+    let sub2 = substring(s6, 7, 12);
+    print(f"原始字符串: {s6}");
+    print(f"子串[0:5]: {sub1}");
+    print(f"子串[7:12]: {sub2}");
+    
+    print("\n=== 字符串检查 ===");
+    let s7 = "Hello, World!";
+    print(f"原始字符串: {s7}");
+    print(f"包含'World': {contains(s7, "World")");
+    print(f"包含'Python': {contains(s7, "Python")}");
+    print(f"以'Hello'开头: {starts_with(s7, "Hello")}");
+    print(f"以'World'结尾: {ends_with(s7, "World")}");
+    
+    print("\n=== 字符串反转 ===");
+    let s8 = "Hello";
+    let reversed = reverse_string(s8);
+    print(f"原始字符串: {s8}");
+    print(f"反转后: {reversed}");
+    
+    print("\n=== 回文检查 ===");
+    let palindromes = ["racecar", "A man a plan a canal Panama", "hello"];
+    for s in palindromes {
+        print(f"'{s}' 是回文: {is_palindrome(s)}");
+    }
+    
+    print("\n=== 字符统计 ===");
+    let s9 = "Hello, World!";
+    let count_h = count_char(s9, "H");
+    let count_l = count_char(s9, "l");
+    let count_o = count_char(s9, "o");
+    print(f"原始字符串: {s9}");
+    print(f"'H' 出现次数: {count_h}");
+    print(f"'l' 出现次数: {count_l}");
+    print(f"'o' 出现次数: {count_o}");
+    
+    print("\n=== 首字母大写 ===");
+    let s10 = "hello world";
+    let capitalized = capitalize(s10);
+    print(f"原始字符串: {s10}");
+    print(f"首字母大写: {capitalized}");
+    
+    print("\n=== 命名转换 ===");
+    let s11 = "hello world nova";
+    print(f"原始字符串: {s11}");
+    print(f"驼峰命名: {to_camel_case(s11)}");
+    print(f"蛇形命名: {to_snake_case(s11)}");
+    
+    print("\n=== 移除空格 ===");
+    let s12 = "H e l l o   W o r l d";
+    let no_spaces = remove_all_spaces(s12);
+    print(f"原始字符串: {s12}");
+    print(f"移除空格后: {no_spaces}");
+    
+    print("\n=== 空白检查 ===");
+    let s13 = "   ";
+    let s14 = "hello";
+    print(f"'{s13}' 是空白: {is_blank(s13)}");
+    print(f"'{s14}' 是空白: {is_blank(s14)}");
+    
+    print("\n=== 字符串截断 ===");
+    let s15 = "This is a very long string that needs to be truncated";
+    let truncated = truncate(s15, 20);
+    print(f"原始字符串: {s15}");
+    print(f"截断后: {truncated}");
+    
+    print("\n=== 不区分大小写的检查 ===");
+    let s16 = "Hello, World!";
+    print(f"原始字符串: {s16}");
+    print(f"包含'hello'（不区分大小写）: {contains_case_insensitive(s16, "hello")}");
+    print(f"以'hello'开头（不区分大小写）: {starts_with_ignore_case(s16, "hello")}");
+    print(f"以'world'结尾（不区分大小写）: {ends_with_ignore_case(s16, "world")}");
+}

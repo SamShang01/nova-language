@@ -1,0 +1,211 @@
+# Nova 语言更新日志
+
+## [0.8.0] - 2026-02-26
+### 新增
+- **异步编程支持**：
+  - 实现async/await语法解析
+  - 支持异步函数执行机制
+  - 提供异步IO操作
+
+- **类型注解系统**：
+  - 增强类型检查能力
+  - 支持泛型类型
+  - 实现类型推断
+
+- **增强内置函数**：
+  - 扩展数学函数模块
+  - 增强字符串处理函数
+  - 新增时间和日期处理函数
+
+### 改进
+- 重构命令行工具，使用模块化设计
+- 完善LSP模块结构
+- 提高错误处理能力
+
+## [0.5.0] - 2026-02-26
+### 新增
+- **NovaFunction类**: 创建Nova专用的函数代理对象
+  - 封装函数名、指令和参数
+  - 支持位置参数和关键字参数
+  - 提供清晰的函数表示
+
+- **高级参数系统**:
+  - 支持位置参数
+  - 支持关键字参数
+  - 支持默认值参数
+  - 支持可变参数（*args）
+  - 支持关键字可变参数（**kwargs）
+
+- **ParameterDefinition AST节点**: 新增参数定义节点，支持复杂的参数类型
+- **Token类型扩展**: 添加STAR、STAR_STAR、EQUAL等token类型
+
+### 改进
+- **REPL多行模式**: 改进代码完整性检测，支持自动退出多行模式
+  - 检查括号平衡（圆括号、方括号、花括号）
+  - 检查冒号和逗号结尾
+  - 更智能的代码完整性判断
+
+- **函数参数绑定**: 修复函数调用时参数未定义的问题
+  - 正确处理位置参数
+  - 正确处理关键字参数
+  - 参数不足时使用默认值None
+
+### 修复
+- 修复REPL函数定义后无法调用的问题
+- 修复:type命令找不到变量的问题
+- 修复控制字符导致词法错误的问题
+- 修复VMError参数错误的问题
+- 修复函数调用时参数未定义的错误
+- 修复Unknown operator错误
+- 修复泛型类型解析错误
+
+### 技术细节
+- NovaFunction类支持多种参数类型
+- ParameterDefinition类支持默认值、可变参数和关键字参数
+- 解析器支持*args和**kwargs语法
+
+## [0.4.1] - 2026-02-14
+### 新增
+- 实现 Nova IDLE 图形界面，类似于 Python IDLE
+- 添加 `idle` 命令用于启动 Nova IDLE
+
+### 修复
+- 修复了 Nova IDLE 中 tkinter 导入错误的问题
+
+## [0.4.0] - 2026-02-13
+### 新增
+- 实现编译功能
+  - 添加编译器模块，支持将Nova代码编译为Python可执行文件
+  - 添加编译器模块，支持将Nova代码编译为独立可执行文件
+  - 在script.py中添加compile子命令，支持命令行编译
+  - 支持两种编译格式：python和executable
+- 实现GUI功能
+  - 添加GUI标准库，提供类似Python tkinter的GUI功能
+  - 实现Widget窗口组件，支持创建GUI窗口
+  - 实现Button按钮组件，支持点击回调
+  - 实现Label标签组件，用于显示文本
+  - 实现Entry输入框组件，支持用户输入
+  - 实现Text文本框组件，支持多行文本
+  - 实现Canvas画布组件，支持绘制图形
+  - 实现Menu菜单组件，支持创建菜单
+- 添加GUI测试用例
+  - 测试窗口组件的创建和子组件添加
+  - 测试按钮组件的创建和回调函数
+  - 测试标签组件的创建
+  - 测试输入框组件的获取和设置
+  - 测试文本框组件的获取、设置和追加
+  - 测试画布组件的图形绘制
+  - 测试菜单组件的菜单项添加
+- 扩展标准库测试用例
+  - 添加扩展标准库测试文件test_extended_stdlib.py
+  - 测试数学函数：abs, max, min, sum, round, pow_func, divmod_func
+  - 测试类型函数：type, isinstance
+  - 测试转换函数：to_str, to_int, to_float
+  - 测试容器函数：contains
+  - 测试列表函数：list, append, remove, pop, sort, reverse, slice
+  - 测试字典函数：dict, keys, values, items
+  - 测试函数式编程函数：map_func, filter_func, reduce_func, zip_func
+  - 测试逻辑函数：any_func, all_func
+  - 测试字符函数：chr_func, ord_func, hex_func, oct_func, bin_func
+  - 测试对象函数：hash_func, id_func
+
+### 修复
+- 修复标准库函数递归调用问题
+  - 修复list函数递归调用自己，使用builtins.list
+  - 修复dict函数递归调用自己，使用builtins.dict
+  - 修复keys函数使用list递归，使用builtins.list
+  - 修复values函数使用list递归，使用builtins.list
+  - 修复items函数使用list递归，使用builtins.list
+  - 修复sort函数使用sorted递归，使用builtins.sorted
+  - 修复reverse函数使用list和reversed递归，使用builtins.list和builtins.reversed
+  - 修复map_func函数使用map和list递归，使用builtins.map和builtins.list
+  - 修复filter_func函数使用filter和list递归，使用builtins.filter和builtins.list
+  - 修复zip_func函数使用zip和list递归，使用builtins.zip和builtins.list
+- 修复Float类初始化递归问题，使用builtins.float
+- 修复String类初始化递归问题，使用builtins.str
+- 修复Int类初始化递归问题，使用builtins.int
+- 修复测试用例中的断言失败，正确处理返回的Int对象
+- 修复语义分析器类型错误
+  - 修复二元表达式类型检查，正确处理相等比较操作的布尔返回类型
+  - 修复函数返回类型推断，正确处理变量声明和返回表达式
+  - 修复常量声明冲突问题，允许覆盖已存在的常量符号
+  - 修复函数体变量作用域问题，确保变量在返回表达式中可见
+- 修复解析器操作符处理问题
+  - 修复相等操作符（==、!=）的解析，使用正确的lexeme而不是token类型名称
+
+### 变更
+- 更新版本号到0.4.0
+- 在标准库中添加GUI模块，版本要求>=0.4.0
+- 更新标准库版本提示信息
+
+## [0.3.0] - 2026-02-13
+### 新增
+- 扩展标准库核心函数，添加大量实用函数
+  - 列表操作：list, append, remove, pop, sort, reverse, slice
+  - 字典操作：dict, keys, values, items
+  - 容器操作：contains
+  - 函数式编程：map_func, filter_func, reduce_func, zip_func
+  - 逻辑检查：any_func, all_func
+  - 字符转换：chr_func, ord_func, hex_func, oct_func, bin_func
+  - 数学运算：pow_func, divmod_func
+  - 对象操作：hash_func, id_func
+- 实现 `__future__.nova` 文件支持
+- 添加 `from __future__ import ...` 语法支持，类似 Python 的 `__future__` 模块
+- 支持双下划线（__）作为特殊标识符
+- 性能优化
+  - 优化虚拟机指令执行循环，减少条件检查开销
+  - 优化内存管理器，减少排序和遍历开销
+  - 改进内存分配策略，批量处理空闲列表
+
+### 修复
+- 修复标准库函数命名冲突问题
+- 优化内存管理器的地址有效性检查
+
+### 变更
+- 更新版本号到 0.3.0
+- 扩展标准库功能，提供更丰富的内置函数
+
+## [0.2.0] - 2026-02-12
+### 新增
+- 完善语法分析器，实现对Nova语言语法的完整解析
+- 开发语义分析器，进行类型检查和作用域分析
+- 实现虚拟机，支持Nova语言的执行
+- 开发标准库，提供常用功能
+- 泛型编程支持
+- 特质（trait）系统
+- 改进的模块系统
+- 扩展的标准库功能
+- 性能优化
+
+### 修复
+- 修复TokenType枚举缺少TRUE和FALSE常量的问题
+- 修复标准库函数无限递归的问题
+- 修复版本导入路径问题
+
+### 变更
+- 将async模块重命名为asynchronous，避免与Python保留关键字冲突
+- 更新版本号到0.2.0
+
+## [0.1.0] - 2026-02-10
+### 新增
+- 初始版本发布
+- 基础语法结构实现
+- 变量与常量支持
+- 数据类型系统
+- 函数定义功能
+- 控制流语句
+- 类型系统进阶
+- 泛型编程支持
+- 错误处理机制
+- 并发编程能力
+- 模块系统
+- 元编程功能
+- 内存管理系统
+- 运算符重载
+- 标准库预览
+
+### 修复
+- 无
+
+### 变更
+- 无

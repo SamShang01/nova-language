@@ -1,0 +1,39 @@
+feature GenericTypes;
+
+func main() {
+    // 测试abs函数
+    let abs_value = abs(-10);
+    print(str(abs_value));
+    
+    // 测试max函数
+    let max_value = max(1, 5, 3, 9, 2);
+    print(str(max_value));
+    
+    // 测试min函数
+    let min_value = min(1, 5, 3, 9, 2);
+    print(str(min_value));
+    
+    // 测试sum函数
+    let sum_value = sum([1, 2, 3, 4, 5]);
+    print(str(sum_value));
+    
+    // 测试round函数
+    let round_value = round(3.14159, 2);
+    print(str(round_value));
+    
+    // 测试type函数
+    let type_value = type(42);
+    print(type_value);
+    
+    // 测试to_str函数
+    let str_value = to_str(123);
+    print(str_value);
+    
+    // 测试to_int函数
+    let int_value = to_int("456");
+    print(str(int_value));
+    
+    // 测试to_float函数
+    let float_value = to_float("78.9");
+    print(str(float_value));
+}

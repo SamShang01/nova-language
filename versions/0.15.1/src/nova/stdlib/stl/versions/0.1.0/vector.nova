@@ -1,0 +1,223 @@
+
+template class Vector<T> {
+    var data: [T];
+    var size: int;
+    var capacity: int;
+
+    init() {
+        this.data = [];
+        this.size = 0;
+        this.capacity = 0;
+    }
+
+    init(initialCapacity: int) {
+        this.data = [];
+        this.size = 0;
+        this.capacity = initialCapacity;
+    }
+
+    init(values: [T]) {
+        this.data = values;
+        this.size = values.len();
+        this.capacity = this.size;
+    }
+
+    func push(value: T) {
+        if this.size >= this.capacity {
+            this.resize();
+        }
+        this.data.push(value);
+        this.size = this.size + 1;
+    }
+
+    func pop(): T {
+        if this.size == 0 {
+            return null;
+        }
+        this.size = this.size - 1;
+        return this.data.pop();
+    }
+
+    func get(index: int): T {
+        if index < 0 || index >= this.size {
+            return null;
+        }
+        return this.data[index];
+    }
+
+    func set(index: int, value: T) {
+        if index >= 0 && index < this.size {
+            this.data[index] = value;
+        }
+    }
+
+    func insert(index: int, value: T) {
+        if index < 0 || index > this.size {
+            return;
+        }
+        if this.size >= this.capacity {
+            this.resize();
+        }
+        var i = this.size;
+        while i > index {
+            this.data[i] = this.data[i - 1];
+            i = i - 1;
+        }
+        this.data[index] = value;
+        this.size = this.size + 1;
+    }
+
+    func remove(index: int): T {
+        if index < 0 || index >= this.size {
+            return null;
+        }
+        var value = this.data[index];
+        var i = index;
+        while i < this.size - 1 {
+            this.data[i] = this.data[i + 1];
+            i = i + 1;
+        }
+        this.size = this.size - 1;
+        return value;
+    }
+
+    func clear() {
+        this.data = [];
+        this.size = 0;
+    }
+
+    func isEmpty(): bool {
+        return this.size == 0;
+    }
+
+    func contains(value: T): bool {
+        var i = 0;
+        while i < this.size {
+            if this.data[i] == value {
+                return true;
+            }
+            i = i + 1;
+        }
+        return false;
+    }
+
+    func indexOf(value: T): int {
+        var i = 0;
+        while i < this.size {
+            if this.data[i] == value {
+                return i;
+            }
+            i = i + 1;
+        }
+        return -1;
+    }
+
+    func lastIndexOf(value: T): int {
+        var i = this.size - 1;
+        while i >= 0 {
+            if this.data[i] == value {
+                return i;
+            }
+            i = i - 1;
+        }
+        return -1;
+    }
+
+    func resize() {
+        if this.capacity == 0 {
+            this.capacity = 1;
+        } else {
+            this.capacity = this.capacity * 2;
+        }
+    }
+
+    func reserve(newCapacity: int) {
+        if newCapacity > this.capacity {
+            this.capacity = newCapacity;
+        }
+    }
+
+    func shrinkToFit() {
+        this.capacity = this.size;
+    }
+
+    func swap(other: Vector<T>) {
+        var tempData = this.data;
+        var tempSize = this.size;
+        var tempCapacity = this.capacity;
+
+        this.data = other.data;
+        this.size = other.size;
+        this.capacity = other.capacity;
+
+        other.data = tempData;
+        other.size = tempSize;
+        other.capacity = tempCapacity;
+    }
+
+    func front(): T {
+        if this.size == 0 {
+            return null;
+        }
+        return this.data[0];
+    }
+
+    func back(): T {
+        if this.size == 0 {
+            return null;
+        }
+        return this.data[this.size - 1];
+    }
+
+    func slice(start: int, end: int): Vector<T> {
+        var result = Vector<T>();
+        if start < 0 {
+            start = 0;
+        }
+        if end > this.size {
+            end = this.size;
+        }
+        var i = start;
+        while i < end {
+            result.push(this.data[i]);
+            i = i + 1;
+        }
+        return result;
+    }
+
+    func reverse() {
+        var i = 0;
+        var j = this.size - 1;
+        while i < j {
+            var temp = this.data[i];
+            this.data[i] = this.data[j];
+            this.data[j] = temp;
+            i = i + 1;
+            j = j - 1;
+        }
+    }
+
+    func sort() {
+        var i = 0;
+        while i < this.size - 1 {
+            var j = 0;
+            while j < this.size - i - 1 {
+                if this.data[j] > this.data[j + 1] {
+                    var temp = this.data[j];
+                    this.data[j] = this.data[j + 1];
+                    this.data[j + 1] = temp;
+                }
+                j = j + 1;
+            }
+            i = i + 1;
+        }
+    }
+
+    func count(): int {
+        return this.size;
+    }
+
+    func toArray(): [T] {
+        return this.data.slice(0, this.size);
+    }
+}

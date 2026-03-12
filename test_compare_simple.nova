@@ -1,0 +1,17 @@
+// 简单测试比较操作符
+
+func testCompare(a: int, b: int): bool {
+    return a < b;
+}
+
+func main() {
+    print("=== Test Simple Comparison ===");
+    
+    let result = testCompare(10, 20);
+    print("10 < 20 = ");
+    print(result);
+    
+    print("=== Done ===");
+}
+
+main();

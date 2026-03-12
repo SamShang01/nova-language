@@ -1,0 +1,23 @@
+async func test_async() -> string {
+    print('Start async function');
+    
+    // 模拟异步操作
+    func simulate_async() -> string {
+        return 'Async result';
+    }
+    
+    let result = await simulate_async();
+    print('Async result: ' + result);
+    print('End async function');
+    return result;
+}
+
+// 测试异步函数
+func main() {
+    print('Start main function');
+    let result = test_async();
+    print('Got result: ' + result);
+    print('End main function');
+}
+
+main();

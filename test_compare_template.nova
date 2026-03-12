@@ -1,0 +1,17 @@
+// 测试模板函数中的比较操作符
+
+template func testCompare<T>(a: T, b: T): bool {
+    return a < b;
+}
+
+func main() {
+    print("=== Test Template Comparison ===");
+    
+    let result = testCompare<int>(10, 20);
+    print("10 < 20 = ");
+    print(result);
+    
+    print("=== Done ===");
+}
+
+main();

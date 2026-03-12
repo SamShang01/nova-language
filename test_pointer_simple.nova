@@ -1,0 +1,20 @@
+// 测试指针功能 - 简单版本
+
+func main() {
+    print("=== Test Pointer ===");
+    
+    // 测试1: 基本取地址
+    let x = 42;
+    let ptr = &x;
+    print("x = ");
+    print(x);
+    
+    // 测试2: 解引用
+    let value = *ptr;
+    print("*ptr = ");
+    print(value);
+    
+    print("=== Done ===");
+}
+
+main();

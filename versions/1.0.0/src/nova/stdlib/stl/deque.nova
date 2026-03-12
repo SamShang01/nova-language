@@ -1,0 +1,149 @@
+// Deque - 双端队列
+// 支持在两端高效插入和删除的序列容器
+
+template class Deque<T> {
+    var data: [T];
+    var size: int;
+    var capacity: int;
+    var front: int;
+    var back: int;
+
+    init() {
+        this.data = [];
+        this.size = 0;
+        this.capacity = 16;
+        this.front = 0;
+        this.back = 0;
+    }
+
+    init(initialCapacity: int) {
+        this.data = [];
+        this.size = 0;
+        this.capacity = initialCapacity;
+        this.front = 0;
+        this.back = 0;
+    }
+
+    // 在前端添加元素
+    func pushFront(value: T) {
+        if this.size >= this.capacity {
+            this.resize();
+        }
+        this.front = (this.front - 1 + this.capacity) % this.capacity;
+        this.data[this.front] = value;
+        this.size = this.size + 1;
+    }
+
+    // 在后端添加元素
+    func pushBack(value: T) {
+        if this.size >= this.capacity {
+            this.resize();
+        }
+        this.data[this.back] = value;
+        this.back = (this.back + 1) % this.capacity;
+        this.size = this.size + 1;
+    }
+
+    // 从前端移除元素
+    func popFront(): T {
+        if this.size == 0 {
+            return null;
+        }
+        var value = this.data[this.front];
+        this.front = (this.front + 1) % this.capacity;
+        this.size = this.size - 1;
+        return value;
+    }
+
+    // 从后端移除元素
+    func popBack(): T {
+        if this.size == 0 {
+            return null;
+        }
+        this.back = (this.back - 1 + this.capacity) % this.capacity;
+        var value = this.data[this.back];
+        this.size = this.size - 1;
+        return value;
+    }
+
+    // 获取前端元素
+    func front(): T {
+        if this.size == 0 {
+            return null;
+        }
+        return this.data[this.front];
+    }
+
+    // 获取后端元素
+    func back(): T {
+        if this.size == 0 {
+            return null;
+        }
+        var index = (this.back - 1 + this.capacity) % this.capacity;
+        return this.data[index];
+    }
+
+    // 获取指定位置元素
+    func get(index: int): T {
+        if index < 0 || index >= this.size {
+            return null;
+        }
+        var actualIndex = (this.front + index) % this.capacity;
+        return this.data[actualIndex];
+    }
+
+    // 设置指定位置元素
+    func set(index: int, value: T) {
+        if index >= 0 && index < this.size {
+            var actualIndex = (this.front + index) % this.capacity;
+            this.data[actualIndex] = value;
+        }
+    }
+
+    // 检查是否为空
+    func isEmpty(): bool {
+        return this.size == 0;
+    }
+
+    // 获取大小
+    func count(): int {
+        return this.size;
+    }
+
+    // 清空队列
+    func clear() {
+        this.data = [];
+        this.size = 0;
+        this.front = 0;
+        this.back = 0;
+    }
+
+    // 检查是否包含元素
+    func contains(value: T): bool {
+        var i = 0;
+        while i < this.size {
+            var actualIndex = (this.front + i) % this.capacity;
+            if this.data[actualIndex] == value {
+                return true;
+            }
+            i = i + 1;
+        }
+        return false;
+    }
+
+    // 扩容
+    func resize() {
+        var newCapacity = this.capacity * 2;
+        var newData = [];
+        var i = 0;
+        while i < this.size {
+            var actualIndex = (this.front + i) % this.capacity;
+            newData.push(this.data[actualIndex]);
+            i = i + 1;
+        }
+        this.data = newData;
+        this.capacity = newCapacity;
+        this.front = 0;
+        this.back = this.size;
+    }
+}

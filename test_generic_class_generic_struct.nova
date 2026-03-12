@@ -1,0 +1,22 @@
+// 测试泛型类中使用泛型结构体
+
+template struct Node<T> {
+    var value: T;
+}
+
+template class Container<T> {
+    var head: Node<T>;
+    
+    init() {
+        this.head = Node<T>(null);
+    }
+}
+
+func main() {
+    print("=== Test ===");
+    let c = Container<int>();
+    print("Container created");
+    print("=== Done ===");
+}
+
+main();

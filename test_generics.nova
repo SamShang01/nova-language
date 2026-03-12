@@ -1,0 +1,24 @@
+feature GenericTypes;
+
+func main() {
+    // 测试泛型函数
+    let result = identity(42);
+    print(str(result));
+    
+    let message = identity("Hello, Nova!");
+    print(message);
+    
+    // 测试泛型结构体
+    let box = Box(value: 3.14);
+    print(str(box.value));
+}
+
+// 泛型函数：返回输入值
+func identity<T>(value: T) -> T {
+    return value;
+}
+
+// 泛型结构体：包装任意类型的值
+generic struct Box<T> {
+    value: T;
+}

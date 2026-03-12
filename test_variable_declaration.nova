@@ -1,0 +1,16 @@
+func main() {
+    // 测试输出功能
+    print("Hello, Nova!");
+    
+    // 测试有类型无初始值的变量声明
+    let b:int;
+    print("b = " + str(b));
+    
+    // 测试有类型有初始值的变量声明
+    let c:int = 42;
+    print("c = " + str(c));
+    
+    // 测试类型推断
+    let d = 3.14;
+    print("d = " + str(d));
+}

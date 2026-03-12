@@ -1,0 +1,17 @@
+// 测试比较操作符解析问题
+
+template func myMin<T>(a: T, b: T): T {
+    if a < b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+func main() {
+    print("Testing comparison operator in template function");
+    let result = myMin(10, 20);
+    print("myMin(10, 20) executed");
+}
+
+main();

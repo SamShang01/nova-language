@@ -1,0 +1,61 @@
+// Nova语言的__future__模块
+// 用于启用未来版本的语言特性
+// 
+// 使用方法：
+// from __future__ import FeatureName
+//
+// 特性说明：
+// - 每个特性都有一个optional_version（首次引入版本）和mandatory_version（成为默认的版本）
+// - 在optional_version之前，该特性不可用
+// - 在optional_version和mandatory_version之间，需要显式导入才能使用
+// - 在mandatory_version之后，该特性自动启用，无需导入
+
+// 泛型类型支持
+// 首次引入：0.2.0
+// 成为默认：0.3.0
+let GenericTypes = true;
+
+// 特质系统支持
+// 首次引入：0.2.0
+// 成为默认：0.3.0
+let TraitSystem = true;
+
+// 模块导入导出支持
+// 首次引入：0.2.0
+// 成为默认：0.3.0
+let ModuleSystem = true;
+
+// 异步编程支持
+// 首次引入：0.3.0
+// 成为默认：未确定
+let AsyncProgramming = false;
+
+// 类型注解
+// 首次引入：0.4.0
+// 成为默认：未确定
+let Annotations = false;
+
+// 模式匹配支持
+// 首次引入：0.5.0
+// 成为默认：未确定
+let PatternMatching = false;
+
+// 字符串插值
+// 首次引入：0.5.0
+// 成为默认：未确定
+let StringInterpolation = false;
+
+// 解构赋值
+// 首次引入：0.5.0
+// 成为默认：未确定
+let Destructuring = false;
+
+// 可选链
+// 首次引入：0.5.0
+// 成为默认：未确定
+let OptionalChaining = false;
+
+// 空值合并
+// 首次引入：0.5.0
+// 成为默认：未确定
+let NullCoalescing = false;

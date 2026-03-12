@@ -1,0 +1,62 @@
+// 测试多个 Trait 约束的泛型函数
+
+trait Comparable {
+    func compare(other: Self) -> int;
+}
+
+trait Cloneable {
+    func clone() -> Self;
+}
+
+struct Point {
+    x: int;
+    y: int;
+}
+
+impl Comparable for Point {
+    func compare(other: Point) -> int {
+        if self.x < other.x {
+            return -1;
+        } else if self.x > other.x {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+impl Cloneable for Point {
+    func clone() -> Point {
+        let new_x = self.x;
+        let new_y = self.y;
+        let p = Point();
+        p.x = new_x;
+        p.y = new_y;
+        return p;
+    }
+}
+
+// 泛型函数使用多个 Trait 约束
+generic func process<T>(value: T)
+    where T: Comparable + Cloneable
+{
+    print("In process function");
+    print("value is:");
+    print(value);
+    let cloned = value.clone();
+    print("Cloned value");
+}
+
+func main() {
+    let p = Point();
+    print("Created Point object");
+    p.x = 1;
+    p.y = 2;
+    print("Set Point properties");
+    print("p.x = ");
+    print(p.x);
+    print("p.y = ");
+    print(p.y);
+    process(p);
+    print("Multiple trait constraints test passed!");
+}

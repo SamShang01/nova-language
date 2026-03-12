@@ -1,0 +1,277 @@
+
+func sort<T>(data: Vector<T>) {
+    var n = data.count();
+    var i = 0;
+    while i < n - 1 {
+        var j = 0;
+        while j < n - i - 1 {
+            if data.get(j) > data.get(j + 1) {
+                var temp = data.get(j);
+                data.set(j, data.get(j + 1));
+                data.set(j + 1, temp);
+            }
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+}
+
+func sort<T>(data: [T]) {
+    var n = data.len();
+    var i = 0;
+    while i < n - 1 {
+        var j = 0;
+        while j < n - i - 1 {
+            if data[j] > data[j + 1] {
+                var temp = data[j];
+                data[j] = data[j + 1];
+                data[j + 1] = temp;
+            }
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+}
+
+func reverse<T>(data: Vector<T>) {
+    var n = data.count();
+    var i = 0;
+    var j = n - 1;
+    while i < j {
+        var temp = data.get(i);
+        data.set(i, data.get(j));
+        data.set(j, temp);
+        i = i + 1;
+        j = j - 1;
+    }
+}
+
+func reverse<T>(data: [T]) {
+    var n = data.len();
+    var i = 0;
+    var j = n - 1;
+    while i < j {
+        var temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+        i = i + 1;
+        j = j - 1;
+    }
+}
+
+func find<T>(data: Vector<T>, value: T): int {
+    var i = 0;
+    while i < data.count() {
+        if data.get(i) == value {
+            return i;
+        }
+        i = i + 1;
+    }
+    return -1;
+}
+
+func find<T>(data: [T], value: T): int {
+    var i = 0;
+    while i < data.len() {
+        if data[i] == value {
+            return i;
+        }
+        i = i + 1;
+    }
+    return -1;
+}
+
+func findIf<T>(data: Vector<T>, predicate: func(T): bool): int {
+    var i = 0;
+    while i < data.count() {
+        if predicate(data.get(i)) {
+            return i;
+        }
+        i = i + 1;
+    }
+    return -1;
+}
+
+func findIf<T>(data: [T], predicate: func(T): bool): int {
+    var i = 0;
+    while i < data.len() {
+        if predicate(data[i]) {
+            return i;
+        }
+        i = i + 1;
+    }
+    return -1;
+}
+
+func binarySearch<T>(data: Vector<T>, value: T): int {
+    var left = 0;
+    var right = data.count() - 1;
+    while left <= right {
+        var mid = (left + right) / 2;
+        if data.get(mid) == value {
+            return mid;
+        } else if data.get(mid) < value {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+
+func binarySearch<T>(data: [T], value: T): int {
+    var left = 0;
+    var right = data.len() - 1;
+    while left <= right {
+        var mid = (left + right) / 2;
+        if data[mid] == value {
+            return mid;
+        } else if data[mid] < value {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+
+func lowerBound<T>(data: Vector<T>, value: T): int {
+    var left = 0;
+    var right = data.count();
+    while left < right {
+        var mid = (left + right) / 2;
+        if data.get(mid) < value {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    return left;
+}
+
+func upperBound<T>(data: Vector<T>, value: T): int {
+    var left = 0;
+    var right = data.count();
+    while left < right {
+        var mid = (left + right) / 2;
+        if data.get(mid) <= value {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    return left;
+}
+
+func count<T>(data: Vector<T>, value: T): int {
+    var result = 0;
+    var i = 0;
+    while i < data.count() {
+        if data.get(i) == value {
+            result = result + 1;
+        }
+        i = i + 1;
+    }
+    return result;
+}
+
+func countIf<T>(data: Vector<T>, predicate: func(T): bool): int {
+    var result = 0;
+    var i = 0;
+    while i < data.count() {
+        if predicate(data.get(i)) {
+            result = result + 1;
+        }
+        i = i + 1;
+    }
+    return result;
+}
+
+func allOf<T>(data: Vector<T>, predicate: func(T): bool): bool {
+    var i = 0;
+    while i < data.count() {
+        if !predicate(data.get(i)) {
+            return false;
+        }
+        i = i + 1;
+    }
+    return true;
+}
+
+func anyOf<T>(data: Vector<T>, predicate: func(T): bool): bool {
+    var i = 0;
+    while i < data.count() {
+        if predicate(data.get(i)) {
+            return true;
+        }
+        i = i + 1;
+    }
+    return false;
+}
+
+func noneOf<T>(data: Vector<T>, predicate: func(T): bool): bool {
+    var i = 0;
+    while i < data.count() {
+        if predicate(data.get(i)) {
+            return false;
+        }
+        i = i + 1;
+    }
+    return true;
+}
+
+func min<T>(a: T, b: T): T {
+    if a < b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+func max<T>(a: T, b: T): T {
+    if a > b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+func minElement<T>(data: Vector<T>): T {
+    if data.isEmpty() {
+        return null;
+    }
+    var result = data.get(0);
+    var i = 1;
+    while i < data.count() {
+        if data.get(i) < result {
+            result = data.get(i);
+        }
+        i = i + 1;
+    }
+    return result;
+}
+
+func maxElement<T>(data: Vector<T>): T {
+    if data.isEmpty() {
+        return null;
+    }
+    var result = data.get(0);
+    var i = 1;
+    while i < data.count() {
+        if data.get(i) > result {
+            result = data.get(i);
+        }
+        i = i + 1;
+    }
+    return result;
+}
+
+func clamp<T>(value: T, min: T, max: T): T {
+    if value < min {
+        return min;
+    } else if value > max {
+        return max;
+    } else {
+        return value;
+    }
+}

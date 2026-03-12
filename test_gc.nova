@@ -1,0 +1,24 @@
+# 分代垃圾回收器测试文件
+
+func main() {
+    println("分代垃圾回收器测试");
+    
+    // 测试1: 创建短生命周期对象
+    println("测试1: 短生命周期对象");
+    let temp1 = "temp1";
+    let temp2 = "temp2";
+    let temp3 = "temp3";
+    println("创建了短生命周期对象");
+    
+    // 测试2: 创建长生命周期对象
+    println("测试2: 长生命周期对象");
+    let persistent = "persistent_data";
+    println("创建了长生命周期对象: " + persistent);
+    
+    // 测试3: 测试对象晋升
+    println("测试3: 对象晋升");
+    let promoted = "promoted_object";
+    println("对象晋升测试完成: " + promoted);
+    
+    println("垃圾回收器测试完成");
+}

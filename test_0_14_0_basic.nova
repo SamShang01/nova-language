@@ -1,0 +1,85 @@
+// 基础测试 0.14.0 - 测试核心功能
+
+// 加法函数
+func add(a: int, b: int): int {
+    return a + b;
+}
+
+// 乘法函数
+func multiply(a: int, b: int): int {
+    return a * b;
+}
+
+func main() {
+    print("==================================");
+    print("     Nova 0.14.0 基础测试        ");
+    print("==================================");
+    print("");
+    
+    // 测试 1: 基本数值计算
+    print("【测试 1】基本数值计算");
+    var a = 10;
+    var b = 20;
+    var sum = a + b;
+    var diff = b - a;
+    var product = a * b;
+    var quotient = b / a;
+    
+    print("a = 10, b = 20");
+    print("和:");
+    print(sum);
+    print("差:");
+    print(diff);
+    print("积:");
+    print(product);
+    print("商:");
+    print(quotient);
+    print("");
+    
+    // 测试 2: 条件语句
+    print("【测试 2】条件语句");
+    var x = 15;
+    if x > 10 {
+        print("x > 10: 正确");
+    } else {
+        print("x <= 10: 错误");
+    }
+    
+    if x == 15 {
+        print("x == 15: 正确");
+    }
+    print("");
+    
+    // 测试 3: 循环
+    print("【测试 3】循环");
+    print("while 循环 1 到 5:");
+    var i = 1;
+    while i <= 5 {
+        print(i);
+        i = i + 1;
+    }
+    print("");
+    
+    // 测试 4: 字符串
+    print("【测试 4】字符串操作");
+    var str1 = "Hello";
+    var str2 = "World";
+    var combined = str1 + ", " + str2 + "!";
+    print(combined);
+    print("");
+    
+    // 测试 5: 函数调用
+    print("【测试 5】函数调用");
+    var result = add(5, 3);
+    print("add(5, 3) =");
+    print(result);
+    
+    var prod = multiply(4, 7);
+    print("multiply(4, 7) =");
+    print(prod);
+    print("");
+    
+    print("==================================");
+    print("     基础测试完成！              ");
+    print("==================================");
+}

@@ -1,0 +1,20 @@
+// 基础 Trait 测试
+trait Printable {
+    func toString(): string;
+}
+
+struct Point {
+    x: int;
+    y: int;
+}
+
+impl Printable for Point {
+    func toString(): string {
+        return "Point";
+    }
+}
+
+func main() {
+    var p = Point(x: 10, y: 20);
+    print(p.toString());
+}

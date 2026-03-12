@@ -1,0 +1,85 @@
+// 测试 Trait 约束检查功能
+
+// 1. 基本的 Trait 定义和实现
+trait Printable {
+    func toString() -> string;
+}
+
+struct Point {
+    x: int;
+    y: int;
+}
+
+// 正确的实现
+impl Printable for Point {
+    func toString() -> string {
+        return f"Point({self.x}, {self.y})";
+    }
+}
+
+// 2. 不完整的 Trait 实现（应该报错）
+/*
+impl Printable for int {
+    // 缺少 toString 方法
+}
+*/
+
+// 3. 方法签名不匹配（应该报错）
+/*
+impl Printable for string {
+    func toString() -> int {  // 返回类型错误
+        return 42;
+    }
+}
+*/
+
+// 4. 泛型函数的 Trait 约束
+generic func print_value<T>(value: T)
+    where T: Printable
+{
+    print(value.toString());
+}
+
+// 5. 多 Trait 约束
+trait Comparable {
+    func compare(self: Self, other: Self) -> int;
+}
+
+generic func sort<T>(values: [T]) -> [T]
+    where T: Comparable
+{
+    // 简化的排序实现
+    return values;
+}
+
+// 为 Point 实现 Comparable
+impl Comparable for Point {
+    func compare(self: Point, other: Point) -> int {
+        let sum1 = self.x + self.y;
+        let sum2 = other.x + other.y;
+        if sum1 < sum2 {
+            return -1;
+        } else if sum1 > sum2 {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+// 6. 测试 Trait 约束的类型检查
+func test_trait_constraint() {
+    let p = Point(x: 10, y: 20);
+    print_value(p);  // 应该通过，因为 Point 实现了 Printable
+    
+    // 以下代码应该报错，因为 int 没有实现 Printable
+    /*
+    let x = 42;
+    print_value(x);
+    */
+}
+
+func main() {
+    test_trait_constraint();
+    print("Trait constraint tests passed!");
+}

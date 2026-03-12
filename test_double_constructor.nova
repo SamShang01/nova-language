@@ -1,0 +1,32 @@
+// 测试Double类型构造函数
+
+// 使用Double构造函数创建Double对象
+let a = Double(3.14159265358979323846);
+print("a的值:");
+print(a);
+
+print("a的类型:");
+print(type(a));
+
+// 从整数创建Double
+let b = Double(42);
+print("b的值:");
+print(b);
+
+print("b的类型:");
+print(type(b));
+
+// 从字符串创建Double
+let c = Double("2.71828182845904523536");
+print("c的值:");
+print(c);
+
+print("c的类型:");
+print(type(c));
+
+// 测试Double对象的运算
+let sum = a + b;
+print("a + b:");
+print(sum);
+
+print("测试完成");

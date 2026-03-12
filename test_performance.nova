@@ -1,0 +1,25 @@
+feature GenericTypes;
+
+func main() {
+    // 测试循环性能
+    let sum = 0;
+    for (let i = 0; i < 10000; i = i + 1) {
+        sum = sum + i;
+    }
+    print("Loop test sum: " + str(sum));
+    
+    // 测试函数调用性能
+    let result = 0;
+    for (let i = 0; i < 1000; i = i + 1) {
+        result = result + fibonacci(10);
+    }
+    print("Function call test result: " + str(result));
+}
+
+func fibonacci(n: int) -> int {
+    if (n <= 1) {
+        return n;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}

@@ -1,0 +1,208 @@
+
+func main() {
+    print("=== Nova STL Library Test Suite ===\n");
+
+    testVector();
+    testList();
+    testStack();
+    testQueue();
+    testSet();
+    testMap();
+    testAlgorithms();
+    testNumeric();
+
+    print("\n=== All tests completed! ===");
+}
+
+func testVector() {
+    print("=== Testing Vector<T> ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    print("Vector after push: " + vec.toArray().toString());
+    print("Size: " + vec.count());
+    print("Front: " + vec.front());
+    print("Back: " + vec.back());
+    print("Contains 3: " + vec.contains(3));
+    print("Index of 4: " + vec.indexOf(4));
+    
+    vec.remove(2);
+    print("After remove index 2: " + vec.toArray().toString());
+    
+    vec.reverse();
+    print("After reverse: " + vec.toArray().toString());
+    
+    vec.sort();
+    print("After sort: " + vec.toArray().toString());
+    
+    print("");
+}
+
+func testList() {
+    print("=== Testing List<T> ===");
+    
+    var list = List<int>();
+    list.pushBack(1);
+    list.pushBack(2);
+    list.pushBack(3);
+    list.pushFront(0);
+    
+    print("List after push: " + list.toArray().toString());
+    print("Size: " + list.count());
+    print("Front: " + list.front());
+    print("Back: " + list.back());
+    print("Contains 2: " + list.contains(2));
+    
+    list.remove(2);
+    print("After remove index 2: " + list.toArray().toString());
+    
+    list.reverse();
+    print("After reverse: " + list.toArray().toString());
+    
+    print("");
+}
+
+func testStack() {
+    print("=== Testing Stack<T> ===");
+    
+    var stack = Stack<int>();
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    
+    print("Stack size: " + stack.size());
+    print("Top: " + stack.top());
+    
+    var popped = stack.pop();
+    print("Popped: " + popped);
+    print("New top: " + stack.top());
+    
+    print("");
+}
+
+func testQueue() {
+    print("=== Testing Queue<T> ===");
+    
+    var queue = Queue<int>();
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+    
+    print("Queue size: " + queue.size());
+    print("Front: " + queue.front());
+    print("Back: " + queue.back());
+    
+    var dequeued = queue.dequeue();
+    print("Dequeued: " + dequeued);
+    print("New front: " + queue.front());
+    
+    print("");
+}
+
+func testSet() {
+    print("=== Testing Set<T> ===");
+    
+    var set = Set<int>();
+    set.insert(1);
+    set.insert(2);
+    set.insert(3);
+    set.insert(2);
+    
+    print("Set size: " + set.size());
+    print("Contains 2: " + set.contains(2));
+    print("Contains 4: " + set.contains(4));
+    
+    set.remove(2);
+    print("After remove 2, size: " + set.size());
+    
+    print("");
+}
+
+func testMap() {
+    print("=== Testing Map<K, V> ===");
+    
+    var map = Map<string, int>();
+    map.insert("one", 1);
+    map.insert("two", 2);
+    map.insert("three", 3);
+    
+    print("Map size: " + map.size());
+    print("Get 'two': " + map.get("two"));
+    print("Contains 'three': " + map.contains("three"));
+    
+    map.insert("two", 20);
+    print("After update 'two': " + map.get("two"));
+    
+    print("Keys: " + map.keys().toArray().toString());
+    print("Values: " + map.values().toArray().toString());
+    
+    print("");
+}
+
+func testAlgorithms() {
+    print("=== Testing Algorithms ===");
+    
+    var vec = Vector<int>();
+    vec.push(5);
+    vec.push(2);
+    vec.push(8);
+    vec.push(1);
+    vec.push(9);
+    
+    print("Original: " + vec.toArray().toString());
+    
+    sort(vec);
+    print("After sort: " + vec.toArray().toString());
+    
+    var index = find(vec, 8);
+    print("Find 8: index = " + index);
+    
+    var minVal = minElement(vec);
+    var maxVal = maxElement(vec);
+    print("Min element: " + minVal);
+    print("Max element: " + maxVal);
+    
+    var filtered = filter(vec, func(x: int): bool {
+        return x > 3;
+    });
+    print("Filtered (>3): " + filtered.toArray().toString());
+    
+    var doubled = map(vec, func(x: int): int {
+        return x * 2;
+    });
+    print("Mapped (x2): " + doubled.toArray().toString());
+    
+    print("");
+}
+
+func testNumeric() {
+    print("=== Testing Numeric Algorithms ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    print("Vector: " + vec.toArray().toString());
+    
+    var sum = accumulate(vec, 0);
+    print("Sum: " + sum);
+    
+    var product = reduce(vec, 1, func(a: int, b: int): int {
+        return a * b;
+    });
+    print("Product: " + product);
+    
+    forEach(vec, func(x: int) {
+        print("Element: " + x);
+    });
+    
+    print("");
+}

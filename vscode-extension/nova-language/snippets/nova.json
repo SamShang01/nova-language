@@ -1,0 +1,224 @@
+{
+  "Function": {
+    "prefix": "func",
+    "body": [
+      "func ${1:name}(${2:params})${3: -> ${4:return_type}} {",
+      "  ${5:body}",
+      "}"
+    ],
+    "description": "Create a function"
+  },
+  "Struct": {
+    "prefix": "struct",
+    "body": [
+      "struct ${1:name} {",
+      "  ${2:fields}",
+      "}"
+    ],
+    "description": "Create a struct"
+  },
+  "If Statement": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition} {",
+      "  ${2:body}",
+      "}"
+    ],
+    "description": "Create an if statement"
+  },
+  "If-Else Statement": {
+    "prefix": "ifelse",
+    "body": [
+      "if ${1:condition} {",
+      "  ${2:body}",
+      "} else {",
+      "  ${3:else_body}",
+      "}"
+    ],
+    "description": "Create an if-else statement"
+  },
+  "While Loop": {
+    "prefix": "while",
+    "body": [
+      "while ${1:condition} {",
+      "  ${2:body}",
+      "}"
+    ],
+    "description": "Create a while loop"
+  },
+  "For Loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:variable} in ${2:range} {",
+      "  ${3:body}",
+      "}"
+    ],
+    "description": "Create a for loop"
+  },
+  "Variable Declaration": {
+    "prefix": "let",
+    "body": [
+      "let ${1:name}${2: : ${3:type}} = ${4:value};",
+    ],
+    "description": "Create a variable declaration"
+  },
+  "Mutable Variable": {
+    "prefix": "var",
+    "body": [
+      "var ${1:name}${2: : ${3:type}} = ${4:value};",
+    ],
+    "description": "Create a mutable variable"
+  },
+  "Constant": {
+    "prefix": "const",
+    "body": [
+      "const ${1:name}${2: : ${3:type}} = ${4:value};",
+    ],
+    "description": "Create a constant"
+  },
+  "Return Statement": {
+    "prefix": "return",
+    "body": [
+      "return ${1:value};",
+    ],
+    "description": "Create a return statement"
+  },
+  "Import Statement": {
+    "prefix": "import",
+    "body": [
+      "import ${1:module};",
+    ],
+    "description": "Create an import statement"
+  },
+  "Import From": {
+    "prefix": "from",
+    "body": [
+      "from ${1:module} import ${2:names};",
+    ],
+    "description": "Create an import from statement"
+  },
+  "Generic Function": {
+    "prefix": "funcg",
+    "body": [
+      "func ${1:name}<${2:T}>(${3:params})${4: -> ${5:return_type}} {",
+      "  ${6:body}",
+      "}"
+    ],
+    "description": "Create a generic function"
+  },
+  "Generic Struct": {
+    "prefix": "structg",
+    "body": [
+      "struct ${1:name}<${2:T}> {",
+      "  ${3:fields}",
+      "}"
+    ],
+    "description": "Create a generic struct"
+  },
+  "Lambda Expression": {
+    "prefix": "lambda",
+    "body": [
+      "(${1:params}) => ${2:body}",
+    ],
+    "description": "Create a lambda expression"
+  },
+  "Trait Definition": {
+    "prefix": "trait",
+    "body": [
+      "trait ${1:name} {",
+      "  ${2:methods}",
+      "}"
+    ],
+    "description": "Create a trait definition"
+  },
+  "Async Function": {
+    "prefix": "async",
+    "body": [
+      "async func ${1:name}(${2:params})${3: -> ${4:return_type}} {",
+      "  ${5:body}",
+      "}"
+    ],
+    "description": "Create an async function"
+  },
+  "Await Expression": {
+    "prefix": "await",
+    "body": [
+      "await ${1:expression};",
+    ],
+    "description": "Create an await expression"
+  },
+  "Switch Statement": {
+    "prefix": "switch",
+    "body": [
+      "switch ${1:expression} {",
+      "  case ${2:value}:",
+      "    ${3:body}",
+      "  default:",
+      "    ${4:default_body}",
+      "}"
+    ],
+    "description": "Create a switch statement"
+  },
+  "Class Definition": {
+    "prefix": "class",
+    "body": [
+      "class ${1:name} {",
+      "  ${2:members}",
+      "}"
+    ],
+    "description": "Create a class definition"
+  },
+  "Main Function": {
+    "prefix": "main",
+    "body": [
+      "func main() -> void {",
+      "  ${1:body}",
+      "}"
+    ],
+    "description": "Create a main function"
+  },
+  "Print Statement": {
+    "prefix": "print",
+    "body": [
+      "print(${1:value});",
+    ],
+    "description": "Create a print statement"
+  },
+  "Comment": {
+    "prefix": "//",
+    "body": [
+      "// ${1:comment}",
+    ],
+    "description": "Create a comment"
+  },
+  "Block Comment": {
+    "prefix": "/*",
+    "body": [
+      "/*",
+      " ${1:comment}",
+      "*/"
+    ],
+    "description": "Create a block comment"
+  },
+  "List Literal": {
+    "prefix": "list",
+    "body": [
+      "[${1:items}]",
+    ],
+    "description": "Create a list literal"
+  },
+  "Dict Literal": {
+    "prefix": "dict",
+    "body": [
+      "{${1:key}: ${2:value}}",
+    ],
+    "description": "Create a dictionary literal"
+  },
+  "Tuple Literal": {
+    "prefix": "tuple",
+    "body": [
+      "(${1:items})",
+    ],
+    "description": "Create a tuple literal"
+  }
+}

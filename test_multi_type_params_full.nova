@@ -1,0 +1,113 @@
+
+template class Pair<T, U> {
+    var first: T;
+    var second: U;
+    
+    init(first: T, second: U) {
+        this.first = first;
+        this.second = second;
+    }
+    
+    func getFirst(): T {
+        return this.first;
+    }
+    
+    func getSecond(): U {
+        return this.second;
+    }
+}
+
+template class Triple<T, U, V> {
+    var first: T;
+    var second: U;
+    var third: V;
+    
+    init(first: T, second: U, third: V) {
+        this.first = first;
+        this.second = second;
+        this.third = third;
+    }
+    
+    func getFirst(): T {
+        return this.first;
+    }
+    
+    func getSecond(): U {
+        return this.second;
+    }
+    
+    func getThird(): V {
+        return this.third;
+    }
+}
+
+template class Quadruple<T, U, V, W> {
+    var first: T;
+    var second: U;
+    var third: V;
+    var fourth: W;
+    
+    init(first: T, second: U, third: V, fourth: W) {
+        this.first = first;
+        this.second = second;
+        this.third = third;
+        this.fourth = fourth;
+    }
+    
+    func getFirst(): T {
+        return this.first;
+    }
+    
+    func getSecond(): U {
+        return this.second;
+    }
+    
+    func getThird(): V {
+        return this.third;
+    }
+    
+    func getFourth(): W {
+        return this.fourth;
+    }
+}
+
+func main() {
+    print("=== Two Type Parameters (T, U) ===");
+    let pair1 = Pair<int, string>(1, "one");
+    print("Pair<int, string>:");
+    print(pair1.getFirst());
+    print(pair1.getSecond());
+    
+    let pair2 = Pair<string, int>("two", 2);
+    print("Pair<string, int>:");
+    print(pair2.getFirst());
+    print(pair2.getSecond());
+    
+    print("=== Three Type Parameters (T, U, V) ===");
+    let triple1 = Triple<int, string, int>(1, "one", 100);
+    print("Triple<int, string, int>:");
+    print(triple1.getFirst());
+    print(triple1.getSecond());
+    print(triple1.getThird());
+    
+    let triple2 = Triple<string, int, string>("two", 2, "two hundred");
+    print("Triple<string, int, string>:");
+    print(triple2.getFirst());
+    print(triple2.getSecond());
+    print(triple2.getThird());
+    
+    print("=== Four Type Parameters (T, U, V, W) ===");
+    let quad1 = Quadruple<int, string, int, string>(1, "one", 100, "one hundred");
+    print("Quadruple<int, string, int, string>:");
+    print(quad1.getFirst());
+    print(quad1.getSecond());
+    print(quad1.getThird());
+    print(quad1.getFourth());
+    
+    let quad2 = Quadruple<string, int, string, int>("two", 2, "two hundred", 200);
+    print("Quadruple<string, int, string, int>:");
+    print(quad2.getFirst());
+    print(quad2.getSecond());
+    print(quad2.getThird());
+    print(quad2.getFourth());
+}

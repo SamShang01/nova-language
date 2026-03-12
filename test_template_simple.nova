@@ -1,0 +1,26 @@
+template class MyTemplate<T> {
+    var value: T;
+    
+    init(value: T) {
+        this.value = value;
+    }
+    
+    func getValue(): T {
+        return this.value;
+    }
+}
+
+func main() {
+    print("Starting test...");
+    let intTemplate = MyTemplate<int>(42);
+    print("Created intTemplate");
+    let intValue = intTemplate.getValue();
+    print("Got int value:");
+    print(intValue);
+    
+    let stringTemplate = MyTemplate<string>("Hello");
+    print("Created stringTemplate");
+    let stringValue = stringTemplate.getValue();
+    print("Got string value:");
+    print(stringValue);
+}

@@ -1,0 +1,204 @@
+// Trie - 前缀树（字典树）
+// 用于高效存储和检索字符串的数据结构
+
+template class TrieNode<T> {
+    var children: Map<char, TrieNode<T>>;
+    var isEndOfWord: bool;
+    var value: T;
+
+    init() {
+        this.children = Map<char, TrieNode<T>>();
+        this.isEndOfWord = false;
+        this.value = null;
+    }
+}
+
+template class Trie<T> {
+    var root: TrieNode<T>;
+    var size: int;
+
+    init() {
+        this.root = TrieNode<T>();
+        this.size = 0;
+    }
+
+    // 插入键值对
+    func insert(key: string, value: T) {
+        var current = this.root;
+        var i = 0;
+        while i < key.len() {
+            var char = key[i];
+            if !current.children.containsKey(char) {
+                current.children.set(char, TrieNode<T>());
+            }
+            current = current.children.get(char);
+            i = i + 1;
+        }
+        if !current.isEndOfWord {
+            this.size = this.size + 1;
+        }
+        current.isEndOfWord = true;
+        current.value = value;
+    }
+
+    // 查找键对应的值
+    func search(key: string): T {
+        var node = this.findNode(key);
+        if node != null && node.isEndOfWord {
+            return node.value;
+        }
+        return null;
+    }
+
+    // 检查是否包含键
+    func contains(key: string): bool {
+        var node = this.findNode(key);
+        return node != null && node.isEndOfWord;
+    }
+
+    // 检查是否有以指定前缀开头的键
+    func startsWith(prefix: string): bool {
+        return this.findNode(prefix) != null;
+    }
+
+    // 删除键
+    func delete(key: string): bool {
+        return this.deleteHelper(this.root, key, 0);
+    }
+
+    // 获取所有键
+    func keys(): [string] {
+        var result = [];
+        this.collectKeys(this.root, "", result);
+        return result;
+    }
+
+    // 获取以指定前缀开头的所有键
+    func keysWithPrefix(prefix: string): [string] {
+        var result = [];
+        var node = this.findNode(prefix);
+        if node != null {
+            this.collectKeys(node, prefix, result);
+        }
+        return result;
+    }
+
+    // 获取大小
+    func count(): int {
+        return this.size;
+    }
+
+    // 检查是否为空
+    func isEmpty(): bool {
+        return this.size == 0;
+    }
+
+    // 清空
+    func clear() {
+        this.root = TrieNode<T>();
+        this.size = 0;
+    }
+
+    // 辅助方法：查找节点
+    func findNode(key: string): TrieNode<T> {
+        var current = this.root;
+        var i = 0;
+        while i < key.len() {
+            var char = key[i];
+            if !current.children.containsKey(char) {
+                return null;
+            }
+            current = current.children.get(char);
+            i = i + 1;
+        }
+        return current;
+    }
+
+    // 辅助方法：收集所有键
+    func collectKeys(node: TrieNode<T>, prefix: string, result: [string]) {
+        if node.isEndOfWord {
+            result.push(prefix);
+        }
+        var keys = node.children.keys();
+        var i = 0;
+        while i < keys.len() {
+            var char = keys[i];
+            var child = node.children.get(char);
+            this.collectKeys(child, prefix + char, result);
+            i = i + 1;
+        }
+    }
+
+    // 辅助方法：删除帮助函数
+    func deleteHelper(node: TrieNode<T>, key: string, index: int): bool {
+        if index == key.len() {
+            if !node.isEndOfWord {
+                return false;
+            }
+            node.isEndOfWord = false;
+            node.value = null;
+            this.size = this.size - 1;
+            return node.children.isEmpty();
+        }
+
+        var char = key[index];
+        if !node.children.containsKey(char) {
+            return false;
+        }
+
+        var child = node.children.get(char);
+        var shouldDeleteChild = this.deleteHelper(child, key, index + 1);
+
+        if shouldDeleteChild {
+            node.children.remove(char);
+            return !node.isEndOfWord && node.children.isEmpty();
+        }
+
+        return false;
+    }
+}
+
+// StringTrie - 字符串专用Trie（便捷类）
+template class StringTrie {
+    var trie: Trie<string>;
+
+    init() {
+        this.trie = Trie<string>();
+    }
+
+    func insert(key: string) {
+        this.trie.insert(key, key);
+    }
+
+    func contains(key: string): bool {
+        return this.trie.contains(key);
+    }
+
+    func startsWith(prefix: string): bool {
+        return this.trie.startsWith(prefix);
+    }
+
+    func delete(key: string): bool {
+        return this.trie.delete(key);
+    }
+
+    func keys(): [string] {
+        return this.trie.keys();
+    }
+
+    func keysWithPrefix(prefix: string): [string] {
+        return this.trie.keysWithPrefix(prefix);
+    }
+
+    func count(): int {
+        return this.trie.count();
+    }
+
+    func isEmpty(): bool {
+        return this.trie.isEmpty();
+    }
+
+    func clear() {
+        this.trie.clear();
+    }
+}

@@ -1,0 +1,75 @@
+// 测试多个 Trait 约束
+
+// 定义第一个 Trait
+trait Printable {
+    fn print(): void;
+}
+
+// 定义第二个 Trait
+trait Comparable<T> {
+    fn compare(other: T): int;
+}
+
+// 定义一个类，同时实现两个 Trait
+class Person {
+    let name: string;
+    let age: int;
+    
+    fn __init__(name: string, age: int) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+// 实现 Printable Trait
+impl Printable for Person {
+    fn print() {
+        print("Person: " + this.name + ", Age: " + str(this.age));
+    }
+}
+
+// 实现 Comparable Trait
+impl Comparable<Person> for Person {
+    fn compare(other: Person): int {
+        if this.age < other.age {
+            return -1;
+        } else if this.age > other.age {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+// 定义一个函数，使用多个 Trait 约束
+fn process<T>(obj: T) where T: Printable + Comparable<T> {
+    obj.print();
+    
+    // 创建一个比较对象
+    let other = Person("John", 30);
+    let result = obj.compare(other);
+    
+    if result < 0 {
+        print("Younger than John");
+    } else if result > 0 {
+        print("Older than John");
+    } else {
+        print("Same age as John");
+    }
+}
+
+// 测试函数
+fn main() {
+    print("Testing multiple trait constraints...");
+    
+    let alice = Person("Alice", 25);
+    let bob = Person("Bob", 35);
+    
+    print("Processing Alice:");
+    process(alice);
+    
+    println("\nProcessing Bob:");
+    process(bob);
+    
+    println("\nMultiple trait constraints test passed!");
+}

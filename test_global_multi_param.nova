@@ -1,0 +1,19 @@
+// 测试全局作用域的多参数泛型结构体实例化
+
+template struct Node<T> {
+    var value: T;
+    var isValid: bool;
+}
+
+// 全局变量
+let n = Node<int>(42, true);
+
+func main() {
+    print("=== Test ===");
+    print("Test passed");
+    print(n.value);
+    print(n.isValid);
+    print("=== Done ===");
+}
+
+main();

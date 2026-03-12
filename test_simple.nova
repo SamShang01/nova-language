@@ -1,0 +1,6 @@
+// 测试延迟运算功能
+
+func main() {
+    let a = "Hello, Nova!";
+    print(a);
+}

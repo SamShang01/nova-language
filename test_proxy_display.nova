@@ -1,0 +1,14 @@
+// 测试代理对象显示效果
+
+// 测试内置函数对象
+print("内置函数对象:");
+print(print);
+print(len);
+print(str);
+
+// 测试Double类型对象
+let a = 3.14159265358979323846;
+print("Double类型对象:");
+print(a);
+
+print("测试完成");

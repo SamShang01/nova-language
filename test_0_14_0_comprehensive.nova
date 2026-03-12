@@ -1,0 +1,208 @@
+// 综合测试 0.14.0 新容器和算法
+// 测试 Deque、Heap、Trie 和高级算法
+
+// 测试 Deque 双端队列
+func testDeque() {
+    print("=== 【测试 1】Deque 双端队列 ===");
+    
+    // 创建 Deque
+    var deque = Deque<int>();
+    
+    // 测试 pushBack
+    print("添加元素到后端: 10, 20, 30");
+    deque.pushBack(10);
+    deque.pushBack(20);
+    deque.pushBack(30);
+    print("当前大小:");
+    print(deque.count());
+    
+    // 测试 pushFront
+    print("添加元素到前端: 5, 1");
+    deque.pushFront(5);
+    deque.pushFront(1);
+    print("当前大小:");
+    print(deque.count());
+    
+    // 测试 front 和 back
+    print("前端元素:");
+    print(deque.front());
+    print("后端元素:");
+    print(deque.back());
+    
+    // 测试 popFront
+    print("从前端移除元素:");
+    var frontVal = deque.popFront();
+    print(frontVal);
+    print("新的前端元素:");
+    print(deque.front());
+    
+    // 测试 popBack
+    print("从后端移除元素:");
+    var backVal = deque.popBack();
+    print(backVal);
+    print("新的后端元素:");
+    print(deque.back());
+    
+    print("Deque 测试完成！");
+    print("");
+}
+
+// 测试 Heap 堆/优先队列
+func testHeap() {
+    print("=== 【测试 2】Heap 堆/优先队列 ===");
+    
+    // 测试最大堆
+    print("--- 最大堆测试 ---");
+    var maxHeap = Heap<int>();
+    maxHeap.push(50);
+    maxHeap.push(30);
+    maxHeap.push(70);
+    maxHeap.push(20);
+    maxHeap.push(60);
+    
+    print("堆大小:");
+    print(maxHeap.count());
+    print("堆顶元素（应该是最大值 70）:");
+    print(maxHeap.top());
+    
+    print("弹出堆顶元素:");
+    var popped = maxHeap.pop();
+    print(popped);
+    
+    print("新的堆顶元素（应该是 60）:");
+    print(maxHeap.top());
+    
+    print("当前堆大小:");
+    print(maxHeap.count());
+    
+    // 测试最小堆
+    print("--- 最小堆测试 ---");
+    var minHeap = Heap<int>(false);
+    minHeap.push(50);
+    minHeap.push(30);
+    minHeap.push(70);
+    minHeap.push(20);
+    minHeap.push(60);
+    
+    print("堆顶元素（应该是最小值 20）:");
+    print(minHeap.top());
+    
+    print("弹出堆顶元素:");
+    popped = minHeap.pop();
+    print(popped);
+    
+    print("新的堆顶元素（应该是 30）:");
+    print(minHeap.top());
+    
+    print("Heap 测试完成！");
+    print("");
+}
+
+// 测试 Trie 前缀树
+func testTrie() {
+    print("=== 【测试 3】Trie 前缀树 ===");
+    
+    // 创建 Trie
+    var trie = Trie<int>();
+    
+    // 插入键值对
+    print("插入键值对:");
+    print("apple -> 1");
+    print("app -> 2");
+    print("application -> 3");
+    print("banana -> 4");
+    print("band -> 5");
+    
+    trie.insert("apple", 1);
+    trie.insert("app", 2);
+    trie.insert("application", 3);
+    trie.insert("banana", 4);
+    trie.insert("band", 5);
+    
+    print("Trie 大小:");
+    print(trie.size());
+    
+    // 测试搜索
+    print("搜索 'apple':");
+    print(trie.search("apple"));
+    
+    print("搜索 'app':");
+    print(trie.search("app"));
+    
+    print("搜索 'appl'（不存在）:");
+    print(trie.search("appl"));
+    
+    // 测试 contains
+    print("包含 'application'?");
+    print(trie.contains("application"));
+    
+    print("包含 'apply'?");
+    print(trie.contains("apply"));
+    
+    // 测试 startsWith
+    print("是否有以 'app' 开头的键?");
+    print(trie.startsWith("app"));
+    
+    print("是否有以 'ban' 开头的键?");
+    print(trie.startsWith("ban"));
+    
+    print("是否有以 'ora' 开头的键?");
+    print(trie.startsWith("ora"));
+    
+    print("Trie 测试完成！");
+    print("");
+}
+
+// 测试高级算法
+func testAdvancedAlgorithms() {
+    print("=== 【测试 4】高级算法 ===");
+    
+    // 测试快速排序
+    print("--- 快速排序 ---");
+    var vec = Vector<int>();
+    vec.push(64);
+    vec.push(34);
+    vec.push(25);
+    vec.push(12);
+    vec.push(22);
+    vec.push(11);
+    vec.push(90);
+    
+    print("排序前:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    // 使用 Vector 的 sort 方法
+    vec.sort();
+    
+    print("排序后:");
+    i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("高级算法测试完成！");
+    print("");
+}
+
+// 主函数
+func main() {
+    print("==================================");
+    print("     Nova 0.14.0 综合测试        ");
+    print("  测试新容器: Deque, Heap, Trie  ");
+    print("==================================");
+    print("");
+    
+    testDeque();
+    testHeap();
+    testTrie();
+    testAdvancedAlgorithms();
+    
+    print("==================================");
+    print("     所有测试完成！              ");
+    print("==================================");
+}

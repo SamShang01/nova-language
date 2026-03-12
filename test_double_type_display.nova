@@ -1,0 +1,27 @@
+// 测试Double类型的类型显示
+
+let a = 3.14159265358979323846;
+let b = 2.71828182845904523536;
+
+// 测试Double类型的字符串表示
+print("a的值:");
+print(a);
+
+print("a的类型:");
+print(type(a));
+
+print("b的值:");
+print(b);
+
+print("b的类型:");
+print(type(b));
+
+// 测试运算
+let sum = a + b;
+print("sum的值:");
+print(sum);
+
+print("sum的类型:");
+print(type(sum));
+
+print("测试完成");

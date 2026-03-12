@@ -1,0 +1,11 @@
+// 测试延迟运算特性
+
+// 启用延迟运算特性
+feature DeferredOperations;
+
+func main() {
+    // 测试延迟运算功能
+    let a = 1 / 3 * 3;
+    print("1/3*3 = ");
+    print(str(a));
+}

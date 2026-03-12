@@ -1,0 +1,8 @@
+// 测试 from __future__ import 语法
+from __future__ import GenericTypes;
+
+use std::io::print;
+
+func main() {
+    print("Hello, Nova with __future__ imports!");
+}

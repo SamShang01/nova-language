@@ -1,0 +1,35 @@
+// 测试在类中使用泛型结构体
+
+template struct Node<T> {
+    var value: T;
+    var next: Node<T>;
+}
+
+template class Container<T> {
+    var head: Node<T>;
+    var hasHead: bool;
+    
+    init() {
+        this.head = Node<T>(null, null);
+        this.hasHead = false;
+    }
+    
+    func add(value: T) {
+        this.head = Node<T>(value, null);
+        this.hasHead = true;
+    }
+}
+
+func main() {
+    print("=== Test Generic Struct in Class ===");
+    
+    let c = Container<int>();
+    print("Container created");
+    
+    c.add(42);
+    print("Value added");
+    
+    print("=== Done ===");
+}
+
+main();

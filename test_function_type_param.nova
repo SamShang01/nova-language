@@ -1,0 +1,89 @@
+template func apply<T>(value: T, fn: func(T): T): T {
+    return fn(value);
+}
+
+template func applyTwice<T>(value: T, fn1: func(T): T, fn2: func(T): T): T {
+    var temp = fn1(value);
+    return fn2(temp);
+}
+
+template func applyThree<T>(value: T, fn1: func(T): T, fn2: func(T): T, fn3: func(T): T): T {
+    var temp1 = fn1(value);
+    var temp2 = fn2(temp1);
+    return fn3(temp2);
+}
+
+func square(x: int): int {
+    return x * x;
+}
+
+func double(x: int): int {
+    return x * 2;
+}
+
+func increment(x: int): int {
+    return x + 1;
+}
+
+func testApplyWithFunctionParam() {
+    print("=== Test 1: Apply with Function Parameter ===");
+    
+    var result = apply<int>(5, square);
+    print("apply(5, square):");
+    print(result);
+    
+    result = apply<int>(5, double);
+    print("apply(5, double):");
+    print(result);
+    
+    result = apply<int>(5, increment);
+    print("apply(5, increment):");
+    print(result);
+    
+    print("");
+}
+
+func testApplyTwiceWithFunctionParams() {
+    print("=== Test 2: ApplyTwice with Function Parameters ===");
+    
+    var result = applyTwice<int>(5, square, double);
+    print("applyTwice(5, square, double):");
+    print("  square(5) = " + square(5));
+    print("  double(" + square(5) + ") = " + double(square(5)));
+    print("  result:");
+    print(result);
+    
+    result = applyTwice<int>(5, increment, square);
+    print("applyTwice(5, increment, square):");
+    print("  increment(5) = " + increment(5));
+    print("  square(" + increment(5) + ") = " + square(increment(5)));
+    print("  result:");
+    print(result);
+    
+    print("");
+}
+
+func testApplyThreeWithFunctionParams() {
+    print("=== Test 3: ApplyThree with Function Parameters ===");
+    
+    var result = applyThree<int>(5, increment, double, square);
+    print("applyThree(5, increment, double, square):");
+    print("  increment(5) = " + increment(5));
+    print("  double(" + increment(5) + ") = " + double(increment(5)));
+    print("  square(" + double(increment(5)) + ") = " + square(double(increment(5))));
+    print("  result:");
+    print(result);
+    
+    print("");
+}
+
+func main() {
+    print("=== Function Type Parameter Tests ===");
+    print("");
+    
+    testApplyWithFunctionParam();
+    testApplyTwiceWithFunctionParams();
+    testApplyThreeWithFunctionParams();
+    
+    print("=== All Tests Completed ===");
+}

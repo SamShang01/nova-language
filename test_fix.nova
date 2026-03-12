@@ -1,0 +1,18 @@
+struct it {
+    a: int,
+    
+    func new(a: int) -> it {
+        self.a = a;
+        return self;
+    }
+    
+    func __add__(other: it) -> it {
+        return it(self.a + other.a);
+    }
+}
+
+// 测试加法运算符重载
+let x = it.new(1);
+let y = it.new(2);
+let z = x + y;
+print('1 + 2 = ' + str(z.a));

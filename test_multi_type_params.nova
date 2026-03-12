@@ -1,0 +1,60 @@
+
+template class Pair<T, U> {
+    var first: T;
+    var second: U;
+    
+    init(first: T, second: U) {
+        this.first = first;
+        this.second = second;
+    }
+    
+    func getFirst(): T {
+        return this.first;
+    }
+    
+    func getSecond(): U {
+        return this.second;
+    }
+}
+
+template class Triple<T, U, V> {
+    var first: T;
+    var second: U;
+    var third: V;
+    
+    init(first: T, second: U, third: V) {
+        this.first = first;
+        this.second = second;
+        this.third = third;
+    }
+    
+    func getFirst(): T {
+        return this.first;
+    }
+    
+    func getSecond(): U {
+        return this.second;
+    }
+    
+    func getThird(): V {
+        return this.third;
+    }
+}
+
+func main() {
+    print("=== Two Type Parameters ===");
+    let pair = Pair<int, string>(1, "one");
+    print("First:");
+    print(pair.getFirst());
+    print("Second:");
+    print(pair.getSecond());
+    
+    print("=== Three Type Parameters ===");
+    let triple = Triple<int, string, int>(1, "one", 100);
+    print("First:");
+    print(triple.getFirst());
+    print("Second:");
+    print(triple.getSecond());
+    print("Third:");
+    print(triple.getThird());
+}

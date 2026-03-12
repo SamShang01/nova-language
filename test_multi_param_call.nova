@@ -1,0 +1,20 @@
+// 测试多参数泛型结构体实例化
+
+template struct Node<T> {
+    var value: T;
+    var next: Node<T>;
+}
+
+func test() {
+    // 多参数实例化
+    let n = Node<int>(42, null);
+    print("Test passed");
+}
+
+func main() {
+    print("=== Test ===");
+    test();
+    print("=== Done ===");
+}
+
+main();

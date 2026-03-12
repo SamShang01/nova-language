@@ -1,0 +1,7 @@
+// Nova语言示例程序
+func main() -> int {
+    println("Hello, Nova!")
+    return 0
+}
+
+

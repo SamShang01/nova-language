@@ -1,0 +1,24 @@
+feature GenericTypes;
+
+// 导入整个模块
+use test_module;
+
+// 从模块导入特定符号
+use from test_module import add;
+
+func main() {
+    // 使用导入的模块
+    let sum = test_module::add(10, 20);
+    print(str(sum));
+    
+    let product = test_module::multiply(5, 6);
+    print(str(product));
+    
+    let pi = test_module::PI;
+    print(str(pi));
+    
+    // 使用直接导入的符号
+    let direct_sum = add(30, 40);
+    print(str(direct_sum));
+}
+

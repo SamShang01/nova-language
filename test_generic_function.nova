@@ -1,0 +1,18 @@
+template func identity<T>(value: T): T {
+    return value;
+}
+
+func main() {
+    print("Testing Generic Functions...");
+    
+    print("Testing identity with int:");
+    print(identity<int>(42));
+    
+    print("Testing identity with float:");
+    print(identity<float>(3.14));
+    
+    print("Testing identity with string:");
+    print(identity<string>("Nova"));
+    
+    print("Generic Functions Test Passed!");
+}

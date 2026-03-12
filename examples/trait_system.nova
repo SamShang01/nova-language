@@ -1,0 +1,207 @@
+// 特质（Trait）系统示例
+
+// 定义特质
+trait Display {
+    func display(self: Self) -> string;
+}
+
+trait Debug {
+    func debug(self: Self) -> string;
+}
+
+trait Comparable {
+    func compare(self: Self, other: Self) -> int;
+}
+
+trait Clone {
+    func clone(self: Self) -> Self;
+}
+
+// 为基本类型实现特质
+impl Display for int {
+    func display(self: int) -> string {
+        return str(self);
+    }
+}
+
+impl Debug for int {
+    func debug(self: int) -> string {
+        return f"int({self})";
+    }
+}
+
+impl Comparable for int {
+    func compare(self: int, other: int) -> int {
+        if self < other {
+            return -1;
+        } else if self > other {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+impl Clone for int {
+    func clone(self: int) -> int {
+        return self;
+    }
+}
+
+impl Display for string {
+    func display(self: string) -> string {
+        return self;
+    }
+}
+
+impl Debug for string {
+    func debug(self: string) -> string {
+        return f"string(\"{self}\")";
+    }
+}
+
+impl Clone for string {
+    func clone(self: string) -> string {
+        return self;
+    }
+}
+
+// 定义结构体
+struct Point {
+    x: int;
+    y: int;
+}
+
+impl Display for Point {
+    func display(self: Point) -> string {
+        return f"Point({self.x}, {self.y})";
+    }
+}
+
+impl Debug for Point {
+    func debug(self: Point) -> string {
+        return f"Point {{ x: {self.x}, y: {self.y} }}";
+    }
+}
+
+impl Clone for Point {
+    func clone(self: Point) -> Point {
+        return Point(x: self.x, y: self.y);
+    }
+}
+
+struct Rectangle {
+    width: int;
+    height: int;
+}
+
+impl Display for Rectangle {
+    func display(self: Rectangle) -> string {
+        return f"Rectangle({self.width}x{self.height})";
+    }
+}
+
+impl Debug for Rectangle {
+    func debug(self: Rectangle) -> string {
+        return f"Rectangle {{ width: {self.width}, height: {self.height} }}";
+    }
+}
+
+impl Clone for Rectangle {
+    func clone(self: Rectangle) -> Rectangle {
+        return Rectangle(width: self.width, height: self.height);
+    }
+}
+
+// 泛型函数，使用特质约束
+generic func print_display<T>(value: T)
+    where T: Display
+{
+    print(value.display());
+}
+
+generic func print_debug<T>(value: T)
+    where T: Debug
+{
+    print(value.debug());
+}
+
+generic func clone_and_display<T>(value: T) -> T
+    where T: Display + Clone
+{
+    let cloned = value.clone();
+    print("Cloned:");
+    print(cloned.display());
+    return cloned;
+}
+
+generic func compare_and_print<T>(a: T, b: T)
+    where T: Comparable + Display
+{
+    let result = a.compare(b);
+    if result < 0 {
+        print(f"{a.display()} < {b.display()}");
+    } else if result > 0 {
+        print(f"{a.display()} > {b.display()}");
+    } else {
+        print(f"{a.display()} == {b.display()}");
+    }
+}
+
+// 使用特质
+func main() {
+    // 基本类型示例
+    print("=== Basic Types ===");
+    
+    let x = 42;
+    print("Display:");
+    print_display(x);
+    print("Debug:");
+    print_debug(x);
+    
+    let s = "hello";
+    print("\nString:");
+    print_display(s);
+    print_debug(s);
+    
+    // 结构体示例
+    print("\n=== Structs ===");
+    
+    let p = Point(x: 10, y: 20);
+    print("Point:");
+    print_display(p);
+    print_debug(p);
+    
+    let rect = Rectangle(width: 100, height: 200);
+    print("\nRectangle:");
+    print_display(rect);
+    print_debug(rect);
+    
+    // 克隆示例
+    print("\n=== Clone ===");
+    
+    let p2 = clone_and_display(p);
+    let rect2 = clone_and_display(rect);
+    
+    // 比较示例
+    print("\n=== Compare ===");
+    
+    let a = 10;
+    let b = 20;
+    compare_and_print(a, b);
+    compare_and_print(b, a);
+    compare_and_print(a, a);
+    
+    // 多个特质约束
+    print("\n=== Multiple Traits ===");
+    
+    let items = [x, s, p, rect];
+    for item in items {
+        if item is Display {
+            print_display(item);
+        }
+        if item is Debug {
+            print_debug(item);
+        }
+    }
+}

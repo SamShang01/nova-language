@@ -1,0 +1,32 @@
+// 最简单的泛型 Trait 测试
+// 只测试泛型 Trait 定义和基本实现
+
+trait Addable<T> {
+    func add(other: T) -> T;
+}
+
+struct IntWrapper {
+    value: int;
+}
+
+// 为 IntWrapper 实现 Addable Trait
+impl Addable<IntWrapper> for IntWrapper {
+    func add(other: IntWrapper) -> IntWrapper {
+        var result = IntWrapper();
+        result.value = this.value + other.value;
+        return result;
+    }
+}
+
+func main() {
+    var a = IntWrapper();
+    a.value = 10;
+    var b = IntWrapper();
+    b.value = 20;
+    
+    var c = a.add(b);
+    print("Testing Addable Trait:");
+    print("10 + 20 = " + str(c.value));
+    
+    print("Test passed!");
+}

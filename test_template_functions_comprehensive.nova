@@ -1,0 +1,95 @@
+template func add<T>(a: T, b: T): T {
+    return a + b;
+}
+
+template func multiply<T>(a: T, b: T): T {
+    return a * b;
+}
+
+template func square<T>(x: T): T {
+    return x * x;
+}
+
+template func negate<T>(x: T): T {
+    return -x;
+}
+
+func testBasicOperations() {
+    print("=== Test 1: Basic Operations ===");
+    
+    var a = 10;
+    var b = 20;
+    
+    var sum = add<int>(a, b);
+    var product = multiply<int>(a, b);
+    var squared = square<int>(a);
+    var negated = negate<int>(a);
+    
+    print("add(10, 20):");
+    print(sum);
+    print("multiply(10, 20):");
+    print(product);
+    print("square(10):");
+    print(squared);
+    print("negate(10):");
+    print(negated);
+    
+    print("");
+}
+
+func testWithFloat() {
+    print("=== Test 2: Operations with Float ===");
+    
+    var a = 3.14;
+    var b = 2.71;
+    
+    var sum = add<float>(a, b);
+    var product = multiply<float>(a, b);
+    var squared = square<float>(a);
+    var negated = negate<float>(a);
+    
+    print("add(3.14, 2.71):");
+    print(sum);
+    print("multiply(3.14, 2.71):");
+    print(product);
+    print("square(3.14):");
+    print(squared);
+    print("negate(3.14):");
+    print(negated);
+    
+    print("");
+}
+
+func testWithInt() {
+    print("=== Test 3: Operations with Int ===");
+    
+    var a = 5;
+    var b = 3;
+    
+    var sum = add<int>(a, b);
+    var product = multiply<int>(a, b);
+    var squared = square<int>(b);
+    var negated = negate<int>(a);
+    
+    print("add(5, 3):");
+    print(sum);
+    print("multiply(5, 3):");
+    print(product);
+    print("square(3):");
+    print(squared);
+    print("negate(5):");
+    print(negated);
+    
+    print("");
+}
+
+func main() {
+    print("=== Template Function Tests ===");
+    print("");
+    
+    testBasicOperations();
+    testWithFloat();
+    testWithInt();
+    
+    print("=== All Tests Completed ===");
+}

@@ -1,0 +1,22 @@
+// 测试在init方法中使用泛型结构体
+
+template struct Node<T> {
+    var value: T;
+}
+
+class Container {
+    var head: Node<int>;
+    
+    init() {
+        this.head = Node<int>(42);
+    }
+}
+
+func main() {
+    print("=== Test ===");
+    let c = Container();
+    print("Container created");
+    print("=== Done ===");
+}
+
+main();

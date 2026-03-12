@@ -1,0 +1,77 @@
+// 泛型 Trait 测试
+// 测试泛型 Trait 定义和 Impl 块
+
+trait Iterator<T> {
+    func next() -> T;
+    func hasNext() -> bool;
+}
+
+template class List<T> {
+    var data: [T];
+    var index: int;
+    
+    init() {
+        this.data = [];
+        this.index = 0;
+    }
+    
+    func push(value: T) {
+        this.data.push(value);
+    }
+    
+    func get(index: int) -> T {
+        return this.data[index];
+    }
+    
+    func len() -> int {
+        return this.data.len();
+    }
+}
+
+template class ListIterator<T> {
+    var list: List<T>;
+    var index: int;
+    
+    init(list: List<T>) {
+        this.list = list;
+        this.index = 0;
+    }
+    
+    func next() -> T {
+        var value = this.list.get(this.index);
+        this.index = this.index + 1;
+        return value;
+    }
+    
+    func hasNext() -> bool {
+        return this.index < this.list.len();
+    }
+}
+
+// 为 ListIterator 实现 Iterator Trait
+impl<T> Iterator<T> for ListIterator<T> {
+    func next() -> T {
+        var value = this.list.get(this.index);
+        this.index = this.index + 1;
+        return value;
+    }
+    
+    func hasNext() -> bool {
+        return this.index < this.list.len();
+    }
+}
+
+func main() {
+    var list = List<int>();
+    list.push(1);
+    list.push(2);
+    list.push(3);
+    
+    var iter = ListIterator<int>(list);
+    print("Testing Iterator Trait:");
+    while iter.hasNext() {
+        print(iter.next());
+    }
+    
+    print("Test passed!");
+}

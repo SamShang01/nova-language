@@ -1,0 +1,21 @@
+// 测试赋值语句中的泛型结构体实例化
+
+template struct Node<T> {
+    var value: T;
+}
+
+func test() {
+    var n = Node<int>(42);
+    print("Test 1 passed");
+    
+    n = Node<int>(100);
+    print("Test 2 passed");
+}
+
+func main() {
+    print("=== Test ===");
+    test();
+    print("=== Done ===");
+}
+
+main();

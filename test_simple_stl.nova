@@ -1,0 +1,31 @@
+// 简单STL类型推断测试
+
+import stl.vector
+import stl.algorithm_template
+
+// 测试sort函数类型推断
+func testSort() {
+    print("Test: Sort with type inference");
+    
+    var vec = Vector<int>();
+    vec.push(3);
+    vec.push(1);
+    vec.push(4);
+    
+    print("Before: " + vec.toString());
+    
+    // 使用类型推断
+    sort(vec);
+    
+    print("After: " + vec.toString());
+    print("");
+}
+
+// 主函数
+func main() {
+    print("=== Simple STL Test ===");
+    testSort();
+    print("=== Test Completed ===");
+}
+
+main();

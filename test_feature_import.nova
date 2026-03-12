@@ -1,0 +1,7 @@
+feature GenericTypes;
+
+use from std::io import print;
+
+func main() {
+    print("Hello, Nova!");
+}

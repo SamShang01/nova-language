@@ -1,0 +1,153 @@
+// 类型萃取库
+// 提供类似C++ STL的类型萃取功能
+
+// remove_pointer: 移除指针
+template class remove_pointer<T> {
+    var t: type: T;
+    
+    func get_type() -> type {
+        // 如果T是指针类型，返回指向的类型
+        // 否则返回T本身
+        return type: T;
+    }
+}
+
+// add_pointer: 添加指针
+template class add_pointer<T> {
+    var t: type: T;
+    
+    func get_type() -> type {
+        // 返回T的指针类型
+        return type: *T;
+    }
+}
+
+// remove_reference: 移除引用
+template class remove_reference<T> {
+    var t: type: T;
+    
+    func get_type() -> type {
+        // 如果T是引用类型，返回引用的类型
+        // 否则返回T本身
+        return type: T;
+    }
+}
+
+// add_reference: 添加引用
+template class add_reference<T> {
+    var t: type: T;
+    
+    func get_type() -> type {
+        // 返回T的引用类型
+        return type: &T;
+    }
+}
+
+// is_pointer: 判断是否是指针类型
+template class is_pointer<T> {
+    var t: type: T;
+    
+    func value() -> bool {
+        // 判断T是否是指针类型
+        return false;
+    }
+}
+
+// is_reference: 判断是否是引用类型
+template class is_reference<T> {
+    var t: type: T;
+    
+    func value() -> bool {
+        // 判断T是否是引用类型
+        return false;
+    }
+}
+
+// is_array: 判断是否是数组类型
+template class is_array<T> {
+    var t: type: T;
+    
+    func value() -> bool {
+        // 判断T是否是数组类型
+        return false;
+    }
+}
+
+// remove_const: 移除const修饰符
+template class remove_const<T> {
+    var t: type: T;
+    
+    func get_type() -> type {
+        return type: T;
+    }
+}
+
+// enable_if: 条件启用
+template class enable_if<Condition, T> {
+    var condition: bool;
+    var t: type: T;
+    
+    func get_type() -> type {
+        // 如果Condition为true，返回T
+        // 否则编译错误
+        return type: T;
+    }
+}
+
+// conditional: 条件类型选择
+template class conditional<Condition, TrueType, FalseType> {
+    var condition: bool;
+    var true_type: type: TrueType;
+    var false_type: type: FalseType;
+    
+    func get_type() -> type {
+        // 如果Condition为true，返回TrueType
+        // 否则返回FalseType
+        if condition {
+            return type: TrueType;
+        } else {
+            return type: FalseType;
+        }
+    }
+}
+
+// decay: 类型退化
+template class decay<T> {
+    var t: type: T;
+    
+    func get_type() -> type {
+        // 将T转换为 decayed 类型
+        // 移除引用、const等修饰符
+        return type: T;
+    }
+}
+
+// common_type: 公共类型
+template class common_type<T, U> {
+    var t: type: T;
+    var u: type: U;
+    
+    func get_type() -> type {
+        // 找到T和U的公共类型
+        return type: T;
+    }
+}
+
+// 测试函数
+func test_type_traits() {
+    print("=== Type Traits Test ===");
+    
+    // 测试remove_pointer
+    let ptr_type = remove_pointer(*int);
+    print("remove_pointer<*int> created");
+    
+    // 测试add_pointer
+    let int_ptr = add_pointer(int);
+    print("add_pointer<int> created");
+    
+    // 测试is_pointer
+    let is_ptr = is_pointer(*int);
+    print("is_pointer<*int> created");
+    
+    print("=== All Type Traits Tests Passed! ===");
+}

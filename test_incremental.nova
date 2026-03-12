@@ -1,0 +1,7 @@
+# 增量编译测试文件
+
+func main() {
+    println("Hello, Nova!");
+    println("Incremental compilation test");
+    println("Test completed - modified");
+}

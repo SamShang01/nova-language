@@ -1,0 +1,306 @@
+# Nova STL库完整测试用例
+# 测试所有STL组件的功能和集成
+
+func main() {
+    print("========================================");
+    print("  Nova STL库完整测试");
+    print("========================================");
+    print("");
+    
+    testVectorContainer();
+    testListContainer();
+    testStackContainer();
+    testQueueContainer();
+    testSetContainer();
+    testMapContainer();
+    testAlgorithms();
+    testNumericAlgorithms();
+    testFunctionObjects();
+    testIterator();
+    testOptionType();
+    
+    print("========================================");
+    print("  所有测试完成！");
+    print("========================================");
+}
+
+func testVectorContainer() {
+    print("=== Test 1: Vector容器 ===");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(30);
+    
+    print("Vector大小:");
+    print(vec.count());
+    
+    print("Vector元素:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("Vector包含20:");
+    print(vec.contains(20));
+    
+    print("Vector索引查找20:");
+    print(vec.indexOf(20));
+    
+    vec.removeAt(1);
+    print("删除索引1后的大小:");
+    print(vec.count());
+    
+    print("");
+}
+
+func testListContainer() {
+    print("=== Test 2: List容器 ===");
+    
+    var list = List<int>();
+    list.push(10);
+    list.push(20);
+    list.push(30);
+    
+    print("List大小:");
+    print(list.count());
+    
+    print("List元素:");
+    var i = 0;
+    while i < list.count() {
+        print(list.get(i));
+        i = i + 1;
+    }
+    
+    print("List包含20:");
+    print(list.contains(20));
+    
+    list.remove(20);
+    print("删除20后的大小:");
+    print(list.count());
+    
+    print("");
+}
+
+func testStackContainer() {
+    print("=== Test 3: Stack容器 ===");
+    
+    var stack = Stack<int>();
+    stack.push(10);
+    stack.push(20);
+    stack.push(30);
+    
+    print("Stack大小:");
+    print(stack.count());
+    
+    print("Stack弹出元素:");
+    while stack.count() > 0 {
+        print(stack.pop());
+    }
+    
+    print("Stack为空:");
+    print(stack.isEmpty());
+    
+    print("");
+}
+
+func testQueueContainer() {
+    print("=== Test 4: Queue容器 ===");
+    
+    var queue = Queue<int>();
+    queue.enqueue(10);
+    queue.enqueue(20);
+    queue.enqueue(30);
+    
+    print("Queue大小:");
+    print(queue.count());
+    
+    print("Queue出队元素:");
+    while queue.count() > 0 {
+        print(queue.dequeue());
+    }
+    
+    print("Queue为空:");
+    print(queue.isEmpty());
+    
+    print("");
+}
+
+func testSetContainer() {
+    print("=== Test 5: Set容器 ===");
+    
+    var set = Set<int>();
+    set.add(10);
+    set.add(20);
+    set.add(30);
+    set.add(20);
+    
+    print("Set大小:");
+    print(set.count());
+    
+    print("Set包含20:");
+    print(set.contains(20));
+    
+    set.remove(20);
+    print("删除20后的大小:");
+    print(set.count());
+    
+    print("");
+}
+
+func testMapContainer() {
+    print("=== Test 6: Map容器 ===");
+    
+    var map = Map<string, int>();
+    map.set("one", 1);
+    map.set("two", 2);
+    map.set("three", 3);
+    
+    print("Map大小:");
+    print(map.count());
+    
+    print("Map获取'two':");
+    print(map.get("two"));
+    
+    print("Map包含'two':");
+    print(map.containsKey("two"));
+    
+    map.remove("two");
+    print("删除'two'后的大小:");
+    print(map.count());
+    
+    print("");
+}
+
+func testAlgorithms() {
+    print("=== Test 7: 算法库 ===");
+    
+    var vec = Vector<int>();
+    vec.push(3);
+    vec.push(1);
+    vec.push(4);
+    vec.push(1);
+    vec.push(5);
+    vec.push(9);
+    vec.push(2);
+    vec.push(6);
+    vec.push(5);
+    vec.push(3);
+    vec.push(5);
+    
+    print("原始Vector:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("查找5的次数:");
+    print(count(vec, 5));
+    
+    print("查找第一个1的索引:");
+    print(find(vec, 1));
+    
+    print("Vector是否已排序:");
+    print(isSorted(vec));
+    
+    print("");
+}
+
+func testNumericAlgorithms() {
+    print("=== Test 8: 数值算法 ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    print("Vector元素:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("累加和:");
+    print(accumulate(vec, 0));
+    
+    print("内积:");
+    var vec2 = Vector<int>();
+    vec2.push(1);
+    vec2.push(2);
+    vec2.push(3);
+    vec2.push(4);
+    vec2.push(5);
+    print(innerProduct(vec, vec2));
+    
+    print("");
+}
+
+func testFunctionObjects() {
+    print("=== Test 9: 函数对象 ===");
+    
+    print("Less比较:");
+    print(less(10, 20));
+    print(less(20, 10));
+    
+    print("Greater比较:");
+    print(greater(10, 20));
+    print(greater(20, 10));
+    
+    print("Plus加法:");
+    print(plus(10, 20));
+    
+    print("Minus减法:");
+    print(minus(20, 10));
+    
+    print("Multiplies乘法:");
+    print(multiplies(10, 20));
+    
+    print("");
+}
+
+func testIterator() {
+    print("=== Test 10: 迭代器 ===");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(30);
+    
+    print("使用迭代器遍历Vector:");
+    var it = vec.begin();
+    while it != vec.end() {
+        print(it.value());
+        it.next();
+    }
+    
+    print("");
+}
+
+func testOptionType() {
+    print("=== Test 11: Option类型 ===");
+    
+    var someValue = Option<int>.some(42);
+    var noneValue = Option<int>.none();
+    
+    print("Some值:");
+    print(someValue.isSome());
+    print(someValue.unwrap());
+    
+    print("None值:");
+    print(noneValue.isSome());
+    
+    print("Option映射:");
+    var mapped = someValue.map(func(x: int): int {
+        return x * 2;
+    });
+    print(mapped.unwrap());
+    
+    print("");
+}
+
+main();

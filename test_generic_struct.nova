@@ -1,0 +1,39 @@
+template struct Point<T> {
+    var x: T;
+    var y: T;
+    
+    func getX(): T {
+        return this.x;
+    }
+    
+    func getY(): T {
+        return this.y;
+    }
+}
+
+func main() {
+    print("Testing Generic Struct...");
+    
+    let intPoint = Point<int>(10, 20);
+    print("Created intPoint");
+    print("X:");
+    print(intPoint.getX());
+    print("Y:");
+    print(intPoint.getY());
+    
+    let floatPoint = Point<float>(3.14, 2.71);
+    print("Created floatPoint");
+    print("X:");
+    print(floatPoint.getX());
+    print("Y:");
+    print(floatPoint.getY());
+    
+    let stringPoint = Point<string>("Hello", "World");
+    print("Created stringPoint");
+    print("X:");
+    print(stringPoint.getX());
+    print("Y:");
+    print(stringPoint.getY());
+    
+    print("Generic Struct Test Passed!");
+}

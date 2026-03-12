@@ -1,0 +1,23 @@
+template func apply<T, U>(value: T, transformer: func(T): U): U {
+    return transformer(value);
+}
+
+func double(x: int): int {
+    return x * 2;
+}
+
+func triple(x: int): int {
+    return x * 3;
+}
+
+func main() {
+    print("=== Test 1: apply<int, int> with double ===");
+    var result1 = apply<int, int>(21, double);
+    print(result1);
+    
+    print("=== Test 2: apply<int, int> with triple ===");
+    var result2 = apply<int, int>(14, triple);
+    print(result2);
+    
+    print("=== All Tests Completed ===");
+}

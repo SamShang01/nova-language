@@ -1,0 +1,58 @@
+
+template class Container<T> {
+    var value: T;
+    
+    init(value: T) {
+        this.value = value;
+    }
+    
+    func getValue(): T {
+        return this.value;
+    }
+    
+    func setValue(newValue: T) {
+        this.value = newValue;
+    }
+}
+
+template class Pair<T, U> {
+    var first: T;
+    var second: U;
+    
+    init(first: T, second: U) {
+        this.first = first;
+        this.second = second;
+    }
+    
+    func getFirst(): T {
+        return this.first;
+    }
+    
+    func getSecond(): U {
+        return this.second;
+    }
+}
+
+func main() {
+    print("=== Template Class Example ===");
+    
+    let intContainer = Container<int>(42);
+    print("Integer value:");
+    print(intContainer.getValue());
+    
+    let stringContainer = Container<string>("Hello Nova!");
+    print("String value:");
+    print(stringContainer.getValue());
+    
+    intContainer.setValue(100);
+    print("Modified integer value:");
+    print(intContainer.getValue());
+    
+    print("=== Multi-type Parameters Example ===");
+    
+    let pair = Pair<int, string>(1, "one");
+    print("First value:");
+    print(pair.getFirst());
+    print("Second value:");
+    print(pair.getSecond());
+}

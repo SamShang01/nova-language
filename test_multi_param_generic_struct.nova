@@ -1,0 +1,24 @@
+// 测试多参数泛型结构体实例化
+
+template struct Node<T> {
+    var value: T;
+    var next: Node<T>;
+    var isValid: bool;
+}
+
+template class Container<T> {
+    var head: Node<T>;
+    
+    init() {
+        this.head = Node<T>(null, null, false);
+    }
+}
+
+func main() {
+    print("=== Test ===");
+    let c = Container<int>();
+    print("Container created");
+    print("=== Done ===");
+}
+
+main();

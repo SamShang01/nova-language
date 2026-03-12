@@ -1,0 +1,4 @@
+PyQt5==5.15.9
+QScintilla==2.13.3
+nova-language
+watchdog==3.0.0

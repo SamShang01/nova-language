@@ -1,0 +1,35 @@
+
+template class Iterator<T> {
+    func next(): T;
+    func hasNext(): bool;
+}
+
+template class RandomAccessIterator<T> {
+    func next(): T;
+    func hasNext(): bool;
+    func prev(): T;
+    func hasPrev(): bool;
+    func get(index: int): T;
+    func set(index: int, value: T);
+}
+
+template class BidirectionalIterator<T> {
+    func next(): T;
+    func hasNext(): bool;
+    func prev(): T;
+    func hasPrev(): bool;
+}
+
+template class ForwardIterator<T> {
+    func next(): T;
+    func hasNext(): bool;
+}
+
+template class InputIterator<T> {
+    func next(): T;
+    func hasNext(): bool;
+}
+
+template class OutputIterator<T> {
+    func set(value: T);
+}

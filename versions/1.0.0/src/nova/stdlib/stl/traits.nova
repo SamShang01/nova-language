@@ -1,0 +1,79 @@
+trait Iterator<T> {
+    func next() -> T;
+    func hasNext() -> bool;
+}
+
+trait RandomAccessIterator<T> {
+    func next() -> T;
+    func hasNext() -> bool;
+    func prev() -> T;
+    func hasPrev() -> bool;
+    func get(index: int) -> T;
+    func set(index: int, value: T);
+}
+
+trait BidirectionalIterator<T> {
+    func next() -> T;
+    func hasNext() -> bool;
+    func prev() -> T;
+    func hasPrev() -> bool;
+}
+
+trait ForwardIterator<T> {
+    func next() -> T;
+    func hasNext() -> bool;
+}
+
+trait InputIterator<T> {
+    func next() -> T;
+    func hasNext() -> bool;
+}
+
+trait OutputIterator<T> {
+    func set(value: T);
+}
+
+trait Comparable<T> {
+    func compareTo(other: T) -> int;
+}
+
+trait Equatable<T> {
+    func equals(other: T) -> bool;
+}
+
+trait Cloneable<T> {
+    func clone() -> T;
+}
+
+trait Default<T> {
+    func defaultValue() -> T;
+}
+
+trait Hashable {
+    func hashCode() -> int;
+}
+
+trait Printable {
+    func toString() -> string;
+}
+
+trait Sized {
+    func size() -> int;
+    func isEmpty() -> bool;
+}
+
+trait Container<T> {
+    func clear();
+    func contains(value: T) -> bool;
+}
+
+trait Sequence<T> {
+    func first() -> T;
+    func last() -> T;
+}
+
+trait Collection<T> {
+    func add(value: T);
+    func remove(value: T);
+    func toArray() -> [T];
+}

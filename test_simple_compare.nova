@@ -1,0 +1,17 @@
+// 简单的比较测试
+fn main() {
+    let a = 35;
+    let b = 30;
+    
+    print("Testing comparison...");
+    
+    if a < b {
+        print("a < b");
+    } else if a > b {
+        print("a > b");
+    } else {
+        print("a == b");
+    }
+    
+    print("Test passed!");
+}

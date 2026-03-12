@@ -1,0 +1,128 @@
+// 测试Vector的Trait实现
+
+// 测试Sized Trait
+func testSized() {
+    var vec = Vector<int>();
+    if vec.isEmpty() == true {
+        print("Sized Trait: isEmpty测试通过");
+    } else {
+        print("Sized Trait: isEmpty测试失败");
+    }
+    if vec.size() == 0 {
+        print("Sized Trait: size测试通过");
+    } else {
+        print("Sized Trait: size测试失败");
+    }
+    
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    
+    if vec.isEmpty() == false {
+        print("Sized Trait: isEmpty(false)测试通过");
+    } else {
+        print("Sized Trait: isEmpty(false)测试失败");
+    }
+    if vec.size() == 3 {
+        print("Sized Trait: size(3)测试通过");
+    } else {
+        print("Sized Trait: size(3)测试失败");
+    }
+    
+    print("Sized Trait测试完成");
+}
+
+// 测试Container Trait
+func testContainer() {
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    
+    if vec.contains(2) == true {
+        print("Container Trait: contains(true)测试通过");
+    } else {
+        print("Container Trait: contains(true)测试失败");
+    }
+    if vec.contains(4) == false {
+        print("Container Trait: contains(false)测试通过");
+    } else {
+        print("Container Trait: contains(false)测试失败");
+    }
+    
+    vec.clear();
+    if vec.isEmpty() == true {
+        print("Container Trait: clear测试通过");
+    } else {
+        print("Container Trait: clear测试失败");
+    }
+    
+    print("Container Trait测试完成");
+}
+
+// 测试Sequence Trait
+func testSequence() {
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    
+    if vec.first() == 1 {
+        print("Sequence Trait: first测试通过");
+    } else {
+        print("Sequence Trait: first测试失败");
+    }
+    if vec.last() == 3 {
+        print("Sequence Trait: last测试通过");
+    } else {
+        print("Sequence Trait: last测试失败");
+    }
+    
+    print("Sequence Trait测试完成");
+}
+
+// 测试Collection Trait
+func testCollection() {
+    var vec = Vector<int>();
+    vec.add(1);
+    vec.add(2);
+    vec.add(3);
+    
+    if vec.size() == 3 {
+        print("Collection Trait: add测试通过");
+    } else {
+        print("Collection Trait: add测试失败");
+    }
+    
+    vec.remove(2);
+    if vec.size() == 2 {
+        print("Collection Trait: remove测试通过");
+    } else {
+        print("Collection Trait: remove测试失败");
+    }
+    if vec.contains(2) == false {
+        print("Collection Trait: contains after remove测试通过");
+    } else {
+        print("Collection Trait: contains after remove测试失败");
+    }
+    
+    var arr = vec.toArray();
+    if arr.len() == 2 {
+        print("Collection Trait: toArray长度测试通过");
+    } else {
+        print("Collection Trait: toArray长度测试失败");
+    }
+    // 暂时跳过数组索引访问测试，等待解析器支持
+    print("Collection Trait: toArray内容测试跳过");
+    
+    print("Collection Trait测试完成");
+}
+
+// 运行所有测试
+func main() {
+    testSized();
+    testContainer();
+    testSequence();
+    testCollection();
+    print("所有Vector Trait测试完成！");
+}

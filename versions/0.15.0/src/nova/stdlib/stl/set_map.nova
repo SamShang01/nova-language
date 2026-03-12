@@ -1,0 +1,220 @@
+
+template class Set<T> {
+    var data: Vector<T>;
+
+    init() {
+        this.data = Vector<T>();
+    }
+
+    init(values: [T]) {
+        this.data = Vector<T>();
+        var i = 0;
+        while i < values.len() {
+            this.insert(values[i]);
+            i = i + 1;
+        }
+    }
+
+    func insert(value: T) {
+        if !this.contains(value) {
+            this.data.push(value);
+        }
+    }
+
+    func remove(value: T): bool {
+        var index = this.data.indexOf(value);
+        if index != -1 {
+            this.data.remove(index);
+            return true;
+        }
+        return false;
+    }
+
+    func contains(value: T): bool {
+        return this.data.contains(value);
+    }
+
+    func isEmpty(): bool {
+        return this.data.isEmpty();
+    }
+
+    func size(): int {
+        return this.data.count();
+    }
+
+    func clear() {
+        this.data.clear();
+    }
+
+    func toArray(): [T] {
+        return this.data.toArray();
+    }
+
+    func union(other: Set<T>): Set<T> {
+        var result = Set<T>();
+        var i = 0;
+        while i < this.data.count() {
+            result.insert(this.data.get(i));
+            i = i + 1;
+        }
+        var j = 0;
+        while j < other.data.count() {
+            result.insert(other.data.get(j));
+            j = j + 1;
+        }
+        return result;
+    }
+
+    func intersection(other: Set<T>): Set<T> {
+        var result = Set<T>();
+        var i = 0;
+        while i < this.data.count() {
+            if other.contains(this.data.get(i)) {
+                result.insert(this.data.get(i));
+            }
+            i = i + 1;
+        }
+        return result;
+    }
+
+    func difference(other: Set<T>): Set<T> {
+        var result = Set<T>();
+        var i = 0;
+        while i < this.data.count() {
+            if !other.contains(this.data.get(i)) {
+                result.insert(this.data.get(i));
+            }
+            i = i + 1;
+        }
+        return result;
+    }
+
+    func isSubset(other: Set<T>): bool {
+        var i = 0;
+        while i < this.data.count() {
+            if !other.contains(this.data.get(i)) {
+                return false;
+            }
+            i = i + 1;
+        }
+        return true;
+    }
+
+    func isSuperset(other: Set<T>): bool {
+        return other.isSubset(this);
+    }
+
+    func swap(other: Set<T>) {
+        this.data.swap(other.data);
+    }
+}
+
+template struct Pair<K, V> {
+    var key: K;
+    var value: V;
+}
+
+template class Map<K, V> {
+    var data: Vector<Pair<K, V>>;
+
+    init() {
+        this.data = Vector<Pair<K, V>>();
+    }
+
+    init(keys: [K], values: [V]) {
+        this.data = Vector<Pair<K, V>>();
+        var i = 0;
+        while i < keys.len() && i < values.len() {
+            this.insert(keys[i], values[i]);
+            i = i + 1;
+        }
+    }
+
+    func insert(key: K, value: V) {
+        var index = this.findIndex(key);
+        if index != -1 {
+            var pair = this.data.get(index);
+            pair.value = value;
+            this.data.set(index, pair);
+        } else {
+            var newPair = Pair<K, V>(key: key, value: value);
+            this.data.push(newPair);
+        }
+    }
+
+    func get(key: K): V {
+        var index = this.findIndex(key);
+        if index != -1 {
+            var pair = this.data.get(index);
+            return pair.value;
+        }
+        return null;
+    }
+
+    func remove(key: K): bool {
+        var index = this.findIndex(key);
+        if index != -1 {
+            this.data.remove(index);
+            return true;
+        }
+        return false;
+    }
+
+    func contains(key: K): bool {
+        return this.findIndex(key) != -1;
+    }
+
+    func isEmpty(): bool {
+        return this.data.isEmpty();
+    }
+
+    func size(): int {
+        return this.data.count();
+    }
+
+    func clear() {
+        this.data.clear();
+    }
+
+    func keys(): Vector<K> {
+        var result = Vector<K>();
+        var i = 0;
+        while i < this.data.count() {
+            var pair = this.data.get(i);
+            result.push(pair.key);
+            i = i + 1;
+        }
+        return result;
+    }
+
+    func values(): Vector<V> {
+        var result = Vector<V>();
+        var i = 0;
+        while i < this.data.count() {
+            var pair = this.data.get(i);
+            result.push(pair.value);
+            i = i + 1;
+        }
+        return result;
+    }
+
+    func entries(): Vector<Pair<K, V>> {
+        return this.data;
+    }
+
+    func findIndex(key: K): int {
+        var i = 0;
+        while i < this.data.count() {
+            var pair = this.data.get(i);
+            if pair.key == key {
+                return i;
+            }
+            i = i + 1;
+        }
+        return -1;
+    }
+
+    func swap(other: Map<K, V>) {
+        this.data.swap(other.data);
+    }
+}

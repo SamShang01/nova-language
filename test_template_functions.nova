@@ -1,0 +1,349 @@
+func testBasicTemplateFunctions() {
+    print("=== Test 1: Basic Template Functions ===");
+    
+    var a = 10;
+    var b = 20;
+    
+    var minValue = min<int>(a, b);
+    var maxValue = max<int>(a, b);
+    
+    print("min(10, 20):");
+    print(minValue);
+    print("max(10, 20):");
+    print(maxValue);
+    
+    var clamped = clamp<int>(15, 0, 10);
+    print("clamp(15, 0, 10):");
+    print(clamped);
+    
+    print("");
+}
+
+func testSortFunction() {
+    print("=== Test 2: Sort Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(5);
+    vec.push(2);
+    vec.push(8);
+    vec.push(1);
+    vec.push(9);
+    
+    print("Before sort:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    sort<int>(vec);
+    
+    print("After sort:");
+    i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("");
+}
+
+func testFindFunction() {
+    print("=== Test 3: Find Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(30);
+    vec.push(40);
+    vec.push(50);
+    
+    var index = find<int>(vec, 30);
+    print("find(30):");
+    print(index);
+    
+    index = find<int>(vec, 100);
+    print("find(100):");
+    print(index);
+    
+    print("");
+}
+
+func testFindIfFunction() {
+    print("=== Test 4: FindIf Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(30);
+    vec.push(40);
+    vec.push(50);
+    
+    var index = findIf<int>(vec, func(x: int): bool {
+        return x > 25;
+    });
+    print("findIf(x > 25):");
+    print(index);
+    
+    index = findIf<int>(vec, func(x: int): bool {
+        return x < 5;
+    });
+    print("findIf(x < 5):");
+    print(index);
+    
+    print("");
+}
+
+func testCountFunction() {
+    print("=== Test 5: Count Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(10);
+    vec.push(30);
+    vec.push(10);
+    
+    var count = count<int>(vec, 10);
+    print("count(10):");
+    print(count);
+    
+    count = countIf<int>(vec, func(x: int): bool {
+        return x > 15;
+    });
+    print("countIf(x > 15):");
+    print(count);
+    
+    print("");
+}
+
+func testAllOfAnyOfNoneOf() {
+    print("=== Test 6: AllOf, AnyOf, NoneOf ===");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(30);
+    vec.push(40);
+    vec.push(50);
+    
+    var result = allOf<int>(vec, func(x: int): bool {
+        return x > 5;
+    });
+    print("allOf(x > 5):");
+    print(result);
+    
+    result = anyOf<int>(vec, func(x: int): bool {
+        return x > 45;
+    });
+    print("anyOf(x > 45):");
+    print(result);
+    
+    result = noneOf<int>(vec, func(x: int): bool {
+        return x < 5;
+    });
+    print("noneOf(x < 5):");
+    print(result);
+    
+    print("");
+}
+
+func testTransformFunction() {
+    print("=== Test 7: Transform Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    var result = transform<int, int>(vec, func(x: int): int {
+        return x * 2;
+    });
+    
+    print("Original:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("Transformed (x * 2):");
+    i = 0;
+    while i < result.count() {
+        print(result.get(i));
+        i = i + 1;
+    }
+    
+    print("");
+}
+
+func testFilterFunction() {
+    print("=== Test 8: Filter Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    vec.push(6);
+    vec.push(7);
+    vec.push(8);
+    vec.push(9);
+    vec.push(10);
+    
+    var result = filter<int>(vec, func(x: int): bool {
+        return x % 2 == 0;
+    });
+    
+    print("Original:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("Filtered (even numbers):");
+    i = 0;
+    while i < result.count() {
+        print(result.get(i));
+        i = i + 1;
+    }
+    
+    print("");
+}
+
+func testReduceFunction() {
+    print("=== Test 9: Reduce Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    var sum = reduce<int>(vec, 0, func(a: int, b: int): int {
+        return a + b;
+    });
+    print("Sum (reduce):");
+    print(sum);
+    
+    sum = accumulate<int>(vec, 0);
+    print("Sum (accumulate):");
+    print(sum);
+    
+    print("");
+}
+
+func testForEachFunction() {
+    print("=== Test 10: ForEach Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    print("ForEach output:");
+    forEach<int>(vec, func(x: int) {
+        print("  Value: " + x);
+    });
+    
+    print("");
+}
+
+func testReverseFunction() {
+    print("=== Test 11: Reverse Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    print("Before reverse:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    reverse<int>(vec);
+    
+    print("After reverse:");
+    i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("");
+}
+
+func testBinarySearchFunction() {
+    print("=== Test 12: Binary Search Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(30);
+    vec.push(40);
+    vec.push(50);
+    
+    var index = binarySearch<int>(vec, 30);
+    print("binarySearch(30):");
+    print(index);
+    
+    index = binarySearch<int>(vec, 35);
+    print("binarySearch(35):");
+    print(index);
+    
+    print("");
+}
+
+func testMinElementMaxElement() {
+    print("=== Test 13: MinElement, MaxElement ===");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(5);
+    vec.push(40);
+    vec.push(15);
+    
+    var minVal = minElement<int>(vec);
+    var maxVal = maxElement<int>(vec);
+    
+    print("minElement:");
+    print(minVal);
+    print("maxElement:");
+    print(maxVal);
+    
+    print("");
+}
+
+func main() {
+    print("=== Template Function Tests ===");
+    print("");
+    
+    testBasicTemplateFunctions();
+    testSortFunction();
+    testFindFunction();
+    testFindIfFunction();
+    testCountFunction();
+    testAllOfAnyOfNoneOf();
+    testTransformFunction();
+    testFilterFunction();
+    testReduceFunction();
+    testForEachFunction();
+    testReverseFunction();
+    testBinarySearchFunction();
+    testMinElementMaxElement();
+    
+    print("=== All Tests Completed ===");
+}

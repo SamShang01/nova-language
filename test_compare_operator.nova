@@ -1,0 +1,37 @@
+// 测试比较操作符在模板函数中的解析
+
+template func myMin<T>(a: T, b: T): T {
+    if a < b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+template func myMax<T>(a: T, b: T): T {
+    if a > b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+func main() {
+    print("=== Test Comparison Operators ===");
+    
+    // 测试 < 操作符
+    print("Test 1: myMin(10, 20)");
+    let minResult = myMin<int>(10, 20);
+    print("Result:");
+    print(minResult);
+    
+    // 测试 > 操作符
+    print("Test 2: myMax(10, 20)");
+    let maxResult = myMax<int>(10, 20);
+    print("Result:");
+    print(maxResult);
+    
+    print("=== All Tests Passed! ===");
+}
+
+main();

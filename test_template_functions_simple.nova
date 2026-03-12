@@ -1,0 +1,77 @@
+template func min<T>(a: T, b: T): T {
+    if a < b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+template func max<T>(a: T, b: T): T {
+    if a > b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+template func clamp<T>(value: T, min: T, max: T): T {
+    if value < min {
+        return min;
+    } else if value > max {
+        return max;
+    } else {
+        return value;
+    }
+}
+
+func testBasicTemplateFunctions() {
+    print("=== Test 1: Basic Template Functions ===");
+    
+    var a = 10;
+    var b = 20;
+    
+    var minValue = min<int>(a, b);
+    var maxValue = max<int>(a, b);
+    
+    print("min(10, 20):");
+    print(minValue);
+    print("max(10, 20):");
+    print(maxValue);
+    
+    var clamped = clamp<int>(15, 0, 10);
+    print("clamp(15, 0, 10):");
+    print(clamped);
+    
+    print("");
+}
+
+func testWithFloat() {
+    print("=== Test 2: Template Functions with Float ===");
+    
+    var a = 3.14;
+    var b = 2.71;
+    
+    var minValue = min<float>(a, b);
+    var maxValue = max<float>(a, b);
+    
+    print("min(3.14, 2.71):");
+    print(minValue);
+    print("max(3.14, 2.71):");
+    print(maxValue);
+    
+    var clamped = clamp<float>(5.5, 0.0, 10.0);
+    print("clamp(5.5, 0.0, 10.0):");
+    print(clamped);
+    
+    print("");
+}
+
+func main() {
+    print("=== Template Function Tests ===");
+    print("");
+    
+    testBasicTemplateFunctions();
+    testWithFloat();
+    
+    print("=== All Tests Completed ===");
+}

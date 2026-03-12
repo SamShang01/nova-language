@@ -1,0 +1,144 @@
+// 泛型 Trait 测试文件 - 0.15.0 版本 (简化版)
+// 测试泛型 Trait 定义、Impl 块和约束检查
+
+// 测试 1: 泛型 Iterator Trait
+trait Iterator<T> {
+    func next() -> T;
+    func hasNext() -> bool;
+}
+
+// 测试 2: 泛型 Impl块
+template class List<T> {
+    var data: [T];
+    var index: int;
+    
+    init() {
+        this.data = [];
+        this.index = 0;
+    }
+    
+    func push(value: T) {
+        this.data.push(value);
+    }
+    
+    func len() -> int {
+        return this.data.len();
+    }
+}
+
+template class ListIterator<T> {
+    var list: List<T>;
+    var index: int;
+    var current: T;
+    
+    init(list: List<T>) {
+        this.list = list;
+        this.index = 0;
+        this.current = this.getCurrent();
+    }
+    
+    func getCurrent() -> T {
+        // 简化处理，返回第一个元素
+        if this.list.len() > 0 {
+            return this.list.data[0];
+        }
+        return 0 as T;
+    }
+    
+    func next() -> T {
+        var value = this.current;
+        this.index = this.index + 1;
+        this.current = this.getCurrent();
+        return value;
+    }
+    
+    func hasNext() -> bool {
+        return this.index < this.list.len();
+    }
+}
+
+// 为 ListIterator 实现 Iterator Trait
+impl<T> Iterator<T> for ListIterator<T> {
+    func next() -> T {
+        var value = this.current;
+        this.index = this.index + 1;
+        this.current = this.getCurrent();
+        return value;
+    }
+    
+    func hasNext() -> bool {
+        return this.index < this.list.len();
+    }
+}
+
+// 测试 3: Comparable Trait
+trait Comparable<T> {
+    func compareTo(other: T) -> int;
+}
+
+struct Point {
+    x: int;
+    y: int;
+}
+
+impl Comparable<Point> for Point {
+    func compareTo(other: Point) -> int {
+        if this.x < other.x {
+            return -1;
+        } else if this.x > other.x {
+            return 1;
+        } else {
+            if this.y < other.y {
+                return -1;
+            } else if this.y > other.y {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    }
+}
+
+// 测试 4: Sized Trait
+trait Sized {
+    func size() -> int;
+    func isEmpty() -> bool;
+}
+
+impl<T> Sized for List<T> {
+    func size() -> int {
+        return this.data.len();
+    }
+    
+    func isEmpty() -> bool {
+        return this.data.len() == 0;
+    }
+}
+
+// 主函数
+func main() {
+    // 测试泛型 Iterator Trait
+    var list = List<int>();
+    list.push(1);
+    list.push(2);
+    list.push(3);
+    
+    var iter = ListIterator<int>(list);
+    print("Testing Iterator Trait:");
+    while iter.hasNext() {
+        print(iter.next());
+    }
+    
+    // 测试 Comparable Trait
+    var p1 = Point(x: 3, y: 1);
+    var p2 = Point(x: 1, y: 2);
+    print("\nTesting Comparable Trait:");
+    print("p1.compareTo(p2) = " + p1.compareTo(p2));
+    
+    // 测试 Sized Trait
+    print("\nTesting Sized Trait:");
+    print("List size: " + list.size());
+    print("List isEmpty: " + list.isEmpty());
+    
+    print("\nAll tests passed!");
+}

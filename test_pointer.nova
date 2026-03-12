@@ -1,0 +1,31 @@
+// 测试指针功能
+
+func main() {
+    print("=== Test Pointer ===");
+    
+    // 测试1: 基本取地址和解引用
+    let x = 42;
+    let ptr = &x;
+    print("x = ");
+    print(x);
+    print("*ptr = ");
+    print(*ptr);
+    
+    // 测试2: 通过指针修改值
+    *ptr = 100;
+    print("After *ptr = 100:");
+    print("x = ");
+    print(x);
+    
+    // 测试3: 指针类型声明
+    let y = 10;
+    let ptr2: *int = &y;
+    print("y = ");
+    print(y);
+    print("*ptr2 = ");
+    print(*ptr2);
+    
+    print("=== Done ===");
+}
+
+main();

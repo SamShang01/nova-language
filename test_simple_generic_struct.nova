@@ -1,0 +1,17 @@
+// 测试简单的泛型结构体实例化
+
+template struct Node<T> {
+    var value: T;
+}
+
+func main() {
+    print("=== Test ===");
+    
+    // 直接实例化
+    let n = Node<int>(42);
+    print("Node created");
+    
+    print("=== Done ===");
+}
+
+main();

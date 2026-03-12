@@ -1,0 +1,17 @@
+struct Vector {
+    x: float,
+    y: float,
+    
+    func __add__(self: Vector, other: Vector) -> Vector {
+        return Vector(x: self.x + other.x, y: self.y + other.y);
+    }
+}
+
+func main() {
+    let v1 = Vector(x: 1.0, y: 2.0);
+    let v2 = Vector(x: 3.0, y: 4.0);
+    let v3 = v1 + v2;
+    print("v1 + v2 = (" + str(v3.x) + ", " + str(v3.y) + ")");
+}
+
+main();

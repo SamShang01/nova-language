@@ -1,0 +1,212 @@
+// Advanced Algorithms - 高级算法库
+// 包含更高效的算法实现
+
+// 快速排序 - 平均时间复杂度 O(n log n)
+template func quickSort<T>(arr: [T], low: int, high: int) {
+    if low < high {
+        var pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+template func partition<T>(arr: [T], low: int, high: int): int {
+    var pivot = arr[high];
+    var i = low - 1;
+    var j = low;
+    while j < high {
+        if arr[j] <= pivot {
+            i = i + 1;
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        j = j + 1;
+    }
+    var temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return i + 1;
+}
+
+// 归并排序 - 稳定排序，时间复杂度 O(n log n)
+template func mergeSort<T>(arr: [T], left: int, right: int) {
+    if left < right {
+        var mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
+template func merge<T>(arr: [T], left: int, mid: int, right: int) {
+    var n1 = mid - left + 1;
+    var n2 = right - mid;
+    var L = [];
+    var R = [];
+    var i = 0;
+    while i < n1 {
+        L.push(arr[left + i]);
+        i = i + 1;
+    }
+    var j = 0;
+    while j < n2 {
+        R.push(arr[mid + 1 + j]);
+        j = j + 1;
+    }
+    i = 0;
+    j = 0;
+    var k = left;
+    while i < n1 && j < n2 {
+        if L[i] <= R[j] {
+            arr[k] = L[i];
+            i = i + 1;
+        } else {
+            arr[k] = R[j];
+            j = j + 1;
+        }
+        k = k + 1;
+    }
+    while i < n1 {
+        arr[k] = L[i];
+        i = i + 1;
+        k = k + 1;
+    }
+    while j < n2 {
+        arr[k] = R[j];
+        j = j + 1;
+        k = k + 1;
+    }
+}
+
+// 二分查找 - 时间复杂度 O(log n)
+template func binarySearch<T>(arr: [T], target: T): int {
+    var left = 0;
+    var right = arr.len() - 1;
+    while left <= right {
+        var mid = left + (right - left) / 2;
+        if arr[mid] == target {
+            return mid;
+        }
+        if arr[mid] < target {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+
+// 线性查找（带哨兵优化）
+template func linearSearch<T>(arr: [T], target: T): int {
+    var i = 0;
+    while i < arr.len() {
+        if arr[i] == target {
+            return i;
+        }
+        i = i + 1;
+    }
+    return -1;
+}
+
+// 堆排序
+template func heapSort<T>(arr: [T]) {
+    var n = arr.len();
+    var i = n / 2 - 1;
+    while i >= 0 {
+        heapify(arr, n, i);
+        i = i - 1;
+    }
+    i = n - 1;
+    while i > 0 {
+        var temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        heapify(arr, i, 0);
+        i = i - 1;
+    }
+}
+
+template func heapify<T>(arr: [T], n: int, i: int) {
+    var largest = i;
+    var left = 2 * i + 1;
+    var right = 2 * i + 2;
+    if left < n && arr[left] > arr[largest] {
+        largest = left;
+    }
+    if right < n && arr[right] > arr[largest] {
+        largest = right;
+    }
+    if largest != i {
+        var temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+        heapify(arr, n, largest);
+    }
+}
+
+// 插入排序 - 对小数组高效
+template func insertionSort<T>(arr: [T], left: int, right: int) {
+    var i = left + 1;
+    while i <= right {
+        var key = arr[i];
+        var j = i - 1;
+        while j >= left && arr[j] > key {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+        i = i + 1;
+    }
+}
+
+//  introsort (内省排序) - 结合快速排序、堆排序和插入排序
+template func introSort<T>(arr: [T], left: int, right: int, depthLimit: int) {
+    if right - left < 16 {
+        insertionSort(arr, left, right);
+        return;
+    }
+    if depthLimit == 0 {
+        heapSort(arr.slice(left, right + 1));
+        return;
+    }
+    var pi = partition(arr, left, right);
+    introSort(arr, left, pi - 1, depthLimit - 1);
+    introSort(arr, pi + 1, right, depthLimit - 1);
+}
+
+// 选择第 k 小的元素 - 快速选择算法
+template func quickSelect<T>(arr: [T], left: int, right: int, k: int): T {
+    if left == right {
+        return arr[left];
+    }
+    var pi = partition(arr, left, right);
+    if k == pi {
+        return arr[k];
+    } else if k < pi {
+        return quickSelect(arr, left, pi - 1, k);
+    } else {
+        return quickSelect(arr, pi + 1, right, k);
+    }
+}
+
+// 三数取中法选择枢轴
+template func medianOfThree<T>(arr: [T], low: int, high: int): int {
+    var mid = low + (high - low) / 2;
+    if arr[low] > arr[mid] {
+        var temp = arr[low];
+        arr[low] = arr[mid];
+        arr[mid] = temp;
+    }
+    if arr[low] > arr[high] {
+        var temp = arr[low];
+        arr[low] = arr[high];
+        arr[high] = temp;
+    }
+    if arr[mid] > arr[high] {
+        var temp = arr[mid];
+        arr[mid] = arr[high];
+        arr[high] = temp;
+    }
+    return mid;
+}

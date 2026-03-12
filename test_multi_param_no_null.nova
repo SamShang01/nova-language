@@ -1,0 +1,22 @@
+// 测试多参数泛型结构体实例化（不使用null）
+
+template struct Node<T> {
+    var value: T;
+    var isValid: bool;
+}
+
+func test() {
+    // 多参数实例化
+    let n = Node<int>(42, true);
+    print("Test passed");
+    print(n.value);
+    print(n.isValid);
+}
+
+func main() {
+    print("=== Test ===");
+    test();
+    print("=== Done ===");
+}
+
+main();

@@ -1,0 +1,37 @@
+# Test new features
+
+# Test delay calculation feature
+func test_delay_calculation() {
+    let a = 1.0 / 3.0;
+    let b = a * 3.0;
+    print("1.0 / 3.0 * 3.0 = " + str(b));
+}
+
+# Test constant calculation feature
+func test_constant_calculation() {
+    let a: int = 1 + 2;
+    let b: float = 3.0 * 4.0;
+    print("1 + 2 = " + str(a));
+    print("3.0 * 4.0 = " + str(b));
+}
+
+# Test auto type inference feature
+func test_auto_type_inference() {
+    let a = 12;
+    let b = 3.14;
+    let c = "Hello";
+    let d = true;
+    let e: auto = 42;
+    let f: auto = 2.718;
+    print("a = " + str(a));
+    print("b = " + str(b));
+    print("c = " + str(c));
+    print("d = " + str(d));
+    print("e = " + str(e));
+    print("f = " + str(f));
+}
+
+# Run tests
+test_delay_calculation();
+test_constant_calculation();
+test_auto_type_inference();

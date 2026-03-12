@@ -1,0 +1,102 @@
+// 访问修饰符示例
+// 使用 class 关键字定义类，支持 private、protected、public 访问修饰符
+
+class Person {
+    // private 成员 - 仅类内部可访问
+    private var _name: string;
+    private var _age: int;
+    
+    // protected 成员 - 类内部和子类可访问
+    protected var _id: string;
+    
+    // public 成员 - 任何地方可访问
+    public var nationality: string;
+    
+    // public 构造函数
+    public func Person(name: string, age: int) {
+        this._name = name;
+        this._age = age;
+        this._id = "P" + name;
+        this.nationality = "Unknown";
+    }
+    
+    // public getter
+    public func getName(): string {
+        return this._name;
+    }
+    
+    // public setter
+    public func setName(name: string) {
+        this._name = name;
+    }
+    
+    // protected 方法 - 子类可以重写
+    protected func getId(): string {
+        return this._id;
+    }
+    
+    // private 方法 - 仅内部使用
+    private func validateAge(age: int): bool {
+        return age >= 0 && age <= 150;
+    }
+    
+    public func setAge(age: int) {
+        if (this.validateAge(age)) {
+            this._age = age;
+        }
+    }
+    
+    public func getAge(): int {
+        return this._age;
+    }
+}
+
+// 子类示例
+class Student extends Person {
+    private var _studentId: string;
+    public var school: string;
+    
+    public func Student(name: string, age: int, studentId: string) {
+        super(name, age);
+        this._studentId = studentId;
+        this.school = "Unknown";
+        
+        // 可以访问 protected 成员
+        this._id = "S" + studentId;
+    }
+    
+    // 可以重写 protected 方法
+    protected func getId(): string {
+        return this._studentId;
+    }
+    
+    public func getStudentInfo(): string {
+        // 可以访问 public 成员
+        var info = this.getName() + " from " + this.school;
+        
+        // 可以访问 protected 成员
+        info = info + " (ID: " + this._id + ")";
+        
+        return info;
+    }
+}
+
+// 使用示例
+var person = new Person("Alice", 30);
+
+// 可以访问 public 成员
+print(person.nationality);
+person.nationality = "USA";
+
+// 可以访问 public 方法
+print(person.getName());
+person.setName("Bob");
+
+// 以下代码会导致错误（如果访问控制已完全实现）：
+// print(person._name);      // Error: _name is private
+// print(person._id);        // Error: _id is protected
+// person.validateAge(20);   // Error: validateAge is private
+
+var student = new Student("Charlie", 20, "S12345");
+student.school = "MIT";
+print(student.getStudentInfo());

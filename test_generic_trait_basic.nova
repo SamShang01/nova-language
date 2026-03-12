@@ -1,0 +1,50 @@
+// 简单的泛型 Trait 测试用例
+
+// 1. 泛型 Trait 定义
+trait Iterator<T> {
+    func next() -> T;
+    func has_next() -> bool;
+}
+
+// 2. 泛型结构体
+struct List<T> {
+    items: [T];
+    index: int;
+}
+
+// 3. 泛型 Impl 块
+impl<T> Iterator<T> for List<T> {
+    func next() -> T {
+        if self.has_next() {
+            let item = self.items[self.index];
+            self.index = self.index + 1;
+            return item;
+        } else {
+            return 0;
+        }
+    }
+    
+    func has_next() -> bool {
+        return self.index < len(self.items);
+    }
+}
+
+// 4. 使用泛型 Trait 的函数
+generic func iterate<T>(iter: Iterator<T>) {
+    while iter.has_next() {
+        let item = iter.next();
+        print(item);
+    }
+}
+
+func main() {
+    // 测试泛型 Trait
+    let list = List<int>();
+    list.items = [1, 2, 3, 4, 5];
+    list.index = 0;
+    
+    print("Iterating over list:");
+    iterate(list);
+    
+    print("Generic trait tests passed!");
+}

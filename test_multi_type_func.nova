@@ -1,0 +1,22 @@
+// 测试template func多类型参数
+
+// 简单的多类型参数函数
+template func pair<T, U>(first: T, second: U) {
+    print("pair function called");
+    print("first:");
+    print(first);
+    print("second:");
+    print(second);
+}
+
+func main() {
+    print("=== Test Multi-Type Template Function ===");
+    
+    // 测试1: pair函数（显式类型指定）
+    print("Test 1: pair function with explicit types");
+    pair<int, string>(10, "hello");
+    
+    print("=== All Tests Passed! ===");
+}
+
+main();

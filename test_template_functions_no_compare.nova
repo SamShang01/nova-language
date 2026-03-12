@@ -1,0 +1,51 @@
+template func add<T>(a: T, b: T): T {
+    return a + b;
+}
+
+template func multiply<T>(a: T, b: T): T {
+    return a * b;
+}
+
+func testBasicTemplateFunctions() {
+    print("=== Test 1: Basic Template Functions ===");
+    
+    var a = 10;
+    var b = 20;
+    
+    var sum = add<int>(a, b);
+    var product = multiply<int>(a, b);
+    
+    print("add(10, 20):");
+    print(sum);
+    print("multiply(10, 20):");
+    print(product);
+    
+    print("");
+}
+
+func testWithFloat() {
+    print("=== Test 2: Template Functions with Float ===");
+    
+    var a = 3.14;
+    var b = 2.71;
+    
+    var sum = add<float>(a, b);
+    var product = multiply<float>(a, b);
+    
+    print("add(3.14, 2.71):");
+    print(sum);
+    print("multiply(3.14, 2.71):");
+    print(product);
+    
+    print("");
+}
+
+func main() {
+    print("=== Template Function Tests ===");
+    print("");
+    
+    testBasicTemplateFunctions();
+    testWithFloat();
+    
+    print("=== All Tests Completed ===");
+}

@@ -1,0 +1,24 @@
+trait Comparable<T> {
+    func compare(other: T) -> int;
+}
+
+struct Point {
+    x: int;
+    y: int;
+}
+
+impl Comparable<Point> for Point {
+    func compare(other: Point) -> int {
+        if self.x < other.x {
+            return -1;
+        } else if self.x > other.x {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+func main() -> int {
+    return 0;
+}

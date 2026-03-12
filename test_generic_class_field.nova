@@ -1,0 +1,28 @@
+// 测试泛型类的字段访问
+
+template class Container<T> {
+    var value: T;
+    var isValid: bool;
+    
+    init(v: T) {
+        this.value = v;
+        this.isValid = true;
+    }
+    
+    func check() {
+        if this.isValid {
+            print("Valid");
+        } else {
+            print("Invalid");
+        }
+    }
+}
+
+func main() {
+    print("=== Test ===");
+    let c = Container<int>(42);
+    c.check();
+    print("=== Done ===");
+}
+
+main();

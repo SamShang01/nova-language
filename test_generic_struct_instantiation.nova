@@ -1,0 +1,22 @@
+// 测试泛型结构体实例化
+
+template struct Pair<T, U> {
+    var first: T;
+    var second: U;
+}
+
+func main() {
+    print("=== Test Generic Struct Instantiation ===");
+    
+    // 测试1: 显式类型参数
+    let p1 = Pair<int, string>(42, "hello");
+    print("Pair<int, string> created");
+    
+    // 测试2: 类型推断
+    let p2 = Pair(10, 20);
+    print("Pair(10, 20) created");
+    
+    print("=== Done ===");
+}
+
+main();

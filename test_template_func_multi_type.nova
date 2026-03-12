@@ -1,0 +1,120 @@
+template func transform<T, U>(data: Vector<T>, fn: func(T): U): Vector<U> {
+    var result = Vector<U>();
+    var i = 0;
+    while i < data.count() {
+        result.push(fn(data.get(i)));
+        i = i + 1;
+    }
+    return result;
+}
+
+template func map<T, U>(data: Vector<T>, fn: func(T): U): Vector<U> {
+    return transform(data, fn);
+}
+
+template func pair<T, U>(first: T, second: U): Pair<T, U> {
+    return Pair<T, U>(first, second);
+}
+
+template class Pair<T, U> {
+    var first: T;
+    var second: U;
+    
+    init(first: T, second: U) {
+        this.first = first;
+        this.second = second;
+    }
+    
+    func getFirst(): T {
+        return this.first;
+    }
+    
+    func getSecond(): U {
+        return this.second;
+    }
+}
+
+func testTransformWithTwoTypeParams() {
+    print("=== Test 1: Transform with Two Type Parameters ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    var result = transform<int, int>(vec, func(x: int): int {
+        return x * 2;
+    });
+    
+    print("Original:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("Transformed (x * 2):");
+    i = 0;
+    while i < result.count() {
+        print(result.get(i));
+        i = i + 1;
+    }
+    
+    print("");
+}
+
+func testMapWithTwoTypeParams() {
+    print("=== Test 2: Map with Two Type Parameters ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    
+    var result = map<int, int>(vec, func(x: int): int {
+        return x * x;
+    });
+    
+    print("Original:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("Mapped (x * x):");
+    i = 0;
+    while i < result.count() {
+        print(result.get(i));
+        i = i + 1;
+    }
+    
+    print("");
+}
+
+func testPairWithTwoTypeParams() {
+    print("=== Test 3: Pair with Two Type Parameters ===");
+    
+    var p = pair<int, string>(42, "Answer");
+    
+    print("Pair<int, string>(42, 'Answer'):");
+    print("  First:");
+    print(p.getFirst());
+    print("  Second:");
+    print(p.getSecond());
+    
+    print("");
+}
+
+func main() {
+    print("=== Template Function Multi-Type Params Tests ===");
+    print("");
+    
+    testTransformWithTwoTypeParams();
+    testMapWithTwoTypeParams();
+    testPairWithTwoTypeParams();
+    
+    print("=== All Tests Completed ===");
+}

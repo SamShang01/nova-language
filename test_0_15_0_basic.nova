@@ -1,0 +1,76 @@
+// 0.15.0 版本基础测试 - 泛型 Trait
+// 测试泛型 Trait 定义、Impl 块和约束检查
+
+// 测试 1: 基础 Trait
+trait Printable {
+    func toString() -> string;
+}
+
+// 测试 2: 泛型 Trait
+trait Container<T> {
+    func get() -> T;
+    func set(value: T);
+}
+
+// 测试 3: 结构体定义
+struct Point {
+    x: int;
+    y: int;
+}
+
+// 测试 4: 为结构体实现 Trait
+impl Printable for Point {
+    func toString() -> string {
+        return "Point(" + this.x + ", " + this.y + ")";
+    }
+}
+
+// 测试 5: 泛型结构体
+template class Box<T> {
+    var value: T;
+    
+    init(value: T) {
+        this.value = value;
+    }
+    
+    func get() -> T {
+        return this.value;
+    }
+    
+    func set(value: T) {
+        this.value = value;
+    }
+}
+
+// 测试 6: 为泛型结构体实现泛型 Trait
+impl<T> Container<T> for Box<T> {
+    func get() -> T {
+        return this.value;
+    }
+    
+    func set(value: T) {
+        this.value = value;
+    }
+}
+
+// 测试 7: 使用 Trait 作为参数类型
+func printValue(p: Printable) {
+    print(p.toString());
+}
+
+// 主函数
+func main() {
+    // 测试基础 Trait
+    var p = Point(x: 10, y: 20);
+    print("Testing Printable Trait:");
+    printValue(p);
+    
+    // 测试泛型 Trait
+    var box = Box<int>(42);
+    print("\nTesting Container<T> Trait:");
+    print("Box value: " + box.get());
+    box.set(100);
+    print("Box value after set: " + box.get());
+    
+    print("\nAll tests passed!");
+}

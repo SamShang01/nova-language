@@ -1,0 +1,268 @@
+
+func transform<T, U>(data: Vector<T>, fn: func(T): U): Vector<U> {
+    var result = Vector<U>();
+    var i = 0;
+    while i < data.count() {
+        result.push(fn(data.get(i)));
+        i = i + 1;
+    }
+    return result;
+}
+
+func transform<T, U>(data: [T], fn: func(T): U): [U] {
+    var result = [];
+    var i = 0;
+    while i < data.len() {
+        result.push(fn(data[i]));
+        i = i + 1;
+    }
+    return result;
+}
+
+func map<T, U>(data: Vector<T>, fn: func(T): U): Vector<U> {
+    return transform(data, fn);
+}
+
+func map<T, U>(data: [T], fn: func(T): U): [U] {
+    return transform(data, fn);
+}
+
+func filter<T>(data: Vector<T>, predicate: func(T): bool): Vector<T> {
+    var result = Vector<T>();
+    var i = 0;
+    while i < data.count() {
+        if predicate(data.get(i)) {
+            result.push(data.get(i));
+        }
+        i = i + 1;
+    }
+    return result;
+}
+
+func filter<T>(data: [T], predicate: func(T): bool): [T] {
+    var result = [];
+    var i = 0;
+    while i < data.len() {
+        if predicate(data[i]) {
+            result.push(data[i]);
+        }
+        i = i + 1;
+    }
+    return result;
+}
+
+func reduce<T>(data: Vector<T>, initial: T, reducer: func(T, T): T): T {
+    var result = initial;
+    var i = 0;
+    while i < data.count() {
+        result = reducer(result, data.get(i));
+        i = i + 1;
+    }
+    return result;
+}
+
+func reduce<T>(data: [T], initial: T, reducer: func(T, T): T): T {
+    var result = initial;
+    var i = 0;
+    while i < data.len() {
+        result = reducer(result, data[i]);
+        i = i + 1;
+    }
+    return result;
+}
+
+func accumulate<T>(data: Vector<T>, initial: T): T {
+    return reduce(data, initial, func(a: T, b: T): T {
+        return a + b;
+    });
+}
+
+func accumulate<T>(data: [T], initial: T): T {
+    return reduce(data, initial, func(a: T, b: T): T {
+        return a + b;
+    });
+}
+
+func forEach<T>(data: Vector<T>, fn: func(T)) {
+    var i = 0;
+    while i < data.count() {
+        fn(data.get(i));
+        i = i + 1;
+    }
+}
+
+func forEach<T>(data: [T], fn: func(T)) {
+    var i = 0;
+    while i < data.len() {
+        fn(data[i]);
+        i = i + 1;
+    }
+}
+
+func copy<T>(source: Vector<T>, destination: Vector<T>, count: int) {
+    var i = 0;
+    while i < count && i < source.count() && i < destination.count() {
+        destination.set(i, source.get(i));
+        i = i + 1;
+    }
+}
+
+func copy<T>(source: [T], destination: [T], count: int) {
+    var i = 0;
+    while i < count && i < source.len() && i < destination.len() {
+        destination[i] = source[i];
+        i = i + 1;
+    }
+}
+
+func fill<T>(data: Vector<T>, value: T, count: int) {
+    var i = 0;
+    while i < count && i < data.count() {
+        data.set(i, value);
+        i = i + 1;
+    }
+}
+
+func fill<T>(data: [T], value: T, count: int) {
+    var i = 0;
+    while i < count && i < data.len() {
+        data[i] = value;
+        i = i + 1;
+    }
+}
+
+func rotate<T>(data: Vector<T>, first: int, middle: int, last: int) {
+    if first >= middle || middle >= last {
+        return;
+    }
+    var next = middle;
+    while first != next {
+        var temp = data.get(first);
+        data.set(first, data.get(next));
+        data.set(next, temp);
+        first = first + 1;
+        next = next + 1;
+        if next == last {
+            next = middle;
+        } else if first == middle {
+            middle = next;
+        }
+    }
+}
+
+func rotate<T>(data: [T], first: int, middle: int, last: int) {
+    if first >= middle || middle >= last {
+        return;
+    }
+    var next = middle;
+    while first != next {
+        var temp = data[first];
+        data[first] = data[next];
+        data[next] = temp;
+        first = first + 1;
+        next = next + 1;
+        if next == last {
+            next = middle;
+        } else if first == middle {
+            middle = next;
+        }
+    }
+}
+
+func partition<T>(data: Vector<T>, predicate: func(T): bool): int {
+    var first = 0;
+    var last = data.count() - 1;
+    while first < last {
+        while predicate(data.get(first)) && first < last {
+            first = first + 1;
+        }
+        while !predicate(data.get(last)) && first < last {
+            last = last - 1;
+        }
+        if first < last {
+            var temp = data.get(first);
+            data.set(first, data.get(last));
+            data.set(last, temp);
+            first = first + 1;
+            last = last - 1;
+        }
+    }
+    return first;
+}
+
+func partition<T>(data: [T], predicate: func(T): bool): int {
+    var first = 0;
+    var last = data.len() - 1;
+    while first < last {
+        while predicate(data[first]) && first < last {
+            first = first + 1;
+        }
+        while !predicate(data[last]) && first < last {
+            last = last - 1;
+        }
+        if first < last {
+            var temp = data[first];
+            data[first] = data[last];
+            data[last] = temp;
+            first = first + 1;
+            last = last - 1;
+        }
+    }
+    return first;
+}
+
+func isSorted<T>(data: Vector<T>): bool {
+    var i = 0;
+    while i < data.count() - 1 {
+        if data.get(i) > data.get(i + 1) {
+            return false;
+        }
+        i = i + 1;
+    }
+    return true;
+}
+
+func isSorted<T>(data: [T]): bool {
+    var i = 0;
+    while i < data.len() - 1 {
+        if data[i] > data[i + 1] {
+            return false;
+        }
+        i = i + 1;
+    }
+    return true;
+}
+
+func isPermutation<T>(data1: Vector<T>, data2: Vector<T>): bool {
+    if data1.count() != data2.count() {
+        return false;
+    }
+    var i = 0;
+    while i < data1.count() {
+        if count(data2, data1.get(i)) != count(data1, data1.get(i)) {
+            return false;
+        }
+        i = i + 1;
+    }
+    return true;
+}
+
+func iota<T>(data: Vector<T>, start: T, step: T) {
+    var i = 0;
+    var current = start;
+    while i < data.count() {
+        data.set(i, current);
+        current = current + step;
+        i = i + 1;
+    }
+}
+
+func iota<T>(data: [T], start: T, step: T) {
+    var i = 0;
+    var current = start;
+    while i < data.len() {
+        data[i] = current;
+        current = current + step;
+        i = i + 1;
+    }
+}

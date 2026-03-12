@@ -1,0 +1,155 @@
+template func transform<T>(data: Vector<T>, fn: func(T): T): Vector<T> {
+    var result = Vector<T>();
+    var i = 0;
+    while i < data.count() {
+        result.push(fn(data.get(i)));
+        i = i + 1;
+    }
+    return result;
+}
+
+template func filter<T>(data: Vector<T>, predicate: func(T): bool): Vector<T> {
+    var result = Vector<T>();
+    var i = 0;
+    while i < data.count() {
+        if predicate(data.get(i)) {
+            result.push(data.get(i));
+        }
+        i = i + 1;
+    }
+    return result;
+}
+
+template func reduce<T>(data: Vector<T>, initial: T, reducer: func(T, T): T): T {
+    var result = initial;
+    var i = 0;
+    while i < data.count() {
+        result = reducer(result, data.get(i));
+        i = i + 1;
+    }
+    return result;
+}
+
+template func forEach<T>(data: Vector<T>, fn: func(T)) {
+    var i = 0;
+    while i < data.count() {
+        fn(data.get(i));
+        i = i + 1;
+    }
+}
+
+func testTransformFunction() {
+    print("=== Test 1: Transform Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    var result = transform<int>(vec, func(x: int): int {
+        return x * 2;
+    });
+    
+    print("Original:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("Transformed (x * 2):");
+    i = 0;
+    while i < result.count() {
+        print(result.get(i));
+        i = i + 1;
+    }
+    
+    print("");
+}
+
+func testFilterFunction() {
+    print("=== Test 2: Filter Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    vec.push(6);
+    vec.push(7);
+    vec.push(8);
+    vec.push(9);
+    vec.push(10);
+    
+    var result = filter<int>(vec, func(x: int): bool {
+        return x % 2 == 0;
+    });
+    
+    print("Original:");
+    var i = 0;
+    while i < vec.count() {
+        print(vec.get(i));
+        i = i + 1;
+    }
+    
+    print("Filtered (even numbers):");
+    i = 0;
+    while i < result.count() {
+        print(result.get(i));
+        i = i + 1;
+    }
+    
+    print("");
+}
+
+func testReduceFunction() {
+    print("=== Test 3: Reduce Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    var sum = reduce<int>(vec, 0, func(a: int, b: int): int {
+        return a + b;
+    });
+    print("Sum (reduce):");
+    print(sum);
+    
+    print("");
+}
+
+func testForEachFunction() {
+    print("=== Test 4: ForEach Function ===");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    print("ForEach output:");
+    forEach<int>(vec, func(x: int) {
+        print("  Value: " + x);
+    });
+    
+    print("");
+}
+
+func main() {
+    print("=== STL Algorithm Tests ===");
+    print("");
+    
+    testTransformFunction();
+    testFilterFunction();
+    testReduceFunction();
+    testForEachFunction();
+    
+    print("=== All Tests Completed ===");
+}

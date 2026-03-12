@@ -1,0 +1,243 @@
+// STL库类型推断测试
+// 测试STL算法与类型推断的集成
+
+import stl.vector
+import stl.algorithm_template
+import stl.numeric_template
+
+// 测试1: sort函数类型推断
+func testSortInference() {
+    print("Test 1: Sort with type inference");
+    
+    // 使用类型推断 - 不需要显式指定<int>
+    var vec = Vector<int>();
+    vec.push(3);
+    vec.push(1);
+    vec.push(4);
+    vec.push(1);
+    vec.push(5);
+    
+    print("Before sort: " + vec.toString());
+    
+    // 类型推断: sort(vec) 自动推断 T = int
+    sort(vec);
+    
+    print("After sort: " + vec.toString());
+    print("");
+}
+
+// 测试2: reverse函数类型推断
+func testReverseInference() {
+    print("Test 2: Reverse with type inference");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    print("Before reverse: " + vec.toString());
+    
+    // 类型推断: reverse(vec) 自动推断 T = int
+    reverse(vec);
+    
+    print("After reverse: " + vec.toString());
+    print("");
+}
+
+// 测试3: find函数类型推断
+func testFindInference() {
+    print("Test 3: Find with type inference");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(30);
+    vec.push(40);
+    vec.push(50);
+    
+    // 类型推断: find(vec, 30) 自动推断 T = int
+    var index = find(vec, 30);
+    
+    print("Find 30 in vector: index = " + index);
+    
+    // 查找不存在的元素
+    var notFound = find(vec, 100);
+    print("Find 100 in vector: index = " + notFound);
+    print("");
+}
+
+// 测试4: transform函数类型推断
+func testTransformInference() {
+    print("Test 4: Transform with type inference");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    print("Original: " + vec.toString());
+    
+    // 类型推断: transform(vec, fn) 自动推断 T = int, U = int
+    var doubled = transform(vec, func(x: int): int {
+        return x * 2;
+    });
+    
+    print("Doubled: " + doubled.toString());
+    print("");
+}
+
+// 测试5: filter函数类型推断
+func testFilterInference() {
+    print("Test 5: Filter with type inference");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    vec.push(6);
+    vec.push(7);
+    vec.push(8);
+    vec.push(9);
+    vec.push(10);
+    
+    print("Original: " + vec.toString());
+    
+    // 类型推断: filter(vec, predicate) 自动推断 T = int
+    var evens = filter(vec, func(x: int): bool {
+        return x % 2 == 0;
+    });
+    
+    print("Evens: " + evens.toString());
+    print("");
+}
+
+// 测试6: reduce函数类型推断
+func testReduceInference() {
+    print("Test 6: Reduce with type inference");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    vec.push(4);
+    vec.push(5);
+    
+    print("Original: " + vec.toString());
+    
+    // 类型推断: reduce(vec, initial, reducer) 自动推断 T = int
+    var sum = reduce(vec, 0, func(a: int, b: int): int {
+        return a + b;
+    });
+    
+    print("Sum: " + sum);
+    
+    var product = reduce(vec, 1, func(a: int, b: int): int {
+        return a * b;
+    });
+    
+    print("Product: " + product);
+    print("");
+}
+
+// 测试7: accumulate函数类型推断
+func testAccumulateInference() {
+    print("Test 7: Accumulate with type inference");
+    
+    var vec = Vector<int>();
+    vec.push(10);
+    vec.push(20);
+    vec.push(30);
+    vec.push(40);
+    vec.push(50);
+    
+    print("Original: " + vec.toString());
+    
+    // 类型推断: accumulate(vec, initial) 自动推断 T = int
+    var sum = accumulate(vec, 0);
+    
+    print("Sum: " + sum);
+    print("");
+}
+
+// 测试8: forEach函数类型推断
+func testForEachInference() {
+    print("Test 8: ForEach with type inference");
+    
+    var vec = Vector<int>();
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    
+    print("ForEach print:");
+    
+    // 类型推断: forEach(vec, fn) 自动推断 T = int
+    forEach(vec, func(x: int) {
+        print("  " + x);
+    });
+    
+    print("");
+}
+
+// 测试9: 数组类型推断
+func testArrayInference() {
+    print("Test 9: Array algorithms with type inference");
+    
+    var arr = [5, 2, 8, 1, 9];
+    
+    print("Original array: " + arr);
+    
+    // 类型推断: sort(arr) 自动推断 T = int
+    sort(arr);
+    print("After sort: " + arr);
+    
+    // 类型推断: find(arr, 8) 自动推断 T = int
+    var index = find(arr, 8);
+    print("Find 8: index = " + index);
+    
+    print("");
+}
+
+// 测试10: 显式类型指定（向后兼容）
+func testExplicitType() {
+    print("Test 10: Explicit type specification (backward compatibility)");
+    
+    var vec = Vector<int>();
+    vec.push(3);
+    vec.push(1);
+    vec.push(4);
+    
+    print("Before sort: " + vec.toString());
+    
+    // 显式类型指定仍然支持
+    sort<int>(vec);
+    
+    print("After explicit sort<int>: " + vec.toString());
+    print("");
+}
+
+// 主函数
+func main() {
+    print("=== STL Type Inference Test ===");
+    print("");
+    
+    testSortInference();
+    testReverseInference();
+    testFindInference();
+    testTransformInference();
+    testFilterInference();
+    testReduceInference();
+    testAccumulateInference();
+    testForEachInference();
+    testArrayInference();
+    testExplicitType();
+    
+    print("=== All STL Type Inference Tests Passed! ===");
+}
+
+main();

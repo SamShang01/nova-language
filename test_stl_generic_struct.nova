@@ -1,0 +1,412 @@
+
+// ============================================
+// Nova STL + 模板结构体集成测试
+// 版本: 0.11.0
+// 说明: 测试STL库与模板结构体的集成
+// ============================================
+
+// ============================================
+// ListNode<T> 模板结构体
+// ============================================
+
+template struct ListNode<T> {
+    var value: T;
+    var prev: ListNode<T>;
+    var next: ListNode<T>;
+    var isValid: bool;
+}
+
+// ============================================
+// List<T> 容器 - 双向链表实现
+// ============================================
+
+template class List<T> {
+    var head: ListNode<T>;
+    var tail: ListNode<T>;
+    var size: int;
+    var hasHead: bool;
+    var hasTail: bool;
+
+    init() {
+        this.head = ListNode<T>(nil, nil, nil, false);
+        this.tail = ListNode<T>(nil, nil, nil, false);
+        this.size = 0;
+        this.hasHead = false;
+        this.hasTail = false;
+    }
+
+    func pushFront(value: T) {
+        var newNode = ListNode<T>(value, this.head, nil, true);
+        
+        if this.hasHead {
+            var oldHead = this.head;
+            oldHead = ListNode<T>(oldHead.value, newNode, oldHead.next, oldHead.isValid);
+        } else {
+            this.tail = newNode;
+            this.hasTail = true;
+        }
+        
+        this.head = newNode;
+        this.hasHead = true;
+        this.size = this.size + 1;
+    }
+
+    func pushBack(value: T) {
+        var newNode = ListNode<T>(value, this.tail, nil, true);
+        
+        if this.hasTail {
+            var oldTail = this.tail;
+            oldTail = ListNode<T>(oldTail.value, oldTail.prev, newNode, oldTail.isValid);
+        } else {
+            this.head = newNode;
+            this.hasHead = true;
+        }
+        
+        this.tail = newNode;
+        this.hasTail = true;
+        this.size = this.size + 1;
+    }
+
+    func popFront(): T {
+        if this.size == 0 {
+            return nil;
+        }
+        
+        var value = this.head.value;
+        this.head = this.head.next;
+        
+        if this.head.isValid {
+            this.head = ListNode<T>(this.head.value, nil, this.head.next, this.head.isValid);
+        } else {
+            this.tail = ListNode<T>(nil, nil, nil, false);
+            this.hasTail = false;
+            this.hasHead = false;
+        }
+        
+        this.size = this.size - 1;
+        return value;
+    }
+
+    func popBack(): T {
+        if this.size == 0 {
+            return nil;
+        }
+        
+        var value = this.tail.value;
+        this.tail = this.tail.prev;
+        
+        if this.tail.isValid {
+            this.tail = ListNode<T>(this.tail.value, this.tail.prev, nil, this.tail.isValid);
+        } else {
+            this.head = ListNode<T>(nil, nil, nil, false);
+            this.hasHead = false;
+            this.hasTail = false;
+        }
+        
+        this.size = this.size - 1;
+        return value;
+    }
+
+    func front(): T {
+        if this.size == 0 {
+            return nil;
+        }
+        return this.head.value;
+    }
+
+    func back(): T {
+        if this.size == 0 {
+            return nil;
+        }
+        return this.tail.value;
+    }
+
+    func insert(index: int, value: T) {
+        if index < 0 || index > this.size {
+            return;
+        }
+        
+        if index == 0 {
+            this.pushFront(value);
+        } else if index == this.size {
+            this.pushBack(value);
+        } else {
+            var current = this.head;
+            var i = 0;
+            
+            while i < index {
+                current = current.next;
+                i = i + 1;
+            }
+            
+            var newNode = ListNode<T>(value, current.prev, current, true);
+            
+            var prevNode = current.prev;
+            prevNode = ListNode<T>(prevNode.value, prevNode.prev, newNode, prevNode.isValid);
+            
+            current = ListNode<T>(current.value, newNode, current.next, current.isValid);
+            
+            this.size = this.size + 1;
+        }
+    }
+
+    func remove(index: int): T {
+        if index < 0 || index >= this.size {
+            return nil;
+        }
+        
+        if index == 0 {
+            return this.popFront();
+        } else if index == this.size - 1 {
+            return this.popBack();
+        } else {
+            var current = this.head;
+            var i = 0;
+            
+            while i < index {
+                current = current.next;
+                i = i + 1;
+            }
+            
+            var value = current.value;
+            
+            var prevNode = current.prev;
+            prevNode = ListNode<T>(prevNode.value, prevNode.prev, current.next, prevNode.isValid);
+            
+            var nextNode = current.next;
+            nextNode = ListNode<T>(nextNode.value, current.prev, nextNode.next, nextNode.isValid);
+            
+            this.size = this.size - 1;
+            return value;
+        }
+    }
+
+    func get(index: int): T {
+        if index < 0 || index >= this.size {
+            return nil;
+        }
+        
+        var current = this.head;
+        var i = 0;
+        
+        while i < index {
+            current = current.next;
+            i = i + 1;
+        }
+        
+        return current.value;
+    }
+
+    func set(index: int, value: T) {
+        if index >= 0 && index < this.size {
+            var current = this.head;
+            var i = 0;
+            
+            while i < index {
+                current = current.next;
+                i = i + 1;
+            }
+            
+            var newNode = ListNode<T>(value, current.prev, current.next, true);
+            
+            if current.prev.isValid {
+                var prevNode = current.prev;
+                prevNode = ListNode<T>(prevNode.value, prevNode.prev, newNode, prevNode.isValid);
+            } else {
+                this.head = newNode;
+            }
+            
+            if current.next.isValid {
+                var nextNode = current.next;
+                nextNode = ListNode<T>(nextNode.value, newNode, nextNode.next, nextNode.isValid);
+            } else {
+                this.tail = newNode;
+            }
+        }
+    }
+
+    func clear() {
+        this.head = ListNode<T>(nil, nil, nil, false);
+        this.tail = ListNode<T>(nil, nil, nil, false);
+        this.size = 0;
+        this.hasHead = false;
+        this.hasTail = false;
+    }
+
+    func isEmpty(): bool {
+        return this.size == 0;
+    }
+
+    func contains(value: T): bool {
+        var current = this.head;
+        
+        while current.isValid {
+            if current.value == value {
+                return true;
+            }
+            current = current.next;
+        }
+        
+        return false;
+    }
+
+    func indexOf(value: T): int {
+        var current = this.head;
+        var index = 0;
+        
+        while current.isValid {
+            if current.value == value {
+                return index;
+            }
+            current = current.next;
+            index = index + 1;
+        }
+        
+        return -1;
+    }
+
+    func lastIndexOf(value: T): int {
+        var current = this.tail;
+        var index = this.size - 1;
+        
+        while current.isValid {
+            if current.value == value {
+                return index;
+            }
+            current = current.prev;
+            index = index - 1;
+        }
+        
+        return -1;
+    }
+
+    func count(): int {
+        return this.size;
+    }
+
+    func reverse() {
+        var current = this.head;
+        
+        while current.isValid {
+            var temp = current.next;
+            current = ListNode<T>(current.value, temp, current.prev, current.isValid);
+            current = temp;
+        }
+        
+        var temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+    }
+
+    func toArray(): [T] {
+        var result = [];
+        var current = this.head;
+        
+        while current.isValid {
+            result.push(current.value);
+            current = current.next;
+        }
+        
+        return result;
+    }
+
+    func swap(other: List<T>) {
+        var tempHead = this.head;
+        var tempTail = this.tail;
+        var tempSize = this.size;
+        var tempHasHead = this.hasHead;
+        var tempHasTail = this.hasTail;
+
+        this.head = other.head;
+        this.tail = other.tail;
+        this.size = other.size;
+        this.hasHead = other.hasHead;
+        this.hasTail = other.hasTail;
+
+        other.head = tempHead;
+        other.tail = tempTail;
+        other.size = tempSize;
+        other.hasHead = tempHasHead;
+        other.hasTail = tempHasTail;
+    }
+}
+
+// ============================================
+// 测试函数
+// ============================================
+
+func testListWithGenericStruct() {
+    print("Test 1: List with Generic Struct Node");
+    
+    var list = List<int>();
+    
+    list.pushBack(10);
+    list.pushBack(20);
+    list.pushBack(30);
+    list.pushFront(5);
+    
+    print("List size:");
+    print(list.count());
+    print("Front:");
+    print(list.front());
+    print("Back:");
+    print(list.back());
+    
+    var arr = list.toArray();
+    print("Array:");
+    print(arr);
+    
+    print("Iterating:");
+    var current = list.head;
+    while current.isValid {
+        print("  " + current.value);
+        current = current.next;
+    }
+}
+
+func testPerformance() {
+    print("Test 2: Performance Test");
+    
+    var list = List<int>();
+    
+    var i = 0;
+    while i < 1000 {
+        list.pushBack(i);
+        i = i + 1;
+    }
+    
+    print("Added 1000 elements");
+    print("List size:");
+    print(list.count());
+    
+    var sum = 0;
+    var current = list.head;
+    while current.isValid {
+        sum = sum + current.value;
+        current = current.next;
+    }
+    
+    print("Sum:");
+    print(sum);
+    
+    var randomAccess = list.get(500);
+    print("Element at index 500:");
+    print(randomAccess);
+    
+    list.clear();
+    print("After clear, size:");
+    print(list.count());
+}
+
+func main() {
+    print("========================================");
+    print("  Nova STL + Generic Struct Test Suite");
+    print("========================================");
+    
+    testListWithGenericStruct();
+    testPerformance();
+    
+    print("========================================");
+    print("  All tests completed!");
+    print("========================================");
+}

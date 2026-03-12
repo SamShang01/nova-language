@@ -1,0 +1,32 @@
+// 测试基本的 Trait 功能
+
+// 定义一个简单的 Trait
+trait Greeting {
+    fn greet(): void;
+}
+
+// 定义一个类
+class Person {
+    let name: string;
+    
+    fn __init__(name: string) {
+        this.name = name;
+    }
+}
+
+// 实现 Trait
+impl Greeting for Person {
+    fn greet() {
+        println("Hello, my name is " + this.name);
+    }
+}
+
+// 测试函数
+fn main() {
+    println("Testing simple trait...");
+    
+    let alice = Person("Alice");
+    alice.greet();
+    
+    println("Simple trait test passed!");
+}

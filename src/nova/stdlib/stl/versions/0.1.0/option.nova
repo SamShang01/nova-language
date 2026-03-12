@@ -1,0 +1,94 @@
+
+// ============================================
+// Nova Option<T> 类型 - 可选值容器
+// 版本: 0.11.0
+// 说明: 用于处理可能不存在的值，特别适用于模板结构体
+// ============================================
+
+template struct Option<T> {
+    var value: T;
+    var hasValue: bool;
+    
+    // 创建包含值的Option
+    static func some(value: T): Option<T> {
+        return Option<T>(value: value, hasValue: true);
+    }
+    
+    // 创建空的Option
+    static func none(): Option<T> {
+        return Option<T>(value: null, hasValue: false);
+    }
+    
+    // 检查是否有值
+    func isSome(): bool {
+        return this.hasValue;
+    }
+    
+    // 检查是否为空
+    func isNone(): bool {
+        return !this.hasValue;
+    }
+    
+    // 获取值，如果不存在返回默认值
+    func unwrapOr(defaultValue: T): T {
+        if this.hasValue {
+            return this.value;
+        }
+        return defaultValue;
+    }
+    
+    // 获取值，如果不存在抛出错误
+    func unwrap(): T {
+        if this.hasValue {
+            return this.value;
+        }
+        // 在实际实现中应该抛出异常
+        return null;
+    }
+    
+    // 映射操作
+    func map<U>(f: func(T): U): Option<U> {
+        if this.hasValue {
+            return Option<U>.some(f(this.value));
+        }
+        return Option<U>.none();
+    }
+    
+    // 过滤操作
+    func filter(predicate: func(T): bool): Option<T> {
+        if this.hasValue && predicate(this.value) {
+            return this;
+        }
+        return Option<T>.none();
+    }
+    
+    // 如果为空则返回另一个Option
+    func orElse(other: Option<T>): Option<T> {
+        if this.hasValue {
+            return this;
+        }
+        return other;
+    }
+    
+    // 转换为字符串
+    func toString(): string {
+        if this.hasValue {
+            return "Some(" + this.value + ")";
+        }
+        return "None";
+    }
+}
+
+// ============================================
+// 辅助函数
+// ============================================
+
+// 创建Some值
+func Some<T>(value: T): Option<T> {
+    return Option<T>.some(value);
+}
+
+// 创建None值
+func None<T>(): Option<T> {
+    return Option<T>.none();
+}

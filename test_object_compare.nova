@@ -1,0 +1,39 @@
+// 对象比较测试
+class Person {
+    name: string
+    age: int
+    
+    fn new(name: string, age: int) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    fn compare(other: Person) -> int {
+        if this.age < other.age {
+            return -1;
+        } else if this.age > other.age {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+fn main() {
+    let bob = Person("Bob", 35);
+    let john = Person("John", 30);
+    
+    print("Testing object comparison...");
+    
+    let result = bob.compare(john);
+    
+    if result < 0 {
+        print("Bob is younger than John");
+    } else if result > 0 {
+        print("Bob is older than John");
+    } else {
+        print("Bob and John are the same age");
+    }
+    
+    print("Test passed!");
+}

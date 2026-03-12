@@ -1,0 +1,36 @@
+// 纯类型推断测试（不导入STL）
+
+// 定义一个泛型结构体
+template struct Point<T> {
+    var x: T;
+    var y: T;
+}
+
+// 定义一个泛型函数
+template func identity<T>(value: T): T {
+    return value;
+}
+
+// 主函数
+func main() {
+    print("=== Type Inference Test ===");
+    
+    // 测试1: 结构体类型推断
+    print("Test 1: Struct type inference");
+    let p1 = Point(10, 20);  // 应该推断为 Point<int>
+    print("Point(10, 20) created");
+    
+    // 测试2: 函数类型推断
+    print("Test 2: Function type inference");
+    let id1 = identity(42);  // 应该推断为 identity<int>
+    print("identity(42) executed");
+    
+    // 测试3: 显式类型指定（向后兼容）
+    print("Test 3: Explicit type specification");
+    let p2 = Point<int>(100, 200);
+    print("Point<int>(100, 200) created");
+    
+    print("=== All Tests Passed! ===");
+}
+
+main();

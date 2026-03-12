@@ -1,0 +1,23 @@
+trait Printable {
+    func toString() -> string;
+}
+
+struct Point {
+    var x: int;
+    var y: int;
+    
+    func toString() -> string {
+        return "Point";
+    }
+}
+
+func printValue(value: Printable) -> unit {
+    print(value.toString());
+}
+
+func main() {
+    var p = Point(10, 20);
+    print("=== Test: Trait Constraint ===");
+    printValue(p);
+    print("=== Test Completed ===");
+}

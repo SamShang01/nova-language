@@ -1,0 +1,90 @@
+{
+  "name": "nova-language",
+  "displayName": "Nova Language",
+  "description": "Nova language support for Visual Studio Code",
+  "version": "0.1.0",
+  "publisher": "nova-lang",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "nova",
+        "aliases": ["Nova"],
+        "extensions": [".nova"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nova",
+        "scopeName": "source.nova",
+        "path": "./syntaxes/nova.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "nova",
+        "path": "./snippets/nova.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "nova-language.helloWorld",
+        "title": "Nova: Hello World"
+      },
+      {
+        "command": "nova-language.run",
+        "title": "Nova: Run Code"
+      },
+      {
+        "command": "nova-language.format",
+        "title": "Nova: Format Code"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "nova-language.run",
+          "group": "navigation",
+          "when": "editorLangId == nova"
+        },
+        {
+          "command": "nova-language.format",
+          "group": "navigation",
+          "when": "editorLangId == nova"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "nova-language.run",
+        "key": "F5",
+        "when": "editorLangId == nova"
+      },
+      {
+        "command": "nova-language.format",
+        "key": "Shift+Alt+F",
+        "when": "editorLangId == nova"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onLanguage:nova"
+  ],
+  "main": "out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.0",
+    "@types/vscode": "^1.60.0",
+    "typescript": "^4.5.0"
+  }
+}

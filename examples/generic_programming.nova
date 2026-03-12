@@ -1,0 +1,110 @@
+// 泛型编程示例
+
+// 泛型函数示例
+generic func identity<T>(value: T) -> T {
+    return value;
+}
+
+generic func swap<T>(a: T, b: T) -> (T, T) {
+    return (b, a);
+}
+
+generic func max<T>(a: T, b: T) -> T
+    where T: Comparable
+{
+    if a > b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+// 泛型结构体示例
+generic struct Pair<T, U> {
+    first: T;
+    second: U;
+}
+
+generic struct Box<T> {
+    value: T;
+    
+    generic func get(self: Box<T>) -> T {
+        return self.value;
+    }
+}
+
+generic struct Stack<T> {
+    items: [T];
+    
+    generic func push(self: Stack<T>, item: T) -> Stack<T> {
+        self.items.push(item);
+        return self;
+    }
+    
+    generic func pop(self: Stack<T>) -> T {
+        return self.items.pop();
+    }
+    
+    generic func is_empty(self: Stack<T>) -> bool {
+        return self.items.len() == 0;
+    }
+}
+
+// 使用泛型函数
+func main() {
+    // identity函数示例
+    let int_value = identity(42);
+    let string_value = identity("hello");
+    let float_value = identity(3.14);
+    
+    print("Identity examples:");
+    print(int_value);
+    print(string_value);
+    print(float_value);
+    
+    // swap函数示例
+    let x = 1;
+    let y = 2;
+    let (new_x, new_y) = swap(x, y);
+    
+    print("\nSwap examples:");
+    print(new_x);
+    print(new_y);
+    
+    // max函数示例
+    let max_int = max(10, 20);
+    let max_float = max(3.14, 2.71);
+    
+    print("\nMax examples:");
+    print(max_int);
+    print(max_float);
+    
+    // Pair结构体示例
+    let pair = Pair<int, string>(first: 1, second: "hello");
+    let pair2 = Pair<string, float>(first: "world", second: 2.5);
+    
+    print("\nPair examples:");
+    print(pair.first);
+    print(pair.second);
+    print(pair2.first);
+    print(pair2.second);
+    
+    // Box结构体示例
+    let box = Box<int>(value: 42);
+    let box2 = Box<string>(value: "hello");
+    
+    print("\nBox examples:");
+    print(box.get());
+    print(box2.get());
+    
+    // Stack结构体示例
+    let stack = Stack<int>(items: []);
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    
+    print("\nStack examples:");
+    while !stack.is_empty() {
+        print(stack.pop());
+    }
+}

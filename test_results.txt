@@ -1,0 +1,1272 @@
+﻿python : ...........................................................................................
+.......................
+所在位置 行:1 字符: 1
++ python -m unittest discover tests 2>&1 | Out-File -FilePath "test_res ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (.................................:String) [], RemoteEx 
+   ception
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+----------------------------------------------------------------------
+Ran 114 tests in 0.026s
+
+OK
+Nova语言标准库版本: (0, 16, 0)
+Nova语言标准库 0.2.0 特性:
+1. 完善核心库功能
+2. 添加更多集合类型
+3. 增强IO库功能
+4. 实现完整的异步库
+Nova语言标准库 0.3.0 特性:
+1. 扩展标准库核心函数
+2. 实现__future__.nova文件支持
+3. 性能优化
+Nova语言标准库 0.4.0 特性:
+1. 实现编译功能
+2. 实现GUI功能
+3. 扩展测试用例
+Nova语言标准库 0.5.0 特性:
+1. NovaFunction类 - Nova专用函数代理对象
+2. 高级参数系统 - 支持位置、关键字、默认值、可变参数
+3. ParameterDefinition AST节点
+4. 改进的REPL多行模式
+5. 完善的函数参数绑定
+DEBUG visit_CallExpression: node.callee.name = print
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65E5940>
+DEBUG visit_CallExpression: symbol.type = unit
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_CallExpression: node.callee.name = first
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA64C0980>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6460F50>]
+DEBUG visit_CallExpression: node.callee.name = first
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA64C0980>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6460F50>]
+DEBUG visit_CallExpression: node.callee.name = first
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA64C0980>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6460F50>]
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_GenericFunctionDefinition: param a type T trait_constraints: []
+DEBUG visit_GenericFunctionDefinition: param b type T trait_constraints: []
+DEBUG visit_CallExpression: node.callee.name = swap
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6460050>
+DEBUG visit_CallExpression: symbol.type = None
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA64F16D0>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6427950>]
+DEBUG visit_CallExpression: node.callee.name = swap
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6460050>
+DEBUG visit_CallExpression: symbol.type = None
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA64F16D0>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6427950>]
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_GenericFunctionDefinition: param first type T trait_constraints: []
+DEBUG visit_GenericFunctionDefinition: param second type U trait_constraints: []
+DEBUG visit_CallExpression: node.callee.name = pair
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6460F50>
+DEBUG visit_CallExpression: symbol.type = None
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6427820>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA650DFD0>]
+DEBUG visit_CallExpression: node.callee.name = pair
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6460F50>
+DEBUG visit_CallExpression: symbol.type = None
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6427820>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA650DFD0>]
+DEBUG visit_CallExpression: node.callee.name = pair
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6460F50>
+DEBUG visit_CallExpression: symbol.type = None
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6427820>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA650DFD0>]
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_MemberExpression: obj_type = [any]
+DEBUG visit_MemberExpression: type_name = [any]
+DEBUG visit_MemberExpression: node.member = push
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: member push not found, returning obj_type [any]
+DEBUG visit_MemberExpression: obj_type = [any]
+DEBUG visit_MemberExpression: type_name = [any]
+DEBUG visit_MemberExpression: node.member = push
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: member push not found, returning obj_type [any]
+DEBUG visit_CallExpression: node.callee.name = map
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA5F33100>
+DEBUG visit_CallExpression: symbol.type = [U]
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA647EAD0>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA643E140>]
+DEBUG visit_CallExpression: node.callee.name = map
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA5F33100>
+DEBUG visit_CallExpression: symbol.type = [U]
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA647EAD0>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA643E140>]
+DEBUG visit_CallExpression: node.callee.name = map
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA5F33100>
+DEBUG visit_CallExpression: symbol.type = [U]
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA647EAD0>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA643E140>]
+DEBUG visit_GenericFunctionDefinition: node.where_clause = <nova.compiler.parser.ast.WhereClause object at 0x0000028EA5F4AA50>
+DEBUG visit_GenericFunctionDefinition: calling _check_trait_constraints
+DEBUG _check_trait_constraints: trait_name_expr = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA6581520>, type = <class 'nova.compiler.parser.ast.TypeExpression'>
+DEBUG _check_trait_constraints: trait_type = Comparable, type = <class 'nova.compiler.semantic.types.TraitType'>
+DEBUG _check_trait_constraints: adding trait Comparable to generic_type T
+DEBUG _check_trait_constraints: generic_type.trait_constraints = [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CD4F0>]
+DEBUG visit_GenericFunctionDefinition: param a type T trait_constraints: [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CD4F0>]
+DEBUG visit_GenericFunctionDefinition: param b type T trait_constraints: [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CD4F0>]
+DEBUG visit_CallExpression: node.callee.name = max
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6427820>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA645AF50>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6458150>]
+DEBUG visit_CallExpression: node.callee.name = max
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6427820>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA645AF50>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6458150>]
+DEBUG visit_CallExpression: node.callee.name = max
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6427820>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA645AF50>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6458150>]
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_GenericFunctionDefinition: param value type T trait_constraints: []
+DEBUG visit_CallExpression: node.callee.name = identity
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA650E7B0>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6557F20>]
+DEBUG visit_CallExpression: node.callee.name = identity
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA650E7B0>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6557F20>]
+DEBUG visit_CallExpression: node.callee.name = identity
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA650E7B0>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6557F20>]
+DEBUG visit_CallExpression: node.callee.name = identity
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA650E7B0>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6557F20>]
+DEBUG visit_CallExpression: node.callee.name = identity
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA650E7B0>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6557F20>]
+DEBUG visit_CallExpression: node.callee.name = identity
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA650E7B0>
+DEBUG visit_CallExpression: symbol.type = T
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6557F20>]
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Triple
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Triple
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Triple
+DEBUG: checking if 'Triple' in self.types: True
+DEBUG: found Triple in self.types: Triple
+DEBUG visit_GenericTypeExpression: node.base_type = Triple
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Triple
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Triple
+DEBUG: checking if 'Triple' in self.types: True
+DEBUG: found Triple in self.types: Triple
+DEBUG visit_GenericTypeExpression: node.base_type = Triple
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Triple
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Triple
+DEBUG: checking if 'Triple' in self.types: True
+DEBUG: found Triple in self.types: Triple
+DEBUG visit_GenericTypeExpression: node.base_type = Triple
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Triple
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Triple
+DEBUG: checking if 'Triple' in self.types: True
+DEBUG: found Triple in self.types: Triple
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Triple
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Triple
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Triple
+DEBUG: checking if 'Triple' in self.types: True
+DEBUG: found Triple in self.types: Triple
+DEBUG visit_GenericTypeExpression: node.base_type = Triple
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Triple
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Triple
+DEBUG: checking if 'Triple' in self.types: True
+DEBUG: found Triple in self.types: Triple
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_GenericTypeExpression: node.base_type = Stack
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Stack
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Stack
+DEBUG: checking if 'Stack' in self.types: True
+DEBUG: found Stack in self.types: Stack
+DEBUG visit_GenericTypeExpression: node.base_type = Stack
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Stack
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Stack
+DEBUG: checking if 'Stack' in self.types: True
+DEBUG: found Stack in self.types: Stack
+DEBUG visit_GenericFunctionDefinition: param item type T trait_constraints: []
+DEBUG visit_MemberExpression: obj_type = Stack<T>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = items
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: found field items with type <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>
+DEBUG visit_MemberExpression: resolved field type = [T]
+DEBUG visit_MemberExpression: obj_type = [T]
+DEBUG visit_MemberExpression: type_name = [T]
+DEBUG visit_MemberExpression: node.member = push
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: member push not found, returning obj_type [T]
+DEBUG visit_MemberExpression: obj_type = Stack<T>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = items
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: found field items with type <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>
+DEBUG visit_MemberExpression: resolved field type = [T]
+DEBUG visit_MemberExpression: obj_type = [T]
+DEBUG visit_MemberExpression: type_name = [T]
+DEBUG visit_MemberExpression: node.member = push
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: member push not found, returning obj_type [T]
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_GenericTypeExpression: node.base_type = Stack
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Stack
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Stack
+DEBUG: checking if 'Stack' in self.types: True
+DEBUG: found Stack in self.types: Stack
+DEBUG visit_MemberExpression: obj_type = Stack<T>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = items
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: found field items with type <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>
+DEBUG visit_MemberExpression: resolved field type = [T]
+DEBUG visit_MemberExpression: obj_type = [T]
+DEBUG visit_MemberExpression: type_name = [T]
+DEBUG visit_MemberExpression: node.member = pop
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: member pop not found, returning obj_type [T]
+DEBUG visit_MemberExpression: obj_type = Stack<T>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = items
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: found field items with type <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>
+DEBUG visit_MemberExpression: resolved field type = [T]
+DEBUG visit_MemberExpression: obj_type = [T]
+DEBUG visit_MemberExpression: type_name = [T]
+DEBUG visit_MemberExpression: node.member = pop
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: member pop not found, returning obj_type [T]
+DEBUG visit_GenericTypeExpression: node.base_type = Stack
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Stack
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Stack
+DEBUG: checking if 'Stack' in self.types: True
+DEBUG: found Stack in self.types: Stack
+DEBUG visit_GenericTypeExpression: node.base_type = Stack
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Stack
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Stack
+DEBUG: checking if 'Stack' in self.types: True
+DEBUG: found Stack in self.types: Stack
+DEBUG visit_GenericTypeExpression: node.base_type = Stack
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Stack
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Stack
+DEBUG: checking if 'Stack' in self.types: True
+DEBUG: found Stack in self.types: Stack
+DEBUG visit_GenericTypeExpression: node.base_type = Stack
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Stack
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Stack
+DEBUG: checking if 'Stack' in self.types: True
+DEBUG: found Stack in self.types: Stack
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = push
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member push not found, returning obj_type Stack<int>
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = push
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member push not found, returning obj_type Stack<int>
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = push
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member push not found, returning obj_type Stack<int>
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = push
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member push not found, returning obj_type Stack<int>
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = pop
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member pop not found, returning obj_type Stack<int>
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = pop
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member pop not found, returning obj_type Stack<int>
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = pop
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member pop not found, returning obj_type Stack<int>
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = pop
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member pop not found, returning obj_type Stack<int>
+DEBUG visit_GenericTypeExpression: node.base_type = Stack
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Stack
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Stack
+DEBUG: checking if 'Stack' in self.types: True
+DEBUG: found Stack in self.types: Stack
+DEBUG visit_GenericTypeExpression: node.base_type = Stack
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Stack
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Stack
+DEBUG: checking if 'Stack' in self.types: True
+DEBUG: found Stack in self.types: Stack
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = pop
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member pop not found, returning obj_type Stack<int>
+DEBUG visit_MemberExpression: obj_type = Stack<int>
+DEBUG visit_MemberExpression: type_name = Stack
+DEBUG visit_MemberExpression: node.member = pop
+DEBUG visit_MemberExpression: fields = [('items', <nova.compiler.parser.ast.ArrayTypeExpression object at 0x0000028EA6427820>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Stack has methods: []
+DEBUG visit_MemberExpression: member pop not found, returning obj_type Stack<int>
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericFunctionDefinition: param first type T trait_constraints: []
+DEBUG visit_GenericFunctionDefinition: param second type U trait_constraints: []
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_CallExpression: node.callee.name = make_pair
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6587350>
+DEBUG visit_CallExpression: symbol.type = Pair<T, U>
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6591300>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA64BB650>]
+DEBUG visit_CallExpression: node.callee.name = make_pair
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6587350>
+DEBUG visit_CallExpression: symbol.type = Pair<T, U>
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6591300>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA64BB650>]
+DEBUG visit_CallExpression: node.callee.name = make_pair
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.GenericFunctionSymbol object at 0x0000028EA6587350>
+DEBUG visit_CallExpression: symbol.type = Pair<T, U>
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6591300>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA64BB650>]
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_GenericTypeExpression: node.base_type = Box
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Box
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Box
+DEBUG: checking if 'Box' in self.types: True
+DEBUG: found Box in self.types: Box
+DEBUG visit_MemberExpression: obj_type = Box<T>
+DEBUG visit_MemberExpression: type_name = Box
+DEBUG visit_MemberExpression: node.member = value
+DEBUG visit_MemberExpression: fields = [('value', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: found field value with type <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>
+DEBUG visit_MemberExpression: resolved field type = T
+DEBUG visit_GenericFunctionDefinition: node.where_clause = None
+DEBUG visit_GenericFunctionDefinition: no where_clause found
+DEBUG visit_GenericTypeExpression: node.base_type = Box
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Box
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Box
+DEBUG: checking if 'Box' in self.types: True
+DEBUG: found Box in self.types: Box
+DEBUG visit_GenericTypeExpression: node.base_type = Box
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Box
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Box
+DEBUG: checking if 'Box' in self.types: True
+DEBUG: found Box in self.types: Box
+DEBUG visit_GenericFunctionDefinition: param value type T trait_constraints: []
+DEBUG visit_MemberExpression: obj_type = Box<T>
+DEBUG visit_MemberExpression: type_name = Box
+DEBUG visit_MemberExpression: node.member = value
+DEBUG visit_MemberExpression: fields = [('value', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: found field value with type <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>
+DEBUG visit_MemberExpression: resolved field type = T
+DEBUG visit_GenericTypeExpression: node.base_type = Box
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Box
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Box
+DEBUG: checking if 'Box' in self.types: True
+DEBUG: found Box in self.types: Box
+DEBUG visit_GenericTypeExpression: node.base_type = Box
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Box
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Box
+DEBUG: checking if 'Box' in self.types: True
+DEBUG: found Box in self.types: Box
+DEBUG visit_GenericTypeExpression: node.base_type = Box
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Box
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Box
+DEBUG: checking if 'Box' in self.types: True
+DEBUG: found Box in self.types: Box
+DEBUG visit_GenericTypeExpression: node.base_type = Box
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Box
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Box
+DEBUG: checking if 'Box' in self.types: True
+DEBUG: found Box in self.types: Box
+DEBUG visit_MemberExpression: obj_type = Box<int>
+DEBUG visit_MemberExpression: type_name = Box
+DEBUG visit_MemberExpression: node.member = get
+DEBUG visit_MemberExpression: fields = [('value', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Box has methods: []
+DEBUG visit_MemberExpression: member get not found, returning obj_type Box<int>
+DEBUG visit_MemberExpression: obj_type = Box<int>
+DEBUG visit_MemberExpression: type_name = Box
+DEBUG visit_MemberExpression: node.member = get
+DEBUG visit_MemberExpression: fields = [('value', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Box has methods: []
+DEBUG visit_MemberExpression: member get not found, returning obj_type Box<int>
+DEBUG visit_MemberExpression: obj_type = Box<int>
+DEBUG visit_MemberExpression: type_name = Box
+DEBUG visit_MemberExpression: node.member = get
+DEBUG visit_MemberExpression: fields = [('value', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Box has methods: []
+DEBUG visit_MemberExpression: member get not found, returning obj_type Box<int>
+DEBUG visit_MemberExpression: obj_type = Box<int>
+DEBUG visit_MemberExpression: type_name = Box
+DEBUG visit_MemberExpression: node.member = get
+DEBUG visit_MemberExpression: fields = [('value', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Box has methods: []
+DEBUG visit_MemberExpression: member get not found, returning obj_type Box<int>
+DEBUG visit_GenericTypeExpression: node.base_type = Box
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Box
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Box
+DEBUG: checking if 'Box' in self.types: True
+DEBUG: found Box in self.types: Box
+DEBUG visit_GenericTypeExpression: node.base_type = Box
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Box
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Box
+DEBUG: checking if 'Box' in self.types: True
+DEBUG: found Box in self.types: Box
+DEBUG visit_MemberExpression: obj_type = Box<int>
+DEBUG visit_MemberExpression: type_name = Box
+DEBUG visit_MemberExpression: node.member = get
+DEBUG visit_MemberExpression: fields = [('value', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Box has methods: []
+DEBUG visit_MemberExpression: member get not found, returning obj_type Box<int>
+DEBUG visit_MemberExpression: obj_type = Box<int>
+DEBUG visit_MemberExpression: type_name = Box
+DEBUG visit_MemberExpression: node.member = get
+DEBUG visit_MemberExpression: fields = [('value', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD610>)]
+DEBUG visit_MemberExpression: type_traits = {}
+DEBUG visit_MemberExpression: type Box has methods: []
+DEBUG visit_MemberExpression: member get not found, returning obj_type Box<int>
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_GenericTypeExpression: node.base_type = Pair
+DEBUG visit_GenericTypeExpression: node.base_type type = <class 'str'>
+DEBUG: base_type_name after processing = Pair
+DEBUG: base_type_name type after processing = <class 'str'>
+DEBUG: final base_type_name = Pair
+DEBUG: checking if 'Pair' in self.types: True
+DEBUG: found Pair in self.types: Pair
+DEBUG visit_CallExpression: node.callee.name = circle_area
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604AD0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA654F610>]
+DEBUG visit_CallExpression: node.callee.name = circle_area
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604AD0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA654F610>]
+DEBUG visit_CallExpression: node.callee.name = circle_circumference
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604B40>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA654F9D0>]
+DEBUG visit_CallExpression: node.callee.name = circle_circumference
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604B40>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA654F9D0>]
+DEBUG visit_CallExpression: node.callee.name = circle_area
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604AD0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA654F610>]
+DEBUG visit_CallExpression: node.callee.name = circle_circumference
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604B40>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA654F9D0>]
+DEBUG visit_CallExpression: node.callee.name = min
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB070>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>), ('y', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = min
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB070>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>), ('y', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = max
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB0E0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>), ('y', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = max
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB0E0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>), ('y', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = min
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB070>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>), ('y', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = max
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB0E0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>), ('y', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sin
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB700>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sin
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB700>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = cos
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = cos
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sin
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB700>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sin
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB700>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = cos
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = cos
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sin
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB700>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sin
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB700>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = cos
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = cos
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sqrt
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66043D0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = distance
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604C20>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581760>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA65817F0>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581880>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581910>]
+DEBUG visit_CallExpression: node.callee.name = distance
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604C20>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581760>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA65817F0>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581880>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581910>]
+DEBUG visit_CallExpression: node.callee.name = distance
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604C20>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581760>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA65817F0>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581880>, <nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581910>]
+DEBUG visit_CallExpression: node.callee.name = sqrt
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA040>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sqrt
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA040>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = pow
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA0B0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>), ('y', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = pow
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA0B0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>), ('y', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = abs
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA120>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = abs
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA120>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sqrt
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA040>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = pow
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA0B0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>), ('y', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = abs
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA120>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = floor
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB5B0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = floor
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB5B0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = ceil
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = ceil
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = round
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABB60>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = round
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABB60>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = floor
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB5B0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = ceil
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = round
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABB60>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sin
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65A9FD0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sin
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65A9FD0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = cos
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65A9F60>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = cos
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65A9F60>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = tan
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABE00>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = tan
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABE00>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = sin
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65A9FD0>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = cos
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65A9F60>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = tan
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABE00>
+DEBUG visit_CallExpression: symbol.type = float
+DEBUG visit_CallExpression: symbol.params = [('x', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA6463750>)]
+DEBUG visit_CallExpression: node.callee.name = to_upper
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA890>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = to_upper
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA890>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = to_lower
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA740>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = to_lower
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA740>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = to_upper
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA890>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = to_lower
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA740>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = reverse
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66048A0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = reverse
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66048A0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = is_palindrome
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66049F0>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581E20>]
+DEBUG visit_CallExpression: node.callee.name = is_palindrome
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66049F0>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581E20>]
+DEBUG visit_CallExpression: node.callee.name = is_palindrome
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66049F0>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581E20>]
+DEBUG visit_CallExpression: node.callee.name = is_palindrome
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66049F0>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581E20>]
+DEBUG visit_CallExpression: node.callee.name = is_palindrome
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66049F0>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581E20>]
+DEBUG visit_CallExpression: node.callee.name = is_palindrome
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66049F0>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581E20>]
+DEBUG visit_CallExpression: node.callee.name = contains
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA6D0>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('substr', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = contains
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA6D0>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('substr', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = starts_with
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('prefix', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = starts_with
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('prefix', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = ends_with
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABB60>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('suffix', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = ends_with
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABB60>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('suffix', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = contains
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA6D0>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('substr', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = starts_with
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB690>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('prefix', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = ends_with
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABB60>
+DEBUG visit_CallExpression: symbol.type = bool
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('suffix', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = len
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AAC10>
+DEBUG visit_CallExpression: symbol.type = int
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_CallExpression: node.callee.name = len
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AAC10>
+DEBUG visit_CallExpression: symbol.type = int
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_CallExpression: node.callee.name = len
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AAC10>
+DEBUG visit_CallExpression: symbol.type = int
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_CallExpression: node.callee.name = trim
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABC40>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = trim
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABC40>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = trim
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABC40>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = replace
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABCB0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('old', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('new', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = replace
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABCB0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('old', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('new', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = replace
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABCB0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('old', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('new', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = split
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA660>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('delimiter', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = split
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA660>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('delimiter', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = join
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AAEB0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('strings', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('delimiter', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = join
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AAEB0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('strings', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('delimiter', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = split
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AA660>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('delimiter', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = join
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AAEB0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('strings', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('delimiter', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>)]
+DEBUG visit_CallExpression: node.callee.name = substring
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB850>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('start', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64C01A0>)]
+DEBUG visit_CallExpression: node.callee.name = substring
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB850>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('start', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64C01A0>)]
+DEBUG visit_CallExpression: node.callee.name = substring
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB850>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('s', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64262C0>), ('start', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA64C01A0>)]
+DEBUG visit_ImplBlock: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>
+DEBUG visit_ImplBlock: node.type_name type = <class 'nova.compiler.parser.ast.TypeExpression'>
+DEBUG visit_ImplBlock: hasattr(node.type_name, 'accept') = True
+DEBUG: calling node.type_name.accept(self)
+DEBUG: type_obj after accept = int
+DEBUG: type_obj type after accept = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>
+DEBUG: type_obj = int
+DEBUG: type_obj type = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: type_name_str = int
+DEBUG visit_CallExpression: node.callee.name = str
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66047C0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_CallExpression: node.callee.name = print
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604670>
+DEBUG visit_CallExpression: symbol.type = unit
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_CallExpression: node.callee.name = print_display_int
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6604F30>
+DEBUG visit_CallExpression: symbol.type = unit
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6581F40>]
+DEBUG visit_ImplBlock: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD130>
+DEBUG visit_ImplBlock: node.type_name type = <class 'nova.compiler.parser.ast.TypeExpression'>
+DEBUG visit_ImplBlock: hasattr(node.type_name, 'accept') = True
+DEBUG: calling node.type_name.accept(self)
+DEBUG: type_obj after accept = int
+DEBUG: type_obj type after accept = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD130>
+DEBUG: type_obj = int
+DEBUG: type_obj type = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: type_name_str = int
+DEBUG visit_CallExpression: node.callee.name = str
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6605630>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_ImplBlock: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD730>
+DEBUG visit_ImplBlock: node.type_name type = <class 'nova.compiler.parser.ast.TypeExpression'>
+DEBUG visit_ImplBlock: hasattr(node.type_name, 'accept') = True
+DEBUG: calling node.type_name.accept(self)
+DEBUG: type_obj after accept = int
+DEBUG: type_obj type after accept = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD730>
+DEBUG: type_obj = int
+DEBUG: type_obj type = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: type_name_str = int
+DEBUG visit_MemberExpression: obj_type = int
+DEBUG visit_MemberExpression: type_name = int
+DEBUG visit_MemberExpression: node.member = clone
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {'int': [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]}
+DEBUG visit_MemberExpression: type int has traits: [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]
+DEBUG visit_MemberExpression: checking trait Display
+DEBUG visit_MemberExpression: trait has methods: [('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)]
+DEBUG visit_MemberExpression: checking method ('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)
+DEBUG visit_MemberExpression: checking trait Clone
+DEBUG visit_MemberExpression: trait has methods: [('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)]
+DEBUG visit_MemberExpression: checking method ('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)
+DEBUG visit_MemberExpression: found method clone with return type <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>
+DEBUG visit_MemberExpression: resolved return type = Self
+DEBUG visit_MemberExpression: obj_type = int
+DEBUG visit_MemberExpression: type_name = int
+DEBUG visit_MemberExpression: node.member = clone
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {'int': [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]}
+DEBUG visit_MemberExpression: type int has traits: [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]
+DEBUG visit_MemberExpression: checking trait Display
+DEBUG visit_MemberExpression: trait has methods: [('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)]
+DEBUG visit_MemberExpression: checking method ('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)
+DEBUG visit_MemberExpression: checking trait Clone
+DEBUG visit_MemberExpression: trait has methods: [('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)]
+DEBUG visit_MemberExpression: checking method ('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)
+DEBUG visit_MemberExpression: found method clone with return type <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>
+DEBUG visit_MemberExpression: resolved return type = Self
+DEBUG visit_MemberExpression: obj_type = int
+DEBUG visit_MemberExpression: type_name = int
+DEBUG visit_MemberExpression: node.member = clone
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {'int': [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]}
+DEBUG visit_MemberExpression: type int has traits: [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]
+DEBUG visit_MemberExpression: checking trait Display
+DEBUG visit_MemberExpression: trait has methods: [('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)]
+DEBUG visit_MemberExpression: checking method ('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)
+DEBUG visit_MemberExpression: checking trait Clone
+DEBUG visit_MemberExpression: trait has methods: [('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)]
+DEBUG visit_MemberExpression: checking method ('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)
+DEBUG visit_MemberExpression: found method clone with return type <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>
+DEBUG visit_MemberExpression: resolved return type = Self
+DEBUG visit_MemberExpression: obj_type = int
+DEBUG visit_MemberExpression: type_name = int
+DEBUG visit_MemberExpression: node.member = clone
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {'int': [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]}
+DEBUG visit_MemberExpression: type int has traits: [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]
+DEBUG visit_MemberExpression: checking trait Display
+DEBUG visit_MemberExpression: trait has methods: [('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)]
+DEBUG visit_MemberExpression: checking method ('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)
+DEBUG visit_MemberExpression: checking trait Clone
+DEBUG visit_MemberExpression: trait has methods: [('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)]
+DEBUG visit_MemberExpression: checking method ('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)
+DEBUG visit_MemberExpression: found method clone with return type <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>
+DEBUG visit_MemberExpression: resolved return type = Self
+DEBUG visit_CallExpression: node.callee.name = print
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66054E0>
+DEBUG visit_CallExpression: symbol.type = unit
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_MemberExpression: obj_type = int
+DEBUG visit_MemberExpression: type_name = int
+DEBUG visit_MemberExpression: node.member = clone
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {'int': [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]}
+DEBUG visit_MemberExpression: type int has traits: [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]
+DEBUG visit_MemberExpression: checking trait Display
+DEBUG visit_MemberExpression: trait has methods: [('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)]
+DEBUG visit_MemberExpression: checking method ('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)
+DEBUG visit_MemberExpression: checking trait Clone
+DEBUG visit_MemberExpression: trait has methods: [('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)]
+DEBUG visit_MemberExpression: checking method ('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)
+DEBUG visit_MemberExpression: found method clone with return type <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>
+DEBUG visit_MemberExpression: resolved return type = Self
+DEBUG visit_MemberExpression: obj_type = int
+DEBUG visit_MemberExpression: type_name = int
+DEBUG visit_MemberExpression: node.member = clone
+DEBUG visit_MemberExpression: fields = []
+DEBUG visit_MemberExpression: type_traits = {'int': [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]}
+DEBUG visit_MemberExpression: type int has traits: [<nova.compiler.semantic.types.TraitType object at 0x0000028EA65CEDB0>, <nova.compiler.semantic.types.TraitType object at 0x0000028EA65CDD30>]
+DEBUG visit_MemberExpression: checking trait Display
+DEBUG visit_MemberExpression: trait has methods: [('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)]
+DEBUG visit_MemberExpression: checking method ('display', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE330>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE210>)
+DEBUG visit_MemberExpression: checking trait Clone
+DEBUG visit_MemberExpression: trait has methods: [('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)]
+DEBUG visit_MemberExpression: checking method ('clone', [('self', <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>)], <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>)
+DEBUG visit_MemberExpression: found method clone with return type <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CDA30>
+DEBUG visit_MemberExpression: resolved return type = Self
+DEBUG visit_CallExpression: node.callee.name = clone_and_display_int
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA6606660>
+DEBUG visit_CallExpression: symbol.type = unit
+DEBUG visit_CallExpression: symbol.params = [<nova.compiler.parser.ast.ParameterDefinition object at 0x0000028EA6582060>]
+[DEBUG visit_ImplBlock] node.type_name: <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE1B0>
+[DEBUG visit_ImplBlock] node.type_name type: <class 'nova.compiler.parser.ast.TypeExpression'>
+[DEBUG visit_ImplBlock] type_name from name attribute: int
+[DEBUG visit_ImplBlock] Looking for class: int
+[DEBUG visit_ImplBlock] self.environment: {}
+[DEBUG visit_ImplBlock] Searching in instructions
+[DEBUG visit_ImplBlock] Could not find class int, skipping
+DEBUG visit_ImplBlock: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE1B0>
+DEBUG visit_ImplBlock: node.type_name type = <class 'nova.compiler.parser.ast.TypeExpression'>
+DEBUG visit_ImplBlock: hasattr(node.type_name, 'accept') = True
+DEBUG: calling node.type_name.accept(self)
+DEBUG: type_obj after accept = int
+DEBUG: type_obj type after accept = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE1B0>
+DEBUG: type_obj = int
+DEBUG: type_obj type = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: type_name_str = int
+DEBUG visit_CallExpression: node.callee.name = str
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AB380>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_CallExpression: node.callee.name = print
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65AAAC0>
+DEBUG visit_CallExpression: symbol.type = unit
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_ImplBlock: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE1B0>
+DEBUG visit_ImplBlock: node.type_name type = <class 'nova.compiler.parser.ast.TypeExpression'>
+DEBUG visit_ImplBlock: hasattr(node.type_name, 'accept') = True
+DEBUG: calling node.type_name.accept(self)
+DEBUG: type_obj after accept = int
+DEBUG: type_obj type after accept = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE1B0>
+DEBUG: type_obj = int
+DEBUG: type_obj type = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: type_name_str = int
+DEBUG visit_CallExpression: node.callee.name = str
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65ABEE0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_CallExpression: node.callee.name = print
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA65A9FD0>
+DEBUG visit_CallExpression: symbol.type = unit
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_ImplBlock: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD370>
+DEBUG visit_ImplBlock: node.type_name type = <class 'nova.compiler.parser.ast.TypeExpression'>
+DEBUG visit_ImplBlock: hasattr(node.type_name, 'accept') = True
+DEBUG: calling node.type_name.accept(self)
+DEBUG: type_obj after accept = int
+DEBUG: type_obj type after accept = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CD370>
+DEBUG: type_obj = int
+DEBUG: type_obj type = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: type_name_str = int
+DEBUG visit_CallExpression: node.callee.name = str
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66052B0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_ImplBlock: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>
+DEBUG visit_ImplBlock: node.type_name type = <class 'nova.compiler.parser.ast.TypeExpression'>
+DEBUG visit_ImplBlock: hasattr(node.type_name, 'accept') = True
+DEBUG: calling node.type_name.accept(self)
+DEBUG: type_obj after accept = int
+DEBUG: type_obj type after accept = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: node.type_name = <nova.compiler.parser.ast.TypeExpression object at 0x0000028EA65CE150>
+DEBUG: type_obj = int
+DEBUG: type_obj type = <class 'nova.compiler.semantic.types.PrimitiveType'>
+DEBUG: type_name_str = int
+DEBUG visit_CallExpression: node.callee.name = str
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66052B0>
+DEBUG visit_CallExpression: symbol.type = string
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_CallExpression: node.callee.name = print
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66051D0>
+DEBUG visit_CallExpression: symbol.type = unit
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]
+DEBUG visit_CallExpression: node.callee.name = print
+DEBUG visit_CallExpression: symbol = <nova.compiler.semantic.symbols.FunctionSymbol object at 0x0000028EA66051D0>
+DEBUG visit_CallExpression: symbol.type = unit
+DEBUG visit_CallExpression: symbol.params = [('value', <nova.compiler.semantic.types.PrimitiveType object at 0x0000028EA647E030>)]

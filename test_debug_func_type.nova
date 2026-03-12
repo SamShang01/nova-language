@@ -1,0 +1,33 @@
+// 调试函数类型 - 测试调用函数参数
+
+template func apply<T, U>(value: T, transformer: func(T): U): U {
+    print("Inside apply function");
+    let result = transformer(value);
+    return result;
+}
+
+func intToString(x: int): string {
+    return "number";
+}
+
+func double(x: int): int {
+    return x * 2;
+}
+
+func main() {
+    print("=== Debug Function Type ===");
+    
+    // 测试1: int -> string
+    let result1 = apply<int, string>(42, intToString);
+    print("Result1:");
+    print(result1);
+    
+    // 测试2: int -> int
+    let result2 = apply<int, int>(5, double);
+    print("Result2:");
+    print(result2);
+    
+    print("=== Done ===");
+}
+
+main();

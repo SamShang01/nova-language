@@ -1,0 +1,49 @@
+template struct Point<T> {
+    var x: T;
+    var y: T;
+}
+
+template func identity<T>(value: T): T {
+    return value;
+}
+
+func main() {
+    print("Testing Type Inference...");
+    
+    // 测试1：泛型结构体类型推断（int）
+    print("Test 1: Point with int");
+    let p1 = Point(10, 20);
+    print(p1);
+    
+    // 测试2：泛型结构体类型推断（float）
+    print("Test 2: Point with float");
+    let p2 = Point(3.14, 2.71);
+    print(p2);
+    
+    // 测试3：泛型结构体类型推断（string）
+    print("Test 3: Point with string");
+    let p3 = Point("Hello", "World");
+    print(p3);
+    
+    // 测试4：泛型函数类型推断（int）
+    print("Test 4: identity with int");
+    let id1 = identity(42);
+    print(id1);
+    
+    // 测试5：泛型函数类型推断（float）
+    print("Test 5: identity with float");
+    let id2 = identity(3.14);
+    print(id2);
+    
+    // 测试6：泛型函数类型推断（string）
+    print("Test 6: identity with string");
+    let id3 = identity("Nova");
+    print(id3);
+    
+    // 测试7：显式类型指定（仍然支持）
+    print("Test 7: explicit type specification");
+    let p4 = Point<int>(100, 200);
+    print(p4);
+    
+    print("Type Inference Test Passed!");
+}

@@ -1,0 +1,530 @@
+
+// ============================================
+// Nova List<T> 容器 - 双向链表实现
+// 版本: 0.11.0
+// 更新: 使用模板结构体 ListNode<T> 提升性能
+// ============================================
+
+// 链表节点 - 使用模板结构体实现
+// 作为值类型，内存布局更紧凑，访问更快
+template struct ListNode<T> {
+    var value: T;
+    var prev: ListNode<T>;
+    var next: ListNode<T>;
+    var isValid: bool;  // 标记节点是否有效（替代null检查）
+    
+    // 创建有效节点
+    static func create(value: T, prev: ListNode<T>, next: ListNode<T>): ListNode<T> {
+        return ListNode<T>(
+            value: value,
+            prev: prev,
+            next: next,
+            isValid: true
+        );
+    }
+    
+    // 创建空节点（无效节点）
+    static func empty(): ListNode<T> {
+        return ListNode<T>(
+            value: null,
+            prev: null,
+            next: null,
+            isValid: false
+        );
+    }
+}
+
+// 链表迭代器
+template class ListIterator<T> {
+    var current: ListNode<T>;
+    var list: List<T>;
+    
+    init(list: List<T>) {
+        this.list = list;
+        this.current = list.head;
+    }
+    
+    func hasNext(): bool {
+        return this.current.isValid;
+    }
+    
+    func next(): T {
+        var value = this.current.value;
+        this.current = this.current.next;
+        return value;
+    }
+    
+    func reset() {
+        this.current = this.list.head;
+    }
+}
+
+template class List<T> {
+    var head: ListNode<T>;
+    var tail: ListNode<T>;
+    var size: int;
+    var hasHead: bool;  // 标记是否有头节点
+    var hasTail: bool;  // 标记是否有尾节点
+
+    init() {
+        this.head = ListNode<T>.empty();
+        this.tail = ListNode<T>.empty();
+        this.size = 0;
+        this.hasHead = false;
+        this.hasTail = false;
+    }
+
+    // 在头部添加元素
+    func pushFront(value: T) {
+        var newNode = ListNode<T>.create(
+            value: value,
+            prev: ListNode<T>.empty(),
+            next: this.head
+        );
+        
+        if this.hasHead {
+            // 更新原头节点的prev指针
+            var oldHead = this.head;
+            oldHead = ListNode<T>.create(
+                value: oldHead.value,
+                prev: newNode,
+                next: oldHead.next,
+                isValid: oldHead.isValid
+            );
+        } else {
+            this.tail = newNode;
+            this.hasTail = true;
+        }
+        
+        this.head = newNode;
+        this.hasHead = true;
+        this.size = this.size + 1;
+    }
+
+    // 在尾部添加元素
+    func pushBack(value: T) {
+        var newNode = ListNode<T>.create(
+            value: value,
+            prev: this.tail,
+            next: ListNode<T>.empty()
+        );
+        
+        if this.hasTail {
+            // 更新原尾节点的next指针
+            var oldTail = this.tail;
+            oldTail = ListNode<T>.create(
+                value: oldTail.value,
+                prev: oldTail.prev,
+                next: newNode,
+                isValid: oldTail.isValid
+            );
+        } else {
+            this.head = newNode;
+            this.hasHead = true;
+        }
+        
+        this.tail = newNode;
+        this.hasTail = true;
+        this.size = this.size + 1;
+    }
+
+    // 移除头部元素
+    func popFront(): T {
+        if this.size == 0 {
+            return null;
+        }
+        
+        var value = this.head.value;
+        this.head = this.head.next;
+        
+        if this.head.isValid {
+            // 更新新头节点的prev指针
+            this.head = ListNode<T>.create(
+                value: this.head.value,
+                prev: ListNode<T>.empty(),
+                next: this.head.next,
+                isValid: this.head.isValid
+            );
+        } else {
+            this.tail = ListNode<T>.empty();
+            this.hasTail = false;
+            this.hasHead = false;
+        }
+        
+        this.size = this.size - 1;
+        return value;
+    }
+
+    // 移除尾部元素
+    func popBack(): T {
+        if this.size == 0 {
+            return null;
+        }
+        
+        var value = this.tail.value;
+        this.tail = this.tail.prev;
+        
+        if this.tail.isValid {
+            // 更新新尾节点的next指针
+            this.tail = ListNode<T>.create(
+                value: this.tail.value,
+                prev: this.tail.prev,
+                next: ListNode<T>.empty(),
+                isValid: this.tail.isValid
+            );
+        } else {
+            this.head = ListNode<T>.empty();
+            this.hasHead = false;
+            this.hasTail = false;
+        }
+        
+        this.size = this.size - 1;
+        return value;
+    }
+
+    // 获取头部元素
+    func front(): T {
+        if this.size == 0 {
+            return null;
+        }
+        return this.head.value;
+    }
+
+    // 获取尾部元素
+    func back(): T {
+        if this.size == 0 {
+            return null;
+        }
+        return this.tail.value;
+    }
+
+    // 在指定位置插入元素
+    func insert(index: int, value: T) {
+        if index < 0 || index > this.size {
+            return;
+        }
+        
+        if index == 0 {
+            this.pushFront(value);
+        } else if index == this.size {
+            this.pushBack(value);
+        } else {
+            var current = this.head;
+            var i = 0;
+            
+            while i < index {
+                current = current.next;
+                i = i + 1;
+            }
+            
+            var newNode = ListNode<T>.create(
+                value: value,
+                prev: current.prev,
+                next: current
+            );
+            
+            // 更新前驱节点的next指针
+            var prevNode = current.prev;
+            prevNode = ListNode<T>.create(
+                value: prevNode.value,
+                prev: prevNode.prev,
+                next: newNode,
+                isValid: prevNode.isValid
+            );
+            
+            // 更新当前节点的prev指针
+            current = ListNode<T>.create(
+                value: current.value,
+                prev: newNode,
+                next: current.next,
+                isValid: current.isValid
+            );
+            
+            this.size = this.size + 1;
+        }
+    }
+
+    // 移除指定位置的元素
+    func remove(index: int): T {
+        if index < 0 || index >= this.size {
+            return null;
+        }
+        
+        if index == 0 {
+            return this.popFront();
+        } else if index == this.size - 1 {
+            return this.popBack();
+        } else {
+            var current = this.head;
+            var i = 0;
+            
+            while i < index {
+                current = current.next;
+                i = i + 1;
+            }
+            
+            var value = current.value;
+            
+            // 更新前驱节点的next指针
+            var prevNode = current.prev;
+            prevNode = ListNode<T>.create(
+                value: prevNode.value,
+                prev: prevNode.prev,
+                next: current.next,
+                isValid: prevNode.isValid
+            );
+            
+            // 更新后继节点的prev指针
+            var nextNode = current.next;
+            nextNode = ListNode<T>.create(
+                value: nextNode.value,
+                prev: current.prev,
+                next: nextNode.next,
+                isValid: nextNode.isValid
+            );
+            
+            this.size = this.size - 1;
+            return value;
+        }
+    }
+
+    // 获取指定位置的元素
+    func get(index: int): T {
+        if index < 0 || index >= this.size {
+            return null;
+        }
+        
+        var current = this.head;
+        var i = 0;
+        
+        while i < index {
+            current = current.next;
+            i = i + 1;
+        }
+        
+        return current.value;
+    }
+
+    // 设置指定位置的元素
+    func set(index: int, value: T) {
+        if index >= 0 && index < this.size {
+            var current = this.head;
+            var i = 0;
+            
+            while i < index {
+                current = current.next;
+                i = i + 1;
+            }
+            
+            // 创建新节点替换旧节点
+            var newNode = ListNode<T>.create(
+                value: value,
+                prev: current.prev,
+                next: current.next
+            );
+            
+            // 更新前驱节点的next指针
+            if current.prev.isValid {
+                var prevNode = current.prev;
+                prevNode = ListNode<T>.create(
+                    value: prevNode.value,
+                    prev: prevNode.prev,
+                    next: newNode,
+                    isValid: prevNode.isValid
+                );
+            } else {
+                this.head = newNode;
+            }
+            
+            // 更新后继节点的prev指针
+            if current.next.isValid {
+                var nextNode = current.next;
+                nextNode = ListNode<T>.create(
+                    value: nextNode.value,
+                    prev: newNode,
+                    next: nextNode.next,
+                    isValid: nextNode.isValid
+                );
+            } else {
+                this.tail = newNode;
+            }
+        }
+    }
+
+    // 清空链表
+    func clear() {
+        this.head = ListNode<T>.empty();
+        this.tail = ListNode<T>.empty();
+        this.size = 0;
+        this.hasHead = false;
+        this.hasTail = false;
+    }
+
+    // 检查是否为空
+    func isEmpty(): bool {
+        return this.size == 0;
+    }
+
+    // 检查是否包含指定元素
+    func contains(value: T): bool {
+        var current = this.head;
+        
+        while current.isValid {
+            if current.value == value {
+                return true;
+            }
+            current = current.next;
+        }
+        
+        return false;
+    }
+
+    // 查找元素第一次出现的索引
+    func indexOf(value: T): int {
+        var current = this.head;
+        var index = 0;
+        
+        while current.isValid {
+            if current.value == value {
+                return index;
+            }
+            current = current.next;
+            index = index + 1;
+        }
+        
+        return -1;
+    }
+
+    // 查找元素最后一次出现的索引
+    func lastIndexOf(value: T): int {
+        var current = this.tail;
+        var index = this.size - 1;
+        
+        while current.isValid {
+            if current.value == value {
+                return index;
+            }
+            current = current.prev;
+            index = index - 1;
+        }
+        
+        return -1;
+    }
+
+    // 获取链表大小
+    func count(): int {
+        return this.size;
+    }
+
+    // 反转链表
+    func reverse() {
+        var current = this.head;
+        
+        while current.isValid {
+            // 交换prev和next指针
+            var temp = current.next;
+            current = ListNode<T>.create(
+                value: current.value,
+                prev: temp,
+                next: current.prev,
+                isValid: current.isValid
+            );
+            current = temp;
+        }
+        
+        // 交换head和tail
+        var temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+    }
+
+    // 转换为数组
+    func toArray(): [T] {
+        var result = [];
+        var current = this.head;
+        
+        while current.isValid {
+            result.push(current.value);
+            current = current.next;
+        }
+        
+        return result;
+    }
+
+    // 交换两个链表的内容
+    func swap(other: List<T>) {
+        var tempHead = this.head;
+        var tempTail = this.tail;
+        var tempSize = this.size;
+        var tempHasHead = this.hasHead;
+        var tempHasTail = this.hasTail;
+
+        this.head = other.head;
+        this.tail = other.tail;
+        this.size = other.size;
+        this.hasHead = other.hasHead;
+        this.hasTail = other.hasTail;
+
+        other.head = tempHead;
+        other.tail = tempTail;
+        other.size = tempSize;
+        other.hasHead = tempHasHead;
+        other.hasTail = tempHasTail;
+    }
+    
+    // 创建迭代器
+    func iterator(): ListIterator<T> {
+        return ListIterator<T>(this);
+    }
+    
+    // 应用函数到每个元素
+    func forEach(f: func(T)) {
+        var current = this.head;
+        
+        while current.isValid {
+            f(current.value);
+            current = current.next;
+        }
+    }
+    
+    // 映射操作
+    func map<U>(f: func(T): U): List<U> {
+        var result = List<U>();
+        var current = this.head;
+        
+        while current.isValid {
+            result.pushBack(f(current.value));
+            current = current.next;
+        }
+        
+        return result;
+    }
+    
+    // 过滤操作
+    func filter(predicate: func(T): bool): List<T> {
+        var result = List<T>();
+        var current = this.head;
+        
+        while current.isValid {
+            if predicate(current.value) {
+                result.pushBack(current.value);
+            }
+            current = current.next;
+        }
+        
+        return result;
+    }
+    
+    // 归约操作
+    func reduce<U>(initial: U, f: func(U, T): U): U {
+        var result = initial;
+        var current = this.head;
+        
+        while current.isValid {
+            result = f(result, current.value);
+            current = current.next;
+        }
+        
+        return result;
+    }
+}

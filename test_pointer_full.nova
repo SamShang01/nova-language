@@ -1,0 +1,39 @@
+// 测试指针功能 - 完整版本
+
+func main() {
+    print("=== Test Pointer Full ===");
+    
+    // 测试1: 基本取地址和解引用
+    let x = 42;
+    let ptr = &x;
+    print("Test 1: Basic pointer");
+    print("x = ");
+    print(x);
+    print("*ptr = ");
+    print(*ptr);
+    
+    // 测试2: 指针类型声明
+    let y = 10;
+    let ptr2: *int = &y;
+    print("\nTest 2: Pointer type declaration");
+    print("y = ");
+    print(y);
+    print("*ptr2 = ");
+    print(*ptr2);
+    
+    // 测试3: 多个指针指向同一个变量
+    let z = 100;
+    let ptr3 = &z;
+    let ptr4 = &z;
+    print("\nTest 3: Multiple pointers");
+    print("z = ");
+    print(z);
+    print("*ptr3 = ");
+    print(*ptr3);
+    print("*ptr4 = ");
+    print(*ptr4);
+    
+    print("\n=== All Tests Passed! ===");
+}
+
+main();

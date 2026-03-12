@@ -1,0 +1,7 @@
+template func test<T, U>(a: T, b: U): U {
+    return b;
+}
+
+func main() {
+    print(test<int, string>(42, "hello"));
+}

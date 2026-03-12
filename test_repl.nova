@@ -1,0 +1,9 @@
+struct Point {
+    x: int;
+    y: int;
+}
+
+Point(1, 2);
+Point(1);
+Point();
+Point(1, 2, 3);

@@ -1,0 +1,108 @@
+template struct Point<T> {
+    var x: T;
+    var y: T;
+    
+    func getX(): T {
+        return this.x;
+    }
+    
+    func getY(): T {
+        return this.y;
+    }
+}
+
+template func identity<T>(value: T): T {
+    return value;
+}
+
+template func add<T>(a: T, b: T): T {
+    return a + b;
+}
+
+func testStructTypeInference() {
+    print("=== Test 1: Struct Type Inference ===");
+    
+    var p1 = Point(10, 20);
+    print("Point(10, 20):");
+    print("  x:");
+    print(p1.getX());
+    print("  y:");
+    print(p1.getY());
+    
+    var p2 = Point(3.14, 2.71);
+    print("Point(3.14, 2.71):");
+    print("  x:");
+    print(p2.getX());
+    print("  y:");
+    print(p2.getY());
+    
+    var p3 = Point("Hello", "World");
+    print("Point('Hello', 'World'):");
+    print("  x:");
+    print(p3.getX());
+    print("  y:");
+    print(p3.getY());
+    
+    print("");
+}
+
+func testFunctionTypeInference() {
+    print("=== Test 2: Function Type Inference ===");
+    
+    var id1 = identity(42);
+    print("identity(42):");
+    print(id1);
+    
+    var id2 = identity(3.14);
+    print("identity(3.14):");
+    print(id2);
+    
+    var id3 = identity("Nova");
+    print("identity('Nova'):");
+    print(id3);
+    
+    print("");
+}
+
+func testOperationTypeInference() {
+    print("=== Test 3: Operation Type Inference ===");
+    
+    var sum1 = add(10, 20);
+    print("add(10, 20):");
+    print(sum1);
+    
+    var sum2 = add(3.14, 2.71);
+    print("add(3.14, 2.71):");
+    print(sum2);
+    
+    print("");
+}
+
+func testExplicitTypeSpecification() {
+    print("=== Test 4: Explicit Type Specification ===");
+    
+    var p1 = Point<int>(100, 200);
+    print("Point<int>(100, 200):");
+    print("  x:");
+    print(p1.getX());
+    print("  y:");
+    print(p1.getY());
+    
+    var id1 = identity<int>(999);
+    print("identity<int>(999):");
+    print(id1);
+    
+    print("");
+}
+
+func main() {
+    print("=== Type Inference Tests ===");
+    print("");
+    
+    testStructTypeInference();
+    testFunctionTypeInference();
+    testOperationTypeInference();
+    testExplicitTypeSpecification();
+    
+    print("=== All Tests Completed ===");
+}

@@ -1,0 +1,10 @@
+// 测试模块
+export func add(a: int, b: int) -> int {
+    return a + b;
+}
+
+export func multiply(a: int, b: int) -> int {
+    return a * b;
+}
+
+export let PI = 3.14159;
