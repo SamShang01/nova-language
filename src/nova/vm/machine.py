@@ -937,6 +937,7 @@ class NovaFunction:
         self.kwargs_param = None
         self.default_values = {}
         self.mandatory_params = []
+        self.default_expressions = {}
         
         for param in self.params:
             if isinstance(param, tuple):
@@ -953,16 +954,16 @@ class NovaFunction:
                     if param.is_mandatory:
                         self.mandatory_params.append(param.name)
                     if param.default_value is not None:
-                        # 求值默认值
-                        evaluated_value = self._evaluate_default_value(param.default_value)
-                        self.default_values[param.name] = evaluated_value
+                        # 存储默认值表达式，而不是在定义时求值
+                        self.default_expressions[param.name] = param.default_value
     
-    def _evaluate_default_value(self, default_value):
+    def _evaluate_default_value(self, default_value, environment):
         """
         求值默认值表达式
         
         Args:
             default_value: 默认值表达式（AST节点）
+            environment: 当前环境，用于解析变量
         
         Returns:
             求值后的值
@@ -973,8 +974,30 @@ class NovaFunction:
         elif hasattr(default_value, 'value'):
             return default_value.value
         else:
-            # 复杂表达式，暂时返回None
-            return None
+            # 对于复杂表达式，使用代码生成器生成字节码后执行
+            try:
+                from nova.compiler.codegen.generator import CodeGenerator
+                from nova.compiler.optimizer.optimizer import Optimizer
+                
+                # 优化AST
+                optimizer = Optimizer()
+                optimized_ast = optimizer.optimize(default_value)
+                
+                # 生成字节码
+                codegen = CodeGenerator()
+                instructions, constants = codegen.generate(optimized_ast)
+                
+                # 创建临时虚拟机来执行
+                from nova.vm.machine import VirtualMachine
+                temp_vm = VirtualMachine()
+                temp_vm.environment.update(environment)
+                temp_vm.load(instructions, constants)
+                
+                result = temp_vm.run()
+                return result
+            except Exception as e:
+                print(f"[DEBUG VM] Error evaluating default value: {e}")
+                return None
     
     def __call__(self, *args, **kwargs):
         """
@@ -1015,7 +1038,14 @@ class NovaFunction:
                 func_vm.environment[param_name] = args[used_args]
                 print(f"[DEBUG VM] Set {param_name} = {args[used_args]}")
                 used_args += 1
+            elif param_name in self.default_expressions:
+                # 动态求值默认值表达式
+                default_expr = self.default_expressions[param_name]
+                evaluated_value = self._evaluate_default_value(default_expr, func_vm.environment)
+                func_vm.environment[param_name] = evaluated_value
+                print(f"[DEBUG VM] Set {param_name} = evaluated default value {evaluated_value}")
             elif param_name in self.default_values:
+                # 兼容旧格式
                 func_vm.environment[param_name] = self.default_values[param_name]
                 print(f"[DEBUG VM] Set {param_name} = default value {self.default_values[param_name]}")
             elif param_name in self.mandatory_params:

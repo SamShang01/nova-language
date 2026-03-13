@@ -1,0 +1,8 @@
+func funcName(a: int = b - 12, b: int) {
+    println("a: ", a);
+    println("b: ", b);
+}
+
+func main() {
+    funcName(5);  // 应该报错，因为a的默认值引用了后面的参数b
+}

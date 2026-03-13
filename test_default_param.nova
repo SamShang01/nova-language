@@ -1,0 +1,9 @@
+func funcName(a: int, b: int = a + 12) {
+    println("a: ", a);
+    println("b: ", b);
+}
+
+func main() {
+    funcName(5);  // 应该输出 a: 5, b: 17
+    funcName(10, 20);  // 应该输出 a: 10, b: 20
+}

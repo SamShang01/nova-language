@@ -21,7 +21,7 @@ version_str = '.'.join(map(str, __version__))
 
 # 读取长描述
 long_description = ''
-readme_file = os.path.join(os.path.dirname(__file__), '语言说明书.md')
+readme_file = os.path.join(os.path.dirname(__file__), 'README.md')
 if os.path.exists(readme_file):
     with open(readme_file, 'r', encoding='utf-8') as f:
         long_description = f.read()
@@ -29,12 +29,17 @@ if os.path.exists(readme_file):
 setup(
     name='nova-language',
     version=version_str,
-    description='Nova编程语言',
+    description='Nova编程语言 - 一个现代、高性能的编程语言，支持LLVM JIT编译',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    author='Nova Team',
-    author_email='nova@example.com',
-    url='https://github.com/nova-language/nova',
+    author='SamShang01',
+    author_email='13823217069@139.com',
+    url='https://github.com/SamShang01/nova-language',
+    project_urls={
+        'Bug Reports': 'https://github.com/SamShang01/nova-language/issues',
+        'Source': 'https://github.com/SamShang01/nova-language',
+        'Documentation': 'https://github.com/SamShang01/nova-language/blob/main/语言说明书.md',
+    },
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
     include_package_data=True,
@@ -50,7 +55,7 @@ setup(
         ],
     },
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
@@ -59,9 +64,13 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
         'Programming Language :: Python :: 3.14',
         'Topic :: Software Development :: Compilers',
         'Topic :: Software Development :: Interpreters',
+        'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     python_requires='>=3.6',
     install_requires=[

@@ -748,10 +748,42 @@ Type "help", "copyright" or "license" for more information.
         
         # 执行Nova代码
         try:
-            # 这里应该调用Nova解释器来执行代码
-            # 目前只是模拟执行
-            result = f"执行: {code}\n"
-            self.shell_text.insert(tk.END, result, 'output')
+            # 重定向标准输出
+            import sys
+            from io import StringIO
+            old_stdout = sys.stdout
+            sys.stdout = StringIO()
+            
+            # 词法分析
+            scanner = Scanner(code)
+            tokens = scanner.scan_tokens()
+            
+            # 语法分析
+            parser = Parser(tokens)
+            ast = parser.parse()
+            
+            # 语义分析
+            analyzer = SemanticAnalyzer()
+            analyzed_ast = analyzer.analyze(ast)
+            
+            # 代码生成
+            codegen = CodeGenerator()
+            instructions, constants = codegen.generate(analyzed_ast)
+            
+            # 执行
+            vm = VirtualMachine()
+            vm.load(instructions, constants)
+            result = vm.run()
+            
+            # 恢复标准输出
+            output = sys.stdout.getvalue()
+            sys.stdout = old_stdout
+            
+            # 输出执行结果
+            if output:
+                self.shell_text.insert(tk.END, output, 'output')
+            if result is not None:
+                self.shell_text.insert(tk.END, f"{result}\n", 'output')
         except Exception as e:
             error_msg = f"错误: {e}\n"
             self.shell_text.insert(tk.END, error_msg, 'error')

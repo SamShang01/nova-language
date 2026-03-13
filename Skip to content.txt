@@ -1,0 +1,149 @@
+Skip to content
+SamShang01
+nova-language
+Repository navigation
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Releases: SamShang01/nova-language
+ReleasesTags
+Find a release
+Nova Language 1.0.0
+23 minutes ago
+@SamShang01 SamShang01
+ v1.0.0
+ 10b3dd1
+Nova Language 1.0.0 Draft
+🎉 Nova语言 1.0.0 正式发布！
+这是Nova语言的第一个正式版本，标志着Nova语言已经准备好用于生产环境。
+
+✨ 核心功能
+1. 完整的编译器系统
+词法分析器：支持完整的Nova语法标记化
+语法分析器：支持表达式、语句、函数、结构体、类等所有语法结构
+语义分析器：完整的类型检查、作用域管理和符号解析
+代码生成器：生成高效的虚拟机字节码
+LLVM JIT编译器：可选的LLVM后端，提供更高的执行性能
+2. 包管理系统
+支持包的安装、卸载和更新
+依赖管理和版本控制
+包索引和搜索功能
+3. 并行编译
+多线程编译支持
+GPU加速编译（可选）
+增量编译优化
+4. 标准库
+STL（标准模板库）
+丰富的内置函数和类型
+完整的I/O和数学库
+5. 开发工具
+VS Code插件（语法高亮、代码片段、智能提示）
+Nova IDE（基于PyQt5）
+增强的REPL交互环境
+📦 安装方法
+使用pip安装：
+pip install nova-language
+从源码安装：
+git clone https://github.com/SamShang01/nova-language.git
+cd nova-language
+python setup.py install
+🚀 快速开始
+创建一个 hello.nova 文件：
+
+fn main() {
+    println("Hello, Nova!");
+}
+运行程序：
+
+nova run hello.nova
+📚 文档
+语言说明书
+开发文档
+项目总结
+🤝 贡献
+欢迎贡献代码、报告问题或提出建议！
+
+📄 许可证
+MIT License
+
+Assets
+2
+Nova Language 1.0.0
+6 minutes ago
+@SamShang01 SamShang01
+ v1.0.0
+ 10b3dd1
+Nova Language 1.0.0 Latest
+🎉 Nova语言 1.0.0 正式发布！
+这是Nova语言的第一个正式版本，标志着Nova语言已经准备好用于生产环境。
+
+✨ 核心功能
+1. 完整的编译器系统
+词法分析器：支持完整的Nova语法标记化
+语法分析器：支持表达式、语句、函数、结构体、类等所有语法结构
+语义分析器：完整的类型检查、作用域管理和符号解析
+代码生成器：生成高效的虚拟机字节码
+LLVM JIT编译器：可选的LLVM后端，提供更高的执行性能
+2. 包管理系统
+支持包的安装、卸载和更新
+依赖管理和版本控制
+包索引和搜索功能
+3. 并行编译
+多线程编译支持
+GPU加速编译（可选）
+增量编译优化
+4. 标准库
+STL（标准模板库）
+丰富的内置函数和类型
+完整的I/O和数学库
+5. 开发工具
+VS Code插件（语法高亮、代码片段、智能提示）
+Nova IDE（基于PyQt5）
+增强的REPL交互环境
+📦 安装方法
+使用pip安装：
+pip install nova-language
+从源码安装：
+git clone https://github.com/SamShang01/nova-language.git
+cd nova-language
+python setup.py install
+🚀 快速开始
+创建一个 hello.nova 文件：
+
+fn main() {
+    println("Hello, Nova!");
+}
+运行程序：
+
+nova run hello.nova
+📚 文档
+语言说明书
+开发文档
+项目总结
+🤝 贡献
+欢迎贡献代码、报告问题或提出建议！
+
+📄 许可证
+MIT License
+
+Assets
+2
+Loading
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information

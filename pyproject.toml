@@ -4,19 +4,19 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nova-language"
-version = "0.16.0"
-description = "Nova编程语言"
-readme = "NOVA_LANGUAGE_MANUAL.md"
+version = "1.0.0"
+description = "Nova编程语言 - 一个现代、高性能的编程语言，支持LLVM JIT编译"
+readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Nova Team", email = "nova@example.com"}
+    {name = "SamShang01", email = "13823217069@139.com"}
 ]
 maintainers = [
-    {name = "Nova Team", email = "nova@example.com"}
+    {name = "SamShang01", email = "13823217069@139.com"}
 ]
 keywords = ["programming-language", "compiler", "interpreter", "nova"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.6",
@@ -26,18 +26,20 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Compilers",
     "Topic :: Software Development :: Interpreters",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 requires-python = ">=3.6"
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/nova-language/nova"
-Documentation = "https://github.com/nova-language/nova/blob/main/NOVA_LANGUAGE_MANUAL.md"
-Repository = "https://github.com/nova-language/nova"
-Issues = "https://github.com/nova-language/nova/issues"
+Homepage = "https://github.com/SamShang01/nova-language"
+Documentation = "https://github.com/SamShang01/nova-language/blob/main/语言说明书.md"
+Repository = "https://github.com/SamShang01/nova-language"
+Issues = "https://github.com/SamShang01/nova-language/issues"
 
 [project.optional-dependencies]
 dev = [

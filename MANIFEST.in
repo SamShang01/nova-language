@@ -1,0 +1,10 @@
+include README.md
+include LICENSE
+include 语言说明书.md
+recursive-include src/nova *.py *.md *.nova
+recursive-include src/nova/stdlib *.nova
+exclude src/nova/__pycache__
+exclude src/nova/**/__pycache__
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
