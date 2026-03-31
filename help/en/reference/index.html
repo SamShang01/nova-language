@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .reference-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .reference-item:last-child {
+            border-bottom: none;
+        }
+        
+        .reference-item a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        
+        .reference-item h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+        }
+        
+        .reference-item p {
+            margin-bottom: 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Reference</h1>
+            <p>Comprehensive reference documentation for Nova programming language</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; Reference
+        </div>
+        
+        <div class="content-section">
+            <h2>Welcome to Nova Reference</h2>
+            <p>This reference documentation provides detailed information about the Nova programming language, including its syntax, built-in types, operators, and more. Use this as a reference when you need to look up specific language features.</p>
+            
+            <div class="info-box">
+                <h4>How to Use This Reference</h4>
+                <p>Browse the sections below to find detailed information about specific aspects of the Nova language. Each section provides comprehensive documentation on a particular topic.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Language Syntax</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Basic Syntax</h4>
+                    <p>Overview of Nova's basic syntax, including statements, expressions, and comments.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Identifiers</h4>
+                    <p>Rules for naming variables, functions, classes, and other identifiers in Nova.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Keywords</h4>
+                    <p>List of reserved keywords in Nova and their usage.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Built-in Types</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Primitive Types</h4>
+                    <p>Documentation for primitive types: int, float, bool, string, and null.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Collection Types</h4>
+                    <p>Documentation for collection types: array, list, dictionary, set, and tuple.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Object Types</h4>
+                    <p>Documentation for object types, including class instances and trait implementations.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Variables and Constants</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Variable Declaration</h4>
+                    <p>How to declare and initialize variables in Nova.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Type Annotations</h4>
+                    <p>How to use type annotations to specify variable types.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Constants</h4>
+                    <p>How to declare and use constants in Nova.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Functions</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Function Declaration</h4>
+                    <p>How to define functions in Nova.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Parameters</h4>
+                    <p>How to define function parameters, including default values and variable arguments.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Return Values</h4>
+                    <p>How to specify return types and return values from functions.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Anonymous Functions</h4>
+                    <p>How to define and use lambda functions in Nova.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Control Flow</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>if-else Statements</h4>
+                    <p>Syntax and usage of if-else conditional statements.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>switch Statements</h4>
+                    <p>Syntax and usage of switch-case statements.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Loops</h4>
+                    <p>Syntax and usage of for, while, and do-while loops.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Loop Control</h4>
+                    <p>Usage of break, continue, and return statements in loops.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Object-Oriented Programming</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Classes</h4>
+                    <p>How to define and use classes in Nova.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Constructors</h4>
+                    <p>How to define and use constructors in classes.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Inheritance</h4>
+                    <p>How to use inheritance to create class hierarchies.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Access Modifiers</h4>
+                    <p>Usage of public, private, and protected access modifiers.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Static Members</h4>
+                    <p>How to define and use static members in classes.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Traits</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Trait Definition</h4>
+                    <p>How to define traits in Nova.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Implementing Traits</h4>
+                    <p>How to implement traits in classes.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Trait Inheritance</h4>
+                    <p>How to extend traits through inheritance.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Generics</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Generic Functions</h4>
+                    <p>How to define and use generic functions.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Generic Classes</h4>
+                    <p>How to define and use generic classes.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Type Constraints</h4>
+                    <p>How to add constraints to generic type parameters.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Error Handling</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>try-catch Statements</h4>
+                    <p>How to use try-catch statements for error handling.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Throwing Exceptions</h4>
+                    <p>How to throw exceptions in Nova.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Custom Exceptions</h4>
+                    <p>How to define and use custom exception classes.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Modules</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Module Creation</h4>
+                    <p>How to create modules in Nova.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Importing Modules</h4>
+                    <p>How to import modules in Nova.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Exporting Members</h4>
+                    <p>How to export functions, classes, and variables from modules.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Operators</h2>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Arithmetic Operators</h4>
+                    <p>Documentation for arithmetic operators: +, -, *, /, %, etc.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Comparison Operators</h4>
+                    <p>Documentation for comparison operators: ==, !=, <, >, <=, >=.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Logical Operators</h4>
+                    <p>Documentation for logical operators: &&, ||, !.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Assignment Operators</h4>
+                    <p>Documentation for assignment operators: =, +=, -=, *=, /=, etc.</p>
+                </a>
+            </div>
+            
+            <div class="reference-item">
+                <a href="#">
+                    <h4>Other Operators</h4>
+                    <p>Documentation for other operators: ., [], (), etc.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Virtual Machine Instructions</h2>
+            <p>Nova's virtual machine uses a set of instructions to execute code. Here's a reference for these instructions:</p>
+            
+            <div class="code-block">
+// Arithmetic instructions
+BINARY_ADD      // Add two values
+BINARY_SUB      // Subtract two values
+BINARY_MUL      // Multiply two values
+BINARY_DIV      // Divide two values
+BINARY_MOD      // Modulo operation
+
+// Comparison instructions
+COMPARE_EQ      // Equal to
+COMPARE_NE      // Not equal to
+COMPARE_LT      // Less than
+COMPARE_LE      // Less than or equal to
+COMPARE_GT      // Greater than
+COMPARE_GE      // Greater than or equal to
+
+// Control flow instructions
+JUMP            // Unconditional jump
+JUMP_IF_TRUE    // Jump if value is true
+JUMP_IF_FALSE   // Jump if value is false
+
+// Stack instructions
+POP             // Pop value from stack
+DUP             // Duplicate top stack value
+SWAP            // Swap top two stack values
+
+// Variable instructions
+LOAD_NAME       // Load variable by name
+STORE_NAME      // Store variable by name
+LOAD_GLOBAL     // Load global variable
+STORE_GLOBAL    // Store global variable
+
+// Function instructions
+CALL            // Call function
+RETURN_VALUE    // Return from function
+
+// Object instructions
+LOAD_ATTR       // Load attribute from object
+STORE_ATTR      // Store attribute in object
+
+// Collection instructions
+BUILD_LIST      // Build list from stack values
+BUILD_TUPLE     // Build tuple from stack values
+BUILD_DICT      // Build dictionary from stack values
+
+// Other instructions
+NOP             // No operation
+HALT            // Halt execution
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Built-in Functions</h2>
+            <p>Nova provides a set of built-in functions that are available globally:</p>
+            
+            <div class="code-block">
+// Print functions
+print(value)        // Print value to console
+println(value)      // Print value with newline
+
+// Type functions
+typeof(value)       // Return type of value
+isinstance(value, type)  // Check if value is instance of type
+
+// Conversion functions
+str(value)          // Convert to string
+int(value)          // Convert to integer
+float(value)        // Convert to float
+bool(value)         // Convert to boolean
+
+// Collection functions
+len(collection)     // Return length of collection
+
+// Math functions
+abs(value)          // Absolute value
+round(value)        // Round to nearest integer
+
+// String functions
+range(start, end, step)  // Generate range of numbers
+
+// Error functions
+throw(error)        // Throw exception
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>After exploring the reference documentation, you can:</p>
+            <ul>
+                <li><a href="../tutorial/index.html">Return to the tutorial</a> to learn more concepts</li>
+                <li><a href="../examples/index.html">Explore examples</a> to see how Nova is used</li>
+                <li><a href="../library/index.html">Check the standard library</a> for available modules</li>
+            </ul>
+            <a href="../tutorial/index.html" class="btn">Return to Tutorial</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

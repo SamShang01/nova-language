@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Nova - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .next-steps {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .next-steps h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .next-steps ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .next-steps li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .next-steps li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+        
+        .next-steps a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .next-steps a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Introduction to Nova</h1>
+            <p>A modern, expressive programming language for the next generation</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Introduction
+        </div>
+        
+        <div class="content-section">
+            <h2>What is Nova?</h2>
+            <p>Nova is a modern programming language designed to be expressive, efficient, and easy to learn. It combines the best features of traditional languages with modern innovations, making it suitable for a wide range of applications from web development to data science.</p>
+            
+            <h3>Key Features</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Modern Syntax</h4>
+                    <p>Clean, readable syntax that reduces boilerplate code and makes programming more enjoyable.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Static Typing</h4>
+                    <p>Optional type annotations for better code reliability and tooling support.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Object-Oriented</h4>
+                    <p>Full support for classes, inheritance, and polymorphism.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Functional Programming</h4>
+                    <p>First-class functions and lambda expressions for functional programming paradigms.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Generics</h4>
+                    <p>Type-safe generic programming for reusable code.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Error Handling</h4>
+                    <p>Comprehensive error handling with try-catch blocks.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Hello World Example</h2>
+            <p>Let's start with a simple Hello World program in Nova:</p>
+            <div class="code-block">
+def main() {
+    print("Hello, World!");
+}
+</div>
+            <p>That's it! A simple and clean syntax that's easy to read and understand.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Basic Syntax Examples</h2>
+            
+            <h3>Variables</h3>
+            <div class="code-block">
+// Variable declaration
+let x = 10;
+let name = "Nova";
+let is_active = true;
+</div>
+            
+            <h3>Functions</h3>
+            <div class="code-block">
+// Function definition
+def add(a, b) {
+    return a + b;
+}
+
+// Function call
+let result = add(5, 3);
+print(result); // Output: 8
+</div>
+            
+            <h3>Control Flow</h3>
+            <div class="code-block">
+// If-else statement
+if (x > 0) {
+    print("Positive");
+} else if (x < 0) {
+    print("Negative");
+} else {
+    print("Zero");
+}
+
+// Loop
+for (let i = 0; i < 5; i++) {
+    print(i);
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Why Choose Nova?</h2>
+            <p>Nova was designed with the following principles in mind:</p>
+            <ul>
+                <li><strong>Readability:</strong> Code should be easy to read and understand</li>
+                <li><strong>Expressiveness:</strong> Write less code to accomplish more</li>
+                <li><strong>Reliability:</strong> Catch errors early with static typing</li>
+                <li><strong>Performance:</strong> Efficient execution for both small and large programs</li>
+                <li><strong>Flexibility:</strong> Adapt to different programming styles and paradigms</li>
+            </ul>
+        </div>
+        
+        <div class="next-steps">
+            <h3>Getting Started</h3>
+            <p>To get started with Nova, follow these steps:</p>
+            <ul>
+                <li><a href="installation.html">Install Nova</a> on your system</li>
+                <li><a href="hello-world.html">Hello World</a> tutorial to learn the basics</li>
+                <li><a href="variables.html">Variables</a> and <a href="functions.html">Functions</a> sections</li>
+                <li><a href="control-flow.html">Control Flow</a> and <a href="classes.html">Classes</a></li>
+                <li><a href="../library/index.html">Standard Library</a> documentation</li>
+            </ul>
+            <a href="installation.html" class="btn">Get Started</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

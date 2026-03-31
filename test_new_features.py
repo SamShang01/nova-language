@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+# 测试 Nova IDLE 新功能
+
+import sys
+sys.path.insert(0, 'src')
+
+from nova.cli.main import NovaIDLE
+
+print("Nova IDLE 新功能测试")
+print("=" * 60)
+print()
+print("已实现的新功能：")
+print()
+print("1. 基础命令：")
+print("   ✅ help - 显示帮助信息")
+print("   ✅ copyright - 显示版权信息")
+print("   ✅ license - 显示许可证信息")
+print("   ✅ exit - 退出IDLE")
+print("   ✅ clear - 清空屏幕")
+print()
+print("2. 文件操作：")
+print("   ✅ 打开文件 (File > Open 或 Ctrl+O)")
+print("   ✅ 保存文件 (File > Save 或 Ctrl+S)")
+print("   ✅ 另存为 (File > Save As)")
+print("   ✅ 新建窗口 (File > New Window 或 Ctrl+N)")
+print()
+print("3. 编辑功能：")
+print("   ✅ 撤销 (Edit > Undo)")
+print("   ✅ 重做 (Edit > Redo)")
+print("   ✅ 剪切 (Edit > Cut)")
+print("   ✅ 复制 (Edit > Copy)")
+print("   ✅ 粘贴 (Edit > Paste)")
+print("   ✅ 全选 (Edit > Select All)")
+print("   ✅ 查找 (Edit > Find 或 Ctrl+F)")
+print("   ✅ 替换 (Edit > Replace 或 Ctrl+H)")
+print()
+print("4. 运行功能：")
+print("   ✅ 运行模块 (Run > Run Module 或 F5)")
+print("   ✅ 检查模块 (Run > Check Module)")
+print()
+print("5. Shell 功能：")
+print("   ✅ 重启Shell (Shell > Restart Shell)")
+print("   ✅ 中断执行 (Shell > Interrupt Execution)")
+print()
+print("=" * 60)
+print()
+print("正在启动 Nova IDLE...")
+print()
+
+# 启动 Nova IDLE
+idle = NovaIDLE()
+idle.run()

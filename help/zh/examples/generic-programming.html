@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泛型编程示例 - Nova 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                        accent: '#f093fb',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        muted: '#64748b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        pre { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.875rem; line-height: 1.7; }
+        code { font-family: 'Fira Code', monospace; }
+        .keyword { color: #c792ea; }
+        .string { color: #c3e88d; }
+        .comment { color: #676e95; font-style: italic; }
+        .function { color: #82aaff; }
+        .number { color: #f78c6c; }
+        .type { color: #ffcb6b; }
+    </style>
+</head>
+<body class="bg-light text-dark min-h-screen">
+    <nav class="bg-white shadow-sm fixed w-full z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Nova</span>
+                    </a>
+                    <div class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="../tutorial/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">教程</a>
+                        <a href="index.html" class="border-b-2 border-primary text-primary px-1 pt-1 text-sm font-medium">示例</a>
+                        <a href="../reference/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">参考</a>
+                        <a href="../faq/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">常见问题</a>
+                        <a href="../library/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">标准库</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-primary to-secondary text-white py-20 px-4 mt-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center mb-4 text-sm text-white/80">
+                <a href="index.html" class="hover:text-white">示例</a>
+                <i class="fa fa-angle-right mx-2"></i>
+                <span>泛型编程</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">泛型编程示例</h1>
+            <p class="text-xl text-white/90 max-w-3xl">学习如何使用泛型函数、泛型结构体和特质约束来编写可重用的代码</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3">
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-cubes mr-3"></i>
+                        概述
+                    </h2>
+                    <p class="text-muted leading-relaxed mb-6">
+                        泛型编程允许您编写适用于多种类型的代码，而无需为每种类型重复编写相同的逻辑。Nova 支持泛型函数、泛型结构体和特质约束。
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-blue-800 mb-2">泛型函数</h4>
+                            <p class="text-blue-700 text-sm">使用类型参数创建通用函数</p>
+                        </div>
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-purple-800 mb-2">泛型结构体</h4>
+                            <p class="text-purple-700 text-sm">定义可存储任意类型的容器</p>
+                        </div>
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-green-800 mb-2">特质约束</h4>
+                            <p class="text-green-700 text-sm">限制泛型类型必须实现的功能</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-code mr-3"></i>
+                        示例代码
+                    </h2>
+                    <pre><code><span class="comment">// 泛型函数示例</span>
+<span class="keyword">generic func</span> <span class="function">identity</span>&lt;<span class="type">T</span>&gt;(value: <span class="type">T</span>) -> <span class="type">T</span> {
+    <span class="keyword">return</span> value;
+}
+
+<span class="keyword">generic func</span> <span class="function">swap</span>&lt;<span class="type">T</span>&gt;(a: <span class="type">T</span>, b: <span class="type">T</span>) -> (<span class="type">T</span>, <span class="type">T</span>) {
+    <span class="keyword">return</span> (b, a);
+}
+
+<span class="keyword">generic func</span> <span class="function">max</span>&lt;<span class="type">T</span>&gt;(a: <span class="type">T</span>, b: <span class="type">T</span>) -> <span class="type">T</span>
+    <span class="keyword">where</span> <span class="type">T</span>: <span class="type">Comparable</span>
+{
+    <span class="keyword">if</span> a > b {
+        <span class="keyword">return</span> a;
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> b;
+    }
+}
+
+<span class="comment">// 泛型结构体示例</span>
+<span class="keyword">generic struct</span> <span class="type">Pair</span>&lt;<span class="type">T</span>, <span class="type">U</span>&gt; {
+    first: <span class="type">T</span>;
+    second: <span class="type">U</span>;
+}
+
+<span class="keyword">generic struct</span> <span class="type">Stack</span>&lt;<span class="type">T</span>&gt; {
+    items: [<span class="type">T</span>];
+    
+    <span class="keyword">generic func</span> <span class="function">push</span>(<span class="keyword">self</span>: <span class="type">Stack</span>&lt;<span class="type">T</span>&gt;, item: <span class="type">T</span>) -> <span class="type">Stack</span>&lt;<span class="type">T</span>&gt; {
+        <span class="keyword">self</span>.items.push(item);
+        <span class="keyword">return self</span>;
+    }
+    
+    <span class="keyword">generic func</span> <span class="function">pop</span>(<span class="keyword">self</span>: <span class="type">Stack</span>&lt;<span class="type">T</span>&gt;) -> <span class="type">T</span> {
+        <span class="keyword">return self</span>.items.pop();
+    }
+}
+
+<span class="comment">// 使用示例</span>
+<span class="keyword">let</span> int_value = <span class="function">identity</span>(<span class="number">42</span>);
+<span class="keyword">let</span> string_value = <span class="function">identity</span>(<span class="string">"hello"</span>);
+
+<span class="keyword">let</span> pair = <span class="type">Pair</span>&lt;<span class="type">int</span>, <span class="type">string</span>&gt;(first: <span class="number">1</span>, second: <span class="string">"hello"</span>);
+
+<span class="keyword">let</span> stack = <span class="type">Stack</span>&lt;<span class="type">int</span>&gt;(items: []);
+stack.push(<span class="number">1</span>);
+stack.push(<span class="number">2</span>);
+<span class="function">print</span>(stack.pop()); <span class="comment">// 输出: 2</span></code></pre>
+                </section>
+
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-lightbulb-o mr-3"></i>
+                        关键概念
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">类型参数</h3>
+                            <p class="text-muted leading-relaxed">
+                                使用 &lt;T&gt; 语法定义类型参数。T 是一个占位符，在使用时会被实际类型替换。
+                                可以定义多个类型参数，如 &lt;T, U, V&gt;。
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">特质约束</h3>
+                            <p class="text-muted leading-relaxed">
+                                使用 where 子句限制泛型类型必须实现的特质。这确保了泛型代码只能使用特质提供的方法。
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">类型推断</h3>
+                            <p class="text-muted leading-relaxed">
+                                编译器通常可以推断泛型类型参数，无需显式指定。例如 identity(42) 会自动推断 T 为 int。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-md p-6 sticky top-20">
+                    <h3 class="text-lg font-semibold mb-4">目录</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-muted hover:text-primary">概述</a></li>
+                        <li><a href="#" class="text-muted hover:text-primary">示例代码</a></li>
+                        <li><a href="#" class="text-muted hover:text-primary">关键概念</a></li>
+                    </ul>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h3 class="text-lg font-semibold mb-4">难度等级</h3>
+                        <span class="inline-block bg-red-100 text-red-800 text-sm font-medium px-3 py-1 rounded-full">
+                            高级
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400 mb-4">&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </div>
+    </footer>
+</body>
+</html>

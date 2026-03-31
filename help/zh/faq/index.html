@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常见问题 - Nova 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                        accent: '#f093fb',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        muted: '#64748b',
+                        'primary-light': '#8b97f5',
+                        'primary-dark': '#4d5fc7',
+                        'secondary-light': '#956bc9',
+                        'secondary-dark': '#5a3785',
+                        'surface': '#ffffff',
+                        'surface-hover': '#f1f5f9',
+                        'border': '#e2e8f0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'dropdown': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    },
+                    transitionProperty: {
+                        'height': 'height',
+                        'spacing': 'margin, padding'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .glass {
+                background: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .bg-gradient {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .bg-gradient-light {
+                background: linear-gradient(135deg, #8b97f5 0%, #956bc9 100%);
+            }
+            .bg-gradient-dark {
+                background: linear-gradient(135deg, #4d5fc7 0%, #5a3785 100%);
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .aspect-video {
+                aspect-ratio: 16 / 9;
+            }
+            .aspect-square {
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-sm fixed w-full z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold text-gradient">Nova</span>
+                    </a>
+                    <div class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="../tutorial/index.html" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-muted hover:text-primary hover:border-primary transition-colors duration-200">
+                            教程
+                        </a>
+                        <a href="../examples/index.html" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-muted hover:text-primary hover:border-primary transition-colors duration-200">
+                            示例
+                        </a>
+                        <a href="../reference/index.html" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-muted hover:text-primary hover:border-primary transition-colors duration-200">
+                            参考
+                        </a>
+                        <a href="index.html" class="inline-flex items-center px-1 pt-1 border-b-2 border-primary text-sm font-medium text-primary transition-colors duration-200">
+                            常见问题
+                        </a>
+                        <a href="../library/index.html" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-muted hover:text-primary hover:border-primary transition-colors duration-200">
+                            标准库
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <div class="relative">
+                        <button type="button" class="text-muted hover:text-primary transition-colors duration-200 flex items-center space-x-1">
+                            <span>中文</span>
+                            <i class="fa fa-chevron-down text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex md:hidden">
+                    <button type="button" class="text-muted hover:text-primary transition-colors duration-200">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 移动导航菜单 -->
+    <div class="fixed inset-0 bg-dark/50 z-50 hidden md:hidden" id="mobile-menu">
+        <div class="bg-white h-full w-64 p-6 shadow-dropdown animate-slide-up">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-2xl font-bold text-gradient">Nova</span>
+                <button type="button" class="text-gray-600 hover:text-primary transition-colors duration-200" id="close-menu">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <ul class="space-y-3">
+                <li><a href="../tutorial/index.html" class="block text-gray-600 hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">教程</a></li>
+                <li><a href="../examples/index.html" class="block text-gray-600 hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">示例</a></li>
+                <li><a href="../reference/index.html" class="block text-gray-600 hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">参考</a></li>
+                <li><a href="index.html" class="block text-primary font-medium py-2 px-4 rounded-md bg-primary/5">常见问题</a></li>
+                <li><a href="../library/index.html" class="block text-gray-600 hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">标准库</a></li>
+                <li class="pt-4 border-t border-gray-200 mt-4">
+                    <h4 class="text-sm font-medium text-muted mb-3">语言</h4>
+                    <div class="space-y-2">
+                        <a href="../../en/faq/index.html" class="block text-sm text-muted hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">English</a>
+                        <a href="../../jp/faq/index.html" class="block text-sm text-muted hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">日本語</a>
+                        <a href="../../fr/faq/index.html" class="block text-sm text-muted hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">Français</a>
+                        <a href="index.html" class="block text-sm text-primary font-medium py-2 px-4 rounded-md bg-primary/5">中文</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 英雄区域 -->
+    <header class="bg-gradient text-white py-24 px-4 relative overflow-hidden">
+        <!-- 装饰元素 -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+            <div class="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-center">常见问题</h1>
+            <p class="text-xl text-center text-white/90 max-w-3xl mx-auto">Nova 编程语言常见问题的解答</p>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- 面包屑 -->
+        <div class="mb-8 flex items-center text-sm text-muted">
+            <a href="../index.html" class="hover:text-primary transition-colors duration-200 flex items-center">
+                <i class="fa fa-home mr-2"></i> 首页
+            </a>
+            <i class="fa fa-angle-right mx-2"></i>
+            <span class="text-primary">常见问题</span>
+        </div>
+        
+        <!-- 一般问题 -->
+        <section class="mb-12 animate-on-scroll">
+            <div class="bg-white rounded-xl shadow-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-question-circle mr-3 text-primary"></i>
+                    一般问题
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">什么是 Nova 编程语言？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 是一种现代的静态类型编程语言，专为构建可靠和高效的软件而设计。它结合了 Python、TypeScript 和 Rust 等语言的优秀特性，提供了简洁的语法、强大的类型系统和丰富的功能。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">谁创建了 Nova？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 由一组经验丰富的软件工程师创建，他们希望构建一种能够解决现有语言局限性，同时提供现代化、开发者友好体验的语言。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 是开源的吗？</h3>
+                        <p class="text-muted leading-relaxed">
+                            是的，Nova 是一个开源项目。您可以在 GitHub 上找到源代码并为其开发做出贡献。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 支持哪些平台？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 被设计为跨平台，支持 Windows、macOS 和 Linux。您可以编写一次代码，然后在任何支持的平台上运行。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 安装 -->
+        <section class="mb-12 animate-on-scroll">
+            <div class="bg-white rounded-xl shadow-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-download mr-3 text-primary"></i>
+                    安装
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">如何安装 Nova？</h3>
+                        <p class="text-muted leading-relaxed">
+                            您可以使用操作系统的包管理器安装 Nova，或者从官方网站下载安装程序。详细的安装说明可在 <a href="../tutorial/installation.html" class="text-primary hover:underline transition-colors duration-200">安装教程</a> 中找到。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 的系统要求是什么？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 的系统要求很低。您需要一台至少有 2GB RAM 和 500MB 可用磁盘空间的计算机。Nova 运行在 Windows 10+、macOS 10.15+ 和大多数 Linux 发行版上。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">如何检查 Nova 是否正确安装？</h3>
+                        <p class="text-muted leading-relaxed">
+                            打开终端并运行 <code class="bg-gray-100 text-primary px-2 py-1 rounded font-mono text-sm">nova --version</code>。如果 Nova 安装正确，您应该看到版本号显示。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 语言特性 -->
+        <section class="mb-12 animate-on-scroll">
+            <div class="bg-white rounded-xl shadow-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-code mr-3 text-primary"></i>
+                    语言特性
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 是静态类型语言吗？</h3>
+                        <p class="text-muted leading-relaxed">
+                            是的，Nova 是静态类型语言。这意味着类型检查在编译时进行，这有助于早期发现错误并提高性能。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 支持面向对象编程吗？</h3>
+                        <p class="text-muted leading-relaxed">
+                            是的，Nova 支持面向对象编程，包括类、继承和多态。它还支持其他编程范式，如函数式编程。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 和 Python 有什么区别？</h3>
+                        <p class="text-muted leading-relaxed">
+                            虽然 Nova 的语法类似于 Python，但它提供了静态类型、更好的性能以及特性和泛型等额外功能。Nova 还拥有更现代的类型系统和更好的错误处理。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 支持并发吗？</h3>
+                        <p class="text-muted leading-relaxed">
+                            是的，Nova 通过线程和 async/await 语法支持并发。它还提供了安全的并发原语，有助于避免常见问题，如竞争条件。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 开发 -->
+        <section class="mb-12 animate-on-scroll">
+            <div class="bg-white rounded-xl shadow-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-laptop-code mr-3 text-primary"></i>
+                    开发
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">哪些编辑器和 IDE 支持 Nova？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 支持流行的编辑器和 IDE，如 Visual Studio Code、IntelliJ IDEA 和 Sublime Text。您可以安装扩展或插件以获得语法高亮、代码补全和其他功能。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">如何运行 Nova 程序？</h3>
+                        <p class="text-muted leading-relaxed">
+                            您可以使用 <code class="bg-gray-100 text-primary px-2 py-1 rounded font-mono text-sm">nova</code> 命令后跟文件名来运行 Nova 程序。例如：<code class="bg-gray-100 text-primary px-2 py-1 rounded font-mono text-sm">nova hello.nova</code>。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">如何调试 Nova 程序？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 支持通过具有 Nova 插件的 IDE 进行调试，或者您可以使用内置的 <code class="bg-gray-100 text-primary px-2 py-1 rounded font-mono text-sm">--debug</code> 标志来获取更详细的错误消息。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">如何创建 Nova 模块？</h3>
+                        <p class="text-muted leading-relaxed">
+                            要创建 Nova 模块，只需创建一个包含代码的 .nova 文件，并使用 <code class="bg-gray-100 text-primary px-2 py-1 rounded font-mono text-sm">export</code> 关键字公开函数、类或变量。然后您可以在其他文件中使用 <code class="bg-gray-100 text-primary px-2 py-1 rounded font-mono text-sm">import</code> 关键字导入它们。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 标准库 -->
+        <section class="mb-12 animate-on-scroll">
+            <div class="bg-white rounded-xl shadow-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-book mr-3 text-primary"></i>
+                    标准库
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 的标准库包含什么？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 的标准库包括用于常见任务的模块，如文件 I/O、网络、集合、日期/时间处理等。您可以在 <a href="../library/index.html" class="text-primary hover:underline transition-colors duration-200">库文档</a> 中找到详细文档。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">如何使用标准库？</h3>
+                        <p class="text-muted leading-relaxed">
+                            您可以使用 <code class="bg-gray-100 text-primary px-2 py-1 rounded font-mono text-sm">import</code> 关键字导入标准库模块。例如：<code class="bg-gray-100 text-primary px-2 py-1 rounded font-mono text-sm">import std.io</code> 以使用 I/O 模块。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">我可以创建自己的库吗？</h3>
+                        <p class="text-muted leading-relaxed">
+                            是的，您可以创建自己的库并将它们作为包分发。Nova 有一个包管理器，允许您发布和安装包。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 故障排除 -->
+        <section class="mb-12 animate-on-scroll">
+            <div class="bg-white rounded-xl shadow-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-tools mr-3 text-primary"></i>
+                    故障排除
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">我遇到了编译错误。该怎么办？</h3>
+                        <p class="text-muted leading-relaxed">
+                            仔细检查错误消息。它应该告诉您出了什么问题以及错误在哪里。常见问题包括语法错误、类型不匹配和未定义的变量。如果您仍然卡住，请查阅 <a href="../reference/index.html" class="text-primary hover:underline transition-colors duration-200">参考文档</a> 或在 Nova 社区中寻求帮助。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">我的程序运行缓慢。如何优化它？</h3>
+                        <p class="text-muted leading-relaxed">
+                            有几种方法可以优化 Nova 程序：使用高效的算法、避免不必要的计算、使用适当的数据结构，并利用 Nova 的性能功能，如静态类型和内联函数。您还可以使用分析工具来识别瓶颈。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">如何在 Nova 中处理错误？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 使用 try-catch 语句进行错误处理。您可以捕获特定的异常或使用通用的 catch 块。您还可以为您的应用程序创建自定义异常类。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 社区 -->
+        <section class="mb-12 animate-on-scroll">
+            <div class="bg-white rounded-xl shadow-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-users mr-3 text-primary"></i>
+                    社区
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">如何获得 Nova 的帮助？</h3>
+                        <p class="text-muted leading-relaxed">
+                            您可以通过 Nova 社区论坛、Discord 服务器或 GitHub 问题获得帮助。您还可以在文档和教程中找到常见问题的答案。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">如何为 Nova 做出贡献？</h3>
+                        <p class="text-muted leading-relaxed">
+                            您可以通过报告错误、提交功能请求、编写文档或贡献代码来为 Nova 做出贡献。查看 GitHub 存储库以获取有关如何贡献的更多信息。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 社区有行为准则吗？</h3>
+                        <p class="text-muted leading-relaxed">
+                            是的，Nova 社区有行为准则，促进尊重和包容的行为。在参与社区之前，请查看它。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 未来计划 -->
+        <section class="mb-12 animate-on-scroll">
+            <div class="bg-white rounded-xl shadow-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-rocket mr-3 text-primary"></i>
+                    未来计划
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 的路线图是什么？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 团队有一个路线图，包括改进的工具、更好的 IDE 支持、额外的标准库模块和性能优化等功能。您可以在 GitHub 存储库上找到最新的路线图。
+                        </p>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
+                        <h3 class="text-lg font-semibold text-dark mb-3">Nova 的下一个版本何时发布？</h3>
+                        <p class="text-muted leading-relaxed">
+                            Nova 遵循定期的发布时间表。次要更新每隔几个月发布一次，主要版本在重要的新功能准备好时发布。查看官方网站或 GitHub 存储库以获取最新的发布信息。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 仍有问题 -->
+        <section class="mb-12 animate-on-scroll">
+            <div class="bg-white rounded-xl shadow-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-question-circle mr-3 text-primary"></i>
+                    仍有问题？
+                </h2>
+                
+                <p class="text-muted leading-relaxed mb-6">如果您有一个这里没有回答的问题，请：</p>
+                
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-start">
+                        <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                        <span class="text-muted">查看 <a href="../tutorial/index.html" class="text-primary hover:underline transition-colors duration-200">教程</a> 以获取分步指南</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                        <span class="text-muted">查阅 <a href="../reference/index.html" class="text-primary hover:underline transition-colors duration-200">参考文档</a> 以获取详细信息</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                        <span class="text-muted">在 Nova 社区论坛或 Discord 服务器中提问</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                        <span class="text-muted">如果您发现了错误或有功能请求，请在 GitHub 上提交问题</span>
+                    </li>
+                </ul>
+                
+                <a href="../index.html" class="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors duration-200 shadow-card hover:shadow-card-hover transform hover:-translate-y-1 duration-200">
+                    <i class="fa fa-home mr-2"></i>
+                    返回首页
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-16 px-4 relative overflow-hidden">
+        <!-- 装饰元素 -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-5">
+            <div class="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- 关于 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fa fa-info-circle text-primary mr-3"></i>
+                        关于 Nova
+                    </h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Nova 是一种现代的静态类型编程语言，专为构建可靠和高效的软件而设计。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-all duration-300 transform hover:scale-110">
+                            <i class="fa fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-all duration-300 transform hover:scale-110">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-all duration-300 transform hover:scale-110">
+                            <i class="fa fa-discord text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 资源 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fa fa-cubes text-primary mr-3"></i>
+                        资源
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="../tutorial/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            教程
+                        </a></li>
+                        <li><a href="../examples/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            示例
+                        </a></li>
+                        <li><a href="../reference/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            参考文档
+                        </a></li>
+                        <li><a href="../library/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            标准库
+                        </a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            常见问题
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- 语言 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fa fa-globe text-primary mr-3"></i>
+                        语言
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../en/faq/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            English
+                        </a></li>
+                        <li><a href="../../jp/faq/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            日本語
+                        </a></li>
+                        <li><a href="../../fr/faq/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            Français
+                        </a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            中文
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- 联系 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fa fa-envelope text-primary mr-3"></i>
+                        联系我们
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="text-gray-400 flex items-center hover:text-primary transition-colors duration-200">
+                            <i class="fa fa-envelope mr-3"></i>
+                            contact@nova-lang.org
+                        </li>
+                        <li class="text-gray-400 flex items-center hover:text-primary transition-colors duration-200">
+                            <i class="fa fa-map-marker mr-3"></i>
+                            全球
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+                <p class="mb-4">&copy; 2026 Nova 编程语言。保留所有权利。</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="hover:text-primary transition-colors duration-200">隐私政策</a>
+                    <a href="#" class="hover:text-primary transition-colors duration-200">服务条款</a>
+                    <a href="#" class="hover:text-primary transition-colors duration-200">Cookie 政策</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动导航菜单
+        const mobileMenuButton = document.querySelector('button[type="button"]');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuButton = document.getElementById('close-menu');
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        if (closeMenuButton) {
+            closeMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // 点击菜单外部关闭菜单
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target === mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                // 关闭移动菜单（如果打开）
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    entry.target.classList.add('animate-slide-up');
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有需要动画的元素
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (nav) {
+                if (window.scrollY > 50) {
+                    nav.classList.add('shadow-md');
+                    nav.classList.add('bg-white/95');
+                } else {
+                    nav.classList.remove('shadow-md');
+                    nav.classList.remove('bg-white/95');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

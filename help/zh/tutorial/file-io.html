@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件 I/O - Nova 编程语言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>文件 I/O</h1>
+            <p>在 Nova 中处理文件操作</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> &gt; <a href="index.html">教程</a> &gt; 文件 I/O
+        </div>
+        
+        <div class="content-section">
+            <h2>文件模块导入</h2>
+            <p>在 Nova 中，你需要导入 <code>fs</code> 模块来进行文件操作。</p>
+            
+            <div class="code-block">
+// 导入文件系统模块
+import fs from "fs";
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>读取文件</h2>
+            <p>你可以使用 <code>fs.readFileSync</code> 来同步读取文件内容，或使用 <code>fs.readFile</code> 来异步读取文件内容。</p>
+            
+            <div class="code-block">
+// 同步读取文件
+import fs from "fs";
+
+try {
+    let content = fs.readFileSync("example.txt", "utf8");
+    print("文件内容:");
+    print(content);
+} catch (e) {
+    print("读取文件时发生错误: " + e.message);
+}
+
+// 异步读取文件
+fs.readFile("example.txt", "utf8", (err, content) => {
+    if (err) {
+        print("读取文件时发生错误: " + err.message);
+        return;
+    }
+    print("文件内容:");
+    print(content);
+});
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>写入文件</h2>
+            <p>你可以使用 <code>fs.writeFileSync</code> 来同步写入文件，或使用 <code>fs.writeFile</code> 来异步写入文件。</p>
+            
+            <div class="code-block">
+// 同步写入文件
+import fs from "fs";
+
+try {
+    fs.writeFileSync("output.txt", "Hello, Nova!");
+    print("文件写入成功");
+} catch (e) {
+    print("写入文件时发生错误: " + e.message);
+}
+
+// 异步写入文件
+fs.writeFile("output.txt", "Hello, Nova!", (err) => {
+    if (err) {
+        print("写入文件时发生错误: " + err.message);
+        return;
+    }
+    print("文件写入成功");
+});
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>追加文件</h2>
+            <p>你可以使用 <code>fs.appendFileSync</code> 来同步追加文件内容，或使用 <code>fs.appendFile</code> 来异步追加文件内容。</p>
+            
+            <div class="code-block">
+// 同步追加文件
+import fs from "fs";
+
+try {
+    fs.appendFileSync("output.txt", "\n追加的内容");
+    print("文件追加成功");
+} catch (e) {
+    print("追加文件时发生错误: " + e.message);
+}
+
+// 异步追加文件
+fs.appendFile("output.txt", "\n追加的内容", (err) => {
+    if (err) {
+        print("追加文件时发生错误: " + err.message);
+        return;
+    }
+    print("文件追加成功");
+});
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>删除文件</h2>
+            <p>你可以使用 <code>fs.unlinkSync</code> 来同步删除文件，或使用 <code>fs.unlink</code> 来异步删除文件。</p>
+            
+            <div class="code-block">
+// 同步删除文件
+import fs from "fs";
+
+try {
+    fs.unlinkSync("file-to-delete.txt");
+    print("文件删除成功");
+} catch (e) {
+    print("删除文件时发生错误: " + e.message);
+}
+
+// 异步删除文件
+fs.unlink("file-to-delete.txt", (err) => {
+    if (err) {
+        print("删除文件时发生错误: " + err.message);
+        return;
+    }
+    print("文件删除成功");
+});
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>检查文件是否存在</h2>
+            <p>你可以使用 <code>fs.existsSync</code> 来检查文件是否存在。</p>
+            
+            <div class="code-block">
+// 检查文件是否存在
+import fs from "fs";
+
+if (fs.existsSync("example.txt")) {
+    print("文件存在");
+} else {
+    print("文件不存在");
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>文件信息</h2>
+            <p>你可以使用 <code>fs.statSync</code> 来获取文件的详细信息。</p>
+            
+            <div class="code-block">
+// 获取文件信息
+import fs from "fs";
+
+try {
+    let stats = fs.statSync("example.txt");
+    print("文件大小: " + stats.size + " 字节");
+    print("是否为文件: " + stats.isFile());
+    print("是否为目录: " + stats.isDirectory());
+    print("创建时间: " + stats.birthtime);
+    print("修改时间: " + stats.mtime);
+} catch (e) {
+    print("获取文件信息时发生错误: " + e.message);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>目录操作</h2>
+            <p>你可以使用 <code>fs.mkdirSync</code> 创建目录，使用 <code>fs.readdirSync</code> 读取目录内容，使用 <code>fs.rmdirSync</code> 删除目录。</p>
+            
+            <div class="code-block">
+// 目录操作
+import fs from "fs";
+
+// 创建目录
+try {
+    fs.mkdirSync("new-directory");
+    print("目录创建成功");
+} catch (e) {
+    print("创建目录时发生错误: " + e.message);
+}
+
+// 读取目录内容
+try {
+    let files = fs.readdirSync(".");
+    print("当前目录文件:");
+    for (let file in files) {
+        print(file);
+    }
+} catch (e) {
+    print("读取目录时发生错误: " + e.message);
+}
+
+// 删除目录
+try {
+    fs.rmdirSync("new-directory");
+    print("目录删除成功");
+} catch (e) {
+    print("删除目录时发生错误: " + e.message);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>二进制文件操作</h2>
+            <p>你可以读取和写入二进制文件，例如图片、音频等。</p>
+            
+            <div class="code-block">
+// 二进制文件操作
+import fs from "fs";
+
+// 读取二进制文件
+try {
+    let buffer = fs.readFileSync("image.jpg");
+    print("二进制文件大小: " + buffer.length + " 字节");
+} catch (e) {
+    print("读取二进制文件时发生错误: " + e.message);
+}
+
+// 写入二进制文件
+let data = new Buffer([0x48, 0x65, 0x6c, 0x6c, 0x6f]); // "Hello" 的 ASCII 编码
+try {
+    fs.writeFileSync("binary.bin", data);
+    print("二进制文件写入成功");
+} catch (e) {
+    print("写入二进制文件时发生错误: " + e.message);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>文件系统路径</h2>
+            <p>你可以使用 <code>path</code> 模块来处理文件路径。</p>
+            
+            <div class="code-block">
+// 文件路径操作
+import path from "path";
+
+// 连接路径
+let fullPath = path.join("directory", "subdirectory", "file.txt");
+print("完整路径: " + fullPath);
+
+// 获取文件名
+let filename = path.basename("/path/to/file.txt");
+print("文件名: " + filename);
+
+// 获取目录名
+let dirname = path.dirname("/path/to/file.txt");
+print("目录名: " + dirname);
+
+// 获取文件扩展名
+let extname = path.extname("file.txt");
+print("文件扩展名: " + extname);
+
+// 解析路径
+let parsedPath = path.parse("/path/to/file.txt");
+print("解析后的路径:");
+print(parsedPath);
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>文件操作最佳实践</h2>
+            <ul>
+                <li>总是使用 try-catch 块来处理文件操作可能的异常</li>
+                <li>对于大型文件，优先使用异步操作以避免阻塞主线程</li>
+                <li>使用 path 模块来处理跨平台的路径问题</li>
+                <li>在操作完成后关闭文件句柄（对于流式操作）</li>
+                <li>检查文件或目录是否存在后再进行操作</li>
+                <li>使用适当的编码格式读取文本文件</li>
+            </ul>
+            
+            <div class="code-block">
+// 文件操作最佳实践示例
+import fs from "fs";
+import path from "path";
+
+def readFileSafely(filePath: string) -> string {
+    // 确保路径存在
+    if (!fs.existsSync(filePath)) {
+        throw new Error(`文件不存在: ${filePath}`);
+    }
+    
+    // 检查是否为文件
+    let stats = fs.statSync(filePath);
+    if (!stats.isFile()) {
+        throw new Error(`路径不是文件: ${filePath}`);
+    }
+    
+    // 读取文件
+    try {
+        return fs.readFileSync(filePath, "utf8");
+    } catch (e) {
+        throw new Error(`读取文件时发生错误: ${e.message}`);
+    }
+}
+
+def writeFileSafely(filePath: string, content: string) {
+    // 确保目录存在
+    let dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
+    
+    // 写入文件
+    try {
+        fs.writeFileSync(filePath, content);
+        print(`文件写入成功: ${filePath}`);
+    } catch (e) {
+        throw new Error(`写入文件时发生错误: ${e.message}`);
+    }
+}
+
+// 使用示例
+try {
+    let content = readFileSafely("input.txt");
+    print("读取的内容:");
+    print(content);
+    
+    writeFileSafely("output/new-file.txt", "处理后的内容: " + content);
+} catch (e) {
+    print("错误: " + e.message);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>练习</h2>
+            <p>尝试完成以下练习，以巩固你对文件 I/O 的理解：</p>
+            <ol>
+                <li>创建一个函数，读取文件内容并计算单词数量</li>
+                <li>创建一个函数，将数组数据写入到 CSV 文件</li>
+                <li>创建一个函数，复制文件从源路径到目标路径</li>
+                <li>创建一个函数，列出目录及其子目录中的所有文件</li>
+            </ol>
+            
+            <div class="code-block">
+// 练习答案示例
+
+// 1. 计算文件中的单词数量
+import fs from "fs";
+
+def countWords(filename: string) -> int {
+    try {
+        let content = fs.readFileSync(filename, "utf8");
+        // 分割单词并过滤空字符串
+        let words = content.split(/\s+/).filter(word => word.length > 0);
+        return words.length;
+    } catch (e) {
+        print("错误: " + e.message);
+        return 0;
+    }
+}
+
+print("单词数量: " + countWords("example.txt"));
+
+// 2. 写入 CSV 文件
+import fs from "fs";
+
+def writeCSV(filename: string, data: array<array<any>>) {
+    try {
+        // 转换为 CSV 格式
+        let csvContent = data.map(row => row.join(",")).join("\n");
+        fs.writeFileSync(filename, csvContent);
+        print("CSV 文件写入成功: " + filename);
+    } catch (e) {
+        print("错误: " + e.message);
+    }
+}
+
+let data = [
+    ["Name", "Age", "City"],
+    ["John", "30", "New York"],
+    ["Jane", "25", "London"],
+    ["Bob", "35", "Paris"]
+];
+
+writeCSV("people.csv", data);
+
+// 3. 复制文件
+import fs from "fs";
+
+def copyFile(source: string, destination: string) {
+    try {
+        // 读取源文件
+        let content = fs.readFileSync(source);
+        // 写入目标文件
+        fs.writeFileSync(destination, content);
+        print("文件复制成功: " + source + " -> " + destination);
+    } catch (e) {
+        print("错误: " + e.message);
+    }
+}
+
+copyFile("source.txt", "destination.txt");
+
+// 4. 列出目录中的所有文件
+import fs from "fs";
+import path from "path";
+
+def listAllFiles(dir: string) -> array<string> {
+    let files: array<string> = [];
+    
+    function traverse(currentDir: string) {
+        let entries = fs.readdirSync(currentDir);
+        for (let entry in entries) {
+            let fullPath = path.join(currentDir, entry);
+            let stats = fs.statSync(fullPath);
+            if (stats.isFile()) {
+                files.push(fullPath);
+            } else if (stats.isDirectory()) {
+                traverse(fullPath);
+            }
+        }
+    }
+    
+    traverse(dir);
+    return files;
+}
+
+let allFiles = listAllFiles(".");
+print("目录中的所有文件:");
+for (let file in allFiles) {
+    print(file);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>下一步</h2>
+            <p>现在你已经了解了 Nova 中的文件 I/O，你可以：</p>
+            <ul>
+                <li><a href="modules.html">学习模块</a></li>
+                <li><a href="operators.html">了解运算符</a></li>
+            </ul>
+            <a href="modules.html" class="btn">继续学习模块</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </footer>
+    </div>
+</body>
+</html>

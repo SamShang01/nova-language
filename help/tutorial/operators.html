@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Operators</h1>
+            <p>Working with operators in Nova</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Operators
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction to Operators</h2>
+            <p>Operators are symbols that perform operations on values. Nova supports a wide range of operators, including arithmetic, comparison, logical, and assignment operators.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Arithmetic Operators</h2>
+            <p>Arithmetic operators perform mathematical operations:</p>
+            
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Result</th>
+                </tr>
+                <tr>
+                    <td><code>+</code></td>
+                    <td>Addition</td>
+                    <td><code>5 + 3</code></td>
+                    <td><code>8</code></td>
+                </tr>
+                <tr>
+                    <td><code>-</code></td>
+                    <td>Subtraction</td>
+                    <td><code>10 - 4</code></td>
+                    <td><code>6</code></td>
+                </tr>
+                <tr>
+                    <td><code>*</code></td>
+                    <td>Multiplication</td>
+                    <td><code>6 * 7</code></td>
+                    <td><code>42</code></td>
+                </tr>
+                <tr>
+                    <td><code>/</code></td>
+                    <td>Division</td>
+                    <td><code>20 / 5</code></td>
+                    <td><code>4</code></td>
+                </tr>
+                <tr>
+                    <td><code>%</code></td>
+                    <td>Modulo (remainder)</td>
+                    <td><code>10 % 3</code></td>
+                    <td><code>1</code></td>
+                </tr>
+                <tr>
+                    <td><code>**</code></td>
+                    <td>Exponentiation</td>
+                    <td><code>2 ** 3</code></td>
+                    <td><code>8</code></td>
+                </tr>
+                <tr>
+                    <td><code>//</code></td>
+                    <td>Integer division</td>
+                    <td><code>10 // 3</code></td>
+                    <td><code>3</code></td>
+                </tr>
+            </table>
+            
+            <div class="code-block">
+// Arithmetic operations
+
+let a = 10;
+let b = 3;
+
+print(a + b); // Output: 13
+print(a - b); // Output: 7
+print(a * b); // Output: 30
+print(a / b); // Output: 3.3333333333333335
+print(a % b); // Output: 1
+print(a ** b); // Output: 1000
+print(a // b); // Output: 3
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Comparison Operators</h2>
+            <p>Comparison operators compare two values and return a boolean:</p>
+            
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Result</th>
+                </tr>
+                <tr>
+                    <td><code>==</code></td>
+                    <td>Equal to</td>
+                    <td><code>5 == 5</code></td>
+                    <td><code>true</code></td>
+                </tr>
+                <tr>
+                    <td><code>!=</code></td>
+                    <td>Not equal to</td>
+                    <td><code>5 != 3</code></td>
+                    <td><code>true</code></td>
+                </tr>
+                <tr>
+                    <td><code>&gt;</code></td>
+                    <td>Greater than</td>
+                    <td><code>5 &gt; 3</code></td>
+                    <td><code>true</code></td>
+                </tr>
+                <tr>
+                    <td><code>&lt;</code></td>
+                    <td>Less than</td>
+                    <td><code>5 &lt; 3</code></td>
+                    <td><code>false</code></td>
+                </tr>
+                <tr>
+                    <td><code>&gt;=</code></td>
+                    <td>Greater than or equal to</td>
+                    <td><code>5 &gt;= 5</code></td>
+                    <td><code>true</code></td>
+                </tr>
+                <tr>
+                    <td><code>&lt;=</code></td>
+                    <td>Less than or equal to</td>
+                    <td><code>5 &lt;= 3</code></td>
+                    <td><code>false</code></td>
+                </tr>
+                <tr>
+                    <td><code>===</code></td>
+                    <td>Strict equal (value and type)</td>
+                    <td><code>5 === 5</code></td>
+                    <td><code>true</code></td>
+                </tr>
+                <tr>
+                    <td><code>!==</code></td>
+                    <td>Strict not equal</td>
+                    <td><code>5 !== "5"</code></td>
+                    <td><code>true</code></td>
+                </tr>
+            </table>
+            
+            <div class="code-block">
+// Comparison operations
+
+let a = 5;
+let b = 3;
+let c = 5;
+let d = "5";
+
+print(a == b); // Output: false
+print(a == c); // Output: true
+print(a != b); // Output: true
+print(a > b); // Output: true
+print(a < b); // Output: false
+print(a >= c); // Output: true
+print(a <= b); // Output: false
+print(a === d); // Output: false (different types)
+print(a !== d); // Output: true (different types)
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Logical Operators</h2>
+            <p>Logical operators perform logical operations on boolean values:</p>
+            
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Result</th>
+                </tr>
+                <tr>
+                    <td><code>&amp;&amp;</code></td>
+                    <td>Logical AND</td>
+                    <td><code>true &amp;&amp; false</code></td>
+                    <td><code>false</code></td>
+                </tr>
+                <tr>
+                    <td><code>||</code></td>
+                    <td>Logical OR</td>
+                    <td><code>true || false</code></td>
+                    <td><code>true</code></td>
+                </tr>
+                <tr>
+                    <td><code>!</code></td>
+                    <td>Logical NOT</td>
+                    <td><code>!true</code></td>
+                    <td><code>false</code></td>
+                </tr>
+            </table>
+            
+            <div class="code-block">
+// Logical operations
+
+let x = true;
+let y = false;
+
+print(x && y); // Output: false
+print(x || y); // Output: true
+print(!x); // Output: false
+print(!y); // Output: true
+
+// Short-circuit evaluation
+print(false && someNonExistentFunction()); // Doesn't call the function
+print(true || someNonExistentFunction()); // Doesn't call the function
+</div>
+            
+            <div class="info-box">
+                <h4>Note</h4>
+                <p>Nova uses short-circuit evaluation for logical operators. This means that if the result can be determined from the first operand, the second operand is not evaluated.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Assignment Operators</h2>
+            <p>Assignment operators assign values to variables:</p>
+            
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Equivalent</th>
+                </tr>
+                <tr>
+                    <td><code>=</code></td>
+                    <td>Simple assignment</td>
+                    <td><code>x = 5</code></td>
+                    <td><code>x = 5</code></td>
+                </tr>
+                <tr>
+                    <td><code>+=</code></td>
+                    <td>Addition assignment</td>
+                    <td><code>x += 3</code></td>
+                    <td><code>x = x + 3</code></td>
+                </tr>
+                <tr>
+                    <td><code>-=</code></td>
+                    <td>Subtraction assignment</td>
+                    <td><code>x -= 3</code></td>
+                    <td><code>x = x - 3</code></td>
+                </tr>
+                <tr>
+                    <td><code>*=</code></td>
+                    <td>Multiplication assignment</td>
+                    <td><code>x *= 3</code></td>
+                    <td><code>x = x * 3</code></td>
+                </tr>
+                <tr>
+                    <td><code>/=</code></td>
+                    <td>Division assignment</td>
+                    <td><code>x /= 3</code></td>
+                    <td><code>x = x / 3</code></td>
+                </tr>
+                <tr>
+                    <td><code>%=</code></td>
+                    <td>Modulo assignment</td>
+                    <td><code>x %= 3</code></td>
+                    <td><code>x = x % 3</code></td>
+                </tr>
+                <tr>
+                    <td><code>**=</code></td>
+                    <td>Exponentiation assignment</td>
+                    <td><code>x **= 3</code></td>
+                    <td><code>x = x ** 3</code></td>
+                </tr>
+                <tr>
+                    <td><code>//=</code></td>
+                    <td>Integer division assignment</td>
+                    <td><code>x //= 3</code></td>
+                    <td><code>x = x // 3</code></td>
+                </tr>
+            </table>
+            
+            <div class="code-block">
+// Assignment operations
+
+let x = 10;
+print(x); // Output: 10
+
+x += 5;
+print(x); // Output: 15
+
+x -= 3;
+print(x); // Output: 12
+
+x *= 2;
+print(x); // Output: 24
+
+x /= 4;
+print(x); // Output: 6
+
+x %= 5;
+print(x); // Output: 1
+
+x **= 3;
+print(x); // Output: 1
+
+x = 10;
+x //= 3;
+print(x); // Output: 3
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Unary Operators</h2>
+            <p>Unary operators operate on a single operand:</p>
+            
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Result</th>
+                </tr>
+                <tr>
+                    <td><code>+</code></td>
+                    <td>Unary plus</td>
+                    <td><code>+5</code></td>
+                    <td><code>5</code></td>
+                </tr>
+                <tr>
+                    <td><code>-</code></td>
+                    <td>Unary minus</td>
+                    <td><code>-5</code></td>
+                    <td><code>-5</code></td>
+                </tr>
+                <tr>
+                    <td><code>!</code></td>
+                    <td>Logical NOT</td>
+                    <td><code>!true</code></td>
+                    <td><code>false</code></td>
+                </tr>
+                <tr>
+                    <td><code>++</code></td>
+                    <td>Increment</td>
+                    <td><code>x++</code></td>
+                    <td><code>x</code> before increment</td>
+                </tr>
+                <tr>
+                    <td><code>--</code></td>
+                    <td>Decrement</td>
+                    <td><code>x--</code></td>
+                    <td><code>x</code> before decrement</td>
+                </tr>
+            </table>
+            
+            <div class="code-block">
+// Unary operations
+
+let x = 5;
+print(+x); // Output: 5
+print(-x); // Output: -5
+
+let y = true;
+print(!y); // Output: false
+
+let z = 10;
+print(z++); // Output: 10 (returns z before increment)
+print(z); // Output: 11
+
+print(--z); // Output: 10 (returns z before decrement)
+print(z); // Output: 10
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Bitwise Operators</h2>
+            <p>Bitwise operators operate on the binary representation of numbers:</p>
+            
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Result (binary)</th>
+                    <th>Result (decimal)</th>
+                </tr>
+                <tr>
+                    <td><code>&amp;</code></td>
+                    <td>Bitwise AND</td>
+                    <td><code>5 &amp; 3</code></td>
+                    <td><code>0001</code></td>
+                    <td><code>1</code></td>
+                </tr>
+                <tr>
+                    <td><code>|</code></td>
+                    <td>Bitwise OR</td>
+                    <td><code>5 | 3</code></td>
+                    <td><code>0111</code></td>
+                    <td><code>7</code></td>
+                </tr>
+                <tr>
+                    <td><code>^</code></td>
+                    <td>Bitwise XOR</td>
+                    <td><code>5 ^ 3</code></td>
+                    <td><code>0110</code></td>
+                    <td><code>6</code></td>
+                </tr>
+                <tr>
+                    <td><code>~</code></td>
+                    <td>Bitwise NOT</td>
+                    <td><code>~5</code></td>
+                    <td><code>...</code></td>
+                    <td><code>-6</code> (two's complement)</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;&lt;</code></td>
+                    <td>Left shift</td>
+                    <td><code>5 &lt;&lt; 1</code></td>
+                    <td><code>1010</code></td>
+                    <td><code>10</code></td>
+                </tr>
+                <tr>
+                    <td><code>&gt;&gt;</code></td>
+                    <td>Right shift</td>
+                    <td><code>5 &gt;&gt; 1</code></td>
+                    <td><code>0010</code></td>
+                    <td><code>2</code></td>
+                </tr>
+                <tr>
+                    <td><code>&gt;&gt;&gt;</code></td>
+                    <td>Unsigned right shift</td>
+                    <td><code>-5 &gt;&gt;&gt; 1</code></td>
+                    <td><code>...</code></td>
+                    <td><code>2147483645</code> (unsigned)</td>
+                </tr>
+            </table>
+            
+            <div class="code-block">
+// Bitwise operations
+
+let a = 5; // Binary: 0101
+let b = 3; // Binary: 0011
+
+print(a & b); // Output: 1 (0001)
+print(a | b); // Output: 7 (0111)
+print(a ^ b); // Output: 6 (0110)
+print(~a); // Output: -6 (two's complement)
+print(a << 1); // Output: 10 (1010)
+print(a >> 1); // Output: 2 (0010)
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>String Operators</h2>
+            <p>String operators work with string values:</p>
+            
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Result</th>
+                </tr>
+                <tr>
+                    <td><code>+</code></td>
+                    <td>String concatenation</td>
+                    <td><code>"Hello" + " " + "World"</code></td>
+                    <td><code>"Hello World"</code></td>
+                </tr>
+                <tr>
+                    <td><code>+=</code></td>
+                    <td>String concatenation assignment</td>
+                    <td><code>s += " World"</code></td>
+                    <td><code>s</code> becomes "Hello World"</td>
+                </tr>
+                <tr>
+                    <td><code>*</code></td>
+                    <td>String repetition</td>
+                    <td><code>"Hello" * 3</code></td>
+                    <td><code>"HelloHelloHello"</code></td>
+                </tr>
+            </table>
+            
+            <div class="code-block">
+// String operations
+
+let s1 = "Hello";
+let s2 = "World";
+
+print(s1 + " " + s2); // Output: Hello World
+
+let s3 = "Hello";
+s3 += " World";
+print(s3); // Output: Hello World
+
+print("Hello" * 3); // Output: HelloHelloHello
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Array and Object Operators</h2>
+            <p>Operators for working with arrays and objects:</p>
+            
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Result</th>
+                </tr>
+                <tr>
+                    <td><code>[]</code></td>
+                    <td>Array/object access</td>
+                    <td><code>arr[0]</code>, <code>obj["key"]</code></td>
+                    <td>Element at index or key</td>
+                </tr>
+                <tr>
+                    <td><code>in</code></td>
+                    <td>Check if element/key exists</td>
+                    <td><code>5 in arr</code>, <code>"key" in obj</code></td>
+                    <td>Boolean</td>
+                </tr>
+                <tr>
+                    <td><code>...</code></td>
+                    <td>Spread operator</td>
+                    <td><code>[...arr]</code>, <code>{...obj}</code></td>
+                    <td>New array/object</td>
+                </tr>
+            </table>
+            
+            <div class="code-block">
+// Array and object operations
+
+// Array operations
+let arr = [1, 2, 3, 4, 5];
+print(arr[0]); // Output: 1
+print(3 in arr); // Output: true
+print(6 in arr); // Output: false
+
+// Spread operator
+let arr2 = [...arr, 6, 7];
+print(arr2); // Output: [1, 2, 3, 4, 5, 6, 7]
+
+// Object operations
+let obj = { name: "John", age: 30 };
+print(obj["name"]); // Output: John
+print(obj.name); // Output: John
+print("age" in obj); // Output: true
+print("address" in obj); // Output: false
+
+// Spread operator
+let obj2 = { ...obj, address: "123 Main St" };
+print(obj2); // Output: { name: "John", age: 30, address: "123 Main St" }
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Operator Precedence</h2>
+            <p>Operators have different precedence levels, which determine the order in which operations are performed:</p>
+            
+            <table>
+                <tr>
+                    <th>Precedence</th>
+                    <th>Operators</th>
+                    <th>Associativity</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><code>()</code> (grouping)</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><code>**</code></td>
+                    <td>Right</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><code>++</code>, <code>--</code>, <code>!</code>, <code>~</code>, <code>+</code> (unary), <code>-</code> (unary)</td>
+                    <td>Right</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><code>*</code>, <code>/</code>, <code>%</code>, <code>//</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><code>+</code>, <code>-</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;&gt;&gt;</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><code>==</code>, <code>!=</code>, <code>===</code>, <code>!==</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><code>&amp;</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><code>^</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td><code>|</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td><code>&amp;&amp;</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td><code>||</code></td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, etc.</td>
+                    <td>Right</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td><code>,</code> (comma)</td>
+                    <td>Left</td>
+                </tr>
+            </table>
+            
+            <div class="code-block">
+// Operator precedence examples
+
+// Without parentheses: 10 + 5 * 2 = 10 + 10 = 20
+print(10 + 5 * 2); // Output: 20
+
+// With parentheses: (10 + 5) * 2 = 15 * 2 = 30
+print((10 + 5) * 2); // Output: 30
+
+// Unary minus has higher precedence than multiplication
+print(-5 * 2); // Output: -10
+
+// Exponentiation is right-associative: 2 ** 3 ** 2 = 2 ** 9 = 512
+print(2 ** 3 ** 2); // Output: 512
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Best Practices</h2>
+            <ul>
+                <li><strong>Use parentheses for clarity:</strong> Even if operator precedence is correct, use parentheses to make code more readable.</li>
+                <li><strong>Be consistent:</strong> Use consistent spacing around operators to improve readability.</li>
+                <li><strong>Understand precedence:</strong> Familiarize yourself with operator precedence to avoid unexpected results.</li>
+                <li><strong>Use compound assignments:</strong> Use <code>+=</code>, <code>-=</code>, etc. for cleaner code.</li>
+                <li><strong>Be careful with floating-point operations:</strong> Remember that floating-point operations can have precision issues.</li>
+                <li><strong>Use string interpolation:</strong> For complex string concatenation, consider using string interpolation instead of the <code>+</code> operator.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Confusing assignment and equality:</strong> Using <code>=</code> instead of <code>==</code> in conditions.</li>
+                <li><strong>Ignoring operator precedence:</strong> Not using parentheses when needed, leading to unexpected results.</li>
+                <li><strong>Mixing data types:</strong> Using arithmetic operators on incompatible data types.</li>
+                <li><strong>Forgetting short-circuit evaluation:</strong> Assuming that both operands of logical operators will always be evaluated.</li>
+                <li><strong>Using bitwise operators on non-integers:</strong> Bitwise operators should only be used on integer values.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand operators in Nova, you can:</p>
+            <ul>
+                <li><a href="traits.html">Learn about traits</a> and interfaces</li>
+                <li><a href="generics.html">Explore generics</a> in Nova</li>
+                <li>Practice using operators in your programs</li>
+            </ul>
+            <a href="traits.html" class="btn">Continue to Traits</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

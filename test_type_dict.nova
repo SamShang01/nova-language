@@ -1,0 +1,5 @@
+# 测试type和dict函数
+let d = dict(a=1, b=2);
+print(d);
+print(type(d));
+print(type(dict()));

@@ -7,7 +7,7 @@ import sys
 import os
 import subprocess
 import tkinter as tk
-from tkinter import scrolledtext, Menu, filedialog, messagebox, ttk
+from tkinter import scrolledtext, Menu, filedialog, messagebox, ttk, simpledialog
 
 from ..version import __version__, get_version_string, version_greater_or_equal
 from ..compiler.lexer.scanner import Scanner
@@ -527,6 +527,14 @@ class NovaIDLE:
         
         # Shell输出
         self.shell_output = []
+        
+        # 创建持久的虚拟机实例（用于保持全局变量）
+        from nova.vm.machine import VirtualMachine
+        self.vm = VirtualMachine()
+        
+        # 创建持久的语义分析器（用于保持变量定义）
+        from nova.compiler.semantic.analyzer import SemanticAnalyzer
+        self.analyzer = SemanticAnalyzer()
     
     def create_shell(self):
         """
@@ -546,12 +554,16 @@ class NovaIDLE:
         self.shell_text.tag_config('prompt', foreground='#000080')
         self.shell_text.tag_config('output', foreground='#000000')
         self.shell_text.tag_config('error', foreground='#800000')
+        self.shell_text.tag_config('print_output', foreground='#008000')
+        
+        # 创建Shell语法高亮器
+        from .syntax_highlighter import NovaSyntaxHighlighter
+        self.shell_syntax_highlighter = NovaSyntaxHighlighter(self.shell_text)
         
         # 绑定事件
-        self.shell_text.bind('<Return>', self.on_shell_return)
         self.shell_text.bind('<Up>', self.on_shell_up)
         self.shell_text.bind('<Down>', self.on_shell_down)
-        self.shell_text.bind('<Key>', self.on_shell_key)
+        self.shell_text.bind('<Return>', self.on_shell_return)
         self.shell_text.bind('<Button-1>', self.on_shell_click)
         self.shell_text.bind('<B1-Motion>', self.on_shell_drag)
         
@@ -568,17 +580,28 @@ class NovaIDLE:
             wrap=tk.WORD,
             font=('Courier New', 10),
             bg='#ffffff',
-            fg='#000000'
+            fg='#000000',
+            undo=True
         )
         self.editor_text.pack(fill=tk.BOTH, expand=True)
         
-        # 配置标签
-        self.editor_text.tag_config('keyword', foreground='#0000ff')
-        self.editor_text.tag_config('string', foreground='#008000')
-        self.editor_text.tag_config('comment', foreground='#808080')
+        # 创建语法高亮器
+        from .syntax_highlighter import NovaSyntaxHighlighter
+        self.syntax_highlighter = NovaSyntaxHighlighter(self.editor_text)
         
         # 绑定事件
         self.editor_text.bind('<KeyRelease>', self.on_editor_key_release)
+        self.editor_text.bind('<space>', self.on_editor_space)
+        self.editor_text.bind('<Return>', self.on_editor_return)
+        self.editor_text.bind('<F5>', lambda e: self.run_module())
+        
+        # 绑定全局快捷键
+        self.root.bind('<F5>', lambda e: self.run_module())
+        self.root.bind('<Control-s>', lambda e: self.save_file())
+        self.root.bind('<Control-o>', lambda e: self.open_file())
+        self.root.bind('<Control-n>', lambda e: self.new_window())
+        self.root.bind('<Control-f>', lambda e: self.find())
+        self.root.bind('<Control-h>', lambda e: self.replace())
     
     def on_shell_key(self, event):
         """
@@ -586,6 +609,10 @@ class NovaIDLE:
         
         阻止在input_start之前进行编辑
         """
+        # 如果是Return键，不处理，让on_shell_return处理
+        if event.keysym == 'Return':
+            return None
+        
         # 允许的键
         allowed_keys = [
             'BackSpace', 'Delete', 'Left', 'Right', 'Home', 'End',
@@ -610,6 +637,10 @@ class NovaIDLE:
                     return "break"
         except tk.TclError:
             pass
+        
+        # 延迟触发语法高亮（等待字符输入完成）
+        if hasattr(self, 'shell_syntax_highlighter'):
+            self.shell_text.after_idle(self.shell_syntax_highlighter.highlight)
         
         return None
     
@@ -667,7 +698,7 @@ Type "help", "copyright" or "license" for more information.
         """
         显示提示符
         """
-        self.shell_text.insert(tk.END, ">>> ", 'prompt')
+        self.shell_text.insert(tk.END, "\n>>> ", 'prompt')
         self.shell_text.mark_set("input_start", tk.INSERT)
         self.shell_text.mark_gravity("input_start", tk.LEFT)
         self.shell_text.see(tk.END)
@@ -676,16 +707,38 @@ Type "help", "copyright" or "license" for more information.
         """
         处理Shell回车事件
         """
-        # 获取输入
-        input_text = self.shell_text.get("input_start", tk.END)
-        input_text = input_text.strip()
+        print(f"[DEBUG] on_shell_return called")
+        
+        # 获取输入 - 查找包含 >>> 提示符的行
+        try:
+            # 获取所有文本
+            all_text = self.shell_text.get(1.0, tk.END)
+            lines = all_text.strip().split('\n')
+            
+            # 找到最后一行包含 >>> 的行
+            input_text = ""
+            for line in reversed(lines):
+                line = line.strip()
+                if line.startswith(">>> "):
+                    # 移除提示符
+                    input_text = line[4:].strip()
+                    print(f"[DEBUG] Found input line: '{line}'")
+                    print(f"[DEBUG] After removing prompt: '{input_text}'")
+                    break
+        except Exception as e:
+            print(f"[DEBUG] Error getting input: {e}")
+            input_text = ""
+        
+        print(f"[DEBUG] Final input: '{input_text}'")
         
         # 添加到历史记录
         if input_text:
+            print(f"[DEBUG] Adding to history: '{input_text}'")
             self.history.append(input_text)
             self.history_index = len(self.history)
         
         # 执行命令
+        print(f"[DEBUG] Calling execute_nova_code with: '{input_text}'")
         self.execute_nova_code(input_text)
         
         # 显示新的提示符
@@ -726,15 +779,47 @@ Type "help", "copyright" or "license" for more information.
         """
         执行Nova代码
         """
+        print(f"[DEBUG] execute_nova_code called with code: '{code}'")
+        
         if not code.strip():
+            print("[DEBUG] Empty code, returning")
             return
         
         # 处理特殊命令
         if code.strip() == "help":
-            self.shell_text.insert(tk.END, "\nNova IDLE 帮助信息\n")
-            self.shell_text.insert(tk.END, "  help - 显示帮助信息\n")
-            self.shell_text.insert(tk.END, "  exit - 退出IDLE\n")
-            self.shell_text.insert(tk.END, "  clear - 清空屏幕\n")
+            self.shell_text.insert(tk.END, "\nNova IDLE 帮助信息\n", 'output')
+            self.shell_text.insert(tk.END, "  help - 显示帮助信息\n", 'output')
+            self.shell_text.insert(tk.END, "  copyright - 显示版权信息\n", 'output')
+            self.shell_text.insert(tk.END, "  license - 显示许可证信息\n", 'output')
+            self.shell_text.insert(tk.END, "  exit - 退出IDLE\n", 'output')
+            self.shell_text.insert(tk.END, "  clear - 清空屏幕\n", 'output')
+            return
+        
+        if code.strip() == "copyright":
+            self.shell_text.insert(tk.END, "\nNova 编程语言\n", 'output')
+            self.shell_text.insert(tk.END, "Copyright (c) 2026 Nova Team\n", 'output')
+            self.shell_text.insert(tk.END, "作者: SamShang01\n", 'output')
+            self.shell_text.insert(tk.END, "GitHub: https://github.com/SamShang01/nova-language\n", 'output')
+            return
+        
+        if code.strip() == "license":
+            self.shell_text.insert(tk.END, "\nMIT License\n\n", 'output')
+            self.shell_text.insert(tk.END, "Copyright (c) 2026 Nova Team\n\n", 'output')
+            self.shell_text.insert(tk.END, "Permission is hereby granted, free of charge, to any person obtaining a copy\n", 'output')
+            self.shell_text.insert(tk.END, "of this software and associated documentation files (the \"Software\"), to deal\n", 'output')
+            self.shell_text.insert(tk.END, "in the Software without restriction, including without limitation the rights\n", 'output')
+            self.shell_text.insert(tk.END, "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n", 'output')
+            self.shell_text.insert(tk.END, "copies of the Software, and to permit persons to whom the Software is\n", 'output')
+            self.shell_text.insert(tk.END, "furnished to do so, subject to the following conditions:\n\n", 'output')
+            self.shell_text.insert(tk.END, "The above copyright notice and this permission notice shall be included in all\n", 'output')
+            self.shell_text.insert(tk.END, "copies or substantial portions of the Software.\n\n", 'output')
+            self.shell_text.insert(tk.END, "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n", 'output')
+            self.shell_text.insert(tk.END, "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n", 'output')
+            self.shell_text.insert(tk.END, "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n", 'output')
+            self.shell_text.insert(tk.END, "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n", 'output')
+            self.shell_text.insert(tk.END, "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n", 'output')
+            self.shell_text.insert(tk.END, "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n", 'output')
+            self.shell_text.insert(tk.END, "SOFTWARE.\n", 'output')
             return
         
         if code.strip() == "exit":
@@ -746,22 +831,108 @@ Type "help", "copyright" or "license" for more information.
             self.show_welcome_message()
             return
         
+        # 提取Nova代码（移除可能的中文说明）
+        import re
+        nova_code = re.sub(r'执行：.*', '', code).strip()
+        print(f"[DEBUG] Extracted Nova code: '{nova_code}'")
+        
+        if not nova_code:
+            self.shell_text.insert(tk.END, "\n错误: 没有有效的Nova代码\n", 'error')
+            return
+        
+        # 检查是否是 print 语句
+        is_print_statement = nova_code.strip().startswith('print(')
+        
         # 执行Nova代码
         try:
-            # 这里应该调用Nova解释器来执行代码
-            # 目前只是模拟执行
-            result = f"执行: {code}\n"
-            self.shell_text.insert(tk.END, result, 'output')
+            print(f"[DEBUG] Starting compilation...")
+            
+            # 词法分析
+            print(f"[DEBUG] Step 1: Lexical analysis")
+            scanner = Scanner(nova_code)
+            tokens = scanner.scan_tokens()
+            print(f"[DEBUG] Generated {len(tokens)} tokens")
+            
+            # 语法分析
+            print(f"[DEBUG] Step 2: Syntax analysis")
+            parser = Parser(tokens)
+            ast = parser.parse()
+            print(f"[DEBUG] AST created successfully")
+            
+            # 语义分析（使用持久的分析器，保持变量定义）
+            print(f"[DEBUG] Step 3: Semantic analysis")
+            analyzed_ast = self.analyzer.analyze(ast)
+            print(f"[DEBUG] Semantic analysis completed")
+            
+            # 代码生成
+            print(f"[DEBUG] Step 4: Code generation")
+            codegen = CodeGenerator()
+            instructions, constants = codegen.generate(analyzed_ast)
+            print(f"[DEBUG] Generated {len(instructions)} instructions")
+            
+            # 执行（使用持久的虚拟机实例，保持全局变量）
+            print(f"[DEBUG] Step 5: Execution")
+            # 重置虚拟机状态，但保留环境
+            self.vm.pc = 0
+            self.vm.stack = []
+            self.vm.instructions = []
+            self.vm.running = False
+            # 加载并执行新指令
+            self.vm.load(instructions, constants)
+            result = self.vm.run()
+            print(f"[DEBUG] Execution result: {result}")
+            
+            # 同步虚拟机环境到语义分析器的全局作用域
+            print(f"[DEBUG] Step 6: Sync environment to semantic analyzer")
+            for name, value in self.vm.environment.items():
+                if not callable(value) and name not in ['globals', 'locals']:
+                    # 检查是否已经存在该符号
+                    if not self.analyzer.global_scope.has_symbol(name):
+                        # 添加到全局作用域
+                        from nova.compiler.semantic.symbols import VariableSymbol
+                        from nova.compiler.semantic.types import ANY_TYPE
+                        var_symbol = VariableSymbol(name, ANY_TYPE, mutable=True, value=None)
+                        self.analyzer.global_scope.declare_symbol(var_symbol)
+            print(f"[DEBUG] Environment synced")
+            
+            # 显示结果（如果是 print 语句且结果为 None，不显示）
+            if not (is_print_statement and result is None):
+                self.shell_text.insert(tk.END, f"\n{result}", 'output')
+            
+            print(f"[DEBUG] Execution completed successfully")
+            
         except Exception as e:
-            error_msg = f"错误: {e}\n"
+            import traceback
+            error_msg = f"\n错误: {e}\n"
+            error_detail = traceback.format_exc()
+            print(f"[DEBUG] Error: {error_msg}")
+            print(f"[DEBUG] Traceback: {error_detail}")
             self.shell_text.insert(tk.END, error_msg, 'error')
+            self.shell_text.insert(tk.END, "\n", 'error')
     
     def on_editor_key_release(self, event):
         """
         处理编辑器按键释放事件
         """
-        # 这里可以实现语法高亮
-        pass
+        # 触发语法高亮
+        if hasattr(self, 'syntax_highlighter'):
+            self.syntax_highlighter.highlight()
+    
+    def on_editor_space(self, event):
+        """
+        处理编辑器空格键事件
+        """
+        # 触发语法高亮
+        if hasattr(self, 'syntax_highlighter'):
+            self.syntax_highlighter.highlight()
+    
+    def on_editor_return(self, event):
+        """
+        处理编辑器回车键事件
+        """
+        # 触发语法高亮
+        if hasattr(self, 'syntax_highlighter'):
+            self.syntax_highlighter.highlight()
     
     def new_window(self):
         """
@@ -875,13 +1046,47 @@ Type "help", "copyright" or "license" for more information.
         """
         查找
         """
-        messagebox.showinfo("Find", "查找功能尚未实现")
+        search_text = simpledialog.askstring("查找", "查找内容:")
+        if search_text:
+            pos = self.editor_text.search(search_text, "1.0", stopindex=tk.END, nocase=1)
+            if pos:
+                self.editor_text.tag_remove(tk.SEL, "1.0", tk.END)
+                self.editor_text.tag_add(tk.SEL, pos, f"{pos}+{len(search_text)}c")
+                self.editor_text.see(pos)
+            else:
+                messagebox.showinfo("查找", f"未找到: {search_text}")
     
     def replace(self):
         """
         替换
         """
-        messagebox.showinfo("Replace", "替换功能尚未实现")
+        replace_window = tk.Toplevel(self.root)
+        replace_window.title("替换")
+        replace_window.geometry("300x150")
+        
+        tk.Label(replace_window, text="查找内容:").pack(pady=5)
+        find_entry = tk.Entry(replace_window)
+        find_entry.pack(pady=5)
+        
+        tk.Label(replace_window, text="替换为:").pack(pady=5)
+        replace_entry = tk.Entry(replace_window)
+        replace_entry.pack(pady=5)
+        
+        button_frame = tk.Frame(replace_window)
+        button_frame.pack(pady=10)
+        
+        def do_replace():
+            find_text = find_entry.get()
+            replace_text = replace_entry.get()
+            if find_text:
+                content = self.editor_text.get(1.0, tk.END)
+                new_content = content.replace(find_text, replace_text)
+                self.editor_text.delete(1.0, tk.END)
+                self.editor_text.insert(1.0, new_content)
+                replace_window.destroy()
+        
+        tk.Button(button_frame, text="全部替换", command=do_replace).pack(side=tk.LEFT, padx=5)
+        tk.Button(button_frame, text="取消", command=replace_window.destroy).pack(side=tk.LEFT, padx=5)
     
     def view_last_restart(self):
         """
@@ -922,7 +1127,10 @@ Type "help", "copyright" or "license" for more information.
         
         # 在Shell中显示执行结果
         self.shell_text.insert(tk.END, "\n===== 运行模块 =====\n", 'output')
-        self.shell_text.insert(tk.END, code, 'output')
+        
+        # 执行代码
+        self.execute_nova_code(code)
+        
         self.shell_text.insert(tk.END, "\n===== 执行完成 =====\n", 'output')
         
         # 显示新的提示符
@@ -932,7 +1140,42 @@ Type "help", "copyright" or "license" for more information.
         """
         检查模块
         """
-        messagebox.showinfo("Check Module", "检查模块功能尚未实现")
+        # 获取编辑器中的代码
+        code = self.editor_text.get(1.0, tk.END)
+        
+        if not code.strip():
+            messagebox.showwarning("Warning", "没有代码可检查")
+            return
+        
+        # 切换到Shell选项卡
+        self.notebook.select(self.shell_frame)
+        
+        # 在Shell中显示检查结果
+        self.shell_text.insert(tk.END, "\n===== 检查模块 =====\n", 'output')
+        
+        try:
+            # 词法分析
+            scanner = Scanner(code)
+            tokens = scanner.scan_tokens()
+            self.shell_text.insert(tk.END, f"✓ 词法分析通过: {len(tokens)} 个 token\n", 'output')
+            
+            # 语法分析
+            parser = Parser(tokens)
+            ast = parser.parse()
+            self.shell_text.insert(tk.END, "✓ 语法分析通过\n", 'output')
+            
+            # 语义分析（使用新的分析器，不污染全局状态）
+            temp_analyzer = SemanticAnalyzer()
+            analyzed_ast = temp_analyzer.analyze(ast)
+            self.shell_text.insert(tk.END, "✓ 语义分析通过\n", 'output')
+            
+            self.shell_text.insert(tk.END, "\n===== 检查完成，没有错误 =====\n", 'output')
+        except Exception as e:
+            self.shell_text.insert(tk.END, f"\n✗ 错误: {str(e)}\n", 'error')
+            self.shell_text.insert(tk.END, "\n===== 检查完成，发现错误 =====\n", 'error')
+        
+        # 显示新的提示符
+        self.show_prompt()
     
     def about_nova(self):
         """

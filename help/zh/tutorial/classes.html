@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类 - Nova 编程语言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>类</h1>
+            <p>在 Nova 中使用面向对象编程</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> &gt; <a href="index.html">教程</a> &gt; 类
+        </div>
+        
+        <div class="content-section">
+            <h2>类的定义</h2>
+            <p>在 Nova 中，你可以使用 <code>class</code> 关键字来定义类。类是一种数据结构，用于封装数据和方法。</p>
+            
+            <div class="code-block">
+// 定义一个简单的类
+class Person {
+    let name: string;
+    let age: int;
+    
+    def __init__(self, name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+    
+    def greet() {
+        print("Hello, my name is " + self.name + " and I am " + self.age + " years old.");
+    }
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>创建对象</h2>
+            <p>你可以使用 <code>new</code> 关键字来创建类的实例（对象）。</p>
+            
+            <div class="code-block">
+// 创建 Person 类的实例
+let person = new Person("John", 30);
+
+// 调用对象的方法
+person.greet(); // 输出: Hello, my name is John and I am 30 years old.
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>构造函数</h2>
+            <p>构造函数是一种特殊的方法，用于初始化对象。在 Nova 中，构造函数的名称是 <code>__init__</code>。</p>
+            
+            <div class="code-block">
+class Person {
+    let name: string;
+    let age: int;
+    let email: string?; // 可选属性
+    
+    def __init__(self, name: string, age: int, email: string = null) {
+        self.name = name;
+        self.age = age;
+        self.email = email;
+    }
+    
+    def getInfo() -> string {
+        let info = "Name: " + self.name + ", Age: " + self.age;
+        if (self.email != null) {
+            info += ", Email: " + self.email;
+        }
+        return info;
+    }
+}
+
+// 创建对象
+let person1 = new Person("John", 30);
+let person2 = new Person("Jane", 25, "jane@example.com");
+
+print(person1.getInfo()); // 输出: Name: John, Age: 30
+print(person2.getInfo()); // 输出: Name: Jane, Age: 25, Email: jane@example.com
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>方法</h2>
+            <p>方法是定义在类中的函数，用于操作对象的数据。</p>
+            
+            <div class="code-block">
+class Calculator {
+    def add(a: int, b: int) -> int {
+        return a + b;
+    }
+    
+    def subtract(a: int, b: int) -> int {
+        return a - b;
+    }
+    
+    def multiply(a: int, b: int) -> int {
+        return a * b;
+    }
+    
+    def divide(a: int, b: int) -> float {
+        if (b == 0) {
+            throw new Error("除数不能为零");
+        }
+        return a / b;
+    }
+}
+
+// 使用计算器
+let calc = new Calculator();
+print(calc.add(5, 3)); // 输出: 8
+print(calc.subtract(10, 4)); // 输出: 6
+print(calc.multiply(6, 7)); // 输出: 42
+print(calc.divide(8, 2)); // 输出: 4.0
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>继承</h2>
+            <p>继承是一种机制，允许一个类（子类）继承另一个类（父类）的属性和方法。</p>
+            
+            <div class="code-block">
+// 父类
+class Animal {
+    let name: string;
+    
+    def __init__(self, name: string) {
+        self.name = name;
+    }
+    
+    def makeSound() {
+        print("Some generic sound");
+    }
+}
+
+// 子类
+class Dog extends Animal {
+    def __init__(self, name: string) {
+        super(name); // 调用父类的构造函数
+    }
+    
+    // 重写父类的方法
+    def makeSound() {
+        print("Woof! Woof!");
+    }
+}
+
+class Cat extends Animal {
+    def __init__(self, name: string) {
+        super(name);
+    }
+    
+    def makeSound() {
+        print("Meow! Meow!");
+    }
+}
+
+// 使用子类
+let dog = new Dog("Rex");
+dog.makeSound(); // 输出: Woof! Woof!
+
+let cat = new Cat("Whiskers");
+cat.makeSound(); // 输出: Meow! Meow!
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>访问修饰符</h2>
+            <p>Nova 支持三种访问修饰符：</p>
+            <ul>
+                <li><code>public</code> - 公开的，可以从任何地方访问（默认）</li>
+                <li><code>private</code> - 私有的，只能在类内部访问</li>
+                <li><code>protected</code> - 受保护的，可以在类内部和子类中访问</li>
+            </ul>
+            
+            <div class="code-block">
+class Person {
+    public let name: string;
+    private let age: int;
+    protected let email: string;
+    
+    def __init__(self, name: string, age: int, email: string) {
+        self.name = name;
+        self.age = age;
+        self.email = email;
+    }
+    
+    public def getName() -> string {
+        return self.name;
+    }
+    
+    private def getAge() -> int {
+        return self.age;
+    }
+    
+    protected def getEmail() -> string {
+        return self.email;
+    }
+    
+    public def getInfo() -> string {
+        return "Name: " + self.name + ", Age: " + self.getAge() + ", Email: " + self.getEmail();
+    }
+}
+
+class Employee extends Person {
+    let employeeId: string;
+    
+    def __init__(self, name: string, age: int, email: string, employeeId: string) {
+        super(name, age, email);
+        self.employeeId = employeeId;
+    }
+    
+    public def getEmployeeInfo() -> string {
+        return self.getInfo() + ", Employee ID: " + self.employeeId;
+    }
+}
+
+let person = new Person("John", 30, "john@example.com");
+print(person.name); // 正确：name 是 public
+// print(person.age); // 错误：age 是 private
+// print(person.email); // 错误：email 是 protected
+print(person.getInfo()); // 正确：通过公共方法访问
+
+let employee = new Employee("Jane", 25, "jane@example.com", "EMP001");
+print(employee.getEmployeeInfo()); // 正确：Employee 可以访问 protected 成员
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>静态成员</h2>
+            <p>静态成员属于类本身，而不是类的实例。你可以使用 <code>static</code> 关键字来定义静态成员。</p>
+            
+            <div class="code-block">
+class MathUtils {
+    static let PI = 3.14159;
+    
+    static def square(x: int) -> int {
+        return x * x;
+    }
+    
+    static def cube(x: int) -> int {
+        return x * x * x;
+    }
+}
+
+// 使用静态成员
+print(MathUtils.PI); // 输出: 3.14159
+print(MathUtils.square(5)); // 输出: 25
+print(MathUtils.cube(3)); // 输出: 27
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>抽象类</h2>
+            <p>抽象类是不能直接实例化的类，它用于定义其他类应该实现的接口。你可以使用 <code>abstract</code> 关键字来定义抽象类和抽象方法。</p>
+            
+            <div class="code-block">
+abstract class Shape {
+    abstract def calculateArea() -> float;
+    abstract def calculatePerimeter() -> float;
+}
+
+class Circle extends Shape {
+    let radius: float;
+    
+    def __init__(self, radius: float) {
+        self.radius = radius;
+    }
+    
+    def calculateArea() -> float {
+        return 3.14159 * self.radius * self.radius;
+    }
+    
+    def calculatePerimeter() -> float {
+        return 2 * 3.14159 * self.radius;
+    }
+}
+
+class Rectangle extends Shape {
+    let width: float;
+    let height: float;
+    
+    def __init__(self, width: float, height: float) {
+        self.width = width;
+        self.height = height;
+    }
+    
+    def calculateArea() -> float {
+        return self.width * self.height;
+    }
+    
+    def calculatePerimeter() -> float {
+        return 2 * (self.width + self.height);
+    }
+}
+
+// 使用形状类
+let circle = new Circle(5);
+print("Circle area: " + circle.calculateArea());
+print("Circle perimeter: " + circle.calculatePerimeter());
+
+let rectangle = new Rectangle(4, 6);
+print("Rectangle area: " + rectangle.calculateArea());
+print("Rectangle perimeter: " + rectangle.calculatePerimeter());
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>多态</h2>
+            <p>多态允许不同类型的对象对相同的方法调用做出不同的响应。</p>
+            
+            <div class="code-block">
+class Animal {
+    def makeSound() {
+        print("Some generic sound");
+    }
+}
+
+class Dog extends Animal {
+    def makeSound() {
+        print("Woof! Woof!");
+    }
+}
+
+class Cat extends Animal {
+    def makeSound() {
+        print("Meow! Meow!");
+    }
+}
+
+// 多态示例
+def makeAnimalSound(animal: Animal) {
+    animal.makeSound();
+}
+
+let animal = new Animal();
+let dog = new Dog();
+let cat = new Cat();
+
+makeAnimalSound(animal); // 输出: Some generic sound
+makeAnimalSound(dog); // 输出: Woof! Woof!
+makeAnimalSound(cat); // 输出: Meow! Meow!
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>练习</h2>
+            <p>尝试完成以下练习，以巩固你对类的理解：</p>
+            <ol>
+                <li>创建一个 <code>Car</code> 类，包含品牌、型号、年份等属性，以及启动、加速、刹车等方法</li>
+                <li>创建一个 <code>Student</code> 类，继承自 <code>Person</code> 类，添加学生 ID、成绩等属性</li>
+                <li>创建一个抽象的 <code>Vehicle</code> 类，然后创建 <code>Car</code> 和 <code>Bicycle</code> 子类</li>
+                <li>使用多态创建一个函数，能够处理不同类型的交通工具</li>
+            </ol>
+            
+            <div class="code-block">
+// 练习答案示例
+
+// 1. Car 类
+class Car {
+    let brand: string;
+    let model: string;
+    let year: int;
+    var speed: int = 0;
+    var isRunning: bool = false;
+    
+    def __init__(self, brand: string, model: string, year: int) {
+        self.brand = brand;
+        self.model = model;
+        self.year = year;
+    }
+    
+    def start() {
+        if (!self.isRunning) {
+            self.isRunning = true;
+            print(self.brand + " " + self.model + " 启动了");
+        } else {
+            print("汽车已经在运行中");
+        }
+    }
+    
+    def accelerate(amount: int) {
+        if (self.isRunning) {
+            self.speed += amount;
+            print("汽车加速到 " + self.speed + " km/h");
+        } else {
+            print("请先启动汽车");
+        }
+    }
+    
+    def brake() {
+        if (self.speed > 0) {
+            self.speed = 0;
+            print("汽车刹车，速度为 0");
+        } else {
+            print("汽车已经停止");
+        }
+    }
+    
+    def stop() {
+        if (self.isRunning) {
+            self.isRunning = false;
+            self.speed = 0;
+            print(self.brand + " " + self.model + " 停止了");
+        } else {
+            print("汽车已经停止");
+        }
+    }
+}
+
+// 2. Student 类继承自 Person
+class Person {
+    let name: string;
+    let age: int;
+    
+    def __init__(self, name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+}
+
+class Student extends Person {
+    let studentId: string;
+    var grades: array<number> = [];
+    
+    def __init__(self, name: string, age: int, studentId: string) {
+        super(name, age);
+        self.studentId = studentId;
+    }
+    
+    def addGrade(grade: number) {
+        self.grades.push(grade);
+    }
+    
+    def getAverageGrade() -> number {
+        if (self.grades.length == 0) {
+            return 0;
+        }
+        let sum = 0;
+        for (let grade in self.grades) {
+            sum += grade;
+        }
+        return sum / self.grades.length;
+    }
+}
+
+// 3. 抽象 Vehicle 类
+abstract class Vehicle {
+    abstract def start();
+    abstract def stop();
+}
+
+class Car extends Vehicle {
+    def start() {
+        print("汽车启动");
+    }
+    
+    def stop() {
+        print("汽车停止");
+    }
+}
+
+class Bicycle extends Vehicle {
+    def start() {
+        print("自行车开始骑行");
+    }
+    
+    def stop() {
+        print("自行车停止");
+    }
+}
+
+// 4. 多态函数
+def operateVehicle(vehicle: Vehicle) {
+    vehicle.start();
+    // 模拟操作
+    vehicle.stop();
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>下一步</h2>
+            <p>现在你已经了解了 Nova 中的类和面向对象编程，你可以：</p>
+            <ul>
+                <li><a href="collections.html">学习集合类型</a></li>
+                <li><a href="error-handling.html">了解错误处理</a></li>
+            </ul>
+            <a href="collections.html" class="btn">继续学习集合</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </footer>
+    </div>
+</body>
+</html>

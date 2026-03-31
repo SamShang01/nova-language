@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova プログラミング言語</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .btn-primary:hover {
+            background: #f0f0f0;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .nav-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-card a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        
+        .nav-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nova</h1>
+            <p>モダンで静的型付けのプログラミング言語</p>
+            <div>
+                <a href="tutorial/index.html" class="btn btn-primary">始めましょう</a>
+                <a href="reference/index.html" class="btn">リファレンス</a>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <h2>Nova へようこそ</h2>
+            <p>Nova は、信頼性が高く効率的なソフトウェアを構築するために設計された、モダンで静的型付けのプログラミング言語です。Python、TypeScript、Rust などの言語の最高の機能を組み合わせ、クリーンな構文、強力な型システム、強力な機能を提供します。</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>静的型付け</h4>
+                    <p>コンパイル時の型チェックにより、エラーを早期に検出し、パフォーマンスを向上させます。</p>
+                </div>
+                <div class="feature-card">
+                    <h4>クリーンな構文</h4>
+                    <p>読み書きが簡単な Python 風の構文。</p>
+                </div>
+                <div class="feature-card">
+                    <h4>オブジェクト指向</h4>
+                    <p>クラス、継承、ポリモーフィズムをサポート。</p>
+                </div>
+                <div class="feature-card">
+                    <h4>関数型機能</h4>
+                    <p>ラムダ関数、高階関数、不変性をサポート。</p>
+                </div>
+                <div class="feature-card">
+                    <h4>トレイト</h4>
+                    <p>柔軟な構成のためのトレイトによるコード再利用。</p>
+                </div>
+                <div class="feature-card">
+                    <h4>ジェネリクス</h4>
+                    <p>最大限の再利用性のために型安全なジェネリックコードを記述。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>ドキュメント</h2>
+            <p>Nova の機能と効果的な使用方法について学ぶために、包括的なドキュメントを探索してください。</p>
+            
+            <div class="nav-grid">
+                <div class="nav-card">
+                    <a href="tutorial/index.html">
+                        <h4>チュートリアル</h4>
+                        <p>Nova を学ぶためのステップバイステップガイド</p>
+                    </a>
+                </div>
+                <div class="nav-card">
+                    <a href="examples/index.html">
+                        <h4>例</h4>
+                        <p>実用的なコード例</p>
+                    </a>
+                </div>
+                <div class="nav-card">
+                    <a href="faq/index.html">
+                        <h4>FAQ</h4>
+                        <p>よくある質問</p>
+                    </a>
+                </div>
+                <div class="nav-card">
+                    <a href="library/index.html">
+                        <h4>標準ライブラリ</h4>
+                        <p>組み込みモジュールと関数</p>
+                    </a>
+                </div>
+                <div class="nav-card">
+                    <a href="reference/index.html">
+                        <h4>リファレンス</h4>
+                        <p>詳細な言語ドキュメント</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>始めましょう</h2>
+            <p>Nova の使用を開始する準備はできましたか？以下の手順に従ってください：</p>
+            
+            <ol>
+                <li>システムに <a href="tutorial/installation.html">Nova をインストール</a> する</li>
+                <li>最初のプログラムを書くために <a href="tutorial/hello-world.html">Hello World</a> チュートリアルを読む</li>
+                <li>より多くの機能を学ぶために <a href="tutorial/index.html">完全なチュートリアル</a> を探索する</li>
+                <li>実用的な使用例については <a href="examples/index.html">例</a> を確認する</li>
+                <li>詳細については <a href="reference/index.html">リファレンスドキュメント</a> を参照する</li>
+            </ol>
+            
+            <div class="info-box">
+                <h4>ヘルプが必要ですか？</h4>
+                <p>質問や支援が必要な場合は、<a href="faq/index.html">FAQ</a> を確認するか、Nova コミュニティフォーラムに参加してください。</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>コミュニティ</h2>
+            <p>Nova には、言語に情熱を持つ開発者の成長するコミュニティがあります。参加方法は以下の通りです：</p>
+            
+            <ul>
+                <li>他の Nova 開発者とチャットするために Discord サーバーに参加する</li>
+                <li>プロジェクトに貢献するために GitHub でフォローする</li>
+                <li>GitHub の問題を通じてバグを報告し、機能を提案する</li>
+                <li>Nova に関するブログ記事やチュートリアルを書く</li>
+                <li>コミュニティと Nova プロジェクトを共有する</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>最新の更新</h2>
+            <p>Nova エコシステムの最新の開発について最新情報を入手してください：</p>
+            
+            <ul>
+                <li>型推論とパフォーマンスが改善されたバージョン 1.0.0 がリリースされました</li>
+                <li>ネットワーキングと Web 開発のための新しい標準ライブラリモジュール</li>
+                <li>Visual Studio Code と IntelliJ IDEA 用の IDE プラグイン</li>
+                <li>包括的なドキュメントが利用可能になりました</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova プログラミング言語。全著作権所有。</p>
+        </footer>
+    </div>
+</body>
+</html>

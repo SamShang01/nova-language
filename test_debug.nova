@@ -1,0 +1,2 @@
+let f = type;
+print(f(123));

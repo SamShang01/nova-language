@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务管理器示例 - Nova 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                        accent: '#f093fb',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        muted: '#64748b',
+                        'primary-light': '#8b97f5',
+                        'primary-dark': '#4d5fc7',
+                        'secondary-light': '#956bc9',
+                        'secondary-dark': '#5a3785',
+                        'surface': '#ffffff',
+                        'surface-hover': '#f1f5f9',
+                        'border': '#e2e8f0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'dropdown': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    },
+                    transitionProperty: {
+                        'height': 'height',
+                        'spacing': 'margin, padding'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .glass {
+                background: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .bg-gradient {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .bg-gradient-light {
+                background: linear-gradient(135deg, #8b97f5 0%, #956bc9 100%);
+            }
+            .bg-gradient-dark {
+                background: linear-gradient(135deg, #4d5fc7 0%, #5a3785 100%);
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .aspect-video {
+                aspect-ratio: 16 / 9;
+            }
+            .aspect-square {
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+    <style>
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+        .keyword { color: #c792ea; }
+        .string { color: #c3e88d; }
+        .comment { color: #676e95; font-style: italic; }
+        .function { color: #82aaff; }
+        .number { color: #f78c6c; }
+        .type { color: #ffcb6b; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex-shrink-0 flex items-center group">
+                        <span class="text-2xl font-bold text-gradient group-hover:scale-105 transition-transform duration-300">Nova</span>
+                        <span class="ml-2 text-sm text-muted group-hover:text-primary transition-colors duration-200">编程语言</span>
+                    </a>
+                    <div class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="../tutorial/index.html" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-primary/5 rounded-md">教程</a>
+                        <a href="index.html" class="text-primary font-medium px-3 py-2 text-sm bg-primary/5 rounded-md">示例</a>
+                        <a href="../reference/index.html" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-primary/5 rounded-md">参考</a>
+                        <a href="../library/index.html" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-primary/5 rounded-md">标准库</a>
+                        <a href="../faq/index.html" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-primary/5 rounded-md">常见问题</a>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-6">
+                    <a href="../../en/examples/task-manager.html" class="text-sm text-muted hover:text-primary transition-colors duration-200 px-2 py-1 rounded-md hover:bg-primary/5">English</a>
+                    <a href="../../jp/examples/task-manager.html" class="text-sm text-muted hover:text-primary transition-colors duration-200 px-2 py-1 rounded-md hover:bg-primary/5">日本語</a>
+                    <a href="../../fr/examples/task-manager.html" class="text-sm text-muted hover:text-primary transition-colors duration-200 px-2 py-1 rounded-md hover:bg-primary/5">Français</a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-primary hover:bg-gray-100 focus:outline-none transition-colors duration-200" id="mobile-menu-button">
+                        <i class="fa fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <main class="pt-24 pb-16">
+        <!-- 英雄区域 -->
+        <section class="bg-gradient text-white py-20 px-4 relative overflow-hidden">
+            <!-- 装饰元素 -->
+            <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                <div class="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full blur-3xl"></div>
+            </div>
+            <div class="max-w-6xl mx-auto text-center relative z-10 animate-fade-in">
+                <h1 class="text-3xl md:text-5xl font-bold mb-6 leading-tight text-balance">任务管理器示例</h1>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto text-balance">一个完整的命令行任务管理应用，展示 Nova 的核心特性</p>
+            </div>
+        </section>
+
+        <!-- 面包屑 -->
+        <section class="px-4 py-6 bg-white border-b border-border">
+            <div class="max-w-6xl mx-auto">
+                <nav class="text-sm text-muted flex items-center">
+                    <a href="../index.html" class="hover:text-primary transition-colors duration-200 flex items-center">
+                        <i class="fa fa-home mr-2"></i> 首页
+                    </a> 
+                    <span class="mx-3 text-gray-400">/</span> 
+                    <a href="index.html" class="hover:text-primary transition-colors duration-200">示例</a>
+                    <span class="mx-3 text-gray-400">/</span> 
+                    <span class="text-primary font-medium">任务管理器</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- 主要内容 -->
+        <section class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <!-- 侧边栏 -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-xl shadow-card p-6 sticky top-24">
+                            <h3 class="text-lg font-semibold mb-4 text-primary">目录</h3>
+                            <ul class="space-y-3">
+                                <li><a href="#intro" class="text-muted hover:text-primary transition-colors duration-200 flex items-center group">
+                                    <i class="fa fa-info-circle mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                    介绍
+                                </a></li>
+                                <li><a href="#code" class="text-muted hover:text-primary transition-colors duration-200 flex items-center group">
+                                    <i class="fa fa-code mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                    程序代码
+                                </a></li>
+                                <li><a href="#features" class="text-muted hover:text-primary transition-colors duration-200 flex items-center group">
+                                    <i class="fa fa-star mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                    程序特性
+                                </a></li>
+                                <li><a href="#run" class="text-muted hover:text-primary transition-colors duration-200 flex items-center group">
+                                    <i class="fa fa-play-circle mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                    如何运行
+                                </a></li>
+                                <li><a href="#example" class="text-muted hover:text-primary transition-colors duration-200 flex items-center group">
+                                    <i class="fa fa-terminal mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                    运行示例
+                                </a></li>
+                                <li><a href="#functions" class="text-muted hover:text-primary transition-colors duration-200 flex items-center group">
+                                    <i class="fa fa-list mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                    功能说明
+                                </a></li>
+                                <li><a href="#learning" class="text-muted hover:text-primary transition-colors duration-200 flex items-center group">
+                                    <i class="fa fa-graduation-cap mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                    学习要点
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 主内容区 -->
+                    <div class="lg:col-span-3 space-y-8">
+                        <!-- 介绍 -->
+                        <section id="intro" class="bg-white rounded-xl shadow-card p-8 animate-slide-up">
+                            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                                <i class="fa fa-info-circle mr-3"></i>
+                                介绍
+                            </h2>
+                            <p class="text-muted leading-relaxed mb-6">
+                                这个任务管理器示例展示了 Nova 语言的更多特性，比简单的 Hello World 程序更复杂。它包含了数据结构、控制流、函数定义和用户交互等多种功能。
+                            </p>
+                        </section>
+
+                        <!-- 程序代码 -->
+                        <section id="code" class="bg-white rounded-xl shadow-card p-8 animate-slide-up">
+                            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                                <i class="fa fa-code mr-3"></i>
+                                程序代码
+                            </h2>
+                            <div class="relative">
+                                <pre><code class="language-nova">def main() {
+    // 初始化任务列表
+    let tasks: List&lt;Map&lt;String, Any&gt;&gt; = [];
+    let running = true;
+    
+    while (running) {
+        print("\n=== 任务管理器 ===");
+        print("1. 添加任务");
+        print("2. 查看所有任务");
+        print("3. 标记任务完成");
+        print("4. 删除任务");
+        print("5. 退出");
+        
+        let choice = input("请选择操作 (1-5): ");
+        
+        match choice {
+            "1" => addTask(tasks),
+            "2" => viewTasks(tasks),
+            "3" => markTaskComplete(tasks),
+            "4" => deleteTask(tasks),
+            "5" => {
+                print("退出程序...");
+                running = false;
+            },
+            _ => print("无效选择，请重试。")
+        }
+    }
+}
+
+// 添加任务
+fn addTask(tasks: List&lt;Map&lt;String, Any&gt;&gt;) {
+    let title = input("输入任务标题: ");
+    let description = input("输入任务描述: ");
+    let priority = input("输入优先级 (高/中/低): ");
+    
+    let task = {
+        "id": tasks.length + 1,
+        "title": title,
+        "description": description,
+        "priority": priority,
+        "completed": false,
+        "created_at": getCurrentTime()
+    };
+    
+    tasks.push(task);
+    print("任务添加成功！");
+}
+
+// 查看所有任务
+fn viewTasks(tasks: List&lt;Map&lt;String, Any&gt;&gt;) {
+    if (tasks.length == 0) {
+        print("暂无任务。");
+        return;
+    }
+    
+    print("\n=== 任务列表 ===");
+    for (let i = 0; i < tasks.length; i++) {
+        let task = tasks[i];
+        let status = task["completed"] ? "✅ 已完成" : "❌ 未完成";
+        
+        print("\nID: " + task["id"]);
+        print("标题: " + task["title"]);
+        print("描述: " + task["description"]);
+        print("优先级: " + task["priority"]);
+        print("状态: " + status);
+        print("创建时间: " + task["created_at"]);
+        print("-" * 40);
+    }
+}
+
+// 标记任务完成
+fn markTaskComplete(tasks: List&lt;Map&lt;String, Any&gt;&gt;) {
+    if (tasks.length == 0) {
+        print("暂无任务。");
+        return;
+    }
+    
+    let taskId = input("输入要标记完成的任务 ID: ");
+    let id = parseInt(taskId);
+    
+    let found = false;
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i]["id"] == id) {
+            tasks[i]["completed"] = true;
+            print("任务标记完成成功！");
+            found = true;
+            break;
+        }
+    }
+    
+    if (!found) {
+        print("未找到指定 ID 的任务。");
+    }
+}
+
+// 删除任务
+fn deleteTask(tasks: List&lt;Map&lt;String, Any&gt;&gt;) {
+    if (tasks.length == 0) {
+        print("暂无任务。");
+        return;
+    }
+    
+    let taskId = input("输入要删除的任务 ID: ");
+    let id = parseInt(taskId);
+    
+    let foundIndex = -1;
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i]["id"] == id) {
+            foundIndex = i;
+            break;
+        }
+    }
+    
+    if (foundIndex != -1) {
+        tasks.splice(foundIndex, 1);
+        print("任务删除成功！");
+        
+        // 更新任务 ID
+        for (let i = 0; i < tasks.length; i++) {
+            tasks[i]["id"] = i + 1;
+        }
+    } else {
+        print("未找到指定 ID 的任务。");
+    }
+}
+
+// 获取当前时间
+fn getCurrentTime(): String {
+    // 简化的时间获取函数
+    return "2026-03-18 " + (10 + Math.random() * 14).toInt() + ":" + (10 + Math.random() * 50).toInt();
+}</code></pre>
+                                <button class="absolute top-4 right-4 bg-primary/80 text-white px-3 py-1 rounded text-xs opacity-0 hover:opacity-100 transition-opacity duration-200" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').textContent).then(() => { this.textContent = '已复制'; setTimeout(() => { this.textContent = '复制'; }, 2000); });">复制</button>
+                            </div>
+                        </section>
+
+                        <!-- 程序特性 -->
+                        <section id="features" class="bg-white rounded-xl shadow-card p-8 animate-slide-up">
+                            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                                <i class="fa fa-star mr-3"></i>
+                                程序特性
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-primary/5 p-6 rounded-lg border border-primary/20 hover:shadow-card-hover transition-all duration-300">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                            <i class="fa fa-database text-primary"></i>
+                                        </div>
+                                        <h3 class="font-semibold text-lg">数据结构</h3>
+                                    </div>
+                                    <p class="text-muted">使用 List&lt;Map&lt;String, Any&gt;&gt; 存储任务，映射用于存储任务的属性</p>
+                                </div>
+                                <div class="bg-primary/5 p-6 rounded-lg border border-primary/20 hover:shadow-card-hover transition-all duration-300">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                            <i class="fa fa-code-fork text-primary"></i>
+                                        </div>
+                                        <h3 class="font-semibold text-lg">控制流</h3>
+                                    </div>
+                                    <p class="text-muted">while 循环、match 语句、if 条件判断、for 循环</p>
+                                </div>
+                                <div class="bg-primary/5 p-6 rounded-lg border border-primary/20 hover:shadow-card-hover transition-all duration-300">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                            <i class="fa fa-cogs text-primary"></i>
+                                        </div>
+                                        <h3 class="font-semibold text-lg">函数</h3>
+                                    </div>
+                                    <p class="text-muted">定义多个函数，包括参数和返回值</p>
+                                </div>
+                                <div class="bg-primary/5 p-6 rounded-lg border border-primary/20 hover:shadow-card-hover transition-all duration-300">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                            <i class="fa fa-comments text-primary"></i>
+                                        </div>
+                                        <h3 class="font-semibold text-lg">用户交互</h3>
+                                    </div>
+                                    <p class="text-muted">使用 input() 获取用户输入，print() 显示信息</p>
+                                </div>
+                                <div class="bg-primary/5 p-6 rounded-lg border border-primary/20 hover:shadow-card-hover transition-all duration-300">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                            <i class="fa fa-font text-primary"></i>
+                                        </div>
+                                        <h3 class="font-semibold text-lg">字符串操作</h3>
+                                    </div>
+                                    <p class="text-muted">字符串拼接、重复字符</p>
+                                </div>
+                                <div class="bg-primary/5 p-6 rounded-lg border border-primary/20 hover:shadow-card-hover transition-all duration-300">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                            <i class="fa fa-exchange text-primary"></i>
+                                        </div>
+                                        <h3 class="font-semibold text-lg">类型转换</h3>
+                                    </div>
+                                    <p class="text-muted">parseInt()、toInt() 等类型转换</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- 如何运行 -->
+                        <section id="run" class="bg-white rounded-xl shadow-card p-8 animate-slide-up">
+                            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                                <i class="fa fa-play-circle mr-3"></i>
+                                如何运行
+                            </h2>
+                            <ol class="space-y-4">
+                                <li class="flex items-start">
+                                    <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">1</span>
+                                    <p class="text-muted">将代码保存为 <code class="bg-gray-100 px-2 py-1 rounded font-mono">task_manager.nova</code></p>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">2</span>
+                                    <p class="text-muted">在终端中运行：</p>
+                                </li>
+                            </ol>
+                            <div class="mt-4 bg-dark text-light p-4 rounded-lg font-mono">
+nova task_manager.nova
+</div>
+                        </section>
+
+                        <!-- 运行示例 -->
+                        <section id="example" class="bg-white rounded-xl shadow-card p-8 animate-slide-up">
+                            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                                <i class="fa fa-terminal mr-3"></i>
+                                运行示例
+                            </h2>
+                            <div class="bg-dark text-light p-6 rounded-lg font-mono overflow-x-auto">
+=== 任务管理器 ===
+1. 添加任务
+2. 查看所有任务
+3. 标记任务完成
+4. 删除任务
+5. 退出
+请选择操作 (1-5): 1
+输入任务标题: 学习 Nova
+输入任务描述: 完成所有教程
+输入优先级 (高/中/低): 高
+任务添加成功！
+
+=== 任务管理器 ===
+1. 添加任务
+2. 查看所有任务
+3. 标记任务完成
+4. 删除任务
+5. 退出
+请选择操作 (1-5): 2
+
+=== 任务列表 ===
+
+ID: 1
+标题: 学习 Nova
+描述: 完成所有教程
+优先级: 高
+状态: ❌ 未完成
+创建时间: 2026-03-18 15:30
+----------------------------------------
+</div>
+                        </section>
+
+                        <!-- 功能说明 -->
+                        <section id="functions" class="bg-white rounded-xl shadow-card p-8 animate-slide-up">
+                            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                                <i class="fa fa-list mr-3"></i>
+                                功能说明
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-primary/5 transition-colors duration-200">
+                                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fa fa-plus text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">添加任务</h4>
+                                        <p class="text-muted text-sm">输入任务标题、描述和优先级</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-primary/5 transition-colors duration-200">
+                                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fa fa-list-alt text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">查看任务</h4>
+                                        <p class="text-muted text-sm">显示所有任务的详细信息</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-primary/5 transition-colors duration-200">
+                                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fa fa-check text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">标记完成</h4>
+                                        <p class="text-muted text-sm">将指定任务标记为已完成</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-primary/5 transition-colors duration-200">
+                                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fa fa-trash text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">删除任务</h4>
+                                        <p class="text-muted text-sm">删除指定 ID 的任务</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-primary/5 transition-colors duration-200 md:col-span-2">
+                                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fa fa-sign-out text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">退出程序</h4>
+                                        <p class="text-muted text-sm">结束任务管理器</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- 学习要点 -->
+                        <section id="learning" class="bg-white rounded-xl shadow-card p-8 animate-slide-up">
+                            <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                                <i class="fa fa-graduation-cap mr-3"></i>
+                                学习要点
+                            </h2>
+                            <p class="text-muted mb-4">通过这个示例，你可以学习到：</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-muted">如何使用复杂的数据结构（列表和映射）</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-muted">如何实现循环和条件控制</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-muted">如何定义和使用函数</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-muted">如何处理用户输入和输出</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-muted">如何组织一个完整的程序</span>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <!-- 关于 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">关于 Nova</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Nova 是一种现代的静态类型编程语言，专为构建可靠和高效的软件而设计。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
+                            <i class="fa fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
+                            <i class="fa fa-discord text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- 资源 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">资源</h3>
+                    <ul class="space-y-3">
+                        <li><a href="../tutorial/index.html" class="text-gray-400 hover:text-white transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-arrow-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            教程
+                        </a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-arrow-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            示例
+                        </a></li>
+                        <li><a href="../reference/index.html" class="text-gray-400 hover:text-white transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-arrow-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            参考文档
+                        </a></li>
+                        <li><a href="../library/index.html" class="text-gray-400 hover:text-white transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-arrow-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            标准库
+                        </a></li>
+                        <li><a href="../faq/index.html" class="text-gray-400 hover:text-white transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-arrow-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            常见问题
+                        </a></li>
+                    </ul>
+                </div>
+                <!-- 语言 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">语言</h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../en/examples/task-manager.html" class="text-gray-400 hover:text-white transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-arrow-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            English
+                        </a></li>
+                        <li><a href="../../jp/examples/task-manager.html" class="text-gray-400 hover:text-white transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-arrow-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            日本語
+                        </a></li>
+                        <li><a href="../../fr/examples/task-manager.html" class="text-gray-400 hover:text-white transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-arrow-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            Français
+                        </a></li>
+                    </ul>
+                </div>
+                <!-- 联系 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">联系我们</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-envelope mr-3"></i>
+                            <span>contact@nova-lang.org</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-github mr-3"></i>
+                            <span>github.com/nova-lang</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 Nova 编程语言。保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white/95', 'shadow-md');
+            } else {
+                nav.classList.remove('bg-white/95');
+            }
+        });
+
+        // 移动菜单
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            // 这里可以添加移动菜单的展开/收起逻辑
+        });
+    </script>
+</body>
+</html>

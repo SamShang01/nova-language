@@ -1084,7 +1084,7 @@ class CodeGenerator:
         访问二元表达式节点
         """
         if node.operator == '=':
-            # 特殊处理赋值操作：x = y 或 this.x = y
+            # 特殊处理赋值操作：x = y 或 this.x = y 或 g['key'] = value
             # 对于赋值，我们需要先计算右侧的值，然后存储到左侧的变量
             if isinstance(node.left, IdentifierExpression):
                 # 计算右侧表达式
@@ -1100,6 +1100,17 @@ class CodeGenerator:
                 # 存储到成员
                 from nova.vm.instructions import STORE_ATTR
                 self.instructions.append(STORE_ATTR(node.left.member))
+            elif isinstance(node.left, IndexExpression):
+                # 下标赋值：g['key'] = value
+                # 先加载对象（g）
+                node.left.object.accept(self)
+                # 加载索引（'key'）
+                node.left.index.accept(self)
+                # 计算右侧的值
+                node.right.accept(self)
+                # 执行下标赋值
+                from nova.vm.instructions import STORE_SUBSCRIPT
+                self.instructions.append(STORE_SUBSCRIPT())
             else:
                 raise VMError(f"Invalid assignment target at line {node.line}, column {node.column}")
         else:
@@ -1215,6 +1226,14 @@ class CodeGenerator:
         else:
             self.instructions.append(LOAD_NAME(node.name))
     
+    def visit_TypeTypeExpression(self, node):
+        """
+        访问类型类型表达式节点
+        
+        对于type(...)这样的调用，将其视为对内置type函数的调用
+        """
+        self.instructions.append(LOAD_NAME('type'))
+    
     def visit_CallExpression(self, node):
         """
         访问调用表达式节点
@@ -1298,8 +1317,13 @@ class CodeGenerator:
         """
         访问索引表达式节点
         """
-        # 简化实现：跳过索引访问
+        # 加载对象（如 g）
         node.object.accept(self)
+        # 加载索引（如 'key'）
+        node.index.accept(self)
+        # 执行下标访问
+        from nova.vm.instructions import LOAD_SUBSCRIPT
+        self.instructions.append(LOAD_SUBSCRIPT())
     
     def visit_LambdaExpression(self, node):
         """

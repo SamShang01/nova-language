@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .btn-primary:hover {
+            background: #f0f0f0;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .nav-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-card a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        
+        .nav-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nova</h1>
+            <p>A modern, statically-typed programming language</p>
+            <div>
+                <a href="tutorial/index.html" class="btn btn-primary">Get Started</a>
+                <a href="reference/index.html" class="btn">Reference</a>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <h2>Welcome to Nova</h2>
+            <p>Nova is a modern, statically-typed programming language designed for building reliable and efficient software. It combines the best features of languages like Python, TypeScript, and Rust, offering a clean syntax, strong type system, and powerful features.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Static Typing</h4>
+                    <p>Compile-time type checking helps catch errors early and improves performance.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Clean Syntax</h4>
+                    <p>Python-like syntax that's easy to read and write.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Object-Oriented</h4>
+                    <p>Supports classes, inheritance, and polymorphism.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Functional Features</h4>
+                    <p>Supports lambda functions, higher-order functions, and immutability.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Traits</h4>
+                    <p>Code reuse through traits for flexible composition.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Generics</h4>
+                    <p>Write type-safe generic code for maximum reusability.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Documentation</h2>
+            <p>Explore our comprehensive documentation to learn about Nova's features and how to use them effectively.</p>
+            
+            <div class="nav-grid">
+                <div class="nav-card">
+                    <a href="tutorial/index.html">
+                        <h4>Tutorial</h4>
+                        <p>Step-by-step guides to learn Nova</p>
+                    </a>
+                </div>
+                <div class="nav-card">
+                    <a href="examples/index.html">
+                        <h4>Examples</h4>
+                        <p>Practical code examples</p>
+                    </a>
+                </div>
+                <div class="nav-card">
+                    <a href="faq/index.html">
+                        <h4>FAQ</h4>
+                        <p>Frequently asked questions</p>
+                    </a>
+                </div>
+                <div class="nav-card">
+                    <a href="library/index.html">
+                        <h4>Standard Library</h4>
+                        <p>Built-in modules and functions</p>
+                    </a>
+                </div>
+                <div class="nav-card">
+                    <a href="reference/index.html">
+                        <h4>Reference</h4>
+                        <p>Detailed language documentation</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Getting Started</h2>
+            <p>Ready to start using Nova? Follow these steps:</p>
+            
+            <ol>
+                <li><a href="tutorial/installation.html">Install Nova</a> on your system</li>
+                <li>Read the <a href="tutorial/hello-world.html">Hello World</a> tutorial to write your first program</li>
+                <li>Explore the <a href="tutorial/index.html">full tutorial</a> to learn more features</li>
+                <li>Check the <a href="examples/index.html">examples</a> for practical use cases</li>
+                <li>Refer to the <a href="reference/index.html">reference documentation</a> for detailed information</li>
+            </ol>
+            
+            <div class="info-box">
+                <h4>Need Help?</h4>
+                <p>If you have questions or need assistance, check the <a href="faq/index.html">FAQ</a> or join the Nova community forums.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Community</h2>
+            <p>Nova has a growing community of developers who are passionate about the language. Here's how you can get involved:</p>
+            
+            <ul>
+                <li>Join the Discord server to chat with other Nova developers</li>
+                <li>Follow us on GitHub to contribute to the project</li>
+                <li>Report bugs and suggest features through GitHub issues</li>
+                <li>Write blog posts or tutorials about Nova</li>
+                <li>Share your Nova projects with the community</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Latest Updates</h2>
+            <p>Stay up-to-date with the latest developments in the Nova ecosystem:</p>
+            
+            <ul>
+                <li>Version 1.0.0 released with improved type inference and performance</li>
+                <li>New standard library modules for networking and web development</li>
+                <li>IDE plugins for Visual Studio Code and IntelliJ IDEA</li>
+                <li>Comprehensive documentation now available</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

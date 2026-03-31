@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .step {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .step h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hello World</h1>
+            <p>Your first Nova program</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Hello World
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction</h2>
+            <p>Welcome to your first Nova program! In this tutorial, you'll learn how to create and run a simple "Hello, World!" program in Nova. This is the traditional first step for learning any programming language.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Step 1: Create a Nova File</h2>
+            <p>First, create a new file with a <code>.nova</code> extension. You can name it whatever you like, but for this tutorial, let's call it <code>hello.nova</code>.</p>
+            
+            <div class="step">
+                <h4>Windows</h4>
+                <ol>
+                    <li>Open Notepad or your favorite text editor</li>
+                    <li>Save the file as <code>hello.nova</code> (make sure to select "All Files" in the save dialog)</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h4>macOS/Linux</h4>
+                <ol>
+                    <li>Open your favorite text editor (e.g., VS Code, Sublime Text, or nano)</li>
+                    <li>Save the file as <code>hello.nova</code></li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Step 2: Write the Hello World Program</h2>
+            <p>Now, let's write the code for our Hello World program. In Nova, the simplest way to print something to the console is to use the <code>print</code> function.</p>
+            
+            <div class="code-block">
+def main() {
+    print("Hello, World!");
+}
+</div>
+            
+            <p>Let's break down what this code does:</p>
+            <ul>
+                <li><code>def main() {</code> - This defines a function named <code>main</code>. In Nova, the <code>main</code> function is the entry point of your program.</li>
+                <li><code>print("Hello, World!");</code> - This calls the <code>print</code> function with the string "Hello, World!" as an argument. This will display the text on the console.</li>
+                <li><code>}</code> - This closes the <code>main</code> function.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Step 3: Run the Program</h2>
+            <p>Now that we've written our program, let's run it. Open a terminal or command prompt and navigate to the directory where you saved <code>hello.nova</code>.</p>
+            
+            <div class="step">
+                <h4>Running the Program</h4>
+                <div class="terminal-block">
+# Run the program using the nova command
+nova hello.nova
+                </div>
+                <p>You should see the output:</p>
+                <div class="terminal-block">
+Hello, World!
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Alternative: Using the REPL</h2>
+            <p>You can also run Nova code interactively using the REPL (Read-Eval-Print Loop). To start the REPL, simply type <code>nova</code> in your terminal:</p>
+            
+            <div class="terminal-block">
+$ nova
+Nova 1.0.0 (REPL mode)
+Type 'exit' to quit.
+
+> print("Hello, World!");
+Hello, World!
+>
+                </div>
+            
+            <p>To exit the REPL, type <code>exit</code> or press Ctrl+D (Ctrl+Z on Windows).</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Understanding the Code</h2>
+            <p>Let's take a closer look at the Hello World program:</p>
+            
+            <h3>Function Definition</h3>
+            <p>In Nova, functions are defined using the <code>def</code> keyword, followed by the function name, parentheses for parameters, and a block of code enclosed in curly braces.</p>
+            
+            <h3>The main Function</h3>
+            <p>The <code>main</code> function is special in Nova. When you run a Nova program, the interpreter looks for a <code>main</code> function and calls it automatically. This is the entry point of your program.</p>
+            
+            <h3>The print Function</h3>
+            <p>The <code>print</code> function is a built-in function in Nova that displays text to the console. It takes one or more arguments and prints them separated by spaces.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Variations</h2>
+            <p>Here are a few variations of the Hello World program to try:</p>
+            
+            <h3>Printing Multiple Lines</h3>
+            <div class="code-block">
+def main() {
+    print("Hello, World!");
+    print("Welcome to Nova!");
+}
+</div>
+            
+            <h3>Using Variables</h3>
+            <div class="code-block">
+def main() {
+    let message = "Hello, World!";
+    print(message);
+}
+</div>
+            
+            <h3>Printing with Variables</h3>
+            <div class="code-block">
+def main() {
+    let name = "World";
+    print("Hello, " + name + "!");
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Errors</h2>
+            <p>Here are some common errors you might encounter when writing your first Nova program:</p>
+            
+            <ul>
+                <li><strong>Syntax Error:</strong> Forgetting to close parentheses or curly braces. Make sure all opening parentheses, brackets, and braces have corresponding closing ones.</li>
+                <li><strong>Name Error:</strong> Using a variable or function that hasn't been defined. Check your spelling and make sure all names are correct.</li>
+                <li><strong>File Not Found:</strong> Running the program from the wrong directory. Make sure you're in the same directory as your <code>.nova</code> file.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you've written your first Nova program, you can:</p>
+            <ul>
+                <li><a href="variables.html">Learn about variables</a> in Nova</li>
+                <li><a href="functions.html">Explore functions</a> in more detail</li>
+                <li>Try writing a program that does something more complex</li>
+            </ul>
+            <a href="variables.html" class="btn">Continue to Variables</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

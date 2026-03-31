@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泛型 - Nova 编程语言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>泛型</h1>
+            <p>在 Nova 中使用泛型实现类型安全的代码</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> &gt; <a href="index.html">教程</a> &gt; 泛型
+        </div>
+        
+        <div class="content-section">
+            <h2>泛型简介</h2>
+            <p>泛型允许您编写可以处理多种类型的代码，同时保持类型安全性。它们使您能够创建可重用的组件，这些组件可以在维护编译时类型检查的同时操作不同类型的数据。</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>泛型函数</h2>
+            <p>您可以通过在尖括号中指定类型参数（<code>&lt;T&gt;</code>）来定义泛型函数：</p>
+            
+            <div class="code-block">
+// 泛型函数
+
+def printArray<T>(arr: Array<T>) {
+    for (let item in arr) {
+        print(item);
+    }
+}
+
+// 用于不同类型
+let numbers = [1, 2, 3, 4, 5];
+let strings = ["hello", "world", "nova"];
+
+printArray(numbers); // 输出: 1, 2, 3, 4, 5
+printArray(strings); // 输出: hello, world, nova
+</div>
+            
+            <h3>多个类型参数</h3>
+            <p>您可以定义具有多个类型参数的函数：</p>
+            
+            <div class="code-block">
+// 多个类型参数
+
+def pair<T, U>(first: T, second: U) -> Array<any> {
+    return [first, second];
+}
+
+// 使用
+let result1 = pair(1, "hello");
+print(result1); // 输出: [1, "hello"]
+
+let result2 = pair(true, 3.14);
+print(result2); // 输出: [true, 3.14]
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>泛型类</h2>
+            <p>您可以通过在尖括号中指定类型参数来定义泛型类：</p>
+            
+            <div class="code-block">
+// 泛型类
+
+class Box<T> {
+    private let value: T;
+    
+    def __init__(self, value: T) {
+        self.value = value;
+    }
+    
+    def getValue() -> T {
+        return self.value;
+    }
+    
+    def setValue(value: T) {
+        self.value = value;
+    }
+}
+
+// 用于不同类型
+let intBox = Box<int>(42);
+print(intBox.getValue()); // 输出: 42
+
+intBox.setValue(100);
+print(intBox.getValue()); // 输出: 100
+
+let stringBox = Box<string>("Hello");
+print(stringBox.getValue()); // 输出: Hello
+
+stringBox.setValue("World");
+print(stringBox.getValue()); // 输出: World
+</div>
+            
+            <h3>类中的多个类型参数</h3>
+            <p>类也可以有多个类型参数：</p>
+            
+            <div class="code-block">
+// 类中的多个类型参数
+
+class Pair<T, U> {
+    let first: T;
+    let second: U;
+    
+    def __init__(self, first: T, second: U) {
+        self.first = first;
+        self.second = second;
+    }
+    
+    def getFirst() -> T {
+        return self.first;
+    }
+    
+    def getSecond() -> U {
+        return self.second;
+    }
+}
+
+// 使用
+let pair1 = Pair<int, string>(1, "one");
+print(pair1.getFirst()); // 输出: 1
+print(pair1.getSecond()); // 输出: one
+
+let pair2 = Pair<string, bool>("test", true);
+print(pair2.getFirst()); // 输出: test
+print(pair2.getSecond()); // 输出: true
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>泛型接口和特性</h2>
+            <p>您可以定义泛型接口和特性：</p>
+            
+            <div class="code-block">
+// 泛型特性
+
+trait Container<T> {
+    def add(item: T);
+    def remove() -> T;
+    def isEmpty() -> bool;
+}
+
+// 实现泛型特性
+
+class Stack<T> implements Container<T> {
+    private let items: Array<T> = [];
+    
+    def add(item: T) {
+        self.items.push(item);
+    }
+    
+    def remove() -> T {
+        if (self.isEmpty()) {
+            throw new Error("Stack is empty");
+        }
+        return self.items.pop();
+    }
+    
+    def isEmpty() -> bool {
+        return self.items.length == 0;
+    }
+}
+
+// 使用
+let stack = Stack<int>();
+stack.add(1);
+stack.add(2);
+stack.add(3);
+
+print(stack.remove()); // 输出: 3
+print(stack.remove()); // 输出: 2
+print(stack.remove()); // 输出: 1
+print(stack.isEmpty()); // 输出: true
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>类型约束</h2>
+            <p>您可以为类型参数添加约束，以确保它们满足特定要求：</p>
+            
+            <div class="code-block">
+// 类型约束
+
+trait Comparable {
+    def compareTo(other: any) -> int;
+}
+
+class Person implements Comparable {
+    let name: string;
+    let age: int;
+    
+    def __init__(self, name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+    
+    def compareTo(other: any) -> int {
+        if (other is Person) {
+            return self.age - other.age;
+        }
+        return 0;
+    }
+}
+
+// 带约束的泛型函数
+def findMax<T: Comparable>(items: Array<T>) -> T {
+    if (items.length == 0) {
+        throw new Error("Array is empty");
+    }
+    
+    let max = items[0];
+    for (let item in items) {
+        if (item.compareTo(max) > 0) {
+            max = item;
+        }
+    }
+    return max;
+}
+
+// 使用
+let people = [
+    Person("John", 30),
+    Person("Alice", 25),
+    Person("Bob", 35)
+];
+
+let oldest = findMax(people);
+print(oldest.name); // 输出: Bob
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>默认类型参数</h2>
+            <p>您可以为类型参数指定默认类型：</p>
+            
+            <div class="code-block">
+// 默认类型参数
+
+def defaultValue<T = string>() -> T {
+    if (T is string) {
+        return "default" as T;
+    } elif (T is int) {
+        return 0 as T;
+    } elif (T is bool) {
+        return false as T;
+    }
+    return null as T;
+}
+
+// 使用
+print(defaultValue<string>()); // 输出: default
+print(defaultValue<int>()); // 输出: 0
+print(defaultValue<bool>()); // 输出: false
+print(defaultValue()); // 输出: default (使用默认的 string 类型)
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>非泛型类中的泛型方法</h2>
+            <p>您可以在非泛型类中定义泛型方法：</p>
+            
+            <div class="code-block">
+// 非泛型类中的泛型方法
+
+class Utils {
+    def static printList<T>(list: Array<T>) {
+        for (let item in list) {
+            print(item);
+        }
+    }
+    
+    def static map<T, U>(list: Array<T>, mapper: (T) -> U) -> Array<U> {
+        let result: Array<U> = [];
+        for (let item in list) {
+            result.push(mapper(item));
+        }
+        return result;
+    }
+}
+
+// 使用
+let numbers = [1, 2, 3, 4, 5];
+Utils.printList(numbers); // 输出: 1, 2, 3, 4, 5
+
+let doubled = Utils.map(numbers, (x) => x * 2);
+Utils.printList(doubled); // 输出: 2, 4, 6, 8, 10
+
+let strings = Utils.map(numbers, (x) => "Number: " + x);
+Utils.printList(strings); // 输出: Number: 1, Number: 2, Number: 3, Number: 4, Number: 5
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>通配符类型</h2>
+            <p>您可以使用通配符类型来表示未知类型：</p>
+            
+            <div class="code-block">
+// 通配符类型
+
+class Box<T> {
+    private let value: T;
+    
+    def __init__(self, value: T) {
+        self.value = value;
+    }
+    
+    def getValue() -> T {
+        return self.value;
+    }
+}
+
+// 使用通配符类型
+def printBoxContent(box: Box<any>) {
+    print(box.getValue());
+}
+
+// 使用
+let intBox = Box<int>(42);
+let stringBox = Box<string>("Hello");
+
+printBoxContent(intBox); // 输出: 42
+printBoxContent(stringBox); // 输出: Hello
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>类型擦除</h2>
+            <p>在 Nova 中，泛型是使用类型擦除实现的，这意味着类型参数在运行时被移除。这允许高效的代码生成，同时保持编译时类型安全。</p>
+            
+            <div class="info-box">
+                <h4>注意</h4>
+                <p>由于类型擦除，您不能在泛型函数或类内部使用类型参数进行运行时类型检查，如 <code>typeof T</code> 或 <code>is T</code>。</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>最佳实践</h2>
+            <ul>
+                <li><strong>使用描述性的类型参数名称：</strong>对于简单情况使用有意义的名称如 <code>T</code>、<code>U</code>、<code>V</code>，或对于复杂情况使用更具描述性的名称如 <code>ElementType</code>。</li>
+                <li><strong>在必要时添加类型约束：</strong>使用约束确保类型参数满足特定要求。</li>
+                <li><strong>保持泛型简单：</strong>不要使用太多类型参数使代码过于复杂。</li>
+                <li><strong>为集合类型使用泛型：</strong>泛型对于列表、栈和队列等集合类特别有用。</li>
+                <li><strong>记录泛型代码：</strong>添加注释解释如何使用泛型类型。</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>常见错误</h2>
+            <ul>
+                <li><strong>忘记指定类型参数：</strong>创建泛型类的实例时始终指定类型参数。</li>
+                <li><strong>在运行时检查中使用类型参数：</strong>记住类型参数在运行时被擦除。</li>
+                <li><strong>过度使用泛型：</strong>当简单的函数或类足够时，不要使用泛型。</li>
+                <li><strong>忽略类型约束：</strong>使用受约束的类型参数时，确保实现所有必需的方法。</li>
+                <li><strong>混淆类型参数：</strong>注意多个类型参数的顺序。</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>下一步</h2>
+            <p>现在您了解了 Nova 中的泛型，您可以：</p>
+            <ul>
+                <li><a href="index.html">返回教程索引</a> 复习其他主题</li>
+                <li>使用泛型创建可重用、类型安全的组件</li>
+                <li>探索高级泛型模式</li>
+            </ul>
+            <a href="index.html" class="btn">返回教程索引</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </footer>
+    </div>
+</body>
+</html>

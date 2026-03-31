@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块 - Nova 编程语言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>模块</h1>
+            <p>在 Nova 中创建和使用模块</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> &gt; <a href="index.html">教程</a> &gt; 模块
+        </div>
+        
+        <div class="content-section">
+            <h2>模块的创建</h2>
+            <p>在 Nova 中，你可以将代码组织到模块中，以便更好地管理和重用代码。</p>
+            
+            <div class="code-block">
+// math.nova - 数学工具模块
+def add(a: int, b: int) -> int {
+    return a + b;
+}
+
+def subtract(a: int, b: int) -> int {
+    return a - b;
+}
+
+def multiply(a: int, b: int) -> int {
+    return a * b;
+}
+
+def divide(a: int, b: int) -> float {
+    if (b == 0) {
+        throw new Error("除数不能为零");
+    }
+    return a / b;
+}
+
+// 导出函数
+export {
+    add,
+    subtract,
+    multiply,
+    divide
+};
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>模块的导入</h2>
+            <p>你可以使用 <code>import</code> 关键字来导入模块中的函数和变量。</p>
+            
+            <div class="code-block">
+// 导入整个模块
+import * as math from "./math";
+
+print(math.add(5, 3)); // 输出: 8
+print(math.subtract(10, 4)); // 输出: 6
+
+// 导入特定函数
+import { add, multiply } from "./math";
+
+print(add(2, 3)); // 输出: 5
+print(multiply(4, 5)); // 输出: 20
+
+// 导入并重命名
+import { divide as divideNumbers } from "./math";
+
+print(divideNumbers(10, 2)); // 输出: 5.0
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>模块的导出</h2>
+            <p>你可以使用 <code>export</code> 关键字来导出模块中的函数、变量和类。</p>
+            
+            <div class="code-block">
+// utils.nova - 工具模块
+
+// 导出变量
+export let PI = 3.14159;
+export let E = 2.71828;
+
+// 导出函数
+export def greet(name: string) -> string {
+    return "Hello, " + name + "!";
+}
+
+// 导出类
+export class Calculator {
+    def add(a: int, b: int) -> int {
+        return a + b;
+    }
+    
+    def subtract(a: int, b: int) -> int {
+        return a - b;
+    }
+}
+
+// 导出默认值
+export default def sayHello() {
+    print("Hello from default export!");
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>默认导出</h2>
+            <p>每个模块可以有一个默认导出，使用 <code>export default</code> 关键字。</p>
+            
+            <div class="code-block">
+// logger.nova - 日志模块
+export default class Logger {
+    def log(message: string) {
+        print("[LOG] " + message);
+    }
+    
+    def error(message: string) {
+        print("[ERROR] " + message);
+    }
+    
+    def info(message: string) {
+        print("[INFO] " + message);
+    }
+}
+
+// 导入默认导出
+import Logger from "./logger";
+
+let logger = new Logger();
+logger.log("This is a log message");
+logger.error("This is an error message");
+logger.info("This is an info message");
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>目录结构</h2>
+            <p>对于较大的项目，你可以使用目录来组织模块。</p>
+            
+            <h3>目录结构示例</h3>
+            <div class="code-block">
+project/
+├── src/
+│   ├── main.nova
+│   ├── math/
+│   │   ├── index.nova
+│   │   ├── arithmetic.nova
+│   │   └── geometry.nova
+│   └── utils/
+│       ├── index.nova
+│       └── helpers.nova
+└── package.json
+            </div>
+            
+            <h3>index.nova 文件</h3>
+            <p>在目录中创建 <code>index.nova</code> 文件，可以将目录作为模块导入。</p>
+            
+            <div class="code-block">
+// math/index.nova - 数学模块入口
+import { add, subtract, multiply, divide } from "./arithmetic";
+import { calculateArea, calculatePerimeter } from "./geometry";
+
+export {
+    add,
+    subtract,
+    multiply,
+    divide,
+    calculateArea,
+    calculatePerimeter
+};
+
+// 导入整个数学模块
+import * as math from "./math";
+
+print(math.add(5, 3));
+print(math.calculateArea(5)); // 计算圆的面积
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>内置模块</h2>
+            <p>Nova 提供了一些内置模块，用于常见的功能。</p>
+            
+            <div class="code-block">
+// 使用内置模块
+
+// 文件系统模块
+import fs from "fs";
+
+// 路径模块
+import path from "path";
+
+// 操作系统模块
+import os from "os";
+
+// 网络模块
+import net from "net";
+
+// 示例：使用 fs 模块
+let content = fs.readFileSync("example.txt", "utf8");
+print(content);
+
+// 示例：使用 path 模块
+let fullPath = path.join("directory", "file.txt");
+print(fullPath);
+
+// 示例：使用 os 模块
+print("操作系统: " + os.platform());
+print("CPU 核心数: " + os.cpus().length);
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>模块的循环依赖</h2>
+            <p>当两个或多个模块相互导入时，会产生循环依赖。在 Nova 中，你需要小心处理这种情况。</p>
+            
+            <div class="code-block">
+// moduleA.nova
+import { functionB } from "./moduleB";
+
+export def functionA() {
+    print("Function A");
+    functionB();
+}
+
+// moduleB.nova
+import { functionA } from "./moduleA";
+
+export def functionB() {
+    print("Function B");
+    // 注意：这里调用 functionA 会导致无限递归
+    // functionA();
+}
+
+// main.nova
+import { functionA } from "./moduleA";
+import { functionB } from "./moduleB";
+
+functionA(); // 输出: Function A, Function B
+functionB(); // 输出: Function B
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>模块的缓存</h2>
+            <p>当你导入一个模块时，Nova 会缓存该模块的导出值。这意味着模块只会被执行一次。</p>
+            
+            <div class="code-block">
+// counter.nova
+let count = 0;
+
+print("模块被加载");
+
+export def increment() {
+    count++;
+    return count;
+}
+
+export def getCount() {
+    return count;
+}
+
+// main1.nova
+import { increment, getCount } from "./counter";
+
+print(increment()); // 输出: 1
+print(getCount()); // 输出: 1
+
+// main2.nova
+import { increment, getCount } from "./counter";
+
+print(increment()); // 输出: 2 (模块被缓存，count 保持之前的值)
+print(getCount()); // 输出: 2
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>模块最佳实践</h2>
+            <ul>
+                <li>将相关功能组织到同一个模块中</li>
+                <li>使用目录结构来组织大型项目</li>
+                <li>使用 <code>index.nova</code> 文件作为模块入口</li>
+                <li>避免循环依赖</li>
+                <li>使用明确的导出和导入语句</li>
+                <li>为模块添加适当的文档</li>
+            </ul>
+            
+            <div class="code-block">
+// 模块最佳实践示例
+
+// 1. 组织相关功能
+// utils/string.nova - 字符串工具
+export def capitalize(str: string) -> string {
+    if (str.length === 0) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export def truncate(str: string, length: int) -> string {
+    if (str.length <= length) return str;
+    return str.slice(0, length) + "...";
+}
+
+// 2. 使用 index.nova 作为入口
+// utils/index.nova
+import * as string from "./string";
+import * as number from "./number";
+
+export {
+    string,
+    number
+};
+
+// 3. 明确的导入
+export { add, subtract } from "./arithmetic";
+export { calculateArea } from "./geometry";
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>练习</h2>
+            <p>尝试完成以下练习，以巩固你对模块的理解：</p>
+            <ol>
+                <li>创建一个 <code>string</code> 模块，包含字符串处理函数</li>
+                <li>创建一个 <code>array</code> 模块，包含数组处理函数</li>
+                <li>创建一个目录结构，包含多个模块，并使用 <code>index.nova</code> 作为入口</li>
+                <li>创建一个使用内置模块的程序</li>
+            </ol>
+            
+            <div class="code-block">
+// 练习答案示例
+
+// 1. string 模块
+// string.nova
+export def capitalize(str: string) -> string {
+    if (str.length === 0) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export def reverse(str: string) -> string {
+    return str.split("").reverse().join("");
+}
+
+export def countWords(str: string) -> int {
+    return str.split(/\s+/).filter(word => word.length > 0).length;
+}
+
+export def toCamelCase(str: string) -> string {
+    return str.split("-")
+        .map((word, index) => index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))
+        .join("");
+}
+
+export {
+    capitalize,
+    reverse,
+    countWords,
+    toCamelCase
+};
+
+// 2. array 模块
+// array.nova
+export def find(array: array<any>, predicate: function) -> any {
+    for (let item in array) {
+        if (predicate(item)) {
+            return item;
+        }
+    }
+    return null;
+}
+
+export def filter(array: array<any>, predicate: function) -> array<any> {
+    let result = [];
+    for (let item in array) {
+        if (predicate(item)) {
+            result.push(item);
+        }
+    }
+    return result;
+}
+
+export def map(array: array<any>, mapper: function) -> array<any> {
+    let result = [];
+    for (let item in array) {
+        result.push(mapper(item));
+    }
+    return result;
+}
+
+export def reduce(array: array<any>, reducer: function, initialValue: any) -> any {
+    let accumulator = initialValue;
+    for (let item in array) {
+        accumulator = reducer(accumulator, item);
+    }
+    return accumulator;
+}
+
+export {
+    find,
+    filter,
+    map,
+    reduce
+};
+
+// 3. 目录结构
+/*
+utils/
+├── index.nova
+├── string.nova
+└── array.nova
+*/
+
+// utils/index.nova
+import * as string from "./string";
+import * as array from "./array";
+
+export {
+    string,
+    array
+};
+
+// 使用
+import { string, array } from "./utils";
+
+print(string.capitalize("hello"));
+print(array.map([1, 2, 3], x => x * 2));
+
+// 4. 使用内置模块
+import fs from "fs";
+import path from "path";
+
+// 读取目录内容
+let files = fs.readdirSync(".");
+print("当前目录文件:");
+for (let file in files) {
+    print(file);
+}
+
+// 连接路径
+let filePath = path.join(".", "example.txt");
+print("文件路径: " + filePath);
+
+// 读取文件内容
+if (fs.existsSync(filePath)) {
+    let content = fs.readFileSync(filePath, "utf8");
+    print("文件内容:");
+    print(content);
+} else {
+    print("文件不存在");
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>下一步</h2>
+            <p>现在你已经了解了 Nova 中的模块，你可以：</p>
+            <ul>
+                <li><a href="operators.html">学习运算符</a></li>
+                <li><a href="traits.html">了解特性</a></li>
+            </ul>
+            <a href="operators.html" class="btn">继续学习运算符</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </footer>
+    </div>
+</body>
+</html>

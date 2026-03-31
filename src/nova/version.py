@@ -3,8 +3,8 @@ Nova语言版本信息（src包内）
 """
 
 # 当前版本
-__version__ = (1, 0, 0)
-__version_str__ = "1.0.0"
+__version__ = (1, 1, 0)
+__version_str__ = "1.1.0"
 # 版本判断函数
 def version_greater_or_equal(major, minor, patch):
     """

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traits - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Traits</h1>
+            <p>Using traits for code reuse in Nova</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Traits
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction to Traits</h2>
+            <p>Traits are a mechanism for code reuse in Nova. They allow you to define a set of methods that can be shared across multiple classes. Traits are similar to interfaces but can include default implementations.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Defining Traits</h2>
+            <p>You can define a trait using the <code>trait</code> keyword:</p>
+            
+            <div class="code-block">
+// Defining a trait
+
+trait Printable {
+    def print();
+    
+    def printWithPrefix(prefix: string) {
+        print(prefix + ": " + this.toString());
+    }
+}
+</div>
+            
+            <p>In this example, we define a <code>Printable</code> trait with two methods:</p>
+            <ul>
+                <li><code>print()</code> - An abstract method that must be implemented by any class that uses this trait</li>
+                <li><code>printWithPrefix(prefix: string)</code> - A method with a default implementation</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Using Traits</h2>
+            <p>To use a trait in a class, use the <code>implements</code> keyword:</p>
+            
+            <div class="code-block">
+// Using a trait
+
+class Person implements Printable {
+    let name: string;
+    let age: int;
+    
+    def __init__(self, name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+    
+    def print() {
+        print("Person: " + self.name + ", " + self.age + " years old");
+    }
+    
+    def toString() -> string {
+        return self.name + " (" + self.age + ")";
+    }
+}
+
+class Car implements Printable {
+    let make: string;
+    let model: string;
+    
+    def __init__(self, make: string, model: string) {
+        self.make = make;
+        self.model = model;
+    }
+    
+    def print() {
+        print("Car: " + self.make + " " + self.model);
+    }
+    
+    def toString() -> string {
+        return self.make + " " + self.model;
+    }
+}
+</div>
+            
+            <h3>Using the Trait Methods</h3>
+            <div class="code-block">
+// Using trait methods
+
+let person = Person("John", 30);
+person.print(); // Output: Person: John, 30 years old
+person.printWithPrefix("Info"); // Output: Info: John (30)
+
+let car = Car("Toyota", "Corolla");
+car.print(); // Output: Car: Toyota Corolla
+car.printWithPrefix("Vehicle"); // Output: Vehicle: Toyota Corolla
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Multiple Traits</h2>
+            <p>A class can implement multiple traits by separating them with commas:</p>
+            
+            <div class="code-block">
+// Multiple traits
+
+trait Serializable {
+    def serialize() -> string;
+}
+
+trait Comparable {
+    def compareTo(other: any) -> int;
+}
+
+class Person implements Printable, Serializable, Comparable {
+    let name: string;
+    let age: int;
+    
+    def __init__(self, name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+    
+    // Printable methods
+    def print() {
+        print("Person: " + self.name + ", " + self.age + " years old");
+    }
+    
+    def toString() -> string {
+        return self.name + " (" + self.age + ")";
+    }
+    
+    // Serializable method
+    def serialize() -> string {
+        return "{\"name\": \"" + self.name + "\", \"age\": " + self.age + "}";
+    }
+    
+    // Comparable method
+    def compareTo(other: any) -> int {
+        if (other is Person) {
+            return self.age - other.age;
+        }
+        return 0;
+    }
+}
+</div>
+            
+            <h3>Using Multiple Trait Methods</h3>
+            <div class="code-block">
+// Using multiple trait methods
+
+let person1 = Person("John", 30);
+let person2 = Person("Alice", 25);
+
+// Printable methods
+person1.print(); // Output: Person: John, 30 years old
+person1.printWithPrefix("Info"); // Output: Info: John (30)
+
+// Serializable method
+print(person1.serialize()); // Output: {"name": "John", "age": 30}
+
+// Comparable method
+print(person1.compareTo(person2)); // Output: 5 (John is older than Alice)
+print(person2.compareTo(person1)); // Output: -5 (Alice is younger than John)
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Trait Inheritance</h2>
+            <p>Traits can inherit from other traits using the <code>extends</code> keyword:</p>
+            
+            <div class="code-block">
+// Trait inheritance
+
+trait Readable {
+    def read() -> string;
+}
+
+trait Writable {
+    def write(content: string);
+}
+
+trait ReadWriteable extends Readable, Writable {
+    def readWrite() -> string {
+        let content = this.read();
+        this.write(content + " (modified)");
+        return content;
+    }
+}
+
+class File implements ReadWriteable {
+    let filename: string;
+    private let content: string;
+    
+    def __init__(self, filename: string, content: string) {
+        self.filename = filename;
+        self.content = content;
+    }
+    
+    def read() -> string {
+        return self.content;
+    }
+    
+    def write(content: string) {
+        self.content = content;
+        print("Wrote to " + self.filename + ": " + content);
+    }
+}
+</div>
+            
+            <h3>Using Inherited Trait Methods</h3>
+            <div class="code-block">
+// Using inherited trait methods
+
+let file = File("example.txt", "Initial content");
+print(file.read()); // Output: Initial content
+
+let originalContent = file.readWrite();
+print("Original content: " + originalContent); // Output: Original content: Initial content
+print("New content: " + file.read()); // Output: New content: Initial content (modified)
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Default Implementations</h2>
+            <p>Traits can provide default implementations for methods, which can be overridden by classes that use the trait:</p>
+            
+            <div class="code-block">
+// Default implementations
+
+trait Greeter {
+    def greet() -> string {
+        return "Hello!";
+    }
+    
+    def greetName(name: string) -> string {
+        return "Hello, " + name + "!";
+    }
+}
+
+class EnglishGreeter implements Greeter {
+    // Uses default implementations
+}
+
+class SpanishGreeter implements Greeter {
+    // Override the greet method
+    def greet() -> string {
+        return "¡Hola!";
+    }
+    
+    // Override the greetName method
+    def greetName(name: string) -> string {
+        return "¡Hola, " + name + "!";
+    }
+}
+</div>
+            
+            <h3>Using Default Implementations</h3>
+            <div class="code-block">
+// Using default implementations
+
+let englishGreeter = EnglishGreeter();
+print(englishGreeter.greet()); // Output: Hello!
+print(englishGreeter.greetName("John")); // Output: Hello, John!
+
+let spanishGreeter = SpanishGreeter();
+print(spanishGreeter.greet()); // Output: ¡Hola!
+print(spanishGreeter.greetName("Juan")); // Output: ¡Hola, Juan!
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Abstract Methods</h2>
+            <p>Traits can define abstract methods that must be implemented by any class that uses the trait:</p>
+            
+            <div class="code-block">
+// Abstract methods in traits
+
+trait Shape {
+    def area() -> float;
+    def perimeter() -> float;
+    
+    def describe() -> string {
+        return "Shape with area " + this.area() + " and perimeter " + this.perimeter();
+    }
+}
+
+class Circle implements Shape {
+    let radius: float;
+    
+    def __init__(self, radius: float) {
+        self.radius = radius;
+    }
+    
+    def area() -> float {
+        return 3.14159 * self.radius * self.radius;
+    }
+    
+    def perimeter() -> float {
+        return 2 * 3.14159 * self.radius;
+    }
+}
+
+class Rectangle implements Shape {
+    let width: float;
+    let height: float;
+    
+    def __init__(self, width: float, height: float) {
+        self.width = width;
+        self.height = height;
+    }
+    
+    def area() -> float {
+        return self.width * self.height;
+    }
+    
+    def perimeter() -> float {
+        return 2 * (self.width + self.height);
+    }
+}
+</div>
+            
+            <h3>Using Abstract Methods</h3>
+            <div class="code-block">
+// Using abstract methods
+
+let circle = Circle(5);
+print(circle.area()); // Output: 78.53975
+print(circle.perimeter()); // Output: 31.4159
+print(circle.describe()); // Output: Shape with area 78.53975 and perimeter 31.4159
+
+let rectangle = Rectangle(4, 6);
+print(rectangle.area()); // Output: 24
+print(rectangle.perimeter()); // Output: 20
+print(rectangle.describe()); // Output: Shape with area 24 and perimeter 20
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Trait Composition</h2>
+            <p>Traits can be composed to create more complex behaviors:</p>
+            
+            <div class="code-block">
+// Trait composition
+
+trait Loggable {
+    def log(message: string) {
+        print("[LOG] " + message);
+    }
+}
+
+trait Auditable {
+    def audit(action: string) {
+        print("[AUDIT] " + action);
+    }
+}
+
+trait Secure {
+    def authenticate() -> bool {
+        return true;
+    }
+}
+
+class UserService implements Loggable, Auditable, Secure {
+    def createUser(name: string) {
+        if (this.authenticate()) {
+            this.log("Creating user: " + name);
+            // User creation logic here
+            this.audit("User created: " + name);
+        }
+    }
+    
+    def deleteUser(name: string) {
+        if (this.authenticate()) {
+            this.log("Deleting user: " + name);
+            // User deletion logic here
+            this.audit("User deleted: " + name);
+        }
+    }
+}
+</div>
+            
+            <h3>Using Composed Traits</h3>
+            <div class="code-block">
+// Using composed traits
+
+let userService = UserService();
+userService.createUser("John");
+// Output:
+// [LOG] Creating user: John
+// [AUDIT] User created: John
+
+userService.deleteUser("Alice");
+// Output:
+// [LOG] Deleting user: Alice
+// [AUDIT] User deleted: Alice
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Best Practices</h2>
+            <ul>
+                <li><strong>Use traits for code reuse:</strong> Extract common functionality into traits to avoid code duplication.</li>
+                <li><strong>Keep traits focused:</strong> Each trait should have a single responsibility.</li>
+                <li><strong>Use default implementations wisely:</strong> Provide default implementations for methods that have common behavior.</li>
+                <li><strong>Document traits:</strong> Add comments to explain what a trait does and how to use it.</li>
+                <li><strong>Avoid deep trait inheritance:</strong> Keep trait inheritance shallow to maintain clarity.</li>
+                <li><strong>Use multiple traits:</strong> Combine multiple small traits instead of creating one large trait.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Forgetting to implement abstract methods:</strong> Classes must implement all abstract methods from traits.</li>
+                <li><strong>Creating overly complex traits:</strong> Traits should be focused and easy to understand.</li>
+                <li><strong>Using traits for everything:</strong> Not all code reuse scenarios require traits.</li>
+                <li><strong>Ignoring trait conflicts:</strong> Be careful when multiple traits define methods with the same name.</li>
+                <li><strong>Overriding default methods unnecessarily:</strong> Only override default methods if you need to change their behavior.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand traits in Nova, you can:</p>
+            <ul>
+                <li><a href="generics.html">Learn about generics</a> in Nova</li>
+                <li>Use traits to create reusable code components</li>
+                <li>Combine traits to create complex behaviors</li>
+            </ul>
+            <a href="generics.html" class="btn">Continue to Generics</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

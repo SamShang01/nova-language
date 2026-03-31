@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访问修饰符示例 - Nova 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                        accent: '#f093fb',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        muted: '#64748b',
+                        'primary-light': '#8b97f5',
+                        'primary-dark': '#4d5fc7',
+                        'secondary-light': '#956bc9',
+                        'secondary-dark': '#5a3785',
+                        'surface': '#ffffff',
+                        'surface-hover': '#f1f5f9',
+                        'border': '#e2e8f0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+        .keyword { color: #c792ea; }
+        .string { color: #c3e88d; }
+        .comment { color: #676e95; font-style: italic; }
+        .function { color: #82aaff; }
+        .number { color: #f78c6c; }
+        .type { color: #ffcb6b; }
+    </style>
+</head>
+<body class="bg-light text-dark min-h-screen">
+    <nav class="bg-white shadow-sm fixed w-full z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Nova</span>
+                    </a>
+                    <div class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="../tutorial/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">教程</a>
+                        <a href="index.html" class="border-b-2 border-primary text-primary px-1 pt-1 text-sm font-medium">示例</a>
+                        <a href="../reference/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">参考</a>
+                        <a href="../faq/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">常见问题</a>
+                        <a href="../library/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">标准库</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-primary to-secondary text-white py-20 px-4 mt-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center mb-4 text-sm text-white/80">
+                <a href="index.html" class="hover:text-white">示例</a>
+                <i class="fa fa-angle-right mx-2"></i>
+                <span>访问修饰符</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">访问修饰符示例</h1>
+            <p class="text-xl text-white/90 max-w-3xl">学习如何使用 private、protected 和 public 访问修饰符来控制类成员的访问权限</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3">
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-lock mr-3"></i>
+                        概述
+                    </h2>
+                    <p class="text-muted leading-relaxed mb-6">
+                        访问修饰符是面向对象编程的核心概念之一，用于控制类成员（属性和方法）的访问权限。Nova 支持三种访问修饰符：
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-red-800 mb-2">private</h4>
+                            <p class="text-red-700 text-sm">仅类内部可访问，外部无法直接访问</p>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-yellow-800 mb-2">protected</h4>
+                            <p class="text-yellow-700 text-sm">类内部和子类可访问</p>
+                        </div>
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-green-800 mb-2">public</h4>
+                            <p class="text-green-700 text-sm">任何地方都可以访问</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-code mr-3"></i>
+                        完整示例代码
+                    </h2>
+                    <pre><code><span class="comment">// 访问修饰符示例</span>
+<span class="comment">// 使用 class 关键字定义类，支持 private、protected、public 访问修饰符</span>
+
+<span class="keyword">class</span> <span class="type">Person</span> {
+    <span class="comment">// private 成员 - 仅类内部可访问</span>
+    <span class="keyword">private var</span> _name: <span class="type">string</span>;
+    <span class="keyword">private var</span> _age: <span class="type">int</span>;
+    
+    <span class="comment">// protected 成员 - 类内部和子类可访问</span>
+    <span class="keyword">protected var</span> _id: <span class="type">string</span>;
+    
+    <span class="comment">// public 成员 - 任何地方可访问</span>
+    <span class="keyword">public var</span> nationality: <span class="type">string</span>;
+    
+    <span class="comment">// public 构造函数</span>
+    <span class="keyword">public func</span> <span class="function">Person</span>(name: <span class="type">string</span>, age: <span class="type">int</span>) {
+        <span class="keyword">this</span>._name = name;
+        <span class="keyword">this</span>._age = age;
+        <span class="keyword">this</span>._id = <span class="string">"P"</span> + name;
+        <span class="keyword">this</span>.nationality = <span class="string">"Unknown"</span>;
+    }
+    
+    <span class="comment">// public getter</span>
+    <span class="keyword">public func</span> <span class="function">getName</span>(): <span class="type">string</span> {
+        <span class="keyword">return this</span>._name;
+    }
+    
+    <span class="comment">// public setter</span>
+    <span class="keyword">public func</span> <span class="function">setName</span>(name: <span class="type">string</span>) {
+        <span class="keyword">this</span>._name = name;
+    }
+    
+    <span class="comment">// protected 方法 - 子类可以重写</span>
+    <span class="keyword">protected func</span> <span class="function">getId</span>(): <span class="type">string</span> {
+        <span class="keyword">return this</span>._id;
+    }
+    
+    <span class="comment">// private 方法 - 仅内部使用</span>
+    <span class="keyword">private func</span> <span class="function">validateAge</span>(age: <span class="type">int</span>): <span class="type">bool</span> {
+        <span class="keyword">return</span> age >= <span class="number">0</span> && age <= <span class="number">150</span>;
+    }
+    
+    <span class="keyword">public func</span> <span class="function">setAge</span>(age: <span class="type">int</span>) {
+        <span class="keyword">if</span> (<span class="keyword">this</span>.validateAge(age)) {
+            <span class="keyword">this</span>._age = age;
+        }
+    }
+    
+    <span class="keyword">public func</span> <span class="function">getAge</span>(): <span class="type">int</span> {
+        <span class="keyword">return this</span>._age;
+    }
+}
+
+<span class="comment">// 子类示例</span>
+<span class="keyword">class</span> <span class="type">Student</span> <span class="keyword">extends</span> <span class="type">Person</span> {
+    <span class="keyword">private var</span> _studentId: <span class="type">string</span>;
+    <span class="keyword">public var</span> school: <span class="type">string</span>;
+    
+    <span class="keyword">public func</span> <span class="function">Student</span>(name: <span class="type">string</span>, age: <span class="type">int</span>, studentId: <span class="type">string</span>) {
+        <span class="keyword">super</span>(name, age);
+        <span class="keyword">this</span>._studentId = studentId;
+        <span class="keyword">this</span>.school = <span class="string">"Unknown"</span>;
+        
+        <span class="comment">// 可以访问 protected 成员</span>
+        <span class="keyword">this</span>._id = <span class="string">"S"</span> + studentId;
+    }
+    
+    <span class="comment">// 可以重写 protected 方法</span>
+    <span class="keyword">protected func</span> <span class="function">getId</span>(): <span class="type">string</span> {
+        <span class="keyword">return this</span>._studentId;
+    }
+    
+    <span class="keyword">public func</span> <span class="function">getStudentInfo</span>(): <span class="type">string</span> {
+        <span class="comment">// 可以访问 public 成员</span>
+        <span class="keyword">var</span> info = <span class="keyword">this</span>.getName() + <span class="string">" from "</span> + <span class="keyword">this</span>.school;
+        
+        <span class="comment">// 可以访问 protected 成员</span>
+        info = info + <span class="string">" (ID: "</span> + <span class="keyword">this</span>._id + <span class="string">")"</span>;
+        
+        <span class="keyword">return</span> info;
+    }
+}
+
+<span class="comment">// 使用示例</span>
+<span class="keyword">var</span> person = <span class="keyword">new</span> <span class="type">Person</span>(<span class="string">"Alice"</span>, <span class="number">30</span>);
+
+<span class="comment">// 可以访问 public 成员</span>
+<span class="function">print</span>(person.nationality);
+person.nationality = <span class="string">"USA"</span>;
+
+<span class="comment">// 可以访问 public 方法</span>
+<span class="function">print</span>(person.getName());
+person.setName(<span class="string">"Bob"</span>);
+
+<span class="comment">// 以下代码会导致错误：</span>
+<span class="comment">// print(person._name);      // Error: _name is private</span>
+<span class="comment">// print(person._id);        // Error: _id is protected</span>
+<span class="comment">// person.validateAge(20);   // Error: validateAge is private</span>
+
+<span class="keyword">var</span> student = <span class="keyword">new</span> <span class="type">Student</span>(<span class="string">"Charlie"</span>, <span class="number">20</span>, <span class="string">"S12345"</span>);
+student.school = <span class="string">"MIT"</span>;
+<span class="function">print</span>(student.getStudentInfo());</code></pre>
+                </section>
+
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-lightbulb-o mr-3"></i>
+                        关键概念
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">封装性</h3>
+                            <p class="text-muted leading-relaxed">
+                                访问修饰符实现了面向对象编程的封装原则。通过将数据标记为 private，并提供 public 的 getter 和 setter 方法，
+                                可以控制对数据的访问，并在设置值时添加验证逻辑。
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">继承与访问控制</h3>
+                            <p class="text-muted leading-relaxed">
+                                protected 成员在继承关系中非常有用。它们允许子类访问父类的内部状态，
+                                同时仍然对外部代码保持隐藏。这为类的设计提供了更大的灵活性。
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">最佳实践</h3>
+                            <ul class="list-disc list-inside text-muted space-y-2">
+                                <li>默认将成员设为 private，只在需要时才放宽访问权限</li>
+                                <li>使用 getter 和 setter 方法而不是直接暴露属性</li>
+                                <li>在 setter 方法中添加验证逻辑</li>
+                                <li>protected 成员应该有明确的文档说明其用途</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-md p-6 sticky top-20">
+                    <h3 class="text-lg font-semibold mb-4">目录</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-muted hover:text-primary">概述</a></li>
+                        <li><a href="#" class="text-muted hover:text-primary">完整示例代码</a></li>
+                        <li><a href="#" class="text-muted hover:text-primary">关键概念</a></li>
+                    </ul>
+                    
+                    <div class="mt-6 pt-6 border-t border-border">
+                        <h3 class="text-lg font-semibold mb-4">相关信息</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li>
+                                <a href="../tutorial/classes.html" class="text-muted hover:text-primary flex items-center">
+                                    <i class="fa fa-book mr-2"></i>类教程
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reference/index.html#classes" class="text-muted hover:text-primary flex items-center">
+                                    <i class="fa fa-file-text mr-2"></i>参考文档
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-border">
+                        <h3 class="text-lg font-semibold mb-4">难度等级</h3>
+                        <span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">
+                            中级
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400 mb-4">&copy; 2026 Nova 编程语言。保留所有权利。</p>
+            <div class="flex justify-center space-x-6">
+                <a href="../tutorial/index.html" class="text-gray-400 hover:text-primary">教程</a>
+                <a href="index.html" class="text-gray-400 hover:text-primary">示例</a>
+                <a href="../reference/index.html" class="text-gray-400 hover:text-primary">参考</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

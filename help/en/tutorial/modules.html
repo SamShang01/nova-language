@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modules - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Modules</h1>
+            <p>Organizing code with modules in Nova</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Modules
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction to Modules</h2>
+            <p>Modules are a way to organize code into separate files, making it easier to manage large codebases. Nova supports modules through a simple and intuitive system.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Creating a Module</h2>
+            <p>To create a module, simply create a new <code>.nova</code> file. The filename (without the extension) becomes the module name.</p>
+            
+            <div class="code-block">
+// math.nova
+
+def add(a: float, b: float) -> float {
+    return a + b;
+}
+
+def subtract(a: float, b: float) -> float {
+    return a - b;
+}
+
+def multiply(a: float, b: float) -> float {
+    return a * b;
+}
+
+def divide(a: float, b: float) -> float {
+    if (b == 0) {
+        throw new Error("Division by zero");
+    }
+    return a / b;
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Importing Modules</h2>
+            <p>You can import modules using the <code>import</code> keyword:</p>
+            
+            <div class="code-block">
+// main.nova
+
+import math;
+
+let result = math.add(5, 3);
+print("5 + 3 = " + result); // Output: 5 + 3 = 8
+
+result = math.subtract(10, 4);
+print("10 - 4 = " + result); // Output: 10 - 4 = 6
+
+result = math.multiply(6, 7);
+print("6 * 7 = " + result); // Output: 6 * 7 = 42
+
+result = math.divide(20, 5);
+print("20 / 5 = " + result); // Output: 20 / 5 = 4
+</div>
+            
+            <h3>Importing Specific Functions</h3>
+            <p>You can import specific functions from a module:</p>
+            
+            <div class="code-block">
+// main.nova
+
+import { add, multiply } from math;
+
+let sum = add(5, 3);
+print("5 + 3 = " + sum); // Output: 5 + 3 = 8
+
+let product = multiply(6, 7);
+print("6 * 7 = " + product); // Output: 6 * 7 = 42
+
+// subtract and divide are not available here
+</div>
+            
+            <h3>Importing with Aliases</h3>
+            <p>You can import modules or functions with aliases:</p>
+            
+            <div class="code-block">
+// main.nova
+
+// Import module with alias
+import math as m;
+
+let result = m.add(5, 3);
+print("5 + 3 = " + result); // Output: 5 + 3 = 8
+
+// Import specific functions with aliases
+import { add as sum, multiply as times } from math;
+
+let s = sum(5, 3);
+print("5 + 3 = " + s); // Output: 5 + 3 = 8
+
+let t = times(6, 7);
+print("6 * 7 = " + t); // Output: 6 * 7 = 42
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Exporting from Modules</h2>
+            <p>By default, all functions, classes, and variables in a module are exported. However, you can use the <code>export</code> keyword to explicitly export items, and <code>private</code> to prevent items from being exported:</p>
+            
+            <div class="code-block">
+// utils.nova
+
+// This function is exported by default
+def public_function() {
+    print("This is a public function");
+}
+
+// This function is explicitly exported
+export def exported_function() {
+    print("This is an exported function");
+}
+
+// This function is not exported
+private def private_function() {
+    print("This is a private function");
+}
+
+// This variable is exported by default
+let public_variable = 42;
+
+// This variable is explicitly exported
+export let exported_variable = "Hello";
+
+// This variable is not exported
+private let private_variable = "Secret";
+</div>
+            
+            <div class="code-block">
+// main.nova
+
+import utils;
+
+utils.public_function(); // Works
+utils.exported_function(); // Works
+// utils.private_function(); // Error: private_function is not exported
+
+print(utils.public_variable); // Works
+print(utils.exported_variable); // Works
+// print(utils.private_variable); // Error: private_variable is not exported
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Module Structure</h2>
+            <p>For larger projects, you can organize modules into directories. Each directory can have an <code>index.nova</code> file that serves as the entry point for the module.</p>
+            
+            <h3>Directory Structure Example</h3>
+            <div class="code-block">
+my_project/
+├── main.nova
+└── utils/
+    ├── index.nova
+    ├── math.nova
+    └── string.nova
+</div>
+            
+            <h3>Index File</h3>
+            <p>The <code>index.nova</code> file can re-export items from other modules in the directory:</p>
+            
+            <div class="code-block">
+// utils/index.nova
+
+export * from math;
+export * from string;
+</div>
+            
+            <h3>Using the Module</h3>
+            <div class="code-block">
+// main.nova
+
+import utils;
+
+// Using functions from math.nova
+let result = utils.add(5, 3);
+print(result);
+
+// Using functions from string.nova
+let text = "hello world";
+let capitalized = utils.capitalize(text);
+print(capitalized);
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Built-in Modules</h2>
+            <p>Nova provides several built-in modules that you can import:</p>
+            
+            <ul>
+                <li><code>os</code> - Operating system utilities</li>
+                <li><code>sys</code> - System-specific parameters and functions</li>
+                <li><code>math</code> - Mathematical functions</li>
+                <li><code>random</code> - Random number generation</li>
+                <li><code>datetime</code> - Date and time functions</li>
+                <li><code>json</code> - JSON parsing and serialization</li>
+                <li><code>io</code> - Input/output operations</li>
+            </ul>
+            
+            <div class="code-block">
+// Using built-in modules
+
+import os;
+import math;
+import random;
+
+// OS module
+print(os.getcwd()); // Get current working directory
+
+// Math module
+print(math.pi); // Output: 3.141592653589793
+print(math.sqrt(16)); // Output: 4.0
+
+// Random module
+print(random.randint(1, 10)); // Output: Random number between 1 and 10
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Module Resolution</h2>
+            <p>When you import a module, Nova looks for it in the following locations:</p>
+            <ol>
+                <li>The current directory</li>
+                <li>Directories specified in the <code>NOVA_PATH</code> environment variable</li>
+                <li>Standard library directories</li>
+            </ol>
+            
+            <div class="info-box">
+                <h4>Note</h4>
+                <p>Module names are case-sensitive, so make sure to use the correct case when importing modules.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Circular Imports</h2>
+            <p>Circular imports occur when two or more modules import each other. Nova handles circular imports gracefully, but it's generally best to avoid them to keep your code clean and maintainable.</p>
+            
+            <div class="warning-box">
+                <h4>Warning</h4>
+                <p>Circular imports can lead to unexpected behavior, especially if modules try to use each other's functions during initialization.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Best Practices</h2>
+            <ul>
+                <li><strong>Organize code logically:</strong> Group related functionality into the same module.</li>
+                <li><strong>Use descriptive module names:</strong> Choose module names that reflect their purpose.</li>
+                <li><strong>Keep modules small:</strong> Each module should have a single responsibility.</li>
+                <li><strong>Use explicit exports:</strong> Use the <code>export</code> keyword to make it clear what's available to other modules.</li>
+                <li><strong>Avoid circular imports:</strong> Refactor code to eliminate circular dependencies.</li>
+                <li><strong>Use directory structures for large projects:</strong> Organize modules into directories with index files.</li>
+                <li><strong>Document modules:</strong> Add comments to explain what a module does and how to use it.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Incorrect module name:</strong> Make sure the module name matches the filename.</li>
+                <li><strong>Case sensitivity:</strong> Module names are case-sensitive, so <code>Math</code> and <code>math</code> are different.</li>
+                <li><strong>Circular imports:</strong> Avoid circular dependencies between modules.</li>
+                <li><strong>Forgetting to export:</strong> Make sure to export items that other modules need to use.</li>
+                <li><strong>Importing from non-existent modules:</strong> Check that the module exists and is in the correct location.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand modules in Nova, you can:</p>
+            <ul>
+                <li><a href="operators.html">Learn about operators</a> in Nova</li>
+                <li><a href="traits.html">Explore traits</a> and interfaces</li>
+                <li>Organize your code into modules for better maintainability</li>
+            </ul>
+            <a href="operators.html" class="btn">Continue to Operators</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

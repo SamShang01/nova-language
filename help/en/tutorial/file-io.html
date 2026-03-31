@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File I/O - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>File I/O</h1>
+            <p>Working with files in Nova</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; File I/O
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction to File I/O</h2>
+            <p>File I/O (Input/Output) operations allow you to read from and write to files. Nova provides a comprehensive set of functions and methods for working with files.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Opening and Closing Files</h2>
+            <p>To work with a file, you first need to open it using the <code>open</code> function. After you're done with the file, you should close it using the <code>close</code> method.</p>
+            
+            <div class="code-block">
+// Opening and closing a file
+
+let file = open("example.txt", "r");
+try {
+    // File operations here
+    print("File opened successfully");
+} finally {
+    file.close();
+    print("File closed");
+}
+</div>
+            
+            <h3>File Modes</h3>
+            <p>When opening a file, you can specify the mode:</p>
+            
+            <ul>
+                <li><code>"r"</code> - Read mode (default)</li>
+                <li><code>"w"</code> - Write mode (overwrites existing file)</li>
+                <li><code>"a"</code> - Append mode (appends to existing file)</li>
+                <li><code>"r+"</code> - Read and write mode</li>
+                <li><code>"w+"</code> - Write and read mode (overwrites existing file)</li>
+                <li><code>"a+"</code> - Append and read mode</li>
+                <li><code>"b"</code> - Binary mode (e.g., "rb", "wb")</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Reading Files</h2>
+            
+            <h3>Reading Entire File</h3>
+            <p>You can read the entire content of a file using the <code>read</code> method:</p>
+            
+            <div class="code-block">
+// Reading entire file
+
+using (let file = open("example.txt", "r")) {
+    let content = file.read();
+    print(content);
+}
+</div>
+            
+            <h3>Reading Line by Line</h3>
+            <p>You can read a file line by line using the <code>readline</code> method or by iterating over the file:</p>
+            
+            <div class="code-block">
+// Reading line by line with readline
+
+using (let file = open("example.txt", "r")) {
+    let line = file.readline();
+    while (line != null) {
+        print(line.strip()); // Strip newline character
+        line = file.readline();
+    }
+}
+
+// Reading line by line with for loop
+
+using (let file = open("example.txt", "r")) {
+    for (let line in file) {
+        print(line.strip());
+    }
+}
+</div>
+            
+            <h3>Reading All Lines</h3>
+            <p>You can read all lines of a file into a list using the <code>readlines</code> method:</p>
+            
+            <div class="code-block">
+// Reading all lines
+
+using (let file = open("example.txt", "r")) {
+    let lines = file.readlines();
+    for (let line in lines) {
+        print(line.strip());
+    }
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Writing Files</h2>
+            
+            <h3>Writing to a File</h3>
+            <p>You can write to a file using the <code>write</code> method:</p>
+            
+            <div class="code-block">
+// Writing to a file
+
+using (let file = open("output.txt", "w")) {
+    file.write("Hello, world!\n");
+    file.write("This is a test.\n");
+}
+
+// Output: Creates output.txt with the written content
+</div>
+            
+            <h3>Writing Multiple Lines</h3>
+            <p>You can write multiple lines at once using the <code>writelines</code> method:</p>
+            
+            <div class="code-block">
+// Writing multiple lines
+
+let lines = ["Line 1\n", "Line 2\n", "Line 3\n"];
+
+using (let file = open("output.txt", "w")) {
+    file.writelines(lines);
+}
+
+// Output: Creates output.txt with the three lines
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Appending to Files</h2>
+            <p>To append content to an existing file, open it in append mode (<code>"a"</code>):</p>
+            
+            <div class="code-block">
+// Appending to a file
+
+using (let file = open("output.txt", "a")) {
+    file.write("Appended line 1\n");
+    file.write("Appended line 2\n");
+}
+
+// Output: Adds the new lines to the end of output.txt
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Working with Binary Files</h2>
+            <p>To work with binary files, open them in binary mode by adding <code>"b"</code> to the mode:</p>
+            
+            <div class="code-block">
+// Reading a binary file
+
+using (let file = open("image.jpg", "rb")) {
+    let data = file.read();
+    print("Read " + len(data) + " bytes");
+}
+
+// Writing a binary file
+
+let data: bytes = [0x48, 0x65, 0x6c, 0x6c, 0x6f]; // "Hello" in ASCII
+
+using (let file = open("binary.bin", "wb")) {
+    file.write(data);
+}
+
+// Output: Creates binary.bin with the byte data
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>File Position</h2>
+            <p>You can get and set the current position in a file using the <code>tell</code> and <code>seek</code> methods:</p>
+            
+            <div class="code-block">
+// File position operations
+
+using (let file = open("example.txt", "r")) {
+    // Get current position
+    let position = file.tell();
+    print("Initial position: " + position);
+    
+    // Read some data
+    let data = file.read(10);
+    print("Read: " + data);
+    
+    // Get new position
+    position = file.tell();
+    print("Position after reading: " + position);
+    
+    // Seek to beginning
+    file.seek(0);
+    print("Position after seeking to 0: " + file.tell());
+    
+    // Read again from beginning
+    data = file.read(10);
+    print("Read again: " + data);
+}
+</div>
+            
+            <h3>Seek Modes</h3>
+            <p>The <code>seek</code> method takes an optional second parameter to specify the seek mode:</p>
+            <ul>
+                <li><code>0</code> - Seek from the beginning of the file (default)</li>
+                <li><code>1</code> - Seek from the current position</li>
+                <li><code>2</code> - Seek from the end of the file</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>File System Operations</h2>
+            <p>Nova provides various functions for working with the file system:</p>
+            
+            <div class="code-block">
+// File system operations
+
+import os;
+
+// Check if a file exists
+if (os.path.exists("example.txt")) {
+    print("File exists");
+} else {
+    print("File does not exist");
+}
+
+// Get file size
+if (os.path.exists("example.txt")) {
+    let size = os.path.getsize("example.txt");
+    print("File size: " + size + " bytes");
+}
+
+// Check if a path is a file or directory
+if (os.path.isfile("example.txt")) {
+    print("It's a file");
+} elif (os.path.isdir("example")) {
+    print("It's a directory");
+}
+
+// List files in a directory
+let files = os.listdir(".");
+print("Files in current directory:");
+for (let file in files) {
+    print(file);
+}
+
+// Create a directory
+os.makedirs("new_directory", true); // true means create intermediate directories
+
+// Remove a file
+if (os.path.exists("temp.txt")) {
+    os.remove("temp.txt");
+    print("File removed");
+}
+
+// Remove a directory
+if (os.path.exists("empty_directory")) {
+    os.rmdir("empty_directory");
+    print("Directory removed");
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Error Handling for File Operations</h2>
+            <p>File operations can throw exceptions, so it's important to handle them properly:</p>
+            
+            <div class="code-block">
+// Error handling for file operations
+
+try {
+    using (let file = open("nonexistent.txt", "r")) {
+        let content = file.read();
+        print(content);
+    }
+} catch (FileNotFoundError e) {
+    print("Error: File not found - " + e.message);
+} catch (IOError e) {
+    print("Error: I/O error - " + e.message);
+} catch (Error e) {
+    print("Error: " + e.message);
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Using Statement</h2>
+            <p>The <code>using</code> statement automatically closes resources when they go out of scope, which is useful for file operations:</p>
+            
+            <div class="code-block">
+// Using statement for file operations
+
+// This is equivalent to try-finally
+using (let file = open("example.txt", "r")) {
+    let content = file.read();
+    print(content);
+}
+// File is automatically closed here
+</div>
+            
+            <div class="info-box">
+                <h4>Note</h4>
+                <p>The <code>using</code> statement works with any resource that has a <code>close</code> method. It ensures that the resource is closed even if an exception occurs.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Best Practices</h2>
+            <ul>
+                <li><strong>Always close files:</strong> Use the <code>using</code> statement or try-finally to ensure files are closed.</li>
+                <li><strong>Handle exceptions:</strong> Catch and handle exceptions that may occur during file operations.</li>
+                <li><strong>Use appropriate modes:</strong> Choose the correct file mode for your operation.</li>
+                <li><strong>Check file existence:</strong> Verify that files exist before trying to read them.</li>
+                <li><strong>Be mindful of file sizes:</strong> Reading large files all at once can consume a lot of memory.</li>
+                <li><strong>Use binary mode for binary files:</strong> Always open binary files in binary mode.</li>
+                <li><strong>Clean up resources:</strong> Remove temporary files when they're no longer needed.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Forgetting to close files:</strong> This can lead to resource leaks.</li>
+                <li><strong>Using the wrong mode:</strong> For example, trying to write to a file opened in read mode.</li>
+                <li><strong>Not handling exceptions:</strong> File operations can fail for various reasons.</li>
+                <li><strong>Reading large files all at once:</strong> This can cause memory issues.</li>
+                <li><strong>Not checking file existence:</strong> Trying to read a non-existent file will throw an exception.</li>
+                <li><strong>Using text mode for binary files:</strong> This can corrupt binary data.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand file I/O in Nova, you can:</p>
+            <ul>
+                <li><a href="modules.html">Learn about modules</a> and code organization</li>
+                <li><a href="operators.html">Explore operators</a> in Nova</li>
+                <li>Practice working with files in your programs</li>
+            </ul>
+            <a href="modules.html" class="btn">Continue to Modules</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Error Handling</h1>
+            <p>Handling and managing errors in Nova</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Error Handling
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction to Error Handling</h2>
+            <p>Error handling is an important aspect of programming that allows you to gracefully handle unexpected situations. Nova provides a comprehensive error handling system using try-catch blocks and exceptions.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Try-Catch Blocks</h2>
+            <p>You can use try-catch blocks to catch and handle exceptions:</p>
+            
+            <div class="code-block">
+// Basic try-catch
+
+try {
+    // Code that might throw an exception
+    let result = 10 / 0;
+    print(result);
+} catch (e) {
+    // Code to handle the exception
+    print("Error: " + e.message);
+}
+
+// Output: Error: Division by zero
+</div>
+            
+            <h3>Multiple Catch Blocks</h3>
+            <p>You can use multiple catch blocks to handle different types of exceptions:</p>
+            
+            <div class="code-block">
+// Multiple catch blocks
+
+try {
+    let array = [1, 2, 3];
+    print(array[5]); // Index out of bounds
+} catch (IndexError e) {
+    print("Index error: " + e.message);
+} catch (Error e) {
+    print("General error: " + e.message);
+}
+
+// Output: Index error: Index out of bounds
+</div>
+            
+            <h3>Finally Block</h3>
+            <p>The finally block is executed regardless of whether an exception is thrown or not:</p>
+            
+            <div class="code-block">
+// Try-catch-finally
+
+try {
+    print("Executing try block");
+    let result = 10 / 0;
+    print(result);
+} catch (e) {
+    print("Error: " + e.message);
+} finally {
+    print("Executing finally block");
+}
+
+// Output:
+// Executing try block
+// Error: Division by zero
+// Executing finally block
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Throwing Exceptions</h2>
+            <p>You can throw exceptions using the <code>throw</code> keyword:</p>
+            
+            <div class="code-block">
+// Throwing an exception
+
+def divide(a: float, b: float) -> float {
+    if (b == 0) {
+        throw new Error("Division by zero");
+    }
+    return a / b;
+}
+
+try {
+    let result = divide(10, 0);
+    print(result);
+} catch (e) {
+    print("Error: " + e.message);
+}
+
+// Output: Error: Division by zero
+</div>
+            
+            <h3>Custom Exceptions</h3>
+            <p>You can create custom exception classes by extending the base <code>Error</code> class:</p>
+            
+            <div class="code-block">
+// Custom exception
+
+class ValidationError extends Error {
+    def __init__(self, message: string) {
+        super(message);
+        self.name = "ValidationError";
+    }
+}
+
+def validate_age(age: int) {
+    if (age < 0) {
+        throw new ValidationError("Age cannot be negative");
+    } else if (age > 120) {
+        throw new ValidationError("Age is too high");
+    }
+    print("Age is valid: " + age);
+}
+
+try {
+    validate_age(-5);
+} catch (ValidationError e) {
+    print("Validation error: " + e.message);
+} catch (Error e) {
+    print("General error: " + e.message);
+}
+
+// Output: Validation error: Age cannot be negative
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Exception Types</h2>
+            <p>Nova provides several built-in exception types:</p>
+            
+            <ul>
+                <li><code>Error</code> - Base exception class</li>
+                <li><code>TypeError</code> - Raised when an operation or function is applied to an object of inappropriate type</li>
+                <li><code>ValueError</code> - Raised when a function receives an argument of the correct type but inappropriate value</li>
+                <li><code>IndexError</code> - Raised when trying to access an index that is out of range</li>
+                <li><code>KeyError</code> - Raised when trying to access a key that doesn't exist in a dictionary</li>
+                <li><code>ZeroDivisionError</code> - Raised when dividing by zero</li>
+                <li><code>FileNotFoundError</code> - Raised when trying to access a file that doesn't exist</li>
+                <li><code>IOError</code> - Raised when an I/O operation fails</li>
+            </ul>
+            
+            <div class="code-block">
+// Example of different exception types
+
+// TypeError
+try {
+    let result = "5" + 5; // Trying to add string and number
+    print(result);
+} catch (TypeError e) {
+    print("Type error: " + e.message);
+}
+
+// IndexError
+try {
+    let array = [1, 2, 3];
+    print(array[10]); // Index out of bounds
+} catch (IndexError e) {
+    print("Index error: " + e.message);
+}
+
+// KeyError
+try {
+    let person = {"name": "Alice"};
+    print(person["age"]); // Key doesn't exist
+} catch (KeyError e) {
+    print("Key error: " + e.message);
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Error Handling Best Practices</h2>
+            
+            <h3>Be Specific</h3>
+            <p>Catch specific exception types rather than catching all exceptions:</p>
+            
+            <div class="code-block">
+// Good: Catch specific exception
+try {
+    let result = 10 / 0;
+} catch (ZeroDivisionError e) {
+    print("Cannot divide by zero");
+}
+
+// Bad: Catch all exceptions
+try {
+    let result = 10 / 0;
+} catch (e) {
+    print("An error occurred");
+}
+</div>
+            
+            <h3>Provide Meaningful Error Messages</h3>
+            <p>Use descriptive error messages that help identify the problem:</p>
+            
+            <div class="code-block">
+// Good: Descriptive error message
+def calculate_discount(price: float, discount: float) -> float {
+    if (discount < 0) {
+        throw new ValueError("Discount cannot be negative");
+    } else if (discount > 100) {
+        throw new ValueError("Discount cannot exceed 100%");
+    }
+    return price * (1 - discount / 100);
+}
+
+// Bad: Vague error message
+def calculate_discount(price: float, discount: float) -> float {
+    if (discount < 0 || discount > 100) {
+        throw new ValueError("Invalid discount");
+    }
+    return price * (1 - discount / 100);
+}
+</div>
+            
+            <h3>Use Finally for Cleanup</h3>
+            <p>Use the finally block for cleanup operations that should always execute:</p>
+            
+            <div class="code-block">
+// Using finally for cleanup
+
+def read_file(filename: string) {
+    let file = null;
+    try {
+        file = open(filename, "r");
+        // Read file content
+        print("Reading file...");
+        // Simulate an error
+        throw new Error("Simulated error");
+    } catch (e) {
+        print("Error: " + e.message);
+    } finally {
+        if (file != null) {
+            file.close();
+            print("File closed");
+        }
+    }
+}
+
+read_file("example.txt");
+// Output:
+// Reading file...
+// Error: Simulated error
+// File closed
+</div>
+            
+            <h3>Don't Swallow Exceptions</h3>
+            <p>Don't catch exceptions without handling them properly:</p>
+            
+            <div class="code-block">
+// Bad: Swallowing exceptions
+try {
+    let result = 10 / 0;
+} catch (e) {
+    // Do nothing
+}
+
+// Good: Handling exceptions
+try {
+    let result = 10 / 0;
+} catch (e) {
+    print("Error: " + e.message);
+    // Or rethrow the exception if you can't handle it
+    // throw e;
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Error Propagation</h2>
+            <p>Exceptions can be propagated up the call stack if they are not caught:</p>
+            
+            <div class="code-block">
+// Error propagation
+
+def divide(a: float, b: float) -> float {
+    if (b == 0) {
+        throw new Error("Division by zero");
+    }
+    return a / b;
+}
+
+def calculate(a: float, b: float) -> float {
+    // Exception is not caught here, so it propagates to the caller
+    return divide(a, b);
+}
+
+try {
+    let result = calculate(10, 0);
+    print(result);
+} catch (e) {
+    print("Error caught: " + e.message);
+}
+
+// Output: Error caught: Division by zero
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Error Handling Patterns</h2>
+            
+            <h3>Try-With-Resources</h3>
+            <p>In Nova, you can use the <code>using</code> statement to automatically close resources:</p>
+            
+            <div class="code-block">
+// Using statement for resource management
+
+using (let file = open("example.txt", "r")) {
+    // File is automatically closed when leaving this block
+    let content = file.read();
+    print(content);
+}
+// File is closed here
+</div>
+            
+            <h3>Error Handling with Result Type</h3>
+            <p>For functions that might fail, you can return a <code>Result</code> type instead of throwing exceptions:</p>
+            
+            <div class="code-block">
+// Using Result type
+
+def safe_divide(a: float, b: float) -> Result[float, string] {
+    if (b == 0) {
+        return Result.error("Division by zero");
+    }
+    return Result.ok(a / b);
+}
+
+let result = safe_divide(10, 2);
+if (result.is_ok()) {
+    print("Result: " + result.unwrap());
+} else {
+    print("Error: " + result.unwrap_err());
+}
+
+// Output: Result: 5
+
+let result2 = safe_divide(10, 0);
+if (result2.is_ok()) {
+    print("Result: " + result2.unwrap());
+} else {
+    print("Error: " + result2.unwrap_err());
+}
+
+// Output: Error: Division by zero
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Debugging with Exceptions</h2>
+            <p>Exceptions can help you debug your code by providing stack traces:</p>
+            
+            <div class="code-block">
+// Stack trace example
+
+def function_a() {
+    function_b();
+}
+
+def function_b() {
+    function_c();
+}
+
+def function_c() {
+    throw new Error("Something went wrong");
+}
+
+try {
+    function_a();
+} catch (e) {
+    print("Error: " + e.message);
+    print("Stack trace:");
+    print(e.stack);
+}
+
+// Output:
+// Error: Something went wrong
+// Stack trace:
+// at function_c (example.nova:10)
+// at function_b (example.nova:6)
+// at function_a (example.nova:2)
+// at main (example.nova:14)
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Catching all exceptions:</strong> This can hide bugs and make debugging difficult.</li>
+                <li><strong>Swallowing exceptions:</strong> Not handling exceptions properly can lead to unexpected behavior.</li>
+                <li><strong>Throwing exceptions for normal control flow:</strong> Exceptions should be used for exceptional situations, not for normal program flow.</li>
+                <li><strong>Not providing meaningful error messages:</strong> Vague error messages make it hard to identify and fix problems.</li>
+                <li><strong>Not cleaning up resources:</strong> Forgetting to close files or release resources can lead to resource leaks.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand error handling in Nova, you can:</p>
+            <ul>
+                <li><a href="file-io.html">Learn about file I/O</a> operations</li>
+                <li><a href="modules.html">Explore modules</a> and code organization</li>
+                <li>Practice writing code with proper error handling</li>
+            </ul>
+            <a href="file-io.html" class="btn">Continue to File I/O</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

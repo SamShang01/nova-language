@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Variables</h1>
+            <p>Storing and managing data in Nova</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Variables
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction to Variables</h2>
+            <p>Variables are used to store data in a program. In Nova, variables are declared using the <code>let</code> keyword, followed by the variable name and an optional initial value.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Declaring Variables</h2>
+            <p>In Nova, you can declare variables in several ways:</p>
+            
+            <h3>Basic Declaration</h3>
+            <div class="code-block">
+// Declare a variable without initial value
+let x;
+
+// Declare a variable with initial value
+let y = 10;
+let name = "Nova";
+let is_active = true;
+</div>
+            
+            <h3>Type Annotations</h3>
+            <p>Nova supports optional type annotations to specify the type of a variable:</p>
+            <div class="code-block">
+// With type annotations
+let x: int = 10;
+let name: string = "Nova";
+let is_active: bool = true;
+</div>
+            
+            <div class="info-box">
+                <h4>Type Inference</h4>
+                <p>Nova has type inference, which means it can automatically determine the type of a variable based on its initial value. Type annotations are optional but can make your code more readable and help catch errors early.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Variable Types</h2>
+            <p>Nova supports several built-in data types:</p>
+            
+            <h3>Primitive Types</h3>
+            <ul>
+                <li><strong>int:</strong> Integer numbers (e.g., 10, -5, 0)</li>
+                <li><strong>float:</strong> Floating-point numbers (e.g., 3.14, -0.5, 2.0)</li>
+                <li><strong>bool:</strong> Boolean values (true or false)</li>
+                <li><strong>string:</strong> Text strings (e.g., "Hello", "Nova")</li>
+                <li><strong>char:</strong> Single characters (e.g., 'a', '1', '@')</li>
+            </ul>
+            
+            <h3>Example Usage</h3>
+            <div class="code-block">
+let age: int = 25;
+let pi: float = 3.14159;
+let is_student: bool = true;
+let message: string = "Hello, Nova!";
+let initial: char = 'N';
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Variable Scope</h2>
+            <p>Variable scope determines where a variable is accessible in your code. Nova has two types of variable scope:</p>
+            
+            <h3>Local Scope</h3>
+            <p>Variables declared inside a function or block are only accessible within that function or block:</p>
+            <div class="code-block">
+func main() {
+    let local_var = "I'm local";
+    print(local_var); // This works
+}
+
+// print(local_var); // This would cause an error - local_var is not accessible here
+</div>
+            
+            <h3>Global Scope</h3>
+            <p>Variables declared outside of any function are accessible throughout the program:</p>
+            <div class="code-block">
+let global_var = "I'm global";
+
+func main() {
+    print(global_var); // This works
+}
+
+func another_function() {
+    print(global_var); // This also works
+}
+</div>
+            
+            <div class="warning-box">
+                <h4>Best Practice</h4>
+                <p>Use local variables whenever possible to avoid naming conflicts and make your code more modular. Global variables should be used sparingly.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Variable Mutability</h2>
+            <p>By default, variables in Nova are mutable, meaning you can change their values after declaration:</p>
+            
+            <div class="code-block">
+let count = 0;
+print(count); // Output: 0
+
+count = 1;
+print(count); // Output: 1
+
+count = count + 1;
+print(count); // Output: 2
+</div>
+            
+            <h3>Constants</h3>
+            <p>To create a constant (a value that cannot be changed), use the <code>const</code> keyword:</p>
+            <div class="code-block">
+const PI = 3.14159;
+// PI = 3.14; // This would cause an error - constants cannot be modified
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Naming Conventions</h2>
+            <p>Nova follows these naming conventions for variables:</p>
+            
+            <ul>
+                <li><strong>Variable names:</strong> Use camelCase (e.g., <code>firstName</code>, <code>age</code>)</li>
+                <li><strong>Constants:</strong> Use UPPERCASE with underscores (e.g., <code>MAX_VALUE</code>, <code>PI</code>)</li>
+                <li><strong>Function names:</strong> Use camelCase (e.g., <code>calculateTotal</code>, <code>printMessage</code>)</li>
+                <li><strong>Class names:</strong> Use PascalCase (e.g., <code>Person</code>, <code>Car</code>)</li>
+            </ul>
+            
+            <div class="info-box">
+                <h4>Valid Variable Names</h4>
+                <ul>
+                    <li>Must start with a letter or underscore</li>
+                    <li>Can contain letters, numbers, and underscores</li>
+                    <li>Are case-sensitive (<code>myVar</code> and <code>myvar</code> are different)</li>
+                    <li>Cannot be reserved keywords (e.g., <code>let</code>, <code>const</code>, <code>func</code>)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Working with Variables</h2>
+            <p>Here are some common operations with variables:</p>
+            
+            <h3>Arithmetic Operations</h3>
+            <div class="code-block">
+let a = 10;
+let b = 5;
+
+let sum = a + b; // 15
+let difference = a - b; // 5
+let product = a * b; // 50
+let quotient = a / b; // 2
+let remainder = a % b; // 0
+</div>
+            
+            <h3>String Operations</h3>
+            <div class="code-block">
+let firstName = "John";
+let lastName = "Doe";
+
+let fullName = firstName + " " + lastName; // "John Doe"
+let greeting = "Hello, " + fullName + "!"; // "Hello, John Doe!"
+</div>
+            
+            <h3>Boolean Operations</h3>
+            <div class="code-block">
+let isTrue = true;
+let isFalse = false;
+
+let andResult = isTrue && isFalse; // false
+let orResult = isTrue || isFalse; // true
+let notResult = !isTrue; // false
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Type Conversion</h2>
+            <p>You can convert between different types using type conversion functions:</p>
+            
+            <div class="code-block">
+// Convert to string
+let num = 10;
+let numStr = String(num); // "10"
+
+// Convert to int
+let str = "42";
+let strInt = Int(str); // 42
+
+// Convert to float
+let intNum = 5;
+let floatNum = Float(intNum); // 5.0
+</div>
+            
+            <div class="warning-box">
+                <h4>Type Safety</h4>
+                <p>Nova is a statically-typed language, so type conversions must be explicit. You cannot directly assign a value of one type to a variable of another type without conversion.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Using undeclared variables:</strong> Always declare variables before using them.</li>
+                <li><strong>Type mismatches:</strong> Make sure you're assigning values of the correct type to variables.</li>
+                <li><strong>Shadowing variables:</strong> Be careful not to declare a variable with the same name as an existing variable in the same scope.</li>
+                <li><strong>Modifying constants:</strong> Remember that constants cannot be changed after declaration.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand variables in Nova, you can:</p>
+            <ul>
+                <li><a href="functions.html">Learn about functions</a> in Nova</li>
+                <li><a href="control-flow.html">Explore control flow</a> statements</li>
+                <li>Practice using variables in more complex programs</li>
+            </ul>
+            <a href="functions.html" class="btn">Continue to Functions</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .tutorial-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .tutorial-list li {
+            margin-bottom: 15px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tutorial-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .tutorial-list a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        
+        .tutorial-list h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+        }
+        
+        .tutorial-list p {
+            margin-bottom: 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nova Tutorial</h1>
+            <p>Learn Nova programming step by step</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; Tutorial
+        </div>
+        
+        <div class="content-section">
+            <h2>Welcome to Nova Tutorial</h2>
+            <p>This tutorial will guide you through the basics of Nova programming language, from installation to advanced topics. Follow the steps in order to build a solid foundation.</p>
+            
+            <div class="info-box">
+                <h4>Getting Started</h4>
+                <p>We recommend following the tutorial in the order listed below to get the most out of your learning experience.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Tutorial Contents</h2>
+            
+            <ul class="tutorial-list">
+                <li>
+                    <a href="introduction.html">
+                        <h4>Introduction</h4>
+                        <p>Learn about the Nova programming language, its features, and what makes it unique.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="installation.html">
+                        <h4>Installation</h4>
+                        <p>Step-by-step guide to installing Nova on your system.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="hello-world.html">
+                        <h4>Hello World</h4>
+                        <p>Write your first Nova program and learn the basics of the language.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="variables.html">
+                        <h4>Variables</h4>
+                        <p>Learn about variables, data types, and type annotations in Nova.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="functions.html">
+                        <h4>Functions</h4>
+                        <p>Discover how to define and use functions in Nova, including parameters and return values.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="control-flow.html">
+                        <h4>Control Flow</h4>
+                        <p>Learn about conditionals, loops, and other control flow statements.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="classes.html">
+                        <h4>Classes</h4>
+                        <p>Explore object-oriented programming with classes in Nova.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="collections.html">
+                        <h4>Collections</h4>
+                        <p>Learn about arrays, lists, dictionaries, and other collection types.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="error-handling.html">
+                        <h4>Error Handling</h4>
+                        <p>Discover how to handle exceptions and errors in Nova.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="file-io.html">
+                        <h4>File I/O</h4>
+                        <p>Learn how to read from and write to files in Nova.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="modules.html">
+                        <h4>Modules</h4>
+                        <p>Explore how to organize code into modules for better maintainability.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="operators.html">
+                        <h4>Operators</h4>
+                        <p>Learn about the various operators available in Nova.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="traits.html">
+                        <h4>Traits</h4>
+                        <p>Discover how to use traits for code reuse in Nova.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="generics.html">
+                        <h4>Generics</h4>
+                        <p>Learn how to write type-safe generic code in Nova.</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>After completing the tutorial, you can explore:</p>
+            <ul>
+                <li><a href="../examples/index.html">Examples</a> - See practical examples of Nova code</li>
+                <li><a href="../library/index.html">Library</a> - Explore Nova's standard library</li>
+                <li><a href="../reference/index.html">Reference</a> - Detailed reference documentation</li>
+                <li><a href="../faq/index.html">FAQ</a> - Frequently asked questions</li>
+            </ul>
+            <a href="introduction.html" class="btn">Start Tutorial</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

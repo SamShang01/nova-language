@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Functions</h1>
+            <p>Organizing code with reusable functions</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Functions
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction to Functions</h2>
+            <p>Functions are reusable blocks of code that perform a specific task. They help organize code, improve readability, and reduce repetition. In Nova, functions are declared using the <code>def</code> keyword.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Defining Functions</h2>
+            <p>To define a function in Nova, use the <code>def</code> keyword followed by the function name, parentheses containing any parameters, and a block of code enclosed in curly braces:</p>
+            
+            <div class="code-block">
+// Function definition
+def greet() {
+    print("Hello, World!");
+}
+
+// Function call
+greet(); // Output: Hello, World!
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Function Parameters</h2>
+            <p>Functions can accept parameters (also called arguments) to make them more flexible:</p>
+            
+            <div class="code-block">
+// Function with parameters
+def greet(name) {
+    print("Hello, " + name + "!");
+}
+
+// Function call with arguments
+greet("John"); // Output: Hello, John!
+greet("Nova"); // Output: Hello, Nova!
+</div>
+            
+            <h3>Type Annotations</h3>
+            <p>You can add type annotations to function parameters for better type safety:</p>
+            <div class="code-block">
+// Function with type annotations
+def add(a: int, b: int) {
+    return a + b;
+}
+
+let result = add(5, 3);
+print(result); // Output: 8
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Return Values</h2>
+            <p>Functions can return values using the <code>return</code> keyword:</p>
+            
+            <div class="code-block">
+// Function with return value
+def add(a, b) {
+    return a + b;
+}
+
+let sum = add(5, 3);
+print(sum); // Output: 8
+</div>
+            
+            <h3>Return Type Annotations</h3>
+            <p>You can also specify the return type of a function:</p>
+            <div class="code-block">
+// Function with return type annotation
+def add(a: int, b: int) -> int {
+    return a + b;
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Default Parameters</h2>
+            <p>Functions can have default values for parameters:</p>
+            
+            <div class="code-block">
+// Function with default parameter
+def greet(name, greeting = "Hello") {
+    print(greeting + ", " + name + "!");
+}
+
+// Call with both arguments
+greet("John", "Hi"); // Output: Hi, John!
+
+// Call with only required argument
+greet("John"); // Output: Hello, John!
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Variable Arguments</h2>
+            <p>Functions can accept a variable number of arguments using the <code>*</code> syntax:</p>
+            
+            <div class="code-block">
+// Function with variable arguments
+def sum_numbers(*numbers) {
+    let total = 0;
+    for (let number in numbers) {
+        total += number;
+    }
+    return total;
+}
+
+let result1 = sum_numbers(1, 2, 3);
+print(result1); // Output: 6
+
+let result2 = sum_numbers(1, 2, 3, 4, 5);
+print(result2); // Output: 15
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Keyword Arguments</h2>
+            <p>You can pass arguments by name, which makes the code more readable:</p>
+            
+            <div class="code-block">
+// Function with multiple parameters
+def describe_person(name, age, city) {
+    print("Name: " + name);
+    print("Age: " + String(age));
+    print("City: " + city);
+}
+
+// Call with keyword arguments
+describe_person(name: "John", age: 30, city: "New York");
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Function Scope</h2>
+            <p>Variables declared inside a function are local to that function and cannot be accessed outside:</p>
+            
+            <div class="code-block">
+func main() {
+    let local_var = "I'm local";
+    print(local_var); // This works
+}
+
+// print(local_var); // This would cause an error
+</div>
+            
+            <h3>Accessing Global Variables</h3>
+            <p>Functions can access global variables, but if you want to modify them, you need to use the <code>global</code> keyword:</p>
+            <div class="code-block">
+let global_var = 10;
+
+func modify_global() {
+    global global_var;
+    global_var = 20;
+}
+
+print(global_var); // Output: 10
+modify_global();
+print(global_var); // Output: 20
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Recursive Functions</h2>
+            <p>Functions can call themselves, which is known as recursion:</p>
+            
+            <div class="code-block">
+// Recursive function to calculate factorial
+def factorial(n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+let result = factorial(5);
+print(result); // Output: 120
+</div>
+            
+            <div class="warning-box">
+                <h4>Caution</h4>
+                <p>Recursive functions can lead to stack overflow if not implemented carefully. Make sure to include a base case that stops the recursion.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Anonymous Functions</h2>
+            <p>Nova supports anonymous functions (also called lambda functions) using the <code>lambda</code> keyword:</p>
+            
+            <div class="code-block">
+// Anonymous function
+let add = lambda a, b => a + b;
+
+let result = add(5, 3);
+print(result); // Output: 8
+</div>
+            
+            <h3>Using Anonymous Functions as Arguments</h3>
+            <div class="code-block">
+// Function that takes another function as argument
+def apply_operation(a, b, operation) {
+    return operation(a, b);
+}
+
+// Pass anonymous function as argument
+let result = apply_operation(5, 3, lambda a, b => a + b);
+print(result); // Output: 8
+
+let result2 = apply_operation(5, 3, lambda a, b => a * b);
+print(result2); // Output: 15
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Function Composition</h2>
+            <p>You can combine multiple functions to create new functions:</p>
+            
+            <div class="code-block">
+// Define helper functions
+def add_one(x) {
+    return x + 1;
+}
+
+def multiply_by_two(x) {
+    return x * 2;
+}
+
+// Compose functions
+def compose(f, g) {
+    return lambda x => f(g(x));
+}
+
+// Create new function
+let add_one_then_double = compose(multiply_by_two, add_one);
+
+let result = add_one_then_double(5);
+print(result); // Output: 12 (5 + 1 = 6, 6 * 2 = 12)
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Built-in Functions</h2>
+            <p>Nova provides several built-in functions that you can use:</p>
+            
+            <ul>
+                <li><code>print(...args):</code> Prints values to the console</li>
+                <li><code>len(collection):</code> Returns the length of a collection</li>
+                <li><code>type(value):</code> Returns the type of a value</li>
+                <li><code>int(value):</code> Converts a value to an integer</li>
+                <li><code>float(value):</code> Converts a value to a float</li>
+                <li><code>string(value):</code> Converts a value to a string</li>
+                <li><code>bool(value):</code> Converts a value to a boolean</li>
+            </ul>
+            
+            <div class="code-block">
+// Using built-in functions
+print("Hello, Nova!"); // Output: Hello, Nova!
+print(len([1, 2, 3])); // Output: 3
+print(type(42)); // Output: int
+print(int("42")); // Output: 42
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Function Best Practices</h2>
+            <ul>
+                <li><strong>Single Responsibility:</strong> Each function should do one thing and do it well.</li>
+                <li><strong>Descriptive Names:</strong> Use clear, descriptive names that explain what the function does.</li>
+                <li><strong>Proper Parameter Names:</strong> Use meaningful names for parameters.</li>
+                <li><strong>Type Annotations:</strong> Use type annotations to improve code readability and catch errors.</li>
+                <li><strong>Documentation:</strong> Add comments to explain complex functions.</li>
+                <li><strong>Return Early:</strong> Return early from functions to reduce nesting.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Forgetting Parentheses:</strong> Remember to add parentheses when calling a function.</li>
+                <li><strong>Incorrect Number of Arguments:</strong> Make sure to pass the correct number of arguments.</li>
+                <li><strong>Variable Shadowing:</strong> Be careful not to shadow variables from outer scopes.</li>
+                <li><strong>Infinite Recursion:</strong> Always include a base case in recursive functions.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand functions in Nova, you can:</p>
+            <ul>
+                <li><a href="control-flow.html">Learn about control flow</a> statements</li>
+                <li><a href="classes.html">Explore object-oriented programming</a> with classes</li>
+                <li>Practice writing more complex functions</li>
+            </ul>
+            <a href="control-flow.html" class="btn">Continue to Control Flow</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

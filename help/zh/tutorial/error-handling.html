@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误处理 - Nova 编程语言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>错误处理</h1>
+            <p>在 Nova 中处理和管理错误</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> &gt; <a href="index.html">教程</a> &gt; 错误处理
+        </div>
+        
+        <div class="content-section">
+            <h2>try-catch 语句</h2>
+            <p>在 Nova 中，你可以使用 <code>try-catch</code> 语句来捕获和处理异常。</p>
+            
+            <div class="code-block">
+// 基本的 try-catch 语句
+try {
+    // 可能会抛出异常的代码
+    let result = 10 / 0;
+    print(result);
+} catch (e) {
+    // 处理异常
+    print("发生错误: " + e.message);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>抛出异常</h2>
+            <p>你可以使用 <code>throw</code> 关键字来抛出异常。</p>
+            
+            <div class="code-block">
+// 抛出异常
+def divide(a: int, b: int) -> float {
+    if (b == 0) {
+        throw new Error("除数不能为零");
+    }
+    return a / b;
+}
+
+try {
+    let result = divide(10, 0);
+    print(result);
+} catch (e) {
+    print("错误: " + e.message);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>异常类型</h2>
+            <p>Nova 提供了多种内置的异常类型，你也可以创建自定义异常。</p>
+            
+            <div class="code-block">
+// 内置异常类型
+try {
+    // 抛出不同类型的异常
+    throw new Error("通用错误");
+    // throw new RangeError("范围错误");
+    // throw new TypeError("类型错误");
+    // throw new ReferenceError("引用错误");
+} catch (e) {
+    print("错误类型: " + typeof e);
+    print("错误消息: " + e.message);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>自定义异常</h2>
+            <p>你可以通过继承 <code>Error</code> 类来创建自定义异常。</p>
+            
+            <div class="code-block">
+// 自定义异常类
+class ValidationError extends Error {
+    let field: string;
+    
+    def __init__(self, message: string, field: string) {
+        super(message);
+        self.field = field;
+    }
+}
+
+// 使用自定义异常
+def validateEmail(email: string) {
+    if (email.indexOf("@") === -1) {
+        throw new ValidationError("无效的电子邮件格式", "email");
+    }
+}
+
+try {
+    validateEmail("invalid-email");
+} catch (e) {
+    if (e instanceof ValidationError) {
+        print("验证错误: " + e.message + " (字段: " + e.field + ")");
+    } else {
+        print("未知错误: " + e.message);
+    }
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>finally 块</h2>
+            <p><code>finally</code> 块中的代码无论是否发生异常都会执行。</p>
+            
+            <div class="code-block">
+// 使用 finally 块
+try {
+    print("尝试执行代码");
+    throw new Error("发生错误");
+} catch (e) {
+    print("捕获错误: " + e.message);
+} finally {
+    print("无论如何都会执行这里的代码");
+}
+
+// 输出:
+// 尝试执行代码
+// 捕获错误: 发生错误
+// 无论如何都会执行这里的代码
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>错误传播</h2>
+            <p>如果在函数中发生异常但没有捕获，异常会向上传播到调用者。</p>
+            
+            <div class="code-block">
+// 错误传播
+def riskyOperation() {
+    throw new Error("操作失败");
+}
+
+def caller() {
+    riskyOperation(); // 异常会传播到这里
+}
+
+try {
+    caller();
+} catch (e) {
+    print("捕获到传播的错误: " + e.message);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>错误处理最佳实践</h2>
+            <ul>
+                <li>只捕获你能处理的异常</li>
+                <li>使用具体的异常类型而不是通用的 Error</li>
+                <li>提供有意义的错误消息</li>
+                <li>使用 finally 块清理资源</li>
+                <li>记录异常信息以便调试</li>
+                <li>避免在异常处理中使用复杂的逻辑</li>
+            </ul>
+            
+            <div class="code-block">
+// 错误处理最佳实践示例
+import fs from "fs";
+
+def readFileSafely(filename: string) -> string {
+    try {
+        return fs.readFileSync(filename, "utf8");
+    } catch (e) {
+        if (e instanceof Error && e.message.includes("ENOENT")) {
+            print("文件不存在: " + filename);
+            return "";
+        } else {
+            // 重新抛出无法处理的异常
+            throw e;
+        }
+    } finally {
+        // 清理资源（如果需要）
+        print("文件读取操作完成");
+    }
+}
+
+try {
+    let content = readFileSafely("nonexistent.txt");
+    print("文件内容: " + content);
+} catch (e) {
+    print("未处理的错误: " + e.message);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>练习</h2>
+            <p>尝试完成以下练习，以巩固你对错误处理的理解：</p>
+            <ol>
+                <li>创建一个函数，检查输入是否为有效的数字，如果不是则抛出异常</li>
+                <li>创建一个自定义异常类 <code>AuthenticationError</code>，用于处理认证相关的错误</li>
+                <li>编写一个函数，读取文件内容并处理可能的文件不存在、权限不足等异常</li>
+                <li>使用 try-catch-finally 结构实现一个资源管理示例</li>
+            </ol>
+            
+            <div class="code-block">
+// 练习答案示例
+
+// 1. 检查有效数字
+class InvalidNumberError extends Error {
+    def __init__(self, message: string) {
+        super(message);
+    }
+}
+
+def validateNumber(input: any) -> number {
+    if (typeof input !== "number" || isNaN(input)) {
+        throw new InvalidNumberError("输入必须是有效的数字");
+    }
+    return input;
+}
+
+try {
+    let result = validateNumber("123");
+    print("验证成功: " + result);
+} catch (e) {
+    if (e instanceof InvalidNumberError) {
+        print("验证错误: " + e.message);
+    }
+}
+
+// 2. 自定义 AuthenticationError
+class AuthenticationError extends Error {
+    let username: string;
+    
+    def __init__(self, message: string, username: string) {
+        super(message);
+        self.username = username;
+    }
+}
+
+def authenticate(username: string, password: string) {
+    if (username === "" || password === "") {
+        throw new AuthenticationError("用户名和密码不能为空", username);
+    }
+    // 认证逻辑...
+    print("认证成功: " + username);
+}
+
+try {
+    authenticate("", "password");
+} catch (e) {
+    if (e instanceof AuthenticationError) {
+        print("认证错误: " + e.message + " (用户: " + e.username + ")");
+    }
+}
+
+// 3. 读取文件并处理异常
+import fs from "fs";
+
+def readFileWithErrorHandling(filename: string) -> string {
+    try {
+        return fs.readFileSync(filename, "utf8");
+    } catch (e) {
+        if (e instanceof Error) {
+            if (e.message.includes("ENOENT")) {
+                throw new Error("文件不存在: " + filename);
+            } else if (e.message.includes("EACCES")) {
+                throw new Error("权限不足: 无法读取文件 " + filename);
+            } else {
+                throw new Error("读取文件时发生错误: " + e.message);
+            }
+        }
+        throw e;
+    }
+}
+
+try {
+    let content = readFileWithErrorHandling("test.txt");
+    print("文件内容: " + content);
+} catch (e) {
+    print("错误: " + e.message);
+}
+
+// 4. 资源管理示例
+class Resource {
+    def open() {
+        print("资源已打开");
+    }
+    
+    def close() {
+        print("资源已关闭");
+    }
+    
+    def use() {
+        print("使用资源");
+        // 模拟错误
+        throw new Error("资源使用过程中发生错误");
+    }
+}
+
+def useResource() {
+    let resource = new Resource();
+    try {
+        resource.open();
+        resource.use();
+    } catch (e) {
+        print("捕获到错误: " + e.message);
+    } finally {
+        resource.close();
+    }
+}
+
+useResource();
+// 输出:
+// 资源已打开
+// 使用资源
+// 捕获到错误: 资源使用过程中发生错误
+// 资源已关闭
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>下一步</h2>
+            <p>现在你已经了解了 Nova 中的错误处理，你可以：</p>
+            <ul>
+                <li><a href="file-io.html">学习文件 I/O</a></li>
+                <li><a href="modules.html">了解模块</a></li>
+            </ul>
+            <a href="file-io.html" class="btn">继续学习文件 I/O</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </footer>
+    </div>
+</body>
+</html>

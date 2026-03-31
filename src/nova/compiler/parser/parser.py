@@ -1487,6 +1487,19 @@ class Parser:
             # 检查是否是函数调用
             elif self.peek().type == TokenType.LPAREN:
                 primary = self.parse_call(primary, consume_lparen=True)
+            # 检查是否是下标访问
+            elif self.peek().type == TokenType.LBRACKET:
+                # 消耗左方括号
+                self.advance()
+                # 解析下标表达式
+                index_expr = self.parse_expression()
+                # 消耗右方括号
+                self.consume(TokenType.RBRACKET, "Expect ']' after index expression")
+                # 创建下标表达式
+                primary = IndexExpression(
+                    primary.line, primary.column,
+                    primary, index_expr
+                )
             else:
                 break
         

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学库示例 - Nova 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        muted: '#64748b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        pre { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.875rem; }
+        code { font-family: 'Fira Code', monospace; }
+        .keyword { color: #c792ea; }
+        .string { color: #c3e88d; }
+        .comment { color: #676e95; font-style: italic; }
+        .function { color: #82aaff; }
+        .number { color: #f78c6c; }
+        .type { color: #ffcb6b; }
+    </style>
+</head>
+<body class="bg-light text-dark min-h-screen">
+    <nav class="bg-white shadow-sm fixed w-full z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Nova</span>
+                    </a>
+                    <div class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="../tutorial/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">教程</a>
+                        <a href="index.html" class="border-b-2 border-primary text-primary px-1 pt-1 text-sm font-medium">示例</a>
+                        <a href="../reference/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">参考</a>
+                        <a href="../faq/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">常见问题</a>
+                        <a href="../library/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">标准库</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-primary to-secondary text-white py-20 px-4 mt-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center mb-4 text-sm text-white/80">
+                <a href="index.html" class="hover:text-white">示例</a>
+                <i class="fa fa-angle-right mx-2"></i>
+                <span>数学库</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">数学库示例</h1>
+            <p class="text-xl text-white/90 max-w-3xl">学习如何使用 Nova 标准数学库进行数学计算</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3">
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-calculator mr-3"></i>
+                        概述
+                    </h2>
+                    <p class="text-muted leading-relaxed mb-6">
+                        Nova 的标准数学库提供了丰富的数学函数和常量，包括三角函数、指数函数、对数函数、取整函数等。
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-blue-800 mb-2">数学常量</h4>
+                            <p class="text-blue-700 text-sm">PI, E 等常用数学常量</p>
+                        </div>
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-purple-800 mb-2">三角函数</h4>
+                            <p class="text-purple-700 text-sm">sin, cos, tan, asin, acos, atan</p>
+                        </div>
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-green-800 mb-2">指数与对数</h4>
+                            <p class="text-green-700 text-sm">pow, sqrt, exp, log, log10</p>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-yellow-800 mb-2">取整函数</h4>
+                            <p class="text-yellow-700 text-sm">floor, ceil, round, abs</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-code mr-3"></i>
+                        示例代码
+                    </h2>
+                    <pre><code><span class="keyword">use</span> std.math;
+
+<span class="comment">// 计算圆的面积</span>
+<span class="keyword">func</span> <span class="function">circle_area</span>(radius: <span class="type">float</span>) -> <span class="type">float</span> {
+    <span class="keyword">return</span> PI * radius * radius;
+}
+
+<span class="comment">// 计算两点之间的距离</span>
+<span class="keyword">func</span> <span class="function">distance</span>(x1: <span class="type">float</span>, y1: <span class="type">float</span>, x2: <span class="type">float</span>, y2: <span class="type">float</span>) -> <span class="type">float</span> {
+    <span class="keyword">let</span> dx = x2 - x1;
+    <span class="keyword">let</span> dy = y2 - y1;
+    <span class="keyword">return</span> sqrt(dx * dx + dy * dy);
+}
+
+<span class="comment">// 计算阶乘</span>
+<span class="keyword">func</span> <span class="function">factorial</span>(n: <span class="type">int</span>) -> <span class="type">int</span> {
+    <span class="keyword">if</span> n <= <span class="number">1</span> {
+        <span class="keyword">return</span> <span class="number">1</span>;
+    }
+    <span class="keyword">return</span> n * factorial(n - <span class="number">1</span>);
+}
+
+<span class="comment">// 判断是否为质数</span>
+<span class="keyword">func</span> <span class="function">is_prime</span>(n: <span class="type">int</span>) -> <span class="type">bool</span> {
+    <span class="keyword">if</span> n <= <span class="number">1</span> <span class="keyword">return</span> <span class="keyword">false</span>;
+    <span class="keyword">if</span> n <= <span class="number">3</span> <span class="keyword">return</span> <span class="keyword">true</span>;
+    <span class="keyword">if</span> n % <span class="number">2</span> == <span class="number">0</span> || n % <span class="number">3</span> == <span class="number">0</span> <span class="keyword">return</span> <span class="keyword">false</span>;
+    <span class="keyword">let</span> i = <span class="number">5</span>;
+    <span class="keyword">while</span> i * i <= n {
+        <span class="keyword">if</span> n % i == <span class="number">0</span> || n % (i + <span class="number">2</span>) == <span class="number">0</span> {
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        }
+        i = i + <span class="number">6</span>;
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="comment">// 主函数</span>
+<span class="keyword">func</span> <span class="function">main</span>() {
+    <span class="function">print</span>(<span class="string">"PI = "</span> + PI);
+    <span class="function">print</span>(<span class="string">"sqrt(16) = "</span> + sqrt(<span class="number">16</span>));
+    <span class="function">print</span>(<span class="string">"pow(2, 10) = "</span> + pow(<span class="number">2</span>, <span class="number">10</span>));
+    <span class="function">print</span>(<span class="string">"sin(45°) = "</span> + sin(PI / <span class="number">4</span>));
+}</code></pre>
+                </section>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-md p-6 sticky top-20">
+                    <h3 class="text-lg font-semibold mb-4">难度等级</h3>
+                    <span class="inline-block bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
+                        初级
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400 mb-4">&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </div>
+    </footer>
+</body>
+</html>

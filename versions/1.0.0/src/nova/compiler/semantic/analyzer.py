@@ -356,6 +356,22 @@ class SemanticAnalyzer:
         )
         self.global_scope.declare_symbol(reverse_func)
         
+        # globals函数 - 返回全局变量字典
+        globals_func = FunctionSymbol(
+            "globals",
+            STRING_TYPE,
+            params=[]
+        )
+        self.global_scope.declare_symbol(globals_func)
+        
+        # locals函数 - 返回局部变量字典
+        locals_func = FunctionSymbol(
+            "locals",
+            STRING_TYPE,
+            params=[]
+        )
+        self.global_scope.declare_symbol(locals_func)
+        
         # 数学常量
         pi_var = VariableSymbol("PI", FLOAT_TYPE)
         self.global_scope.declare_symbol(pi_var)
@@ -1455,7 +1471,8 @@ class SemanticAnalyzer:
                         )
             
             # 对于赋值操作，检查右操作数的类型是否与左操作数的类型兼容
-            if not self._types_compatible(right_type, left_type):
+            # 对于 IndexExpression（如下标访问），跳过类型检查，因为字典可以存储任何类型
+            if not isinstance(node.left, IndexExpression) and not self._types_compatible(right_type, left_type):
                 raise SemanticError(
                     node.line, node.column,
                     f"Type mismatch in assignment: expected {left_type}, got {right_type}"
@@ -1632,6 +1649,10 @@ class SemanticAnalyzer:
             # 返回一个特殊的super类型
             return ANY_TYPE
         
+        # 特殊处理内置函数
+        if node.name in ["print", "println", "str", "len", "int", "float", "type", "input", "abs", "max", "min", "sum", "round", "double", "globals", "locals", "dict"]:
+            return ANY_TYPE
+        
         # 解析普通符号
         symbol = self.current_scope.resolve_symbol(node.name)
         if not symbol:
@@ -1804,15 +1825,8 @@ class SemanticAnalyzer:
             # 尝试解析函数符号
             symbol = self.current_scope.resolve_symbol(node.callee.name)
             
-            # 调试信息
-            print(f"DEBUG visit_CallExpression: node.callee.name = {node.callee.name}")
-            print(f"DEBUG visit_CallExpression: symbol = {symbol}")
-            if symbol:
-                print(f"DEBUG visit_CallExpression: symbol.type = {getattr(symbol, 'type', None)}")
-                print(f"DEBUG visit_CallExpression: symbol.params = {getattr(symbol, 'params', None)}")
-            
             # 检查是否是内置函数，如果是，优先使用内置函数的参数类型
-            if node.callee.name in ["print", "println", "str", "len"]:
+            if node.callee.name in ["print", "println", "str", "len", "int", "float", "type", "input", "abs", "max", "min", "sum", "round", "double", "globals", "locals", "dict"]:
                 # 内置函数，直接使用内置函数的参数类型
                 if node.callee.name == "str":
                     # str函数可以接受任何类型的参数
@@ -1823,6 +1837,42 @@ class SemanticAnalyzer:
                     return UNIT_TYPE
                 elif node.callee.name == "len":
                     return INT_TYPE
+                elif node.callee.name == "int":
+                    # int函数可以接受任何类型的参数，返回整数
+                    return INT_TYPE
+                elif node.callee.name == "float":
+                    # float函数可以接受任何类型的参数，返回浮点数
+                    return FLOAT_TYPE
+                elif node.callee.name == "type":
+                    # type函数返回类型名称字符串
+                    return STRING_TYPE
+                elif node.callee.name == "input":
+                    # input函数返回字符串
+                    return STRING_TYPE
+                elif node.callee.name == "abs":
+                    # abs函数返回与参数相同的类型
+                    return INT_TYPE
+                elif node.callee.name == "max":
+                    # max函数返回与参数相同的类型
+                    return INT_TYPE
+                elif node.callee.name == "min":
+                    # min函数返回与参数相同的类型
+                    return INT_TYPE
+                elif node.callee.name == "sum":
+                    # sum函数返回整数
+                    return INT_TYPE
+                elif node.callee.name == "round":
+                    # round函数返回整数
+                    return INT_TYPE
+                elif node.callee.name == "double":
+                    # double函数返回浮点数
+                    return FLOAT_TYPE
+                elif node.callee.name == "globals":
+                    # globals函数返回字典类型
+                    return STRING_TYPE  # 简化处理，返回字符串表示
+                elif node.callee.name == "locals":
+                    # locals函数返回字典类型
+                    return STRING_TYPE  # 简化处理，返回字符串表示
             
             # 如果从作用域中找不到符号，尝试从types中查找类型
             if not symbol and node.callee.name in self.types:
@@ -2341,10 +2391,13 @@ class SemanticAnalyzer:
         index_type = self._infer_type(node.index)
         
         # 检查索引类型
-        if index_type != INT_TYPE:
+        # 对于数组/列表，索引应该是 int 类型
+        # 对于字典/映射，索引应该是 string 类型
+        # 这里简化处理，允许 int 或 string 类型的索引
+        if index_type not in [INT_TYPE, STRING_TYPE]:
             raise SemanticError(
                 node.line, node.column,
-                f"Index must be of type int, got {index_type}"
+                f"Index must be of type int or string, got {index_type}"
             )
         
         # 简化实现，返回对象类型

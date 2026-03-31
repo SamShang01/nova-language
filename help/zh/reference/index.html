@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>参考文档 - Nova 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                        accent: '#f093fb',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        muted: '#64748b',
+                        'primary-light': '#8b97f5',
+                        'primary-dark': '#4d5fc7',
+                        'secondary-light': '#956bc9',
+                        'secondary-dark': '#5a3785',
+                        'surface': '#ffffff',
+                        'surface-hover': '#f1f5f9',
+                        'border': '#e2e8f0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'dropdown': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    },
+                    transitionProperty: {
+                        'height': 'height',
+                        'spacing': 'margin, padding'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .glass {
+                background: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .bg-gradient {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .bg-gradient-light {
+                background: linear-gradient(135deg, #8b97f5 0%, #956bc9 100%);
+            }
+            .bg-gradient-dark {
+                background: linear-gradient(135deg, #4d5fc7 0%, #5a3785 100%);
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .aspect-video {
+                aspect-ratio: 16 / 9;
+            }
+            .aspect-square {
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex-shrink-0 flex items-center group">
+                        <span class="text-2xl font-bold text-gradient group-hover:scale-105 transition-transform duration-300">Nova</span>
+                        <span class="ml-2 text-sm text-muted group-hover:text-primary transition-colors duration-200">编程语言</span>
+                    </a>
+                    <div class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="../tutorial/index.html" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-primary/5 rounded-md">教程</a>
+                        <a href="../examples/index.html" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-primary/5 rounded-md">示例</a>
+                        <a href="index.html" class="text-primary font-medium px-3 py-2 text-sm bg-primary/5 rounded-md">参考</a>
+                        <a href="../library/index.html" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-primary/5 rounded-md">标准库</a>
+                        <a href="../faq/index.html" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-primary/5 rounded-md">常见问题</a>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-6">
+                    <a href="../../en/reference/index.html" class="text-sm text-muted hover:text-primary transition-colors duration-200 px-2 py-1 rounded-md hover:bg-primary/5">English</a>
+                    <a href="../../jp/reference/index.html" class="text-sm text-muted hover:text-primary transition-colors duration-200 px-2 py-1 rounded-md hover:bg-primary/5">日本語</a>
+                    <a href="../../fr/reference/index.html" class="text-sm text-muted hover:text-primary transition-colors duration-200 px-2 py-1 rounded-md hover:bg-primary/5">Français</a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-primary hover:bg-gray-100 focus:outline-none transition-colors duration-200" id="mobile-menu-button">
+                        <i class="fa fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <main class="pt-24 pb-16">
+        <!-- 英雄区域 -->
+        <section class="bg-gradient text-white py-20 px-4 relative overflow-hidden">
+            <!-- 装饰元素 -->
+            <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                <div class="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full blur-3xl"></div>
+            </div>
+            <div class="max-w-6xl mx-auto text-center relative z-10 animate-fade-in">
+                <h1 class="text-3xl md:text-5xl font-bold mb-6 leading-tight text-balance">参考文档</h1>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto text-balance">详细的 Nova 编程语言参考，涵盖语法、类型系统、函数、类和对象等核心概念</p>
+            </div>
+        </section>
+
+        <!-- 面包屑 -->
+        <section class="px-4 py-6 bg-white border-b border-border">
+            <div class="max-w-6xl mx-auto">
+                <nav class="text-sm text-muted flex items-center">
+                    <a href="../index.html" class="hover:text-primary transition-colors duration-200 flex items-center">
+                        <i class="fa fa-home mr-2"></i> 首页
+                    </a> 
+                    <span class="mx-3 text-gray-400">/</span> 
+                    <span class="text-primary font-medium">参考文档</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- 参考内容 -->
+        <section class="py-12 px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- 侧边栏 -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-xl shadow-card p-6 sticky top-24 border border-border">
+                            <h2 class="text-xl font-semibold mb-6 flex items-center">
+                                <i class="fa fa-list-ul text-primary mr-3"></i>
+                                目录
+                            </h2>
+                            <ul class="space-y-2">
+                                <li>
+                                    <a href="#syntax" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        语法
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#types" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        类型系统
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#functions" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        函数
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#classes" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        类和对象
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#modules" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        模块
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#collections" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        集合
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#control-flow" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        控制流
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#error-handling" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        错误处理
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#generics" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        泛型
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#traits" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        特质
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#operators" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        操作符
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#keywords" class="block text-gray-600 hover:text-primary transition-all duration-200 py-2 px-4 rounded-md hover:bg-primary/5 group">
+                                        <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                                        关键字
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 主内容 -->
+                    <div class="lg:col-span-2">
+                        <!-- 语法 -->
+                        <div id="syntax" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-code text-primary mr-3"></i>
+                                语法
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">Nova 的语法设计简洁明了，易于学习和使用。以下是基本的语法规则：</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">基本结构</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>import std.io;
+
+fn main() {
+    print("Hello, World!");
+}</pre>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">缩进</h3>
+                                    <p class="text-muted leading-relaxed">Nova 使用 4 个空格或 1 个制表符进行缩进，推荐使用空格。</p>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">注释</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>// 单行注释
+
+/*
+多行注释
+多行注释
+*/</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 类型系统 -->
+                        <div id="types" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-cubes text-primary mr-3"></i>
+                                类型系统
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">Nova 是一种静态类型语言，具有强大的类型系统。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">基本类型</h3>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-start p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">bool</code>
+                                            <span>布尔值：true 或 false</span>
+                                        </li>
+                                        <li class="flex items-start p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">int</code>
+                                            <span>整数</span>
+                                        </li>
+                                        <li class="flex items-start p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">float</code>
+                                            <span>浮点数</span>
+                                        </li>
+                                        <li class="flex items-start p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">string</code>
+                                            <span>字符串</span>
+                                        </li>
+                                        <li class="flex items-start p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">char</code>
+                                            <span>字符</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">类型注解</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>let x: int = 42;
+let name: string = "Nova";
+let is_active: bool = true;</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 函数 -->
+                        <div id="functions" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-function text-primary mr-3"></i>
+                                函数
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">函数是 Nova 中的基本构建块。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">函数定义</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>fn add(a: int, b: int) -> int {
+    return a + b;
+}
+
+// 函数调用
+let result = add(1, 2);</pre>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">默认参数</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>fn greet(name: string, greeting: string = "Hello") {
+    print(greeting + ", " + name + "!");
+}
+
+// 调用
+greet("World"); // 输出: Hello, World!
+greet("Alice", "Hi"); // 输出: Hi, Alice!</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 类和对象 -->
+                        <div id="classes" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-object-group text-primary mr-3"></i>
+                                类和对象
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">Nova 支持面向对象编程，包括类、继承和多态。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">类定义</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>class Person {
+    name: string;
+    age: int;
+    
+    fn __init__(self, name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+    
+    fn greet(self) {
+        print("Hello, my name is " + self.name);
+    }
+}
+
+// 创建对象
+let person = Person("Alice", 30);
+person.greet(); // 输出: Hello, my name is Alice</pre>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">继承</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>class Employee extends Person {
+    job_title: string;
+    
+    fn __init__(self, name: string, age: int, job_title: string) {
+        super(name, age);
+        self.job_title = job_title;
+    }
+    
+    fn greet(self) {
+        super.greet();
+        print("I am a " + self.job_title);
+    }
+}
+
+let employee = Employee("Bob", 25, "Engineer");
+employee.greet();
+// 输出:
+// Hello, my name is Bob
+// I am a Engineer</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 模块 -->
+                        <div id="modules" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-cubes text-primary mr-3"></i>
+                                模块
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">模块允许您组织和复用代码。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">模块定义</h3>
+                                    <p class="text-muted mb-4 leading-relaxed">在 Nova 中，每个文件都是一个模块。您可以使用 <code class="bg-primary/10 text-primary px-2 py-1 rounded font-mono">export</code> 关键字导出函数、类或变量。</p>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>// math.nova
+export fn add(a: int, b: int) -> int {
+    return a + b;
+}
+
+export fn subtract(a: int, b: int) -> int {
+    return a - b;
+}</pre>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">模块导入</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>// main.nova
+import math;
+
+let result = math.add(1, 2);
+print(result); // 输出: 3
+
+// 或使用别名
+import math as m;
+let result2 = m.subtract(5, 3);
+print(result2); // 输出: 2
+
+// 或导入特定函数
+from math import add;
+let result3 = add(10, 20);
+print(result3); // 输出: 30</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 集合 -->
+                        <div id="collections" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-list text-primary mr-3"></i>
+                                集合
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">Nova 提供了多种集合类型，包括数组、列表、字典和集合。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">数组</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>let numbers: [int] = [1, 2, 3, 4, 5];
+print(numbers[0]); // 输出: 1
+numbers[1] = 10;
+print(numbers[1]); // 输出: 10</pre>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">字典</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>let person: {string: any} = {
+    "name": "Alice",
+    "age": 30,
+    "is_active": true
+};
+
+print(person["name"]); // 输出: Alice
+person["age"] = 31;
+print(person["age"]); // 输出: 31</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 控制流 -->
+                        <div id="control-flow" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-random text-primary mr-3"></i>
+                                控制流
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">Nova 提供了多种控制流语句，包括条件语句和循环。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">条件语句</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>let x = 10;
+
+if x > 0 {
+    print("x 是正数");
+} elif x < 0 {
+    print("x 是负数");
+} else {
+    print("x 是零");
+}</pre>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">循环</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>// for 循环
+for i in 0..5 {
+    print(i);
+}
+
+// while 循环
+let i = 0;
+while i < 5 {
+    print(i);
+    i += 1;
+}</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 错误处理 -->
+                        <div id="error-handling" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-exclamation-triangle text-primary mr-3"></i>
+                                错误处理
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">Nova 使用 try-catch 语句进行错误处理。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">try-catch</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>try {
+    // 可能抛出错误的代码
+    let result = 10 / 0;
+} catch e {
+    // 处理错误
+    print("发生错误: " + e.message);
+}</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 泛型 -->
+                        <div id="generics" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-code-fork text-primary mr-3"></i>
+                                泛型
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">泛型允许您编写更通用和灵活的代码。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">泛型函数</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>fn identity<T>(value: T) -> T {
+    return value;
+}
+
+let result = identity(42); // result 是 int 类型
+let result2 = identity("Hello"); // result2 是 string 类型</pre>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">泛型类</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>class Box<T> {
+    value: T;
+    
+    fn __init__(self, value: T) {
+        self.value = value;
+    }
+    
+    fn get(self) -> T {
+        return self.value;
+    }
+}
+
+let int_box = Box(42);
+let string_box = Box("Hello");</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 特质 -->
+                        <div id="traits" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-star text-primary mr-3"></i>
+                                特质
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">特质允许您定义方法签名，这些方法可以被类实现。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">特质定义与实现</h3>
+                                    <div class="bg-gray-900 text-gray-100 rounded-lg p-6 font-mono text-sm overflow-x-auto shadow-lg">
+                                        <pre>trait Printable {
+    fn print(self);
+}
+
+class Person {
+    name: string;
+    
+    fn __init__(self, name: string) {
+        self.name = name;
+    }
+}
+
+// 实现特质
+impl Printable for Person {
+    fn print(self) {
+        print("Person: " + self.name);
+    }
+}
+
+let person = Person("Alice");
+person.print(); // 输出: Person: Alice</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 操作符 -->
+                        <div id="operators" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-plus text-primary mr-3"></i>
+                                操作符
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">Nova 支持多种操作符，包括算术、比较、逻辑等。</p>
+                            
+                            <div class="space-y-8">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">算术操作符</h3>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">+</code>
+                                            <span>加法</span>
+                                        </li>
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">-</code>
+                                            <span>减法</span>
+                                        </li>
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">*</code>
+                                            <span>乘法</span>
+                                        </li>
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">/</code>
+                                            <span>除法</span>
+                                        </li>
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">%</code>
+                                            <span>取模</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-4">比较操作符</h3>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">==</code>
+                                            <span>等于</span>
+                                        </li>
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">!=</code>
+                                            <span>不等于</span>
+                                        </li>
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">&lt;</code>
+                                            <span>小于</span>
+                                        </li>
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">&gt;</code>
+                                            <span>大于</span>
+                                        </li>
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">&lt;=</code>
+                                            <span>小于等于</span>
+                                        </li>
+                                        <li class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                            <code class="bg-primary/10 text-primary px-3 py-1 rounded font-mono font-medium mr-4">&gt;=</code>
+                                            <span>大于等于</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 关键字 -->
+                        <div id="keywords" class="bg-white rounded-xl shadow-card p-8 mb-8 border border-border hover:shadow-card-hover transition-all duration-300 animate-on-scroll">
+                            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                                <i class="fa fa-key text-primary mr-3"></i>
+                                关键字
+                            </h2>
+                            <p class="text-muted mb-8 leading-relaxed">Nova 保留了以下关键字，不能用作标识符。</p>
+                            
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">fn</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">class</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">extends</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">impl</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">trait</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">import</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">from</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">export</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">if</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">elif</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">else</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">for</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">while</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">try</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">catch</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">return</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">super</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">self</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">let</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">const</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">true</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">false</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">null</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">as</code>
+                                <code class="bg-primary/10 text-primary px-3 py-2 rounded font-mono font-medium text-center hover:bg-primary/20 transition-colors duration-200">in</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-16 px-4 relative overflow-hidden">
+        <!-- 装饰元素 -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-5">
+            <div class="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- 关于 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fa fa-info-circle text-primary mr-3"></i>
+                        关于 Nova
+                    </h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Nova 是一种现代的静态类型编程语言，专为构建可靠和高效的软件而设计。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-all duration-300 transform hover:scale-110">
+                            <i class="fa fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-all duration-300 transform hover:scale-110">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-all duration-300 transform hover:scale-110">
+                            <i class="fa fa-discord text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 资源 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fa fa-cubes text-primary mr-3"></i>
+                        资源
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="../tutorial/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            教程
+                        </a></li>
+                        <li><a href="../examples/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            示例
+                        </a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            参考文档
+                        </a></li>
+                        <li><a href="../library/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            标准库
+                        </a></li>
+                        <li><a href="../faq/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            常见问题
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- 语言 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fa fa-globe text-primary mr-3"></i>
+                        语言
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../en/reference/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            English
+                        </a></li>
+                        <li><a href="../../jp/reference/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            日本語
+                        </a></li>
+                        <li><a href="../../fr/reference/index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            Français
+                        </a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors duration-200 flex items-center group">
+                            <i class="fa fa-angle-right mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
+                            中文
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- 联系 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fa fa-envelope text-primary mr-3"></i>
+                        联系我们
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="text-gray-400 flex items-center hover:text-primary transition-colors duration-200">
+                            <i class="fa fa-envelope mr-3"></i>
+                            contact@nova-lang.org
+                        </li>
+                        <li class="text-gray-400 flex items-center hover:text-primary transition-colors duration-200">
+                            <i class="fa fa-map-marker mr-3"></i>
+                            全球
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+                <p class="mb-4">&copy; 2026 Nova 编程语言。保留所有权利。</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="hover:text-primary transition-colors duration-200">隐私政策</a>
+                    <a href="#" class="hover:text-primary transition-colors duration-200">服务条款</a>
+                    <a href="#" class="hover:text-primary transition-colors duration-200">Cookie 政策</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 移动导航菜单 -->
+    <div class="fixed inset-0 bg-dark/50 z-50 hidden md:hidden" id="mobile-menu">
+        <div class="bg-white h-full w-64 p-6 shadow-dropdown animate-slide-up">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-2xl font-bold text-gradient">Nova</span>
+                <button type="button" class="text-gray-600 hover:text-primary transition-colors duration-200" id="close-menu">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <ul class="space-y-3">
+                <li><a href="../tutorial/index.html" class="block text-gray-600 hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">教程</a></li>
+                <li><a href="../examples/index.html" class="block text-gray-600 hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">示例</a></li>
+                <li><a href="index.html" class="block text-primary font-medium py-2 px-4 rounded-md bg-primary/5">参考</a></li>
+                <li><a href="../library/index.html" class="block text-gray-600 hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">标准库</a></li>
+                <li><a href="../faq/index.html" class="block text-gray-600 hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">常见问题</a></li>
+                <li class="pt-4 border-t border-gray-200 mt-4">
+                    <h4 class="text-sm font-medium text-muted mb-3">语言</h4>
+                    <div class="space-y-2">
+                        <a href="../../en/reference/index.html" class="block text-sm text-muted hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">English</a>
+                        <a href="../../jp/reference/index.html" class="block text-sm text-muted hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">日本語</a>
+                        <a href="../../fr/reference/index.html" class="block text-sm text-muted hover:text-primary transition-colors duration-200 py-2 px-4 rounded-md hover:bg-primary/5">Français</a>
+                        <a href="index.html" class="block text-sm text-primary font-medium py-2 px-4 rounded-md bg-primary/5">中文</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 移动导航菜单
+        const mobileMenuButton = document.querySelector('button[type="button"]');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuButton = document.getElementById('close-menu');
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        if (closeMenuButton) {
+            closeMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // 点击菜单外部关闭菜单
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target === mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                // 关闭移动菜单（如果打开）
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    entry.target.classList.add('animate-slide-up');
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有需要动画的元素
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (nav) {
+                if (window.scrollY > 50) {
+                    nav.classList.add('shadow-md');
+                    nav.classList.add('bg-white/95');
+                } else {
+                    nav.classList.remove('shadow-md');
+                    nav.classList.remove('bg-white/95');
+                }
+            }
+        });
+
+        // 代码块复制功能
+        document.querySelectorAll('pre').forEach(pre => {
+            const code = pre.textContent;
+            const button = document.createElement('button');
+            button.className = 'absolute top-2 right-2 bg-white/80 hover:bg-white text-gray-800 rounded-md px-2 py-1 text-xs font-medium transition-colors duration-200';
+            button.textContent = '复制';
+            button.addEventListener('click', () => {
+                navigator.clipboard.writeText(code).then(() => {
+                    button.textContent = '已复制';
+                    setTimeout(() => {
+                        button.textContent = '复制';
+                    }, 2000);
+                });
+            });
+            pre.parentElement.style.position = 'relative';
+            pre.parentElement.appendChild(button);
+        });
+    </script>
+</body>
+</html>

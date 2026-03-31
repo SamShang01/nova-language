@@ -53,9 +53,10 @@ class LOAD_NAME(Instruction):
         super().__init__("LOAD_NAME", name)
     
     def execute(self, vm):
-        if self.args[0] not in vm.environment:
-            raise VMError(f"Name '{self.args[0]}' not defined")
-        value = vm.environment[self.args[0]]
+        name = self.args[0]
+        if name not in vm.environment:
+            raise VMError(f"Name '{name}' not defined")
+        value = vm.environment[name]
         vm.stack.append(value)
 
 class STORE_NAME(Instruction):
@@ -88,6 +89,8 @@ class STORE_NAME(Instruction):
                 # 我们可以设置一个自定义属性来存储类信息
                 pass
         vm.environment[self.args[0]] = value
+        # 将值推回栈顶，使赋值表达式返回值
+        vm.stack.append(value)
 
 # 属性存储指令
 class STORE_ATTR(Instruction):
@@ -99,28 +102,20 @@ class STORE_ATTR(Instruction):
         super().__init__("STORE_ATTR", attr_name)
     
     def execute(self, vm):
-        # 调试信息
-        print(f"[DEBUG STORE_ATTR] Stack size: {len(vm.stack)}, attr: {self.args[0]}")
-        print(f"[DEBUG STORE_ATTR] Stack contents: {vm.stack}")
-        
         # 栈顺序: [对象, 值]
         # 先pop值（栈顶），再pop对象
         value = vm.stack.pop()
         obj = vm.stack.pop()
-        
-        print(f"[DEBUG STORE_ATTR] obj: {obj}, value: {value}, type: {type(value)}")
         
         # 尝试类型转换
         if isinstance(value, str):
             # 尝试将字符串转换为整数
             try:
                 value = int(value)
-                print(f"[DEBUG STORE_ATTR] Converted value to int: {value}")
             except ValueError:
                 # 尝试将字符串转换为浮点数
                 try:
                     value = float(value)
-                    print(f"[DEBUG STORE_ATTR] Converted value to float: {value}")
                 except ValueError:
                     pass
         
@@ -142,6 +137,8 @@ class BINARY_ADD(Instruction):
         super().__init__("BINARY_ADD")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: BINARY_ADD requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
         # 检查是否有__add__方法，并且不是基本类型
@@ -169,6 +166,8 @@ class BINARY_SUB(Instruction):
         super().__init__("BINARY_SUB")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: BINARY_SUB requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
         # 检查是否有__sub__方法，并且不是基本类型
@@ -196,6 +195,8 @@ class BINARY_MUL(Instruction):
         super().__init__("BINARY_MUL")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: BINARY_MUL requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
         # 检查是否有__mul__方法，并且不是基本类型
@@ -223,6 +224,8 @@ class BINARY_DIV(Instruction):
         super().__init__("BINARY_DIV")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: BINARY_DIV requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
         # 检查是否有__truediv__方法，并且不是基本类型
@@ -251,6 +254,8 @@ class COMPARE_EQ(Instruction):
         super().__init__("COMPARE_EQ")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: COMPARE_EQ requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
         # 检查是否有__eq__方法
@@ -274,6 +279,8 @@ class COMPARE_NE(Instruction):
         super().__init__("COMPARE_NE")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: COMPARE_NE requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
         # 检查是否有__ne__方法
@@ -292,36 +299,32 @@ class COMPARE_LT(Instruction):
         super().__init__("COMPARE_LT")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: COMPARE_LT requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
-        print(f"[DEBUG COMPARE_LT] left: {left}, type: {type(left)}")
-        print(f"[DEBUG COMPARE_LT] right: {right}, type: {type(right)}")
         
         # 处理NovaInstance对象的属性访问
         if hasattr(left, 'fields') and isinstance(left.fields, dict):
             # 使用getattr访问属性，触发__getattribute__方法中的类型转换
             try:
                 left_age = getattr(left, 'age', 0)
-                print(f"[DEBUG COMPARE_LT] left_age: {left_age}, type: {type(left_age)}")
                 # 如果right也是NovaInstance，获取其age属性
                 if hasattr(right, 'fields') and isinstance(right.fields, dict):
                     right_age = getattr(right, 'age', 0)
-                    print(f"[DEBUG COMPARE_LT] right_age: {right_age}, type: {type(right_age)}")
                     result = left_age < right_age
                 else:
                     # right不是NovaInstance，直接比较
                     result = left_age < right
-                print(f"[DEBUG COMPARE_LT] result: {result}")
                 vm.stack.append(result)
                 return
             except Exception as ex:
-                print(f"[DEBUG COMPARE_LT] Exception: {ex}")
+                pass
         
         # 尝试将操作数转换为相同类型
         try:
             result = left < right
         except TypeError as e:
-            print(f"[DEBUG COMPARE_LT] TypeError: {e}")
             # 尝试类型转换
             if isinstance(left, str) and isinstance(right, int):
                 left = int(left)
@@ -331,7 +334,6 @@ class COMPARE_LT(Instruction):
                 result = left < right
             else:
                 result = left < right
-        print(f"[DEBUG COMPARE_LT] result: {result}")
         vm.stack.append(result)
 
 class COMPARE_LE(Instruction):
@@ -343,23 +345,21 @@ class COMPARE_LE(Instruction):
         super().__init__("COMPARE_LE")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: COMPARE_LE requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
-        print(f"[DEBUG COMPARE_LE] left: {left}, type: {type(left)}")
-        print(f"[DEBUG COMPARE_LE] right: {right}, type: {type(right)}")
         
         # 确保操作数都是相同类型
         # 尝试将字符串转换为整数
         if isinstance(left, str):
             try:
                 left = int(left)
-                print(f"[DEBUG COMPARE_LE] Converted left to int: {left}")
             except ValueError:
                 pass
         if isinstance(right, str):
             try:
                 right = int(right)
-                print(f"[DEBUG COMPARE_LE] Converted right to int: {right}")
             except ValueError:
                 pass
         
@@ -368,7 +368,6 @@ class COMPARE_LE(Instruction):
         try:
             result = left <= right
         except TypeError as e:
-            print(f"[DEBUG COMPARE_LE] TypeError: {e}")
             # 尝试类型转换
             if isinstance(left, str) and isinstance(right, int):
                 left = int(left)
@@ -382,15 +381,11 @@ class COMPARE_LE(Instruction):
                 try:
                     left_age = getattr(left, 'age', 0)
                     right_age = getattr(right, 'age', 0)
-                    print(f"[DEBUG COMPARE_LE] left_age: {left_age}, type: {type(left_age)}")
-                    print(f"[DEBUG COMPARE_LE] right_age: {right_age}, type: {type(right_age)}")
                     result = left_age <= right_age
                 except Exception as ex:
-                    print(f"[DEBUG COMPARE_LE] Exception: {ex}")
                     result = left <= right
             else:
                 result = left <= right
-        print(f"[DEBUG COMPARE_LE] result: {result}")
         vm.stack.append(result)
 
 class COMPARE_GT(Instruction):
@@ -402,43 +397,38 @@ class COMPARE_GT(Instruction):
         super().__init__("COMPARE_GT")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: COMPARE_GT requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
-        print(f"[DEBUG COMPARE_GT] left: {left}, type: {type(left)}")
-        print(f"[DEBUG COMPARE_GT] right: {right}, type: {type(right)}")
         
         # 处理NovaInstance对象的属性访问
         if hasattr(left, 'fields') and isinstance(left.fields, dict):
             # 使用getattr访问属性，触发__getattribute__方法中的类型转换
             try:
                 left_age = getattr(left, 'age', 0)
-                print(f"[DEBUG COMPARE_GT] left_age: {left_age}, type: {type(left_age)}")
                 # 如果right也是NovaInstance，获取其age属性
                 if hasattr(right, 'fields') and isinstance(right.fields, dict):
                     right_age = getattr(right, 'age', 0)
-                    print(f"[DEBUG COMPARE_GT] right_age: {right_age}, type: {type(right_age)}")
                     result = left_age > right_age
                 else:
                     # right不是NovaInstance，直接比较
                     result = left_age > right
-                print(f"[DEBUG COMPARE_GT] result: {result}")
                 vm.stack.append(result)
                 return
             except Exception as ex:
-                print(f"[DEBUG COMPARE_GT] Exception: {ex}")
+                pass
         
         # 尝试将操作数转换为相同类型
         # 尝试将字符串转换为整数
         if isinstance(left, str):
             try:
                 left = int(left)
-                print(f"[DEBUG COMPARE_GT] Converted left to int: {left}")
             except ValueError:
                 pass
         if isinstance(right, str):
             try:
                 right = int(right)
-                print(f"[DEBUG COMPARE_GT] Converted right to int: {right}")
             except ValueError:
                 pass
         
@@ -446,7 +436,6 @@ class COMPARE_GT(Instruction):
         try:
             result = left > right
         except TypeError as e:
-            print(f"[DEBUG COMPARE_GT] TypeError: {e}")
             # 尝试类型转换
             if isinstance(left, str) and isinstance(right, int):
                 left = int(left)
@@ -456,7 +445,6 @@ class COMPARE_GT(Instruction):
                 result = left > right
             else:
                 result = left > right
-        print(f"[DEBUG COMPARE_GT] result: {result}")
         vm.stack.append(result)
 
 class COMPARE_GE(Instruction):
@@ -468,43 +456,38 @@ class COMPARE_GE(Instruction):
         super().__init__("COMPARE_GE")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: COMPARE_GE requires at least 2 elements on stack")
         right = vm.stack.pop()
         left = vm.stack.pop()
-        print(f"[DEBUG COMPARE_GE] left: {left}, type: {type(left)}, repr: {repr(left)}")
-        print(f"[DEBUG COMPARE_GE] right: {right}, type: {type(right)}, repr: {repr(right)}")
         
         # 处理NovaInstance对象的属性访问
         if hasattr(left, 'fields') and isinstance(left.fields, dict):
             # 使用getattr访问属性，触发__getattribute__方法中的类型转换
             try:
                 left_age = getattr(left, 'age', 0)
-                print(f"[DEBUG COMPARE_GE] left_age: {left_age}, type: {type(left_age)}")
                 # 如果right也是NovaInstance，获取其age属性
                 if isinstance(right, NovaInstance):
                     right_age = getattr(right, 'age', 0)
-                    print(f"[DEBUG COMPARE_GE] right_age: {right_age}, type: {type(right_age)}")
                     result = left_age >= right_age
                 else:
                     # right不是NovaInstance，直接比较
                     result = left_age >= right
-                print(f"[DEBUG COMPARE_GE] result: {result}")
                 vm.stack.append(result)
                 return
             except Exception as ex:
-                print(f"[DEBUG COMPARE_GE] Exception: {ex}")
+                pass
         
         # 确保操作数都是相同类型
         # 尝试将字符串转换为整数
         if isinstance(left, str):
             try:
                 left = int(left)
-                print(f"[DEBUG COMPARE_GE] Converted left to int: {left}")
             except ValueError:
                 pass
         if isinstance(right, str):
             try:
                 right = int(right)
-                print(f"[DEBUG COMPARE_GE] Converted right to int: {right}")
             except ValueError:
                 pass
         
@@ -513,7 +496,6 @@ class COMPARE_GE(Instruction):
         try:
             result = left >= right
         except TypeError as e:
-            print(f"[DEBUG COMPARE_GE] TypeError: {e}")
             # 尝试类型转换
             if isinstance(left, str) and isinstance(right, int):
                 left = int(left)
@@ -523,7 +505,6 @@ class COMPARE_GE(Instruction):
                 result = left >= right
             else:
                 result = left >= right
-        print(f"[DEBUG COMPARE_GE] result: {result}")
         vm.stack.append(result)
 
 # 指针操作指令
@@ -555,6 +536,8 @@ class DEREF(Instruction):
         super().__init__("DEREF")
     
     def execute(self, vm):
+        if len(vm.stack) < 1:
+            raise VMError("Stack underflow: DEREF requires at least 1 element on stack")
         # 弹出指针地址
         address = vm.stack.pop()
         # 从内存中加载值
@@ -572,6 +555,8 @@ class STORE_DEREF(Instruction):
         super().__init__("STORE_DEREF")
     
     def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: STORE_DEREF requires at least 2 elements on stack")
         # 弹出值和地址
         value = vm.stack.pop()
         address = vm.stack.pop()
@@ -604,6 +589,8 @@ class JUMP_IF_TRUE(Instruction):
         super().__init__("JUMP_IF_TRUE", target)
     
     def execute(self, vm):
+        if len(vm.stack) < 1:
+            raise VMError("Stack underflow: JUMP_IF_TRUE requires at least 1 element on stack")
         value = vm.stack.pop()
         if value:
             target = self.args[0]
@@ -624,6 +611,8 @@ class JUMP_IF_FALSE(Instruction):
         super().__init__("JUMP_IF_FALSE", target)
     
     def execute(self, vm):
+        if len(vm.stack) < 1:
+            raise VMError("Stack underflow: JUMP_IF_FALSE requires at least 1 element on stack")
         value = vm.stack.pop()
         if not value:
             target = self.args[0]
@@ -638,6 +627,8 @@ class JUMP_IF_FALSE(Instruction):
 class CALL_FUNCTION(Instruction):
     """
     调用函数
+    
+    栈顺序：[函数, 参数1, 参数2, ...]
     """
     
     def __init__(self, arg_count, keyword_arg_names=None):
@@ -648,36 +639,38 @@ class CALL_FUNCTION(Instruction):
     
     def execute(self, vm):
         positional_count = self.args[0]
-        keyword_arg_names = self.args[1]
+        keyword_arg_names = self.args[1] if len(self.args) > 1 else []
         
-        print(f"[DEBUG CALL_FUNCTION] positional_count: {positional_count}, keyword_arg_names: {keyword_arg_names}")
-        print(f"[DEBUG CALL_FUNCTION] Stack before: {vm.stack}")
+        # 检查栈大小是否足够
+        total_args = positional_count + len(keyword_arg_names)
+        if len(vm.stack) < total_args + 1:  # +1 是因为还需要函数对象
+            raise VMError(f"Stack underflow: need {total_args + 1} items on stack, but only {len(vm.stack)} available")
         
         # 从栈中弹出命名参数值（逆序）
         keyword_args = {}
         for name in reversed(keyword_arg_names):
+            if not vm.stack:
+                raise VMError(f"Stack underflow: not enough keyword arguments")
             keyword_args[name] = vm.stack.pop()
         
         # 从栈中弹出位置参数（逆序）
         args = []
         for _ in range(positional_count):
+            if not vm.stack:
+                raise VMError(f"Stack underflow: not enough positional arguments")
             args.insert(0, vm.stack.pop())
         
         # 弹出函数
+        if not vm.stack:
+            raise VMError(f"Stack underflow: no function to call")
         func = vm.stack.pop()
         
-        print(f"[DEBUG CALL_FUNCTION] func: {func}, args: {args}, keyword_args: {keyword_args}")
-        
         # 调用函数
-        try:
-            if keyword_args:
-                result = func(*args, **keyword_args)
-            else:
-                result = func(*args)
-            vm.stack.append(result)
-        except Exception as e:
-            print(f"[DEBUG CALL_FUNCTION] Exception: {e}")
-            raise
+        if keyword_args:
+            result = func(*args, **keyword_args)
+        else:
+            result = func(*args)
+        vm.stack.append(result)
 
 class RETURN_VALUE(Instruction):
     """
@@ -688,6 +681,8 @@ class RETURN_VALUE(Instruction):
         super().__init__("RETURN_VALUE")
     
     def execute(self, vm):
+        if len(vm.stack) < 1:
+            raise VMError("Stack underflow: RETURN_VALUE requires at least 1 element on stack")
         value = vm.stack.pop()
         vm.stack.append(value)
         vm.running = False
@@ -698,11 +693,50 @@ class POP_TOP(Instruction):
     """
     
     def __init__(self):
-        super().__init__("POP_TOP")
+        super().__init__("POP_TOP", [])
     
     def execute(self, vm):
-        if vm.stack:
-            vm.stack.pop()
+        if not vm.stack:
+            raise VMError("Stack underflow: POP_TOP requires at least 1 element on stack")
+        vm.stack.pop()
+
+class LOAD_SUBSCRIPT(Instruction):
+    """
+    加载下标访问的值
+    
+    栈操作：obj, index → value
+    """
+    
+    def __init__(self):
+        super().__init__("LOAD_SUBSCRIPT", [])
+    
+    def execute(self, vm):
+        if len(vm.stack) < 2:
+            raise VMError("Stack underflow: LOAD_SUBSCRIPT requires at least 2 elements on stack")
+        index = vm.stack.pop()
+        obj = vm.stack.pop()
+        value = obj[index]
+        vm.stack.append(value)
+
+class STORE_SUBSCRIPT(Instruction):
+    """
+    存储值到下标位置
+    
+    栈操作：obj, index, value → None
+    """
+    
+    def __init__(self):
+        super().__init__("STORE_SUBSCRIPT", [])
+    
+    def execute(self, vm):
+        if len(vm.stack) < 3:
+            raise VMError("Stack underflow: STORE_SUBSCRIPT requires at least 3 elements on stack")
+        value = vm.stack.pop()
+        index = vm.stack.pop()
+        obj = vm.stack.pop()
+        obj[index] = value
+        # 将值推回栈顶，使赋值表达式返回值
+        vm.stack.append(value)
 
 class NOP(Instruction):
     """
@@ -710,7 +744,7 @@ class NOP(Instruction):
     """
     
     def __init__(self):
-        super().__init__("NOP")
+        super().__init__("NOP", [])
     
     def execute(self, vm):
         pass
@@ -750,6 +784,8 @@ class BUILD_LIST(Instruction):
     def execute(self, vm):
         # 从栈中弹出count个元素，构建列表
         count = self.args[0]
+        if len(vm.stack) < count:
+            raise VMError(f"Stack underflow: BUILD_LIST requires at least {count} elements on stack")
         elements = []
         for _ in range(count):
             elements.append(vm.stack.pop())
@@ -768,6 +804,8 @@ class BUILD_TUPLE(Instruction):
     def execute(self, vm):
         # 从栈中弹出count个元素，构建元组
         count = self.args[0]
+        if len(vm.stack) < count:
+            raise VMError(f"Stack underflow: BUILD_TUPLE requires at least {count} elements on stack")
         elements = []
         for _ in range(count):
             elements.append(vm.stack.pop())
@@ -780,6 +818,7 @@ INSTRUCTIONS = {
     "LOAD_CONST": LOAD_CONST,
     "LOAD_NAME": LOAD_NAME,
     "STORE_NAME": STORE_NAME,
+    "STORE_ATTR": STORE_ATTR,
     "DELETE_NAME": DELETE_NAME,
     "BINARY_ADD": BINARY_ADD,
     "BINARY_SUB": BINARY_SUB,
@@ -791,11 +830,19 @@ INSTRUCTIONS = {
     "COMPARE_LE": COMPARE_LE,
     "COMPARE_GT": COMPARE_GT,
     "COMPARE_GE": COMPARE_GE,
+    "ADDR_OF": ADDR_OF,
+    "DEREF": DEREF,
+    "STORE_DEREF": STORE_DEREF,
     "JUMP": JUMP,
     "JUMP_IF_TRUE": JUMP_IF_TRUE,
     "JUMP_IF_FALSE": JUMP_IF_FALSE,
     "CALL_FUNCTION": CALL_FUNCTION,
     "RETURN_VALUE": RETURN_VALUE,
     "POP_TOP": POP_TOP,
+    "LOAD_SUBSCRIPT": LOAD_SUBSCRIPT,
+    "STORE_SUBSCRIPT": STORE_SUBSCRIPT,
     "NOP": NOP,
+    "LABEL": LABEL,
+    "BUILD_LIST": BUILD_LIST,
+    "BUILD_TUPLE": BUILD_TUPLE,
 }

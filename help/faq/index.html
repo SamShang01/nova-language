@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .faq-answer {
+            color: #555;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Frequently Asked Questions</h1>
+            <p>Answers to common questions about Nova programming language</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; FAQ
+        </div>
+        
+        <div class="content-section">
+            <h2>General Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">What is Nova programming language?</div>
+                <div class="faq-answer">
+                    <p>Nova is a modern, statically-typed programming language designed for building reliable and efficient software. It combines the best features of languages like Python, TypeScript, and Rust, offering a clean syntax, strong type system, and powerful features.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Who created Nova?</div>
+                <div class="faq-answer">
+                    <p>Nova was created by a team of experienced software engineers who wanted to build a language that addresses the limitations of existing languages while providing a modern, developer-friendly experience.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is Nova open source?</div>
+                <div class="faq-answer">
+                    <p>Yes, Nova is an open-source project. You can find the source code on GitHub and contribute to its development.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What platforms does Nova support?</div>
+                <div class="faq-answer">
+                    <p>Nova is designed to be cross-platform and supports Windows, macOS, and Linux. You can write code once and run it on any supported platform.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Installation</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I install Nova?</div>
+                <div class="faq-answer">
+                    <p>You can install Nova using the package manager for your operating system, or by downloading the installer from the official website. Detailed installation instructions are available in the <a href="../tutorial/installation.html">Installation tutorial</a>.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What are the system requirements for Nova?</div>
+                <div class="faq-answer">
+                    <p>Nova has minimal system requirements. You need a computer with at least 2GB of RAM and 500MB of free disk space. Nova runs on Windows 10+, macOS 10.15+, and most Linux distributions.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I check if Nova is installed correctly?</div>
+                <div class="faq-answer">
+                    <p>Open a terminal and run <code>nova --version</code>. If Nova is installed correctly, you should see the version number displayed.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Language Features</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is Nova a statically-typed language?</div>
+                <div class="faq-answer">
+                    <p>Yes, Nova is a statically-typed language. This means that type checking is done at compile time, which helps catch errors early and improves performance.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Does Nova support object-oriented programming?</div>
+                <div class="faq-answer">
+                    <p>Yes, Nova supports object-oriented programming with classes, inheritance, and polymorphism. It also supports other programming paradigms like functional programming.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What is the difference between Nova and Python?</div>
+                <div class="faq-answer">
+                    <p>While Nova has a syntax similar to Python, it offers static typing, better performance, and additional features like traits and generics. Nova also has a more modern type system and better error handling.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Does Nova support concurrency?</div>
+                <div class="faq-answer">
+                    <p>Yes, Nova supports concurrency through threads and async/await syntax. It also provides safe concurrency primitives to help avoid common issues like race conditions.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Development</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">What editors and IDEs support Nova?</div>
+                <div class="faq-answer">
+                    <p>Nova has support for popular editors and IDEs like Visual Studio Code, IntelliJ IDEA, and Sublime Text. You can install extensions or plugins to get syntax highlighting, code completion, and other features.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I run a Nova program?</div>
+                <div class="faq-answer">
+                    <p>You can run a Nova program using the <code>nova</code> command followed by the filename. For example: <code>nova hello.nova</code>.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I debug a Nova program?</div>
+                <div class="faq-answer">
+                    <p>Nova supports debugging through IDEs that have Nova plugins, or you can use the built-in <code>--debug</code> flag to get more detailed error messages.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I create a Nova module?</div>
+                <div class="faq-answer">
+                    <p>To create a Nova module, simply create a .nova file with your code and use the <code>export</code> keyword to expose functions, classes, or variables. You can then import them in other files using the <code>import</code> keyword.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Standard Library</h2>
+            
+            <div class="faq-question">What's included in Nova's standard library?</div>
+            <div class="faq-answer">
+                <p>Nova's standard library includes modules for common tasks like file I/O, networking, collections, date/time handling, and more. You can find detailed documentation in the <a href="../library/index.html">Library documentation</a>.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I use the standard library?</div>
+                <div class="faq-answer">
+                    <p>You can import standard library modules using the <code>import</code> keyword. For example: <code>import std.io</code> to use the I/O module.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I create my own libraries?</div>
+                <div class="faq-answer">
+                    <p>Yes, you can create your own libraries and distribute them as packages. Nova has a package manager that allows you to publish and install packages.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Troubleshooting</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">I'm getting a compile error. What should I do?</div>
+                <div class="faq-answer">
+                    <p>Check the error message carefully. It should tell you what's wrong and where the error is. Common issues include syntax errors, type mismatches, and undefined variables. If you're still stuck, consult the <a href="../reference/index.html">reference documentation</a> or ask for help in the Nova community.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">My program is running slowly. How can I optimize it?</div>
+                <div class="faq-answer">
+                    <p>There are several ways to optimize Nova programs: use efficient algorithms, avoid unnecessary computations, use appropriate data structures, and take advantage of Nova's performance features like static typing and inline functions. You can also use profiling tools to identify bottlenecks.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I handle errors in Nova?</div>
+                <div class="faq-answer">
+                    <p>Nova uses try-catch statements for error handling. You can catch specific exceptions or use a general catch block. You can also create custom exception classes for your application.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Community</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I get help with Nova?</div>
+                <div class="faq-answer">
+                    <p>You can get help through the Nova community forums, Discord server, or GitHub issues. You can also find answers to common questions in the documentation and tutorials.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I contribute to Nova?</div>
+                <div class="faq-answer">
+                    <p>You can contribute to Nova by reporting bugs, submitting feature requests, writing documentation, or contributing code. Check the GitHub repository for more information on how to contribute.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is there a Nova community code of conduct?</div>
+                <div class="faq-answer">
+                    <p>Yes, the Nova community has a code of conduct that promotes respectful and inclusive behavior. Please review it before participating in the community.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Future Plans</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">What's the roadmap for Nova?</div>
+                <div class="faq-answer">
+                    <p>The Nova team has a roadmap that includes features like improved tooling, better IDE support, additional standard library modules, and performance optimizations. You can find the latest roadmap on the GitHub repository.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">When will the next version of Nova be released?</div>
+                <div class="faq-answer">
+                    <p>Nova follows a regular release schedule. Minor updates are released every few months, and major versions are released when significant new features are ready. Check the official website or GitHub repository for the latest release information.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Still Have Questions?</h2>
+            <p>If you have a question that isn't answered here, please:</p>
+            <ul>
+                <li>Check the <a href="../tutorial/index.html">tutorial</a> for step-by-step guides</li>
+                <li>Consult the <a href="../reference/index.html">reference documentation</a> for detailed information</li>
+                <li>Ask in the Nova community forums or Discord server</li>
+                <li>Submit an issue on GitHub if you found a bug or have a feature request</li>
+            </ul>
+            <a href="../index.html" class="btn">Return to Home</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

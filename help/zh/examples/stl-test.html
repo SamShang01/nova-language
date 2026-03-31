@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STL库测试示例 - Nova 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        muted: '#64748b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        pre { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.875rem; }
+        code { font-family: 'Fira Code', monospace; }
+        .keyword { color: #c792ea; }
+        .string { color: #c3e88d; }
+        .comment { color: #676e95; font-style: italic; }
+        .function { color: #82aaff; }
+        .number { color: #f78c6c; }
+        .type { color: #ffcb6b; }
+    </style>
+</head>
+<body class="bg-light text-dark min-h-screen">
+    <nav class="bg-white shadow-sm fixed w-full z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Nova</span>
+                    </a>
+                    <div class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="../tutorial/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">教程</a>
+                        <a href="index.html" class="border-b-2 border-primary text-primary px-1 pt-1 text-sm font-medium">示例</a>
+                        <a href="../reference/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">参考</a>
+                        <a href="../faq/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">常见问题</a>
+                        <a href="../library/index.html" class="text-muted hover:text-primary px-1 pt-1 text-sm font-medium">标准库</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-primary to-secondary text-white py-20 px-4 mt-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center mb-4 text-sm text-white/80">
+                <a href="index.html" class="hover:text-white">示例</a>
+                <i class="fa fa-angle-right mx-2"></i>
+                <span>STL库测试</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">STL库测试示例</h1>
+            <p class="text-xl text-white/90 max-w-3xl">学习如何使用 Nova 标准模板库（STL）中的容器和算法</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3">
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-database mr-3"></i>
+                        概述
+                    </h2>
+                    <p class="text-muted leading-relaxed mb-6">
+                        Nova 标准模板库（STL）提供了丰富的数据结构和算法，包括 Vector、List、Stack、Queue、Set、Map 等容器。
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-blue-800 mb-2">序列容器</h4>
+                            <p class="text-blue-700 text-sm">Vector, List, Stack, Queue</p>
+                        </div>
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-purple-800 mb-2">关联容器</h4>
+                            <p class="text-purple-700 text-sm">Set, Map</p>
+                        </div>
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r">
+                            <h4 class="font-semibold text-green-800 mb-2">算法</h4>
+                            <p class="text-green-700 text-sm">sort, find, filter, map</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-xl shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                        <i class="fa fa-code mr-3"></i>
+                        示例代码
+                    </h2>
+                    <pre><code><span class="keyword">func</span> <span class="function">main</span>() {
+    <span class="function">print</span>(<span class="string">"=== Nova STL Library Test Suite ===\n"</span>);
+    testVector();
+    testMap();
+    testAlgorithms();
+}
+
+<span class="keyword">func</span> <span class="function">testVector</span>() {
+    <span class="keyword">var</span> vec = <span class="type">Vector</span>&lt;<span class="type">int</span>&gt;();
+    vec.push(<span class="number">1</span>);
+    vec.push(<span class="number">2</span>);
+    vec.push(<span class="number">3</span>);
+    
+    <span class="function">print</span>(<span class="string">"Vector: "</span> + vec.toArray().toString());
+    <span class="function">print</span>(<span class="string">"Size: "</span> + vec.count());
+    <span class="function">print</span>(<span class="string">"Contains 2: "</span> + vec.contains(<span class="number">2</span>));
+}
+
+<span class="keyword">func</span> <span class="function">testMap</span>() {
+    <span class="keyword">var</span> map = <span class="type">Map</span>&lt;<span class="type">string</span>, <span class="type">int</span>&gt;();
+    map.insert(<span class="string">"one"</span>, <span class="number">1</span>);
+    map.insert(<span class="string">"two"</span>, <span class="number">2</span>);
+    
+    <span class="function">print</span>(<span class="string">"Get 'two': "</span> + map.get(<span class="string">"two"</span>));
+    <span class="function">print</span>(<span class="string">"Keys: "</span> + map.keys().toArray().toString());
+}
+
+<span class="keyword">func</span> <span class="function">testAlgorithms</span>() {
+    <span class="keyword">var</span> vec = <span class="type">Vector</span>&lt;<span class="type">int</span>&gt;();
+    vec.push(<span class="number">5</span>);
+    vec.push(<span class="number">2</span>);
+    vec.push(<span class="number">8</span>);
+    
+    sort(vec);
+    <span class="function">print</span>(<span class="string">"After sort: "</span> + vec.toArray().toString());
+    
+    <span class="keyword">var</span> filtered = filter(vec, <span class="keyword">func</span>(x: <span class="type">int</span>): <span class="type">bool</span> {
+        <span class="keyword">return</span> x > <span class="number">3</span>;
+    });
+    <span class="function">print</span>(<span class="string">"Filtered (>3): "</span> + filtered.toArray().toString());
+}</code></pre>
+                </section>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-md p-6 sticky top-20">
+                    <h3 class="text-lg font-semibold mb-4">难度等级</h3>
+                    <span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">
+                        中级
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400 mb-4">&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </div>
+    </footer>
+</body>
+</html>

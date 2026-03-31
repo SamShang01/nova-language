@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特性 - Nova 编程语言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>特性</h1>
+            <p>在 Nova 中使用特性（Traits）</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> &gt; <a href="index.html">教程</a> &gt; 特性
+        </div>
+        
+        <div class="content-section">
+            <h2>特性的定义</h2>
+            <p>特性（Traits）是一种代码复用机制，允许你定义一组方法，然后在多个类中实现这些方法。</p>
+            
+            <div class="code-block">
+// 定义一个特性
+trait Printable {
+    def print() {
+        print("Printing...");
+    }
+    
+    def getDescription() -> string;
+}
+
+// 定义另一个特性
+trait Serializable {
+    def serialize() -> string;
+    def deserialize(data: string);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>实现特性</h2>
+            <p>你可以使用 <code>implements</code> 关键字来实现一个或多个特性。</p>
+            
+            <div class="code-block">
+// 实现特性
+class Person implements Printable, Serializable {
+    let name: string;
+    let age: int;
+    
+    def __init__(self, name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+    
+    // 实现 Printable 特性的方法
+    def print() {
+        print("Person: " + self.name + ", " + self.age + " years old");
+    }
+    
+    def getDescription() -> string {
+        return "A person named " + self.name;
+    }
+    
+    // 实现 Serializable 特性的方法
+    def serialize() -> string {
+        return '{"name": "' + self.name + '", "age": ' + self.age + '}';
+    }
+    
+    def deserialize(data: string) {
+        // 简化实现，实际应使用 JSON 解析
+        // 这里只是示例
+    }
+}
+
+// 使用实现了特性的类
+let person = new Person("John", 30);
+person.print(); // 输出: Person: John, 30 years old
+print(person.getDescription()); // 输出: A person named John
+print(person.serialize()); // 输出: {"name": "John", "age": 30}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>使用特性</h2>
+            <p>你可以将特性作为类型使用，实现了该特性的任何类都可以赋值给该类型的变量。</p>
+            
+            <div class="code-block">
+// 使用特性作为类型
+def printObject(obj: Printable) {
+    obj.print();
+    print(obj.getDescription());
+}
+
+def serializeObject(obj: Serializable) {
+    print(obj.serialize());
+}
+
+let person = new Person("John", 30);
+printObject(person);
+serializeObject(person);
+
+// 可以传递任何实现了 Printable 特性的对象
+class Product implements Printable {
+    let name: string;
+    let price: float;
+    
+    def __init__(self, name: string, price: float) {
+        self.name = name;
+        self.price = price;
+    }
+    
+    def print() {
+        print("Product: " + self.name + ", $" + self.price);
+    }
+    
+    def getDescription() -> string {
+        return "A product named " + self.name;
+    }
+}
+
+let product = new Product("Apple", 1.99);
+printObject(product);
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>多特性</h2>
+            <p>一个类可以实现多个特性，从而获得多个特性的功能。</p>
+            
+            <div class="code-block">
+// 实现多个特性
+class User implements Printable, Serializable, Comparable {
+    let id: int;
+    let name: string;
+    
+    def __init__(self, id: int, name: string) {
+        self.id = id;
+        self.name = name;
+    }
+    
+    // Printable 方法
+    def print() {
+        print("User: " + self.name + " (ID: " + self.id + ")");
+    }
+    
+    def getDescription() -> string {
+        return "User " + self.name;
+    }
+    
+    // Serializable 方法
+    def serialize() -> string {
+        return '{"id": ' + self.id + ', "name": "' + self.name + '"}';
+    }
+    
+    def deserialize(data: string) {
+        // 实现略
+    }
+    
+    // Comparable 方法
+    def compareTo(other: User) -> int {
+        if (self.id < other.id) {
+            return -1;
+        } else if (self.id > other.id) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+// 定义 Comparable 特性
+trait Comparable {
+    def compareTo(other: any) -> int;
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>特性继承</h2>
+            <p>特性可以继承其他特性，形成特性层次结构。</p>
+            
+            <div class="code-block">
+// 特性继承
+trait BaseTrait {
+    def baseMethod() {
+        print("Base method called");
+    }
+}
+
+trait DerivedTrait extends BaseTrait {
+    def derivedMethod() {
+        print("Derived method called");
+    }
+}
+
+class MyClass implements DerivedTrait {
+    def baseMethod() {
+        print("Overridden base method");
+    }
+    
+    def derivedMethod() {
+        print("Overridden derived method");
+    }
+}
+
+let obj = new MyClass();
+obj.baseMethod(); // 输出: Overridden base method
+obj.derivedMethod(); // 输出: Overridden derived method
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>默认实现</h2>
+            <p>特性可以为方法提供默认实现，实现该特性的类可以选择覆盖这些方法。</p>
+            
+            <div class="code-block">
+// 默认实现
+trait Greeter {
+    def greet() {
+        return "Hello!";
+    }
+    
+    def greetByName(name: string) -> string {
+        return "Hello, " + name + "!";
+    }
+}
+
+class EnglishGreeter implements Greeter {
+    // 使用默认实现
+}
+
+class SpanishGreeter implements Greeter {
+    // 覆盖默认实现
+    def greet() {
+        return "¡Hola!";
+    }
+    
+    def greetByName(name: string) -> string {
+        return "¡Hola, " + name + "!";
+    }
+}
+
+let englishGreeter = new EnglishGreeter();
+print(englishGreeter.greet()); // 输出: Hello!
+print(englishGreeter.greetByName("John")); // 输出: Hello, John!
+
+let spanishGreeter = new SpanishGreeter();
+print(spanishGreeter.greet()); // 输出: ¡Hola!
+print(spanishGreeter.greetByName("John")); // 输出: ¡Hola, John!
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>抽象方法</h2>
+            <p>特性可以定义抽象方法，实现该特性的类必须提供这些方法的实现。</p>
+            
+            <div class="code-block">
+// 抽象方法
+trait Drawable {
+    def draw(); // 抽象方法，没有默认实现
+    
+    def getArea() -> float; // 抽象方法
+}
+
+class Circle implements Drawable {
+    let radius: float;
+    
+    def __init__(self, radius: float) {
+        self.radius = radius;
+    }
+    
+    def draw() {
+        print("Drawing a circle with radius " + self.radius);
+    }
+    
+    def getArea() -> float {
+        return 3.14159 * self.radius * self.radius;
+    }
+}
+
+class Rectangle implements Drawable {
+    let width: float;
+    let height: float;
+    
+    def __init__(self, width: float, height: float) {
+        self.width = width;
+        self.height = height;
+    }
+    
+    def draw() {
+        print("Drawing a rectangle with width " + self.width + " and height " + self.height);
+    }
+    
+    def getArea() -> float {
+        return self.width * self.height;
+    }
+}
+
+let circle = new Circle(5);
+circle.draw(); // 输出: Drawing a circle with radius 5
+print("Circle area: " + circle.getArea()); // 输出: Circle area: 78.53975
+
+let rectangle = new Rectangle(4, 6);
+rectangle.draw(); // 输出: Drawing a rectangle with width 4 and height 6
+print("Rectangle area: " + rectangle.getArea()); // 输出: Rectangle area: 24
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>特性组合</h2>
+            <p>你可以组合多个特性来创建更复杂的行为。</p>
+            
+            <div class="code-block">
+// 特性组合
+trait Logger {
+    def log(message: string) {
+        print("[LOG] " + message);
+    }
+}
+
+trait Validator {
+    def validate() -> bool;
+}
+
+trait Persistable {
+    def save();
+    def load();
+}
+
+// 组合多个特性
+class User implements Logger, Validator, Persistable {
+    let name: string;
+    let email: string;
+    
+    def __init__(self, name: string, email: string) {
+        self.name = name;
+        self.email = email;
+    }
+    
+    def validate() -> bool {
+        if (self.name === "") {
+            self.log("Name is required");
+            return false;
+        }
+        if (self.email.indexOf("@") === -1) {
+            self.log("Invalid email format");
+            return false;
+        }
+        self.log("Validation passed");
+        return true;
+    }
+    
+    def save() {
+        self.log("Saving user: " + self.name);
+        // 保存逻辑
+    }
+    
+    def load() {
+        self.log("Loading user");
+        // 加载逻辑
+    }
+}
+
+let user = new User("John", "john@example.com");
+if (user.validate()) {
+    user.save();
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>特性与继承</h2>
+            <p>特性和继承可以一起使用，特性提供水平代码复用，而继承提供垂直代码复用。</p>
+            
+            <div class="code-block">
+// 特性与继承
+class Animal {
+    let name: string;
+    
+    def __init__(self, name: string) {
+        self.name = name;
+    }
+    
+    def makeSound() {
+        print("Some generic sound");
+    }
+}
+
+trait Swimmable {
+    def swim() {
+        print("Swimming");
+    }
+}
+
+trait Flyable {
+    def fly() {
+        print("Flying");
+    }
+}
+
+class Dog extends Animal implements Swimmable {
+    def __init__(self, name: string) {
+        super(name);
+    }
+    
+    def makeSound() {
+        print("Woof! Woof!");
+    }
+}
+
+class Bird extends Animal implements Flyable, Swimmable {
+    def __init__(self, name: string) {
+        super(name);
+    }
+    
+    def makeSound() {
+        print("Tweet! Tweet!");
+    }
+}
+
+let dog = new Dog("Rex");
+dog.makeSound(); // 输出: Woof! Woof!
+dog.swim(); // 输出: Swimming
+
+let bird = new Bird("Tweety");
+bird.makeSound(); // 输出: Tweet! Tweet!
+bird.fly(); // 输出: Flying
+bird.swim(); // 输出: Swimming
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>练习</h2>
+            <p>尝试完成以下练习，以巩固你对特性的理解：</p>
+            <ol>
+                <li>创建一个 <code>Resizable</code> 特性，包含 resize 方法</li>
+                <li>创建一个 <code>Colorable</code> 特性，包含 setColor 和 getColor 方法</li>
+                <li>创建一个 <code>Shape</code> 类，实现这两个特性</li>
+                <li>创建不同的形状类（如 Circle、Rectangle）继承自 Shape</li>
+            </ol>
+            
+            <div class="code-block">
+// 练习答案示例
+
+// 1. Resizable 特性
+trait Resizable {
+    def resize(factor: float);
+}
+
+// 2. Colorable 特性
+trait Colorable {
+    var color: string = "black";
+    
+    def setColor(color: string) {
+        self.color = color;
+    }
+    
+    def getColor() -> string {
+        return self.color;
+    }
+}
+
+// 3. Shape 类
+trait Drawable {
+    def draw();
+}
+
+class Shape implements Resizable, Colorable, Drawable {
+    def resize(factor: float) {
+        // 基类实现，子类可以覆盖
+        print("Resizing by factor " + factor);
+    }
+    
+    def draw() {
+        print("Drawing a shape with color " + self.color);
+    }
+}
+
+// 4. 具体形状类
+class Circle extends Shape {
+    var radius: float;
+    
+    def __init__(self, radius: float) {
+        self.radius = radius;
+    }
+    
+    def resize(factor: float) {
+        self.radius *= factor;
+        print("Circle radius resized to " + self.radius);
+    }
+    
+    def draw() {
+        print("Drawing a circle with radius " + self.radius + " and color " + self.color);
+    }
+}
+
+class Rectangle extends Shape {
+    var width: float;
+    var height: float;
+    
+    def __init__(self, width: float, height: float) {
+        self.width = width;
+        self.height = height;
+    }
+    
+    def resize(factor: float) {
+        self.width *= factor;
+        self.height *= factor;
+        print("Rectangle resized to " + self.width + "x" + self.height);
+    }
+    
+    def draw() {
+        print("Drawing a rectangle with dimensions " + self.width + "x" + self.height + " and color " + self.color);
+    }
+}
+
+// 使用示例
+let circle = new Circle(5);
+circle.draw(); // 输出: Drawing a circle with radius 5 and color black
+circle.setColor("red");
+circle.draw(); // 输出: Drawing a circle with radius 5 and color red
+circle.resize(2); // 输出: Circle radius resized to 10
+circle.draw(); // 输出: Drawing a circle with radius 10 and color red
+
+let rectangle = new Rectangle(4, 6);
+rectangle.draw(); // 输出: Drawing a rectangle with dimensions 4x6 and color black
+rectangle.setColor("blue");
+rectangle.draw(); // 输出: Drawing a rectangle with dimensions 4x6 and color blue
+rectangle.resize(1.5); // 输出: Rectangle resized to 6x9
+rectangle.draw(); // 输出: Drawing a rectangle with dimensions 6x9 and color blue
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>下一步</h2>
+            <p>现在你已经了解了 Nova 中的特性，你可以：</p>
+            <ul>
+                <li><a href="generics.html">学习泛型</a></li>
+                <li>开始使用 Nova 进行实际项目开发</li>
+            </ul>
+            <a href="generics.html" class="btn">继续学习泛型</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </footer>
+    </div>
+</body>
+</html>

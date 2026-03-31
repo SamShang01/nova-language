@@ -9,6 +9,87 @@ from .errors import VMError, StackError
 from .gc import GenerationalGC, Generation
 from .inline_cache import InlineCacheManager
 
+# 导入Nova的Dict类型
+try:
+    from ..stdlib.collections.dict import Dict as NovaDict
+except ImportError:
+    # 如果导入失败，使用简单的字典包装器
+    class NovaDict:
+        def __init__(self, items=None):
+            self.items = dict(items) if items else {}
+        def __getitem__(self, key):
+            return self.items[key]
+        def __setitem__(self, key, value):
+            self.items[key] = value
+        def __repr__(self):
+            return f"Dict({self.items})"
+        def __str__(self):
+            return f"Dict({self.items})"
+
+
+class EnvironmentDict:
+    """
+    环境字典 - 关联到虚拟机环境的字典
+    
+    修改字典时会同步更新虚拟机环境
+    """
+    
+    def __init__(self, environment, builtin_names=None):
+        """
+        初始化环境字典
+        
+        Args:
+            environment: 虚拟机的环境字典
+            builtin_names: 内置函数名称集合，用于过滤
+        """
+        self._environment = environment
+        self._builtin_names = builtin_names or set()
+    
+    def __getitem__(self, key):
+        """获取值"""
+        if key in self._environment:
+            return self._environment[key]
+        raise KeyError(key)
+    
+    def __setitem__(self, key, value):
+        """设置值 - 同步更新环境"""
+        self._environment[key] = value
+    
+    def __contains__(self, key):
+        """检查键是否存在"""
+        return key in self._environment and key not in self._builtin_names
+    
+    def __repr__(self):
+        """字符串表示"""
+        items = {}
+        for k, v in self._environment.items():
+            if k not in self._builtin_names and not callable(v):
+                if isinstance(v, EnvironmentDict):
+                    # 对 EnvironmentDict 实例显示为占位符，避免递归
+                    items[k] = '{...}'
+                else:
+                    items[k] = v
+        return str(items)
+    
+    def __str__(self):
+        """字符串表示"""
+        return self.__repr__()
+    
+    def keys(self):
+        """返回所有键"""
+        return [k for k in self._environment.keys() 
+                if k not in self._builtin_names and not callable(self._environment[k])]
+    
+    def values(self):
+        """返回所有值"""
+        return [v for k, v in self._environment.items() 
+                if k not in self._builtin_names and not callable(v)]
+    
+    def items(self):
+        """返回所有键值对"""
+        return [(k, v) for k, v in self._environment.items() 
+                if k not in self._builtin_names and not callable(v)]
+
 
 class BuiltinFunction:
     """
@@ -1024,6 +1105,42 @@ class NovaFunction:
         if self.environment:
             func_vm.environment.update(self.environment)
         
+        # 更新 globals 和 locals 函数，使其返回正确的环境
+        # 在Nova中：
+        # - globals() 返回函数定义时的环境（全局/闭包环境）
+        # - locals() 返回函数执行时的局部环境（参数 + 局部变量）
+        
+        # 保存函数定义时的环境作为全局环境
+        global_env = self.environment if self.environment else {}
+        
+        # 获取函数的参数名列表
+        param_names = set()
+        for param_name, _ in self.normal_params:
+            param_names.add(param_name)
+        if self.varargs_param:
+            param_names.add(self.varargs_param)
+        if self.kwargs_param:
+            param_names.add(self.kwargs_param)
+        
+        # 内置函数名称列表（用于过滤）
+        builtin_names = {
+            'print', 'println', 'len', 'input', 'type', 'str', 'int', 'float',
+            'abs', 'max', 'min', 'sum', 'round', 'double', 'globals', 'locals',
+            'Vector', 'Double', 'dis'
+        }
+        
+        # globals 返回全局环境（不包含函数的局部变量和内置函数）
+        def globals_func():
+            # 返回全局环境字典（函数定义时的环境）
+            return EnvironmentDict(global_env, builtin_names | param_names | {'this'})
+        func_vm.environment['globals'] = BuiltinFunction('globals', globals_func)
+        
+        # locals 返回局部环境（只包含函数的参数和局部变量）
+        def locals_func():
+            # 返回局部环境字典（当前函数执行时的环境）
+            return EnvironmentDict(func_vm.environment, set(func_vm.environment.keys()) - param_names - {'this'})
+        func_vm.environment['locals'] = BuiltinFunction('locals', locals_func)
+        
         # 检查第一个参数是否是实例（用于方法调用）
         # 如果是，并且函数的第一个参数名是'self'，才设置 this 关键字
         # 注意：不要跳过第一个参数，因为它是 self 参数的值
@@ -1217,6 +1334,53 @@ class VirtualMachine:
             return max(*args)
         self.environment['max'] = BuiltinFunction('max', max_func)
         
+        # min函数
+        def min_func(*args):
+            return min(*args)
+        self.environment['min'] = BuiltinFunction('min', min_func)
+        
+        # sum函数
+        def sum_func(*args):
+            return sum(*args)
+        self.environment['sum'] = BuiltinFunction('sum', sum_func)
+        
+        # round函数
+        def round_func(value):
+            return round(value)
+        self.environment['round'] = BuiltinFunction('round', round_func)
+        
+        # double函数
+        def double_func(value):
+            return float(value) * 2
+        self.environment['double'] = BuiltinFunction('double', double_func)
+        
+        # dict函数
+        def dict_func(*args, **kwargs):
+            if args:
+                # 如果传递了位置参数，返回一个空字典
+                return {}
+            return kwargs
+        self.environment['dict'] = BuiltinFunction('dict', dict_func)
+        
+        # 保存内置函数名称列表，用于过滤
+        self._builtin_names = {
+            'print', 'println', 'len', 'input', 'type', 'str', 'int', 'float',
+            'abs', 'max', 'min', 'sum', 'round', 'double', 'globals', 'locals',
+            'Vector', 'Double', 'dis', 'dict'
+        }
+        
+        # globals函数 - 返回全局变量字典（只包含用户定义的变量）
+        def globals_func():
+            # 返回环境字典，修改时会同步更新环境
+            return EnvironmentDict(self.environment, self._builtin_names)
+        self.environment['globals'] = BuiltinFunction('globals', globals_func)
+        
+        # locals函数 - 返回局部变量字典
+        def locals_func():
+            # 在全局作用域中，locals和globals相同
+            return globals_func()
+        self.environment['locals'] = BuiltinFunction('locals', locals_func)
+        
         # 初始化Vector类型
         self._initialize_vector_type()
     
@@ -1269,21 +1433,6 @@ class VirtualMachine:
                 return list(self)
         
         self.environment['Vector'] = NovaVector
-        
-        # min函数
-        def min_func(*args):
-            return min(*args)
-        self.environment['min'] = BuiltinFunction('min', min_func)
-        
-        # sum函数
-        def sum_func(iterable):
-            return sum(iterable)
-        self.environment['sum'] = BuiltinFunction('sum', sum_func)
-        
-        # round函数
-        def round_func(value, ndigits=0):
-            return round(value, ndigits)
-        self.environment['round'] = BuiltinFunction('round', round_func)
         
         # Double类型构造函数
         def double_func(value):

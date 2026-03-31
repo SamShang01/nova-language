@@ -1,0 +1,6 @@
+// 测试 type() 函数修复
+let g = globals();
+println("type(g): ");
+type(g);
+println("type(type): ");
+type(type);

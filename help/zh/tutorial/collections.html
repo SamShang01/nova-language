@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集合类型 - Nova 编程语言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>集合类型</h1>
+            <p>在 Nova 中使用数组、列表、字典等集合</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> &gt; <a href="index.html">教程</a> &gt; 集合类型
+        </div>
+        
+        <div class="content-section">
+            <h2>数组</h2>
+            <p>数组是一种固定大小的集合，用于存储相同类型的元素。</p>
+            
+            <div class="code-block">
+// 声明数组
+let numbers: array<int> = [1, 2, 3, 4, 5];
+let fruits: array<string> = ["苹果", "香蕉", "橙子"];
+
+// 访问数组元素
+print(numbers[0]); // 输出: 1
+print(fruits[1]); // 输出: 香蕉
+
+// 修改数组元素
+numbers[0] = 10;
+print(numbers[0]); // 输出: 10
+
+// 获取数组长度
+print(numbers.length); // 输出: 5
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>列表</h2>
+            <p>列表是一种动态大小的集合，用于存储相同类型的元素。</p>
+            
+            <div class="code-block">
+// 声明列表
+let numbers: list<int> = [1, 2, 3, 4, 5];
+let fruits: list<string> = ["苹果", "香蕉", "橙子"];
+
+// 添加元素
+numbers.push(6);
+fruits.push("葡萄");
+print(numbers); // 输出: [1, 2, 3, 4, 5, 6]
+print(fruits); // 输出: ["苹果", "香蕉", "橙子", "葡萄"]
+
+// 移除元素
+numbers.pop(); // 移除最后一个元素
+print(numbers); // 输出: [1, 2, 3, 4, 5]
+
+// 插入元素
+numbers.insert(2, 10); // 在索引 2 处插入 10
+print(numbers); // 输出: [1, 2, 10, 3, 4, 5]
+
+// 获取列表长度
+print(fruits.length); // 输出: 4
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>字典</h2>
+            <p>字典是一种键值对的集合，用于存储映射关系。</p>
+            
+            <div class="code-block">
+// 声明字典
+let person: dict<string, any> = {
+    "name": "John",
+    "age": 30,
+    "email": "john@example.com"
+};
+
+// 访问字典值
+print(person["name"]); // 输出: John
+print(person["age"]); // 输出: 30
+
+// 修改字典值
+person["age"] = 31;
+print(person["age"]); // 输出: 31
+
+// 添加新键值对
+person["city"] = "New York";
+print(person); // 输出: {"name": "John", "age": 31, "email": "john@example.com", "city": "New York"}
+
+// 检查键是否存在
+print("name" in person); // 输出: true
+print("phone" in person); // 输出: false
+
+// 删除键值对
+delete person["email"];
+print(person); // 输出: {"name": "John", "age": 31, "city": "New York"}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>集合</h2>
+            <p>集合是一种无序的、不包含重复元素的集合。</p>
+            
+            <div class="code-block">
+// 声明集合
+let numbers: set<int> = {1, 2, 3, 4, 5};
+let fruits: set<string> = {"苹果", "香蕉", "橙子"};
+
+// 添加元素
+numbers.add(6);
+fruits.add("葡萄");
+print(numbers); // 输出: {1, 2, 3, 4, 5, 6}
+print(fruits); // 输出: {"苹果", "香蕉", "橙子", "葡萄"}
+
+// 移除元素
+numbers.remove(3);
+print(numbers); // 输出: {1, 2, 4, 5, 6}
+
+// 检查元素是否存在
+print(5 in numbers); // 输出: true
+print(3 in numbers); // 输出: false
+
+// 集合操作
+let set1: set<int> = {1, 2, 3};
+let set2: set<int> = {3, 4, 5};
+
+// 并集
+let union = set1 | set2;
+print(union); // 输出: {1, 2, 3, 4, 5}
+
+// 交集
+let intersection = set1 & set2;
+print(intersection); // 输出: {3}
+
+// 差集
+let difference = set1 - set2;
+print(difference); // 输出: {1, 2}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>元组</h2>
+            <p>元组是一种固定大小的、不可变的集合，可以存储不同类型的元素。</p>
+            
+            <div class="code-block">
+// 声明元组
+let person: (string, int, string) = ("John", 30, "john@example.com");
+
+// 访问元组元素
+print(person[0]); // 输出: John
+print(person[1]); // 输出: 30
+print(person[2]); // 输出: john@example.com
+
+// 解构元组
+let (name, age, email) = person;
+print(name); // 输出: John
+print(age); // 输出: 30
+print(email); // 输出: john@example.com
+
+// 元组是不可变的
+// person[0] = "Jane"; // 错误：元组是不可变的
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>列表推导式</h2>
+            <p>列表推导式是一种简洁的创建列表的方法。</p>
+            
+            <div class="code-block">
+// 基本列表推导式
+let numbers = [1, 2, 3, 4, 5];
+let doubled = [x * 2 for x in numbers];
+print(doubled); // 输出: [2, 4, 6, 8, 10]
+
+// 带条件的列表推导式
+let evenNumbers = [x for x in numbers if x % 2 == 0];
+print(evenNumbers); // 输出: [2, 4]
+
+// 嵌套列表推导式
+let matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+let flattened = [x for row in matrix for x in row];
+print(flattened); // 输出: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>集合的遍历</h2>
+            <p>你可以使用 for-in 循环来遍历集合中的元素。</p>
+            
+            <div class="code-block">
+// 遍历数组/列表
+let numbers = [1, 2, 3, 4, 5];
+for (let number in numbers) {
+    print(number);
+}
+
+// 遍历字典
+let person = {
+    "name": "John",
+    "age": 30,
+    "email": "john@example.com"
+};
+for (let key in person) {
+    print(key + ": " + person[key]);
+}
+
+// 遍历集合
+let fruits = {"苹果", "香蕉", "橙子"};
+for (let fruit in fruits) {
+    print(fruit);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>集合的常用方法</h2>
+            
+            <h3>列表方法</h3>
+            <div class="code-block">
+let numbers = [1, 2, 3, 4, 5];
+
+// 添加元素
+numbers.push(6); // 添加到末尾
+numbers.unshift(0); // 添加到开头
+print(numbers); // 输出: [0, 1, 2, 3, 4, 5, 6]
+
+// 移除元素
+numbers.pop(); // 移除末尾元素
+numbers.shift(); // 移除开头元素
+print(numbers); // 输出: [1, 2, 3, 4, 5]
+
+// 查找元素
+let index = numbers.indexOf(3);
+print(index); // 输出: 2
+
+// 反转列表
+numbers.reverse();
+print(numbers); // 输出: [5, 4, 3, 2, 1]
+
+// 排序
+numbers.sort();
+print(numbers); // 输出: [1, 2, 3, 4, 5]
+            </div>
+            
+            <h3>字典方法</h3>
+            <div class="code-block">
+let person = {
+    "name": "John",
+    "age": 30,
+    "email": "john@example.com"
+};
+
+// 获取所有键
+let keys = Object.keys(person);
+print(keys); // 输出: ["name", "age", "email"]
+
+// 获取所有值
+let values = Object.values(person);
+print(values); // 输出: ["John", 30, "john@example.com"]
+
+// 获取所有键值对
+let entries = Object.entries(person);
+print(entries); // 输出: [["name", "John"], ["age", 30], ["email", "john@example.com"]]
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>练习</h2>
+            <p>尝试完成以下练习，以巩固你对集合类型的理解：</p>
+            <ol>
+                <li>创建一个列表，存储 1 到 10 的数字，然后计算它们的和</li>
+                <li>创建一个字典，存储学生的姓名和成绩，然后计算平均成绩</li>
+                <li>使用列表推导式创建一个包含 1 到 20 之间所有偶数的列表</li>
+                <li>创建两个集合，然后计算它们的并集、交集和差集</li>
+            </ol>
+            
+            <div class="code-block">
+// 练习答案示例
+
+// 1. 计算列表元素的和
+def calculateSum(numbers: list<int>) -> int {
+    let sum = 0;
+    for (let number in numbers) {
+        sum += number;
+    }
+    return sum;
+}
+
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+print(calculateSum(numbers)); // 输出: 55
+
+// 2. 计算学生平均成绩
+def calculateAverageGrade(grades: dict<string, number>) -> number {
+    if (Object.keys(grades).length == 0) {
+        return 0;
+    }
+    
+    let sum = 0;
+    for (let name in grades) {
+        sum += grades[name];
+    }
+    return sum / Object.keys(grades).length;
+}
+
+let studentGrades = {
+    "John": 85,
+    "Jane": 92,
+    "Bob": 78,
+    "Alice": 95
+};
+print(calculateAverageGrade(studentGrades)); // 输出: 87.5
+
+// 3. 使用列表推导式创建偶数列表
+let evenNumbers = [x for x in 1..20 if x % 2 == 0];
+print(evenNumbers); // 输出: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+// 4. 集合操作
+let set1 = {1, 2, 3, 4, 5};
+let set2 = {4, 5, 6, 7, 8};
+
+let union = set1 | set2;
+let intersection = set1 & set2;
+let difference = set1 - set2;
+
+print("并集: " + union); // 输出: 并集: {1, 2, 3, 4, 5, 6, 7, 8}
+print("交集: " + intersection); // 输出: 交集: {4, 5}
+print("差集: " + difference); // 输出: 差集: {1, 2, 3}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>下一步</h2>
+            <p>现在你已经了解了 Nova 中的集合类型，你可以：</p>
+            <ul>
+                <li><a href="error-handling.html">学习错误处理</a></li>
+                <li><a href="file-io.html">了解文件 I/O</a></li>
+            </ul>
+            <a href="error-handling.html" class="btn">继续学习错误处理</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </footer>
+    </div>
+</body>
+</html>

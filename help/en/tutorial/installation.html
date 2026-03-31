@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .os-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .os-section h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .prerequisites {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .prerequisites h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Installation Guide</h1>
+            <p>Install Nova on your system</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Installation
+        </div>
+        
+        <div class="content-section">
+            <h2>System Requirements</h2>
+            <p>Nova is designed to run on a variety of systems. Here are the minimum requirements:</p>
+            
+            <ul>
+                <li><strong>Operating System:</strong> Windows 10+, macOS 10.15+, Linux (Ubuntu 18.04+, Fedora 30+)</li>
+                <li><strong>CPU:</strong> 1 GHz or faster processor</li>
+                <li><strong>Memory:</strong> 2 GB RAM</li>
+                <li><strong>Storage:</strong> 100 MB of free space</li>
+                <li><strong>Python:</strong> 3.7 or higher (required for runtime)</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Installation Methods</h2>
+            
+            <div class="os-section">
+                <h4>Windows Installation</h4>
+                <ol>
+                    <li><strong>Download the installer:</strong> Visit the Nova website and download the Windows installer (.exe) for your system architecture (32-bit or 64-bit).</li>
+                    <li><strong>Run the installer:</strong> Double-click the downloaded .exe file and follow the on-screen instructions.</li>
+                    <li><strong>Add to PATH:</strong> During installation, select the option to add Nova to your system PATH.</li>
+                    <li><strong>Verify installation:</strong> Open a new command prompt and run <code>nova --version</code> to confirm the installation was successful.</li>
+                </ol>
+            </div>
+            
+            <div class="os-section">
+                <h4>macOS Installation</h4>
+                <ol>
+                    <li><strong>Download the package:</strong> Visit the Nova website and download the macOS package (.pkg).</li>
+                    <li><strong>Run the installer:</strong> Double-click the downloaded .pkg file and follow the on-screen instructions.</li>
+                    <li><strong>Add to PATH:</strong> The installer will automatically add Nova to your PATH.</li>
+                    <li><strong>Verify installation:</strong> Open a new terminal window and run <code>nova --version</code> to confirm the installation was successful.</li>
+                </ol>
+            </div>
+            
+            <div class="os-section">
+                <h4>Linux Installation</h4>
+                <h5>Using Package Manager (Debian/Ubuntu)</h5>
+                <div class="code-block">
+# Add Nova repository
+sudo apt update
+sudo apt install wget gnupg
+wget -qO- https://nova-lang.org/keys/nova.gpg | sudo apt-key add -
+echo "deb https://nova-lang.org/repos/deb stable main" | sudo tee /etc/apt/sources.list.d/nova.list
+
+# Install Nova
+sudo apt update
+sudo apt install nova
+                </div>
+                
+                <h5>Using Package Manager (Fedora)</h5>
+                <div class="code-block">
+# Add Nova repository
+sudo dnf config-manager --add-repo https://nova-lang.org/repos/rpm/nova.repo
+
+# Install Nova
+sudo dnf install nova
+                </div>
+                
+                <h5>From Source</h5>
+                <ol>
+                    <li><strong>Clone the repository:</strong> <code>git clone https://github.com/nova-lang/nova.git</code></li>
+                    <li><strong>Navigate to the directory:</strong> <code>cd nova</code></li>
+                    <li><strong>Install dependencies:</strong> <code>pip install -r requirements.txt</code></li>
+                    <li><strong>Install Nova:</strong> <code>python setup.py install</code></li>
+                    <li><strong>Verify installation:</strong> <code>nova --version</code></li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Alternative Installation Methods</h2>
+            
+            <h3>Using pip</h3>
+            <p>You can also install Nova using pip:</p>
+            <div class="code-block">
+pip install nova-lang
+            </div>
+            
+            <h3>From Source</h3>
+            <p>For advanced users who want to build from source:</p>
+            <ol>
+                <li><strong>Clone the repository:</strong> <code>git clone https://github.com/nova-lang/nova.git</code></li>
+                <li><strong>Navigate to the directory:</strong> <code>cd nova</code></li>
+                <li><strong>Install dependencies:</strong> <code>pip install -r requirements.txt</code></li>
+                <li><strong>Build Nova:</strong> <code>python setup.py build</code></li>
+                <li><strong>Install Nova:</strong> <code>python setup.py install</code></li>
+            </ol>
+        </div>
+        
+        <div class="content-section">
+            <h2>Verifying Installation</h2>
+            <p>To verify that Nova has been installed correctly, open a terminal or command prompt and run:</p>
+            <div class="code-block">
+nova --version
+            </div>
+            <p>You should see the version number of Nova displayed. You can also run the REPL (Read-Eval-Print Loop) by typing:</p>
+            <div class="code-block">
+nova
+            </div>
+            <p>This will start the Nova interactive shell, where you can test simple expressions.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Troubleshooting</h2>
+            
+            <h3>Common Issues</h3>
+            <ul>
+                <li><strong>Nova command not found:</strong> Make sure Nova is added to your system PATH. On Windows, you may need to restart your command prompt. On Linux/macOS, you may need to run <code>source ~/.bashrc</code> or <code>source ~/.zshrc</code>.</li>
+                <li><strong>Python dependency issues:</strong> Ensure you have Python 3.7 or higher installed. You can check your Python version with <code>python --version</code>.</li>
+                <li><strong>Permission errors:</strong> On Linux/macOS, you may need to use <code>sudo</code> when installing Nova.</li>
+            </ul>
+            
+            <h3>Getting Help</h3>
+            <p>If you encounter any issues during installation, you can:</p>
+            <ul>
+                <li>Check the <a href="../faq/index.html">FAQ</a> section</li>
+                <li>Visit the Nova <a href="https://github.com/nova-lang/nova/issues">GitHub Issues</a> page</li>
+                <li>Join the Nova community forum</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you have Nova installed, you can:</p>
+            <ul>
+                <li><a href="hello-world.html">Write your first Hello World program</a></li>
+                <li>Explore the <a href="../library/index.html">Standard Library</a></li>
+                <li>Read the <a href="../reference/index.html">Language Reference</a></li>
+            </ul>
+            <a href="hello-world.html" class="btn">Continue to Hello World</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

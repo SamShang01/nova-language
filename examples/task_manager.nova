@@ -1,0 +1,190 @@
+# 更复杂的 Nova 程序示例：任务管理器
+
+这是一个比 Hello World 更复杂的 Nova 程序，展示了 Nova 语言的更多特性。
+
+## 任务管理器程序
+
+```nova
+def main() {
+    // 初始化任务列表
+    let tasks: List<Map<String, Any>> = [];
+    let running = true;
+    
+    while (running) {
+        print("\n=== 任务管理器 ===");
+        print("1. 添加任务");
+        print("2. 查看所有任务");
+        print("3. 标记任务完成");
+        print("4. 删除任务");
+        print("5. 退出");
+        
+        let choice = input("请选择操作 (1-5): ");
+        
+        match choice {
+            "1" => addTask(tasks),
+            "2" => viewTasks(tasks),
+            "3" => markTaskComplete(tasks),
+            "4" => deleteTask(tasks),
+            "5" => {
+                print("退出程序...");
+                running = false;
+            },
+            _ => print("无效选择，请重试。")
+        }
+    }
+}
+
+// 添加任务
+fn addTask(tasks: List<Map<String, Any>>) {
+    let title = input("输入任务标题: ");
+    let description = input("输入任务描述: ");
+    let priority = input("输入优先级 (高/中/低): ");
+    
+    let task = {
+        "id": tasks.length + 1,
+        "title": title,
+        "description": description,
+        "priority": priority,
+        "completed": false,
+        "created_at": getCurrentTime()
+    };
+    
+    tasks.push(task);
+    print("任务添加成功！");
+}
+
+// 查看所有任务
+fn viewTasks(tasks: List<Map<String, Any>>) {
+    if (tasks.length == 0) {
+        print("暂无任务。");
+        return;
+    }
+    
+    print("\n=== 任务列表 ===");
+    for (let i = 0; i < tasks.length; i++) {
+        let task = tasks[i];
+        let status = task["completed"] ? "✅ 已完成" : "❌ 未完成";
+        
+        print("\nID: " + task["id"]);
+        print("标题: " + task["title"]);
+        print("描述: " + task["description"]);
+        print("优先级: " + task["priority"]);
+        print("状态: " + status);
+        print("创建时间: " + task["created_at"]);
+        print("-" * 40);
+    }
+}
+
+// 标记任务完成
+fn markTaskComplete(tasks: List<Map<String, Any>>) {
+    if (tasks.length == 0) {
+        print("暂无任务。");
+        return;
+    }
+    
+    let taskId = input("输入要标记完成的任务 ID: ");
+    let id = parseInt(taskId);
+    
+    let found = false;
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i]["id"] == id) {
+            tasks[i]["completed"] = true;
+            print("任务标记完成成功！");
+            found = true;
+            break;
+        }
+    }
+    
+    if (!found) {
+        print("未找到指定 ID 的任务。");
+    }
+}
+
+// 删除任务
+fn deleteTask(tasks: List<Map<String, Any>>) {
+    if (tasks.length == 0) {
+        print("暂无任务。");
+        return;
+    }
+    
+    let taskId = input("输入要删除的任务 ID: ");
+    let id = parseInt(taskId);
+    
+    let foundIndex = -1;
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i]["id"] == id) {
+            foundIndex = i;
+            break;
+        }
+    }
+    
+    if (foundIndex != -1) {
+        tasks.splice(foundIndex, 1);
+        print("任务删除成功！");
+        
+        // 更新任务 ID
+        for (let i = 0; i < tasks.length; i++) {
+            tasks[i]["id"] = i + 1;
+        }
+    } else {
+        print("未找到指定 ID 的任务。");
+    }
+}
+
+// 获取当前时间
+fn getCurrentTime(): String {
+    // 简化的时间获取函数
+    return "2026-03-18 " + (10 + Math.random() * 14).toInt() + ":" + (10 + Math.random() * 50).toInt();
+}
+```
+
+## 程序特性说明
+
+这个任务管理器程序展示了 Nova 语言的以下特性：
+
+1. **数据结构**：
+   - 使用 `List<Map<String, Any>>` 存储任务
+   - 映射（Map）用于存储任务的属性
+
+2. **控制流**：
+   - `while` 循环实现菜单的持续显示
+   - `match` 语句处理用户选择
+   - `if` 条件判断
+   - `for` 循环遍历任务列表
+
+3. **函数**：
+   - 定义多个函数（`addTask`, `viewTasks`, `markTaskComplete`, `deleteTask`, `getCurrentTime`）
+   - 函数参数和返回值
+
+4. **用户交互**：
+   - 使用 `input()` 函数获取用户输入
+   - 使用 `print()` 函数显示信息
+
+5. **字符串操作**：
+   - 字符串拼接
+   - 重复字符（`"-" * 40`）
+
+6. **类型转换**：
+   - 使用 `parseInt()` 将字符串转换为整数
+   - 使用 `toInt()` 将浮点数转换为整数
+
+7. **数学函数**：
+   - 使用 `Math.random()` 生成随机数
+
+## 如何运行
+
+1. 将上面的代码保存为 `task_manager.nova`
+2. 在终端中运行：
+   ```bash
+   nova task_manager.nova
+   ```
+
+## 程序功能
+
+- 添加新任务（包含标题、描述、优先级）
+- 查看所有任务的详细信息
+- 标记任务为已完成
+- 删除任务
+- 退出程序
+
+这个程序比简单的 Hello World 复杂得多，展示了 Nova 语言的多种特性，包括数据结构、控制流、函数定义和用户交互。

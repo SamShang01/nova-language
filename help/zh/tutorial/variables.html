@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变量 - Nova 编程语言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>变量</h1>
+            <p>在 Nova 中声明和使用变量</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> &gt; <a href="index.html">教程</a> &gt; 变量
+        </div>
+        
+        <div class="content-section">
+            <h2>变量声明</h2>
+            <p>在 Nova 中，你可以使用 <code>let</code> 关键字来声明变量。变量是用于存储数据的命名容器。</p>
+            
+            <div class="code-block">
+// 声明变量
+let message = "Hello";
+let count = 42;
+let pi = 3.14;
+let isActive = true;
+            </div>
+            
+            <p>在上面的示例中，我们声明了四个变量：</p>
+            <ul>
+                <li><code>message</code> - 存储字符串 "Hello"</li>
+                <li><code>count</code> - 存储整数 42</li>
+                <li><code>pi</code> - 存储浮点数 3.14</li>
+                <li><code>isActive</code> - 存储布尔值 true</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>类型注解</h2>
+            <p>Nova 是静态类型语言，这意味着变量有固定的类型。你可以显式指定变量的类型，也可以让编译器自动推断类型。</p>
+            
+            <div class="code-block">
+// 显式类型注解
+let name: string = "John";
+let age: int = 30;
+let height: float = 1.75;
+let isStudent: bool = false;
+
+// 类型推断
+let city = "New York"; // 自动推断为 string 类型
+let population = 8_000_000; // 自动推断为 int 类型
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>变量可变性</h2>
+            <p>默认情况下，Nova 中的变量是不可变的（常量）。如果你需要修改变量的值，你需要使用 <code>var</code> 关键字来声明可变变量。</p>
+            
+            <div class="code-block">
+// 不可变变量（常量）
+let constantValue = 10;
+// constantValue = 20; // 错误：不能修改不可变变量
+
+// 可变变量
+var mutableValue = 10;
+mutableValue = 20; // 正确：可以修改可变变量
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>作用域</h2>
+            <p>变量的作用域决定了它在代码中的可见性和生命周期。在 Nova 中，变量的作用域由声明它的代码块决定。</p>
+            
+            <div class="code-block">
+// 全局作用域
+let globalVar = "global";
+
+def main() {
+    // 函数作用域
+    let functionVar = "function";
+    
+    if (true) {
+        // 块作用域
+        let blockVar = "block";
+        print(globalVar); // 可以访问全局变量
+        print(functionVar); // 可以访问函数变量
+        print(blockVar); // 可以访问块变量
+    }
+    
+    print(globalVar); // 可以访问全局变量
+    print(functionVar); // 可以访问函数变量
+    // print(blockVar); // 错误：blockVar 不在作用域内
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>命名约定</h2>
+            <p>Nova 推荐使用以下命名约定：</p>
+            <ul>
+                <li><strong>变量和函数：</strong>使用驼峰命名法（camelCase），例如 <code>userName</code>、<code>calculateTotal</code></li>
+                <li><strong>常量：</strong>使用全大写和下划线，例如 <code>MAX_VALUE</code>、<code>PI</code></li>
+                <li><strong>类：</strong>使用 Pascal 命名法（PascalCase），例如 <code>User</code>、<code>OrderItem</code></li>
+            </ul>
+            
+            <div class="code-block">
+// 变量命名示例
+let userName = "Alice";
+let itemCount = 5;
+
+// 常量命名示例
+let MAX_ITEMS = 100;
+let PI = 3.14159;
+
+// 函数命名示例
+def calculateTotal(price: float, quantity: int) -> float {
+    return price * quantity;
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>类型转换</h2>
+            <p>在 Nova 中，你可以在不同类型之间进行转换。有些转换是自动的（隐式转换），而其他转换需要显式指定。</p>
+            
+            <div class="code-block">
+// 隐式转换
+let intValue: int = 42;
+let floatValue: float = intValue; // 自动转换 int 到 float
+
+// 显式转换
+let floatNum: float = 3.14;
+let intNum: int = int(floatNum); // 显式转换 float 到 int
+
+let num: int = 123;
+let str: string = string(num); // 显式转换 int 到 string
+
+let boolValue: bool = true;
+let intBool: int = int(boolValue); // true 转换为 1，false 转换为 0
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>变量操作</h2>
+            <p>你可以对变量执行各种操作，具体取决于它们的类型。</p>
+            
+            <h3>算术操作</h3>
+            <div class="code-block">
+let a = 10;
+let b = 5;
+
+let sum = a + b; // 15
+let difference = a - b; // 5
+let product = a * b; // 50
+let quotient = a / b; // 2
+let remainder = a % b; // 0
+            </div>
+            
+            <h3>字符串操作</h3>
+            <div class="code-block">
+let firstName = "John";
+let lastName = "Doe";
+
+let fullName = firstName + " " + lastName; // "John Doe"
+let greeting = "Hello, " + firstName + "!"; // "Hello, John!"
+            </div>
+            
+            <h3>赋值操作</h3>
+            <div class="code-block">
+var x = 10;
+x += 5; // 等同于 x = x + 5
+x -= 3; // 等同于 x = x - 3
+x *= 2; // 等同于 x = x * 2
+x /= 4; // 等同于 x = x / 4
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>常量</h2>
+            <p>除了使用 <code>let</code> 声明的不可变变量外，Nova 还支持使用 <code>const</code> 关键字声明常量。常量必须在声明时初始化，并且其值在整个程序执行过程中不能改变。</p>
+            
+            <div class="code-block">
+// 声明常量
+const PI = 3.14159;
+const MAX_USERS = 1000;
+const APP_NAME = "Nova App";
+
+// PI = 3.14; // 错误：常量不能修改
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>练习</h2>
+            <p>尝试完成以下练习，以巩固你对变量的理解：</p>
+            <ol>
+                <li>声明一个名为 <code>name</code> 的变量，存储你的名字</li>
+                <li>声明一个名为 <code>age</code> 的变量，存储你的年龄</li>
+                <li>声明一个名为 <code>isStudent</code> 的变量，存储一个布尔值表示你是否是学生</li>
+                <li>使用这些变量创建一个问候语字符串，例如 "Hello, John! You are 25 years old and you are a student."</li>
+                <li>打印这个问候语</li>
+            </ol>
+            
+            <div class="code-block">
+// 练习答案示例
+def main() {
+    let name = "John";
+    let age = 25;
+    let isStudent = true;
+    
+    let greeting = "Hello, " + name + "! You are " + string(age) + " years old and you are " + (isStudent ? "a student" : "not a student") + ".";
+    print(greeting);
+}
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>下一步</h2>
+            <p>现在你已经了解了 Nova 中的变量，你可以：</p>
+            <ul>
+                <li><a href="functions.html">学习 Nova 中的函数</a></li>
+                <li><a href="control-flow.html">了解控制流语句</a></li>
+            </ul>
+            <a href="functions.html" class="btn">继续学习函数</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova 编程语言。保留所有权利。</p>
+        </footer>
+    </div>
+</body>
+</html>

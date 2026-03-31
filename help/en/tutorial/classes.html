@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Classes</h1>
+            <p>Object-oriented programming in Nova</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Classes
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction to Classes</h2>
+            <p>Classes are the fundamental building blocks of object-oriented programming (OOP) in Nova. They allow you to define blueprints for creating objects with specific properties and behaviors.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Defining a Class</h2>
+            <p>You can define a class using the <code>class</code> keyword:</p>
+            
+            <div class="code-block">
+class Person {
+    let name: string;
+    let age: int;
+    
+    def __init__(self, name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+    
+    def greet(self) {
+        print("Hello, my name is " + self.name);
+    }
+}
+</div>
+            
+            <p>In this example:</p>
+            <ul>
+                <li><code>class Person</code> defines a new class named <code>Person</code></li>
+                <li><code>let name: string;</code> and <code>let age: int;</code> define class properties</li>
+                <li><code>def __init__(self, name: string, age: int)</code> is the constructor method</li>
+                <li><code>def greet(self)</code> is a method of the class</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Creating Objects</h2>
+            <p>To create an object (instance) of a class, use the <code>new</code> keyword:</p>
+            
+            <div class="code-block">
+// Create an instance of Person
+let person = new Person("Alice", 30);
+
+// Access properties
+print(person.name); // Output: Alice
+print(person.age); // Output: 30
+
+// Call methods
+person.greet(); // Output: Hello, my name is Alice
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Constructors</h2>
+            <p>Constructors are special methods that are called when an object is created. In Nova, the constructor method is named <code>__init__</code>:</p>
+            
+            <div class="code-block">
+class Car {
+    let make: string;
+    let model: string;
+    let year: int;
+    
+    // Constructor with parameters
+    def __init__(self, make: string, model: string, year: int) {
+        self.make = make;
+        self.model = model;
+        self.year = year;
+    }
+    
+    // Constructor with default values
+    def __init__(self, make: string, model: string) {
+        self.make = make;
+        self.model = model;
+        self.year = 2023;
+    }
+    
+    // Default constructor
+    def __init__(self) {
+        self.make = "Unknown";
+        self.model = "Unknown";
+        self.year = 2023;
+    }
+}
+
+// Using different constructors
+let car1 = new Car("Toyota", "Camry", 2022);
+let car2 = new Car("Honda", "Civic");
+let car3 = new Car();
+</div>
+            
+            <div class="info-box">
+                <h4>Note</h4>
+                <p>Nova supports method overloading, including constructors. This means you can define multiple constructors with different parameter lists.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Methods</h2>
+            <p>Methods are functions defined within a class. They can access and modify the class's properties:</p>
+            
+            <div class="code-block">
+class Circle {
+    let radius: float;
+    
+    def __init__(self, radius: float) {
+        self.radius = radius;
+    }
+    
+    def area(self) -> float {
+        return 3.14159 * self.radius * self.radius;
+    }
+    
+    def circumference(self) -> float {
+        return 2 * 3.14159 * self.radius;
+    }
+    
+    def set_radius(self, new_radius: float) {
+        if (new_radius > 0) {
+            self.radius = new_radius;
+        } else {
+            print("Radius must be positive");
+        }
+    }
+}
+
+let circle = new Circle(5.0);
+print(circle.area()); // Output: 78.53975
+print(circle.circumference()); // Output: 31.4159
+
+circle.set_radius(10.0);
+print(circle.area()); // Output: 314.159
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Inheritance</h2>
+            <p>Inheritance allows you to create a new class that inherits properties and methods from an existing class. The new class is called a subclass, and the existing class is called a superclass:</p>
+            
+            <div class="code-block">
+// Superclass
+class Animal {
+    let name: string;
+    
+    def __init__(self, name: string) {
+        self.name = name;
+    }
+    
+    def make_sound(self) {
+        print("Some generic sound");
+    }
+}
+
+// Subclass
+class Dog extends Animal {
+    let breed: string;
+    
+    def __init__(self, name: string, breed: string) {
+        // Call the superclass constructor
+        super(name);
+        self.breed = breed;
+    }
+    
+    // Override the make_sound method
+    def make_sound(self) {
+        print("Woof! Woof!");
+    }
+    
+    // Additional method
+    def fetch(self) {
+        print(self.name + " is fetching");
+    }
+}
+
+let animal = new Animal("Generic Animal");
+animal.make_sound(); // Output: Some generic sound
+
+let dog = new Dog("Buddy", "Golden Retriever");
+dog.make_sound(); // Output: Woof! Woof!
+dog.fetch(); // Output: Buddy is fetching
+print(dog.name); // Output: Buddy (inherited from Animal)
+</div>
+            
+            <div class="info-box">
+                <h4>Note</h4>
+                <p>When overriding a method, you can use the <code>super</code> keyword to call the superclass's version of the method.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Access Modifiers</h2>
+            <p>Nova provides access modifiers to control the visibility of class members:</p>
+            
+            <ul>
+                <li><code>public</code> - Accessible from anywhere (default)</li>
+                <li><code>private</code> - Only accessible within the class</li>
+                <li><code>protected</code> - Accessible within the class and its subclasses</li>
+            </ul>
+            
+            <div class="code-block">
+class BankAccount {
+    private let balance: float;
+    public let account_number: string;
+    protected let owner: string;
+    
+    def __init__(self, account_number: string, owner: string) {
+        self.account_number = account_number;
+        self.owner = owner;
+        self.balance = 0.0;
+    }
+    
+    public def deposit(self, amount: float) {
+        if (amount > 0) {
+            self.balance += amount;
+        }
+    }
+    
+    public def withdraw(self, amount: float) {
+        if (amount > 0 && amount <= self.balance) {
+            self.balance -= amount;
+            return true;
+        }
+        return false;
+    }
+    
+    public def get_balance(self) -> float {
+        return self.balance;
+    }
+}
+
+class SavingsAccount extends BankAccount {
+    private let interest_rate: float;
+    
+    def __init__(self, account_number: string, owner: string, interest_rate: float) {
+        super(account_number, owner);
+        self.interest_rate = interest_rate;
+    }
+    
+    public def add_interest() {
+        let current_balance = self.get_balance();
+        let interest = current_balance * self.interest_rate;
+        self.deposit(interest);
+        print("Interest added: " + interest);
+    }
+    
+    public def get_owner() -> string {
+        return self.owner; // Accessible because owner is protected
+    }
+}
+
+let account = new BankAccount("12345", "Alice");
+account.deposit(1000);
+print(account.get_balance()); // Output: 1000
+// print(account.balance); // Error: balance is private
+
+let savings = new SavingsAccount("67890", "Bob", 0.05);
+savings.deposit(5000);
+savings.add_interest(); // Output: Interest added: 250
+print(savings.get_balance()); // Output: 5250
+print(savings.get_owner()); // Output: Bob
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Static Members</h2>
+            <p>Static members belong to the class itself, not to individual instances. You can define static properties and methods using the <code>static</code> keyword:</p>
+            
+            <div class="code-block">
+class MathUtils {
+    static let PI: float = 3.14159;
+    
+    static def add(a: float, b: float) -> float {
+        return a + b;
+    }
+    
+    static def multiply(a: float, b: float) -> float {
+        return a * b;
+    }
+}
+
+// Access static properties and methods without creating an instance
+print(MathUtils.PI); // Output: 3.14159
+print(MathUtils.add(5, 3)); // Output: 8
+print(MathUtils.multiply(4, 6)); // Output: 24
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Abstract Classes and Methods</h2>
+            <p>An abstract class is a class that cannot be instantiated and is meant to be subclassed. Abstract methods are methods that are declared but not implemented in the abstract class, and must be implemented by subclasses:</p>
+            
+            <div class="code-block">
+abstract class Shape {
+    abstract def area() -> float;
+    abstract def perimeter() -> float;
+    
+    def describe() {
+        print("This is a shape");
+    }
+}
+
+class Rectangle extends Shape {
+    let width: float;
+    let height: float;
+    
+    def __init__(self, width: float, height: float) {
+        self.width = width;
+        self.height = height;
+    }
+    
+    def area() -> float {
+        return self.width * self.height;
+    }
+    
+    def perimeter() -> float {
+        return 2 * (self.width + self.height);
+    }
+}
+
+class Circle extends Shape {
+    let radius: float;
+    
+    def __init__(self, radius: float) {
+        self.radius = radius;
+    }
+    
+    def area() -> float {
+        return 3.14159 * self.radius * self.radius;
+    }
+    
+    def perimeter() -> float {
+        return 2 * 3.14159 * self.radius;
+    }
+}
+
+// let shape = new Shape(); // Error: Cannot instantiate abstract class
+
+let rectangle = new Rectangle(5, 3);
+print(rectangle.area()); // Output: 15
+print(rectangle.perimeter()); // Output: 16
+rectangle.describe(); // Output: This is a shape
+
+let circle = new Circle(4);
+print(circle.area()); // Output: 50.26544
+print(circle.perimeter()); // Output: 25.13272
+circle.describe(); // Output: This is a shape
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Polymorphism</h2>
+            <p>Polymorphism allows objects of different classes to be treated as objects of a common superclass. This enables you to write code that works with any subclass of a given type:</p>
+            
+            <div class="code-block">
+class Animal {
+    def make_sound() {
+        print("Some generic sound");
+    }
+}
+
+class Dog extends Animal {
+    def make_sound() {
+        print("Woof! Woof!");
+    }
+}
+
+class Cat extends Animal {
+    def make_sound() {
+        print("Meow! Meow!");
+    }
+}
+
+// Polymorphic function
+function let animals_make_sound(animals: list[Animal]) {
+    for (let animal in animals) {
+        animal.make_sound(); // Calls the appropriate method based on the actual type
+    }
+}
+
+let animals: list[Animal] = [
+    new Dog(),
+    new Cat(),
+    new Animal()
+];
+
+animals_make_sound(animals);
+// Output:
+// Woof! Woof!
+// Meow! Meow!
+// Some generic sound
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Best Practices</h2>
+            <ul>
+                <li><strong>Encapsulation:</strong> Use access modifiers to protect class members and expose only what's necessary.</li>
+                <li><strong>Inheritance:</strong> Use inheritance to reuse code and create a hierarchy of related classes.</li>
+                <li><strong>Polymorphism:</strong> Use polymorphism to write flexible code that works with different types.</li>
+                <li><strong>Abstract classes:</strong> Use abstract classes to define common interfaces for subclasses.</li>
+                <li><strong>Meaningful names:</strong> Use clear, descriptive names for classes, properties, and methods.</li>
+                <li><strong>Single responsibility:</strong> Each class should have a single, well-defined responsibility.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Forgetting the self parameter:</strong> All instance methods require a <code>self</code> parameter as the first argument.</li>
+                <li><strong>Accessing private members from outside the class:</strong> Private members can only be accessed within the class.</li>
+                <li><strong>Not calling the superclass constructor:</strong> When extending a class, make sure to call the superclass constructor using <code>super()</code>.</li>
+                <li><strong>Overriding methods without maintaining the same signature:</strong> When overriding a method, keep the same parameter list and return type.</li>
+                <li><strong>Creating overly complex class hierarchies:</strong> Keep inheritance hierarchies simple and focused.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand classes in Nova, you can:</p>
+            <ul>
+                <li><a href="collections.html">Learn about collections</a> like arrays and dictionaries</li>
+                <li><a href="error-handling.html">Explore error handling</a> techniques</li>
+                <li>Practice creating more complex class hierarchies</li>
+            </ul>
+            <a href="collections.html" class="btn">Continue to Collections</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

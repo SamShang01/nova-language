@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Flow - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section h4 {
+            color: #666;
+            margin: 15px 0 8px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal-block {
+            background: #333;
+            color: #f0f0f0;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Control Flow</h1>
+            <p>Controlling the flow of execution in Nova</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; <a href="index.html">Tutorial</a> &gt; Control Flow
+        </div>
+        
+        <div class="content-section">
+            <h2>Introduction to Control Flow</h2>
+            <p>Control flow statements allow you to control the order in which code is executed. Nova provides several control flow statements, including conditional statements and loops.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Conditional Statements</h2>
+            
+            <h3>if Statement</h3>
+            <p>The <code>if</code> statement is used to execute code only if a condition is true:</p>
+            <div class="code-block">
+let age = 18;
+
+if (age >= 18) {
+    print("You are an adult");
+}
+</div>
+            
+            <h3>if-else Statement</h3>
+            <p>The <code>if-else</code> statement allows you to execute different code based on whether a condition is true or false:</p>
+            <div class="code-block">
+let age = 16;
+
+if (age >= 18) {
+    print("You are an adult");
+} else {
+    print("You are a minor");
+}
+</div>
+            
+            <h3>if-else if-else Statement</h3>
+            <p>You can chain multiple conditions using <code>else if</code>:</p>
+            <div class="code-block">
+let score = 85;
+
+if (score >= 90) {
+    print("A");
+} else if (score >= 80) {
+    print("B");
+} else if (score >= 70) {
+    print("C");
+} else if (score >= 60) {
+    print("D");
+} else {
+    print("F");
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Switch Statement</h2>
+            <p>The <code>switch</code> statement allows you to select one of several code blocks to execute based on the value of an expression:</p>
+            
+            <div class="code-block">
+let day = "Monday";
+
+switch (day) {
+    case "Monday":
+        print("Start of the week");
+        break;
+    case "Friday":
+        print("End of the work week");
+        break;
+    case "Saturday":
+    case "Sunday":
+        print("Weekend");
+        break;
+    default:
+        print("Midweek");
+        break;
+}
+</div>
+            
+            <div class="info-box">
+                <h4>Note</h4>
+                <p>In Nova, the <code>break</code> statement is required after each case to prevent fall-through. If you want fall-through behavior, you can omit the <code>break</code> statement.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Loops</h2>
+            
+            <h3>for Loop</h3>
+            <p>The <code>for</code> loop is used to execute a block of code a specified number of times:</p>
+            <div class="code-block">
+// Traditional for loop
+for (let i = 0; i < 5; i++) {
+    print(i);
+}
+// Output: 0, 1, 2, 3, 4
+</div>
+            
+            <h3>for-in Loop</h3>
+            <p>The <code>for-in</code> loop is used to iterate over elements in a collection:</p>
+            <div class="code-block">
+// Iterate over an array
+let fruits = ["apple", "banana", "cherry"];
+for (let fruit in fruits) {
+    print(fruit);
+}
+// Output: apple, banana, cherry
+
+// Iterate over a string
+let message = "Hello";
+for (let char in message) {
+    print(char);
+}
+// Output: H, e, l, l, o
+</div>
+            
+            <h3>while Loop</h3>
+            <p>The <code>while</code> loop executes a block of code as long as a condition is true:</p>
+            <div class="code-block">
+let count = 0;
+while (count < 5) {
+    print(count);
+    count++;
+}
+// Output: 0, 1, 2, 3, 4
+</div>
+            
+            <h3>do-while Loop</h3>
+            <p>The <code>do-while</code> loop executes a block of code at least once, and then repeatedly executes it as long as a condition is true:</p>
+            <div class="code-block">
+let count = 0;
+do {
+    print(count);
+    count++;
+} while (count < 5);
+// Output: 0, 1, 2, 3, 4
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Loop Control Statements</h2>
+            
+            <h3>break Statement</h3>
+            <p>The <code>break</code> statement is used to exit a loop early:</p>
+            <div class="code-block">
+for (let i = 0; i < 10; i++) {
+    if (i === 5) {
+        break; // Exit the loop when i is 5
+    }
+    print(i);
+}
+// Output: 0, 1, 2, 3, 4
+</div>
+            
+            <h3>continue Statement</h3>
+            <p>The <code>continue</code> statement is used to skip the current iteration of a loop and continue with the next iteration:</p>
+            <div class="code-block">
+for (let i = 0; i < 10; i++) {
+    if (i % 2 === 0) {
+        continue; // Skip even numbers
+    }
+    print(i);
+}
+// Output: 1, 3, 5, 7, 9
+</div>
+            
+            <h3>return Statement</h3>
+            <p>The <code>return</code> statement is used to exit a function and return a value:</p>
+            <div class="code-block">
+def find_first_negative(numbers) {
+    for (let number in numbers) {
+        if (number < 0) {
+            return number; // Return the first negative number
+        }
+    }
+    return null; // Return null if no negative numbers found
+}
+
+let numbers = [1, 2, -3, 4, -5];
+let result = find_first_negative(numbers);
+print(result); // Output: -3
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Nested Control Flow</h2>
+            <p>You can nest control flow statements inside each other:</p>
+            
+            <div class="code-block">
+// Nested loops
+for (let i = 0; i < 3; i++) {
+    print("Outer loop: " + i);
+    for (let j = 0; j < 2; j++) {
+        print("  Inner loop: " + j);
+    }
+}
+
+// Nested if statements
+let age = 25;
+let has_license = true;
+
+if (age >= 18) {
+    if (has_license) {
+        print("You can drive");
+    } else {
+        print("You need a license to drive");
+    }
+} else {
+    print("You are too young to drive");
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Logical Operators</h2>
+            <p>Logical operators are often used in conditional statements to combine multiple conditions:</p>
+            
+            <h3>AND Operator (&&)</h3>
+            <div class="code-block">
+let age = 25;
+let has_license = true;
+
+if (age >= 18 && has_license) {
+    print("You can drive");
+}
+</div>
+            
+            <h3>OR Operator (||)</h3>
+            <div class="code-block">
+let is_weekend = true;
+let is_vacation = false;
+
+if (is_weekend || is_vacation) {
+    print("No work today!");
+}
+</div>
+            
+            <h3>NOT Operator (!)</h3>
+            <div class="code-block">
+let is_raining = false;
+
+if (!is_raining) {
+    print("It's a nice day!");
+}
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Comparison Operators</h2>
+            <p>Comparison operators are used to compare values in conditional statements:</p>
+            
+            <ul>
+                <li><code>==</code> - Equal to</li>
+                <li><code>!=</code> - Not equal to</li>
+                <li><code>&lt;</code> - Less than</li>
+                <li><code>&lt;=</code> - Less than or equal to</li>
+                <li><code>&gt;</code> - Greater than</li>
+                <li><code>&gt;=</code> - Greater than or equal to</li>
+                <li><code>===</code> - Strict equal to (checks type and value)</li>
+                <li><code>!==</code> - Strict not equal to (checks type and value)</li>
+            </ul>
+            
+            <div class="code-block">
+let a = 5;
+let b = "5";
+
+print(a == b); // true (loose equality)
+print(a === b); // false (strict equality - different types)
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Best Practices</h2>
+            <ul>
+                <li><strong>Keep it simple:</strong> Avoid overly complex nested control flow.</li>
+                <li><strong>Use meaningful variable names:</strong> Make your conditions easy to understand.</li>
+                <li><strong>Indent properly:</strong> Use consistent indentation to make your code more readable.</li>
+                <li><strong>Use switch for multiple conditions:</strong> Use switch statements instead of long if-else if chains when appropriate.</li>
+                <li><strong>Avoid infinite loops:</strong> Make sure your loops have a way to terminate.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Using assignment instead of equality:</strong> Remember to use <code>==</code> or <code>===</code> for comparisons, not <code>=</code>.</li>
+                <li><strong>Infinite loops:</strong> Forgetting to update the loop variable in a while loop can lead to infinite loops.</li>
+                <li><strong>Misusing break and continue:</strong> Make sure you're using these statements correctly.</li>
+                <li><strong>Complex nested conditions:</strong> Too many nested if statements can make code hard to read.</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>Now that you understand control flow in Nova, you can:</p>
+            <ul>
+                <li><a href="classes.html">Learn about object-oriented programming</a> with classes</li>
+                <li><a href="collections.html">Explore collections</a> like arrays and dictionaries</li>
+                <li>Practice writing programs with more complex control flow</li>
+            </ul>
+            <a href="classes.html" class="btn">Continue to Classes</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

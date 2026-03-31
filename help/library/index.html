@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standard Library - Nova Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            color: #555;
+            margin: 20px 0 10px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .module-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .module-item {
+            margin-bottom: 15px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .module-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .module-item a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        
+        .module-item h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+        }
+        
+        .module-item p {
+            margin-bottom: 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Standard Library</h1>
+            <p>Comprehensive documentation for Nova's standard library</p>
+        </header>
+        
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> &gt; Library
+        </div>
+        
+        <div class="content-section">
+            <h2>Welcome to Nova Standard Library</h2>
+            <p>Nova's standard library provides a rich set of modules and functions to help you build applications efficiently. These modules cover common tasks like file I/O, networking, collections, date/time handling, and more.</p>
+            
+            <div class="info-box">
+                <h4>How to Use the Standard Library</h4>
+                <p>You can import standard library modules using the <code>import</code> keyword. For example: <code>import std.io</code> to use the I/O module.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Core Modules</h2>
+            
+            <ul class="module-list">
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.io</h4>
+                        <p>Input/output operations, including console I/O and file operations.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.math</h4>
+                        <p>Mathematical functions and constants.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.string</h4>
+                        <p>String manipulation functions.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.collection</h4>
+                        <p>Collection types and operations, including arrays, lists, dictionaries, and sets.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.system</h4>
+                        <p>System-related functions, including environment variables and process management.</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Additional Modules</h2>
+            
+            <ul class="module-list">
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.network</h4>
+                        <p>Networking functions, including HTTP, TCP, and UDP operations.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.time</h4>
+                        <p>Date and time handling functions.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.json</h4>
+                        <p>JSON parsing and serialization functions.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.regex</h4>
+                        <p>Regular expression operations.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.crypto</h4>
+                        <p>Cryptographic functions and utilities.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.thread</h4>
+                        <p>Threading and concurrency utilities.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.random</h4>
+                        <p>Random number generation.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.path</h4>
+                        <p>File path manipulation functions.</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Advanced Modules</h2>
+            
+            <ul class="module-list">
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.async</h4>
+                        <p>Asynchronous programming utilities.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.stream</h4>
+                        <p>Stream processing utilities.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.compression</h4>
+                        <p>Data compression and decompression functions.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.database</h4>
+                        <p>Database connectivity utilities.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.web</h4>
+                        <p>Web-related utilities, including HTTP server and client.</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Utilities</h2>
+            
+            <ul class="module-list">
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.assert</h4>
+                        <p>Assertion utilities for testing and debugging.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.logger</h4>
+                        <p>Logging utilities.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.format</h4>
+                        <p>String formatting utilities.</p>
+                    </a>
+                </li>
+                <li class="module-item">
+                    <a href="#">
+                        <h4>std.encoding</h4>
+                        <p>Character encoding utilities.</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>How to Use Library Modules</h2>
+            <p>To use a library module, you need to import it first. Here's how:</p>
+            
+            <div class="info-box">
+                <h4>Importing Modules</h4>
+                <p>You can import modules in several ways:</p>
+                <ul>
+                    <li><code>import std.io</code> - Imports the entire IO module</li>
+                    <li><code>import std.io as io</code> - Imports the IO module with an alias</li>
+                    <li><code>from std.io import print, readLine</code> - Imports specific functions from the IO module</li>
+                </ul>
+            </div>
+            
+            <p>Once imported, you can use the module's functions and types:</p>
+            
+            <div class="code-block" style="background: #f4f4f4; padding: 20px; border-radius: 5px; margin: 20px 0; font-family: 'Courier New', Courier, monospace;">
+import std.io;
+
+// Using the print function from the IO module
+print("Hello, World!");
+
+// Using the readLine function to get user input
+let name = readLine("Enter your name: ");
+print("Hello, " + name + "!");
+</div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Library Versioning</h2>
+            <p>Nova's standard library follows a versioning scheme separate from the compiler. Each library module has its own version number, allowing for independent updates and improvements.</p>
+            
+            <div class="info-box">
+                <h4>Library Versioning Scheme</h4>
+                <p>Libraries use semantic versioning (MAJOR.MINOR.PATCH):</p>
+                <ul>
+                    <li><strong>MAJOR</strong>: Breaking changes</li>
+                    <li><strong>MINOR</strong>: New features</li>
+                    <li><strong>PATCH</strong>: Bug fixes</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Contributing to the Standard Library</h2>
+            <p>The Nova standard library is open to contributions. If you have ideas for new modules or improvements to existing ones, you can contribute through the GitHub repository.</p>
+            
+            <p>Before contributing, please review the contribution guidelines and ensure your code follows the project's style and quality standards.</p>
+        </div>
+        
+        <div class="content-section">
+            <h2>Next Steps</h2>
+            <p>After exploring the standard library, you can:</p>
+            <ul>
+                <li><a href="../tutorial/index.html">Return to the tutorial</a> to learn more concepts</li>
+                <li><a href="../examples/index.html">Explore examples</a> to see how the library is used</li>
+                <li><a href="../reference/index.html">Check the reference documentation</a> for detailed information</li>
+            </ul>
+            <a href="../tutorial/index.html" class="btn">Return to Tutorial</a>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Nova Programming Language. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

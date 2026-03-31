@@ -1,0 +1,22 @@
+# 测试type函数的各种用法
+print(type(123));      # 测试基本类型
+print(type(123.45));    # 测试浮点数
+print(type("hello"));    # 测试字符串
+print(type(true));       # 测试布尔值
+print(type([1, 2, 3]));  # 测试列表
+print(type(type));       # 测试type函数本身
+print(type(globals()));  # 测试globals()返回值
+
+# 测试globals()和locals()
+let g = globals();
+print(g);
+let a = 0;
+print(a);
+print(g);
+g["b"] = 12;
+print(b);
+g["c"] = 12.43;
+print(c);
+g["d"] = "123sasds";
+print(d);
+print(type(g));

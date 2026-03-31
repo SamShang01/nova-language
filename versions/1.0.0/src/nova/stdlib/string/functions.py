@@ -651,3 +651,338 @@ def rpartition(s, sep):
         tuple: (前, 分隔符, 后)
     """
     return str(s).rpartition(str(sep))
+
+# 额外的字符串函数
+def format_string(s, *args, **kwargs):
+    """
+    格式化字符串
+    
+    Args:
+        s: 格式字符串
+        *args: 位置参数
+        **kwargs: 关键字参数
+    
+    Returns:
+        string: 格式化后的字符串
+    """
+    return String(str(s).format(*args, **kwargs))
+
+def center_justify(s, width, fillchar=' '):
+    """
+    居中对齐
+    
+    Args:
+        s: 字符串
+        width: 宽度
+        fillchar: 填充字符
+    
+    Returns:
+        string: 居中对齐后的字符串
+    """
+    return String(str(s).center(width, fillchar))
+
+def left_justify(s, width, fillchar=' '):
+    """
+    左对齐
+    
+    Args:
+        s: 字符串
+        width: 宽度
+        fillchar: 填充字符
+    
+    Returns:
+        string: 左对齐后的字符串
+    """
+    return String(str(s).ljust(width, fillchar))
+
+def right_justify(s, width, fillchar=' '):
+    """
+    右对齐
+    
+    Args:
+        s: 字符串
+        width: 宽度
+        fillchar: 填充字符
+    
+    Returns:
+        string: 右对齐后的字符串
+    """
+    return String(str(s).rjust(width, fillchar))
+
+def is_empty(s):
+    """
+    检查字符串是否为空
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        bool: 是否为空
+    """
+    return len(str(s)) == 0
+
+def is_blank(s):
+    """
+    检查字符串是否为空白
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        bool: 是否为空白
+    """
+    return str(s).isspace()
+
+def truncate(s, max_length, suffix='...'):
+    """
+    截断字符串
+    
+    Args:
+        s: 字符串
+        max_length: 最大长度
+        suffix: 后缀
+    
+    Returns:
+        string: 截断后的字符串
+    """
+    s = str(s)
+    if len(s) <= max_length:
+        return String(s)
+    return String(s[:max_length - len(suffix)] + suffix)
+
+def repeat(s, count):
+    """
+    重复字符串
+    
+    Args:
+        s: 字符串
+        count: 重复次数
+    
+    Returns:
+        string: 重复后的字符串
+    """
+    return String(str(s) * count)
+
+def pad_left(s, width, fillchar='0'):
+    """
+    左侧填充
+    
+    Args:
+        s: 字符串
+        width: 宽度
+        fillchar: 填充字符
+    
+    Returns:
+        string: 填充后的字符串
+    """
+    return String(str(s).zfill(width) if fillchar == '0' else str(s).rjust(width, fillchar))
+
+def pad_right(s, width, fillchar=' '):
+    """
+    右侧填充
+    
+    Args:
+        s: 字符串
+        width: 宽度
+        fillchar: 填充字符
+    
+    Returns:
+        string: 填充后的字符串
+    """
+    return String(str(s).ljust(width, fillchar))
+
+def capitalize_each_word(s):
+    """
+    每个单词首字母大写
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        string: 处理后的字符串
+    """
+    return String(str(s).title())
+
+def swap_case(s):
+    """
+    大小写互换
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        string: 处理后的字符串
+    """
+    return String(str(s).swapcase())
+
+def count_substring(s, sub, start=0, end=None):
+    """
+    计算子串出现次数
+    
+    Args:
+        s: 字符串
+        sub: 子串
+        start: 开始位置
+        end: 结束位置
+    
+    Returns:
+        int: 出现次数
+    """
+    return str(s).count(str(sub), start, end)
+
+def find_substring(s, sub, start=0, end=None):
+    """
+    查找子串位置
+    
+    Args:
+        s: 字符串
+        sub: 子串
+        start: 开始位置
+        end: 结束位置
+    
+    Returns:
+        int: 子串位置，未找到返回-1
+    """
+    return str(s).find(str(sub), start, end)
+
+def rfind_substring(s, sub, start=0, end=None):
+    """
+    从右侧查找子串位置
+    
+    Args:
+        s: 字符串
+        sub: 子串
+        start: 开始位置
+        end: 结束位置
+    
+    Returns:
+        int: 子串位置，未找到返回-1
+    """
+    return str(s).rfind(str(sub), start, end)
+
+def starts_with(s, prefix, start=0, end=None):
+    """
+    检查是否以指定前缀开头
+    
+    Args:
+        s: 字符串
+        prefix: 前缀
+        start: 开始位置
+        end: 结束位置
+    
+    Returns:
+        bool: 是否以指定前缀开头
+    """
+    return str(s).startswith(str(prefix), start, end)
+
+def ends_with(s, suffix, start=0, end=None):
+    """
+    检查是否以指定后缀结尾
+    
+    Args:
+        s: 字符串
+        suffix: 后缀
+        start: 开始位置
+        end: 结束位置
+    
+    Returns:
+        bool: 是否以指定后缀结尾
+    """
+    return str(s).endswith(str(suffix), start, end)
+
+def is_alpha(s):
+    """
+    检查是否全为字母
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        bool: 是否全为字母
+    """
+    return str(s).isalpha()
+
+def is_digit(s):
+    """
+    检查是否全为数字
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        bool: 是否全为数字
+    """
+    return str(s).isdigit()
+
+def is_alphanumeric(s):
+    """
+    检查是否全为字母或数字
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        bool: 是否全为字母或数字
+    """
+    return str(s).isalnum()
+
+def is_lower(s):
+    """
+    检查是否全为小写
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        bool: 是否全为小写
+    """
+    return str(s).islower()
+
+def is_upper(s):
+    """
+    检查是否全为大写
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        bool: 是否全为大写
+    """
+    return str(s).isupper()
+
+def is_title(s):
+    """
+    检查是否为标题格式
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        bool: 是否为标题格式
+    """
+    return str(s).istitle()
+
+def encode_utf8(s):
+    """
+    编码为UTF-8
+    
+    Args:
+        s: 字符串
+    
+    Returns:
+        bytes: UTF-8编码的字节
+    """
+    return str(s).encode('utf-8')
+
+def decode_utf8(b):
+    """
+    解码UTF-8
+    
+    Args:
+        b: 字节
+    
+    Returns:
+        string: 解码后的字符串
+    """
+    return String(b.decode('utf-8'))
+
