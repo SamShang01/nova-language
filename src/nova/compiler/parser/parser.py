@@ -6,6 +6,409 @@ from nova.compiler.lexer import TokenType
 from nova.compiler.parser.ast import *
 from nova.compiler.parser.errors import ParserError
 
+
+class StatementParser:
+    """
+    语句解析策略基类
+    """
+    
+    def __init__(self, parser):
+        """
+        初始化语句解析器
+        
+        Args:
+            parser: Parser实例
+        """
+        self.parser = parser
+    
+    def can_parse(self, token_type):
+        """
+        判断是否可以解析当前Token类型
+        
+        Args:
+            token_type: TokenType枚举值
+            
+        Returns:
+            bool: 是否可以解析
+        """
+        raise NotImplementedError
+    
+    def parse(self, decorators=None):
+        """
+        解析语句
+        
+        Args:
+            decorators: 装饰器列表
+            
+        Returns:
+            Node: 解析后的节点
+        """
+        raise NotImplementedError
+
+
+class StatementParserRegistry:
+    """
+    语句解析策略注册表
+    """
+    
+    def __init__(self):
+        """
+        初始化注册表
+        """
+        self.parsers = []
+    
+    def register(self, parser_class):
+        """
+        注册解析器
+        
+        Args:
+            parser_class: 解析器类
+        """
+        self.parsers.append(parser_class)
+    
+    def find_parser(self, parser, token_type):
+        """
+        查找匹配的解析器
+        
+        Args:
+            parser: Parser实例
+            token_type: TokenType枚举值
+            
+        Returns:
+            StatementParser: 匹配的解析器实例，或None
+        """
+        for parser_class in self.parsers:
+            parser_instance = parser_class(parser)
+            if parser_instance.can_parse(token_type):
+                return parser_instance
+        return None
+
+
+class ModuleStatementParser(StatementParser):
+    """
+    模块声明解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.MOD
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_module_declaration()
+
+
+class FromImportStatementParser(StatementParser):
+    """
+    From导入语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.FROM
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_from_import_statement()
+
+
+class ImportStatementParser(StatementParser):
+    """
+    导入语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.USE
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_import_statement()
+
+
+class FeatureStatementParser(StatementParser):
+    """
+    特性声明解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.FEATURE
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_feature_statement()
+
+
+class FunctionStatementParser(StatementParser):
+    """
+    函数定义解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type in [TokenType.FUNC, TokenType.ASYNC]
+    
+    def parse(self, decorators=None):
+        node = self.parser.parse_function_definition()
+        if decorators:
+            node.decorators = decorators + node.decorators
+        return node
+
+
+class VariableStatementParser(StatementParser):
+    """
+    变量声明解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type in [TokenType.LET, TokenType.VAR, TokenType.CONST]
+    
+    def parse(self, decorators=None):
+        token_type = self.parser.peek().type
+        if token_type == TokenType.LET:
+            return self.parser.parse_variable_declaration()
+        elif token_type == TokenType.VAR:
+            return self.parser.parse_variable_declaration(mutable=True)
+        else:
+            return self.parser.parse_constant_declaration()
+
+
+class IfStatementParser(StatementParser):
+    """
+    If语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.IF
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_if_statement()
+
+
+class ForStatementParser(StatementParser):
+    """
+    For循环解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.FOR
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_for_loop()
+
+
+class WhileStatementParser(StatementParser):
+    """
+    While循环解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.WHILE
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_while_loop()
+
+
+class LoopStatementParser(StatementParser):
+    """
+    Loop循环解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.LOOP
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_loop_statement()
+
+
+class MatchStatementParser(StatementParser):
+    """
+    Match语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.MATCH
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_match_statement()
+
+
+class StructStatementParser(StatementParser):
+    """
+    结构体定义解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.STRUCT
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_struct_definition()
+
+
+class ClassStatementParser(StatementParser):
+    """
+    类定义解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type in [TokenType.CLASS, TokenType.ABSTRACT]
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_class_definition()
+
+
+class EnumStatementParser(StatementParser):
+    """
+    枚举定义解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.ENUM
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_enum_definition()
+
+
+class UnionStatementParser(StatementParser):
+    """
+    联合定义解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.UNION
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_union_definition()
+
+
+class TraitStatementParser(StatementParser):
+    """
+    Trait定义解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.TRAIT
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_trait_definition()
+
+
+class ImplStatementParser(StatementParser):
+    """
+    Impl块解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.IMPL
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_impl_block()
+
+
+class ReturnStatementParser(StatementParser):
+    """
+    返回语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.RETURN
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_return_statement()
+
+
+class BreakStatementParser(StatementParser):
+    """
+    Break语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.BREAK
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_break_statement()
+
+
+class ContinueStatementParser(StatementParser):
+    """
+    Continue语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.CONTINUE
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_continue_statement()
+
+
+class DeleteStatementParser(StatementParser):
+    """
+    删除变量语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.DEL
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_delete_variable()
+
+
+class GenericStatementParser(StatementParser):
+    """
+    泛型语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.GENERIC
+    
+    def parse(self, decorators=None):
+        # 检查是否是泛型结构体声明
+        if not self.parser.is_at_end() and self.parser.current + 1 < len(self.parser.tokens):
+            next_token = self.parser.tokens[self.parser.current + 1]
+            if next_token.type == TokenType.STRUCT:
+                return self.parser.parse_struct_definition()
+            elif next_token.type == TokenType.FUNC:
+                # 泛型函数定义，跳过generic关键字
+                self.parser.advance()
+                # 不要消费FUNC关键字，让parse_function_definition来消费
+                return self.parser.parse_function_definition(is_generic=True)
+        # 尝试解析表达式语句
+        return self.parser.parse_expression_statement()
+
+
+class TemplateStatementParser(StatementParser):
+    """
+    模板语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        return token_type == TokenType.TEMPLATE
+    
+    def parse(self, decorators=None):
+        # 检查是否是模板类或函数声明
+        if not self.parser.is_at_end() and self.parser.current + 1 < len(self.parser.tokens):
+            next_token = self.parser.tokens[self.parser.current + 1]
+            if next_token.type == TokenType.CLASS:
+                # 模板类定义
+                self.parser.advance()  # 跳过TEMPLATE关键字
+                return self.parser.parse_class_definition()
+            elif next_token.type == TokenType.STRUCT:
+                # 模板结构体定义
+                self.parser.advance()  # 跳过TEMPLATE关键字
+                return self.parser.parse_struct_definition(is_template=True)
+            elif next_token.type == TokenType.FUNC:
+                # 模板函数定义
+                self.parser.advance()  # 跳过TEMPLATE关键字
+                return self.parser.parse_function_definition(is_generic=True)
+        # 尝试解析表达式语句
+        return self.parser.parse_expression_statement()
+
+
+class ExpressionStatementParser(StatementParser):
+    """
+    表达式语句解析器
+    """
+    
+    def can_parse(self, token_type):
+        # 表达式语句可以是任何Token类型，作为默认解析器
+        return True
+    
+    def parse(self, decorators=None):
+        return self.parser.parse_expression_statement()
+
+
 class Parser:
     """
     语法分析器
